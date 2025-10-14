@@ -1,7 +1,7 @@
 # ArchipelagoOoA
 Updates to and maintenance of the Oracle of Ages APWorld.
 
-This is a re-hosting of the [code originally developed by SenPierre](https://github.com/SenPierre/ArchipelagoOoA). I'm not able to simply fork because I started work from a compatibility update created by Ishigh1.
+This is a re-hosting of the [code originally developed by SenPierre](https://github.com/SenPierre/ArchipelagoOoA). I'm not able to simply fork because I started work from a compatibility update created by Ishigh1 which was only posted in discord, not on github.
 
 ## Updates
 
