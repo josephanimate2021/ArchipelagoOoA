@@ -515,7 +515,6 @@ class OracleOfAgesWorld(World):
         # Grab the seeds to place. We'll shuffle the duplicate seeds list, since we're only getting 3 (or 2...) of the 5 types
         seeds_to_place = list(SEED_ITEMS)
         duplicate_seeds_to_place = list(SEED_ITEMS)
-        self.random.shuffle(duplicate_seeds_to_place)
 
         # Consolidate the lists of non-duplicate trees and duplicates
         manually_placed_trees = ["Lynna City: Seed Tree"] + duplicate_trees_to_process
@@ -538,6 +537,7 @@ class OracleOfAgesWorld(World):
             # If Lynna is specified as a duplicate, then we just remove it from the list of duplicates, since we already placed
             # something there. We don't need to worry about anything else; in this case trees_to_process will contain 5 trees
             # representing all 5 types. One of those will match whatever Lynna is, guaranteeing it to be a duplicate as desired.
+            del duplicate_seeds_to_place[self.options.default_seed.value]
             duplicate_trees_to_process.remove("Lynna City: Seed Tree")
 
         # Place remaining seeds on remaining trees
@@ -545,6 +545,7 @@ class OracleOfAgesWorld(World):
             place_seed(seed, trees_to_process.pop())
 
         # Fill out the duplicates
+        self.random.shuffle(duplicate_seeds_to_place)
         for tree in duplicate_trees_to_process:
             place_seed(duplicate_seeds_to_place.pop(), tree)
             
