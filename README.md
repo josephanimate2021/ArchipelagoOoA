@@ -29,7 +29,7 @@ Archipelago 0.6.2 or newer were not able to use the apworld to play The Legend o
 ## Building
 In order to build this code for usage with Archipelago, you need to follow these steps:
 1. Download the source code by clicking on Code -> Download ZIP
-2. Extract the zip file where you will see a folder called Archipelago-OoA-<BRANCH_NAME> for which BRANCH_NAME will be main as that's the current branch this source code is on.
+2. Extract the zip file where you will see a folder called ArchipelagoOoA-<BRANCH_NAME> for which BRANCH_NAME will be main as that's the current branch this source code is on.
 3. Rename that folder to tloz_ooa
 4. Right click on the new folder and go to Compress To -> ZIP File.
 5. Once compressed, you will replace .zip with .apworld, If you don't see the filename extension, go to View -> Show -> File name extensions. This will reveal the extension for the filename that we are trying to work with.
