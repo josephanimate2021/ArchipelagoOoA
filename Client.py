@@ -1,5 +1,5 @@
 import time
-from typing import TYPE_CHECKING, Set, Dict
+from typing import TYPE_CHECKING, Set, Dict, Any
 
 from NetUtils import ClientStatus
 import worlds._bizhawk as bizhawk
@@ -35,6 +35,7 @@ class OracleOfAgesClient(BizHawkClient):
     patch_suffix = ".apooa"
     local_checked_locations: Set[int]
     local_scouted_locations: Set[int]
+    local_tracker: Dict[str, Any]
     item_id_to_name: Dict[int, str]
     location_name_to_id: Dict[str, int]
 
@@ -44,6 +45,7 @@ class OracleOfAgesClient(BizHawkClient):
         self.location_name_to_id = build_location_name_to_id_dict()
         self.local_checked_locations = set()
         self.local_scouted_locations = set()
+        self.local_tracker = {}
 
         self.set_deathlink = False
         self.last_deathlink = None
@@ -113,6 +115,7 @@ class OracleOfAgesClient(BizHawkClient):
 
             await self.process_checked_locations(ctx, flag_bytes)
             await self.process_scouted_locations(ctx, flag_bytes)
+            await self.process_tracker_updates(ctx, flag_bytes, current_room)
 
             # Process received items (only if we aren't in Blaino's Gym to prevent him from calling us cheaters)
             if received_item_is_empty:
@@ -233,3 +236,71 @@ class OracleOfAgesClient(BizHawkClient):
                 # ...because of their own incompetence, so let's make their mates pay for that
                 await ctx.send_death(ctx.player_names[ctx.slot] + " might not be the Hero of Time after all.")
                 self.last_deathlink = ctx.last_death_link
+    async def process_tracker_updates(self, ctx: "BizHawkClientContext", flag_bytes: bytes, current_room: int):
+        # Processes the gasha tracking
+        local_tracker = dict(self.local_tracker)
+
+        # Gasha handling
+        # byte_offset = 0xC64a - RAM_ADDRS["location_flags"][0]
+        # gasha_seed_bytes = flag_bytes[byte_offset] + flag_bytes[byte_offset + 1] * 0x100
+        # for gasha_name in GASHA_ADDRS:
+            # (byte_addr, flag) = GASHA_ADDRS[gasha_name]
+
+            # Check if the seed has been harvested
+            # byte_offset = byte_addr - RAM_ADDRS["location_flags"][0]
+            # if flag_bytes[byte_offset] & 0x20:
+                # local_tracker[f"Harvested {gasha_name}"] = True
+            # else:
+                # Check if the seed is currently planted
+                # flag_mask = 0x01 << flag
+                # if not gasha_seed_bytes & flag_mask:
+                    # continue
+
+            # local_tracker[f"Planted {gasha_name}"] = True
+
+        # Position tracking
+        local_tracker["Current Room"] = current_room
+
+        # Wild seed/bomb tracking
+        wild_item_data = [
+            (0x03, "Bombs"),
+            (0x20, "Ember"),
+            (0x21, "Scent"),
+            (0x22, "Pegasus"),
+            (0x23, "Gale"),
+            (0x24, "Mystery"),
+        ]
+        base_offset = 0xc692 - RAM_ADDRS["location_flags"][0]
+        for item_id, item_name in wild_item_data:
+            byte_offset = base_offset + item_id // 8
+            mask = 0x01 << item_id % 8
+            if flag_bytes[byte_offset] & mask:
+                local_tracker[f"Obtained {item_name}"] = True
+
+        updates = {}
+        for key, value in local_tracker.items():
+            if key not in self.local_tracker or self.local_tracker[key] != value:
+                updates[key] = value
+
+        if "Current Room" in updates:
+            await ctx.send_msgs([{
+                "cmd": "Bounce",
+                "slots": [ctx.slot],
+                "data": {
+                    "Current Room": current_room
+                }
+            }])
+            del updates["Current Room"]
+
+        if len(updates) > 0:
+            await ctx.send_msgs([{
+                "cmd": "Set",
+                "key": f"OoA_{ctx.team}_{ctx.slot}",
+                "default": {},
+                "operations": [{
+                    "operation": "update",
+                    "value": updates
+                }],
+            }])
+
+        self.local_tracker = local_tracker
