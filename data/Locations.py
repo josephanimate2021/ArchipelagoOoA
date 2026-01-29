@@ -449,7 +449,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "hiddenTokayCave",
     },
     # "Crescent Island (Past): Tokay Chicken House": {
-        # "region_id": "tokay hut",
+        # "region_id": "tokay chicken house",
         # "vanilla_item": "Bombs (10)",
         # "flag_byte": 0xc2e3,
         # "room": 0x02e3,
