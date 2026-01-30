@@ -16,7 +16,8 @@ def make_overworld_logic(player: int):
 
         # LYNNA CITY
         #######################################
-        ["forest of time", "lynna city", True, lambda state: ooa_can_break_bush(state, player)],
+        # Set lynna city requirements to false mainly because of how the warp is set up. Let's see what happens when we intrduce chaos like this.
+        ["forest of time", "lynna city", False, None],
         ["lynna city", "south lynna tree", False, lambda state: ooa_can_harvest_tree(state, player, True)],
         ["lynna city", "lynna city chest", False, lambda state: ooa_can_use_ember_seeds(state, player, False)],
         ["lynna village", "lynna city chest", False, lambda state: ooa_can_go_back_to_present(state, player)],
@@ -34,7 +35,8 @@ def make_overworld_logic(player: int):
         # LYNNA VILLAGE
         #######################################
         ["lynna city", "lynna village", True, None],
-        ["forest of time", "lynna village", False, lambda state: ooa_can_open_portal(state, player)],
+        # Set lynna village requirements to false mainly because of how the warp is set up. Let's see what happens when we intrduce chaos like this.
+        ["forest of time", "lynna village", False, None],
         ["lynna village", "gasha farmer", False, None],
         ["lynna village", "black tower worker", False, None],
         ["lynna village", "black tower heartpiece", False, lambda state: ooa_can_remove_dirt(state, player, False)],
