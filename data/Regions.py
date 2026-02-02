@@ -332,6 +332,7 @@ REGIONS = [
     "veran beaten",
     "ganon beaten",
     #######
+    # "enter d11",
     
     # trade
     "graveyard poe trade",

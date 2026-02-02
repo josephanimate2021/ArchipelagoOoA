@@ -1,3 +1,5 @@
+from .z80asm.Assembler import GameboyAddress
+
 EOB_ADDR = [
   0x3ef8, # 00
   0x7f23, # 01 - garbage data here
@@ -498,6 +500,7 @@ DUNGEON_ENTRANCES = {
         "position": 0x25,
         "shifted": False,
         "default":"N/A"
+        # "default":"d11"
     },
     "d3": {
         "addr": 0x135c8,
@@ -561,7 +564,7 @@ DUNGEON_ENTRANCES = {
         "position": 0x16,
         "shifted": False,
         "default":"d6 past"
-    },
+    }
 }
 
 DUNGEON_EXITS = {
@@ -576,6 +579,7 @@ DUNGEON_EXITS = {
     "d7": 0x13c60,
     "d8": 0x13c74,
     "d6 past": 0x13c54,
+    # "d11": GameboyAddress(0x04, 0x7b35).address_in_rom(),
 }
 
 PALETTE_BYTES = {

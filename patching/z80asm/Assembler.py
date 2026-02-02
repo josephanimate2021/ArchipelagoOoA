@@ -129,6 +129,9 @@ class GameboyAddress:
 
     def to_byte(self):
         return "$" + hex(self.offset)[2:]
+    
+    def address_in_rom(self):
+        return (self.bank * 0x4000) + self.offset
 
     def to_word(self):
         return "$" + hex(self.offset)[2:].rjust(4, '0')
