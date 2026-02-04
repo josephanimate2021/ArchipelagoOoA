@@ -6,8 +6,6 @@ Archipelago 0.6.2 or newer were not able to use the apworld to play The Legend o
 
 ## Options I am thinking about addding.
 *  Shuffle Old Men - In Seasons, there are mutiple small trees that you can burn with Ember Seeds which reveals a staircase where you can go inside and either get rupees from the old man or the old man takes the rupees, all of that from fixing the door. As far as I know with Ages, there are two trees in the same spot of Rolling Ridge Past & Present where you burn them and both reveal a staircase leading to the exact same old man.
-  
-## Options that are being worked on
 * Secret Locations - In The Legend of Zelda: Oralce of Ages, there are locations that give out items along with secret codes that you can pass onto The Legend of Zelda: Oracle of Seasons. Maybe at some point, we could link those two games together in a randomizer as well. Right now, it's not possible to do so.
 * Linked Hero's Cave - In Ages, there is another cave next to the maku path cave in the present that only gets unlocked when you play the linked game.
 * Shuffle Time Portals - In Seasons Archipelago Randomizer, there is an option to shuffle Subrosia Portals so that it can take you to locations where that portal wouldn't normally take you. Well with Time Portals, i figured why not do the same thing with them. This is going to take alot of logical thinking and testing to get inplemented right for casual players as there is usually two time portals open at the start of the game with the rest of them being blocked off by the harp. (Maybe I could leave those two vanilla and have the other ones shuffled or something)
