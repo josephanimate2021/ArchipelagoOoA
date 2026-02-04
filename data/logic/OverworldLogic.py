@@ -576,7 +576,7 @@ def make_overworld_logic(player: int):
         
         # SEA OF NO RETURN
         #######################################
-        ["lynna city", "piratian captain", False, lambda state: all([
+        ["lynna village", "piratian captain", False, lambda state: all([
             ooa_can_dive(state, player),
             state.has("Zora Scale", player),
         ])],
