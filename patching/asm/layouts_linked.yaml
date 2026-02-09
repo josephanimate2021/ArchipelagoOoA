@@ -56,7 +56,7 @@
     ; db 00,39,20,63,f1 # closed chest on intro screen
     db 00,6b,00,42,3a # removed tree in yoll graveyard
     db 00,6b,02,42,ce # not removed tree in yoll graveyard
-    db 00,83,00,43,cd # path outside d2 present
+    db 00,83,00,43,cc # path outside d2 present
     db 03,0f,00,66,f9 # water in d6 past entrance
     db 01,13,00,61,d7 # portal in symmetry city past
     db 01,13,00,68,d7 # portal in symmetry city past
@@ -75,7 +75,6 @@
     db 01,a5,00,35,48 # ledge by library past
     db 01,a5,00,45,0b # cont.
     db 01,a5,00,55,6c # cont.
-    db 00,83,00,44,d7 # portal outside D2 present
     db 01,48,02,31,cd # past maku road: remove dirt when exiting
     db ff
 

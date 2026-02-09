@@ -1,5 +1,5 @@
 VERSION = "1.0.0 DEV"
-RETRO_COMPAT_VERSION = ["0.4.3", "0.4.2", "0.4.1", "0.4.0"]
+RETRO_COMPAT_VERSION = ["1.0.0 DEV", "0.4.3", "0.4.2", "0.4.1", "0.4.0"]
 
 COMPANIONS = [
     "Ricky",
@@ -49,8 +49,7 @@ DUNGEON_NAMES = [
     "Jabu-Jabu's Belly",
     "Ancient Tomb",
     "Mermaid's Cave Past",
-    # "",
-    # "Hero's Cave"
+    "Hero's Cave"
 ]
 
 REGIONS_CONVERSION_TABLE = {
@@ -85,7 +84,7 @@ DUNGEON_ENTRANCES = {
     "d0 entrance": "enter d0",
     "d1 entrance": "enter d1",
     "d2 past entrance": "enter d2",
-    # "d2 present entrance": "enter d11",
+    "d2 present entrance": "enter d10",
     # "d2 present entrance": "enter d2",
     "d3 entrance": "enter d3",
     "d4 entrance": "enter d4",
@@ -299,7 +298,7 @@ LOCATION_GROUPS = {
         'Ancient Tomb (B3F): Single Chest',
         'Ancient Tomb (B3F): Boss',
     ],
-    # "D11": [],
+    "D10": [],
     'Trade Sequence': [
         'Yoll Graveyard: Graveyard Poe',
         'Lynna Village: Postman',

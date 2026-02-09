@@ -500,7 +500,6 @@ DUNGEON_ENTRANCES = {
         "position": 0x25,
         "shifted": False,
         "default":"N/A"
-        # "default":"d11"
     },
     "d3": {
         "addr": 0x135c8,
@@ -579,7 +578,6 @@ DUNGEON_EXITS = {
     "d7": 0x13c60,
     "d8": 0x13c74,
     "d6 past": 0x13c54,
-    # "d11": GameboyAddress(0x04, 0x7b35).address_in_rom(),
 }
 
 PALETTE_BYTES = {
