@@ -2,6 +2,7 @@
 0a//staticItemsReplacementsTable: |
   # ------- Freestanding items -------
   dwbe $0186, locations.blackTowerHP
+  dwbe $02e3, locations.tokayChickenHut
   dwbe $0406, locations.makuPathHP
   dwbe $008b, locations.yollGraveyardHP
   dwbe $05b1, locations.dekuForestHP

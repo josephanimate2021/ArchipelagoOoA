@@ -240,9 +240,9 @@ def make_overworld_logic(player: int, options):
             ooa_has_bracelet(state, player),
             ooa_has_bombs(state, player),
         ])],
-        # ["crescent past east", "tokay chicken hut", False, lambda state: all([
-            # ooa_has_bracelet(state, player)
-        # ])],
+        ["crescent past east", "tokay chicken hut", False, lambda state: all([
+            ooa_has_bracelet(state, player)
+        ])],
         ["crescent past east", "wild tokay game", False, lambda state: all([
             ooa_has_bracelet(state, player),
             ooa_has_bombs(state, player),
