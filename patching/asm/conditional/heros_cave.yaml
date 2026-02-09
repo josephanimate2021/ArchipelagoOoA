@@ -1,0 +1,24 @@
+08/4b45/: jp newDiveWarpFunc
+08//newDiveWarpFunc: |  # set hl to 5*a+3
+      ld hl,diveWarpTable
+      ld b,a
+      add a,a
+      add a,a
+      add a,b
+      add a,03
+      rst 10
+      ldi a,(hl)
+      ld (wWarpDestIndex),a
+      ld a,(hl)
+      ld b,a
+      and a,0f
+      ld (wWarpTransition),a
+      ld a,b
+      swap a
+      and a,0f
+      ld (wWarpDestGroup),a
+      ld a,01
+      ld (wWarpTransition2),a
+08//diveWarpTable: | # group, room, tile (all 3 for essence exit purposes), dest index, dest group+transition
+    db 01,01,18,00,f4
+    db 05,cc,12,01,f4

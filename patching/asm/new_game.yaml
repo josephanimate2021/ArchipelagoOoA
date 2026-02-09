@@ -45,6 +45,14 @@
     ld (wDimitriState),a
     ld a,$ff
     ld (wAnimalTutorialFlags),a
+
+    ; Mark intro as seen
+    ld a,$0a
+    call setGlobalFlag
+    ld a,$1c
+    call setGlobalFlag
+    ld a,$21
+    call setGlobalFlag
     
     ; Change seeds selected by default inside shooter and satchel
     ld a,option.defaultSeedType - $20

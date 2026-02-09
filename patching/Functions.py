@@ -62,9 +62,10 @@ def get_asm_files(patch_data):
         asm_files.append("asm/conditional/ganon_goal.yaml")
     if patch_data["options"]["secret_locations"]:
         asm_files.append("asm/layouts_linked.yaml")
+        # asm_files.append("asm/conditional/heros_cave.yaml")
+        # asm_files.append("asm/conditional/secret_locations.yaml")
     else:
         asm_files.append("asm/layouts.yaml")
-        # asm_files.append("asm/conditional/secret_locations.yaml")
     return asm_files
 
 def define_location_constants(assembler: Z80Assembler, patch_data):
@@ -376,7 +377,7 @@ def set_file_select_text(assembler: Z80Assembler, slot_name: str):
         else:
             return 0xfc  # All other chars are blank spaces
 
-    row_1 = [char_to_tile(c) for c in f"ARCHIP. {VERSION}"]
+    row_1 = [char_to_tile(c) for c in f"AP {VERSION}"]
     row_1_left_padding = int((16 - len(row_1)) / 2)
     row_1_right_padding = int(16 - row_1_left_padding - len(row_1))
     row_1 = ([0x00] * row_1_left_padding) + row_1 + ([0x00] * row_1_right_padding)
