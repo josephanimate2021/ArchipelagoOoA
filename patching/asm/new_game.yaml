@@ -49,8 +49,6 @@
     ; Mark intro as seen
     ld a,$0a
     call setGlobalFlag
-    ld a,$1c
-    call setGlobalFlag
     ld a,$21
     call setGlobalFlag
     

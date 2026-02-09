@@ -448,14 +448,14 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "hiddenTokayCave",
     },
-    # "Crescent Island (Past): Tokay Chicken House": {
-        # "region_id": "tokay chicken house",
+    # "Crescent Island (Past): Tokay Chicken Hut": {
+        # "region_id": "tokay chicken hut",
         # "vanilla_item": "Bombs (10)",
         # "flag_byte": 0xc2e3,
         # "room": 0x02e3,
         # "map_tile": 0x1dc,
         # "collect": COLLECT_TOUCH,
-        # "symbolic_name": "tokayChickenHouse",
+        # "symbolic_name": "tokayChickenHut",
     # },
     "Crescent Island (Past): Crystal Cave Chest": {
         "region_id": "tokay crystal cave",
@@ -925,8 +925,8 @@ LOCATIONS_DATA = {
         "vanilla_item": "Gasha Seed",
         "conditional": True,
         "flag_byte": 0xc8e8,
-        "room": 0x03e8,
-        "map_tile": 0x0c7,
+        "room": 0x3e8,
+        "map_tile": 0xc7,
         "collect": COLLECT_CHEST,
         "symbolic_name": "seaofstormpresent",
     },
