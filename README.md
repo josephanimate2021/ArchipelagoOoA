@@ -43,3 +43,4 @@ Here are two ways to get in!
 * You need to understand the innerworkings of an Archipelago APWorld. You may start learning [here](https://github.com/ArchipelagoMW/Archipelago/blob/main/docs/apworld%20specification.md).
 * You need your own legally dumped Oracle of Ages ROM either for playtesting or a full randomizer walkthrough. I cannot legally provide you with a ROM if you don't have one, sorry.
 * You need Archipelago v0.5.1 or newer installed in order to test this apworld (I recommend cloning this repo into the lib/worlds folder inside Archipelago that way you don't have to repackage the world every time during testing. And you can just commit your changes while not having to worry about repeating the same steps repetively).
+* You need to have a full understanding of how the oracles randomizer works.
