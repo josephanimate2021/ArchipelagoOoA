@@ -48,7 +48,8 @@ class OracleOfAgesRequiredEssences(Range):
 
 class OracleOfAgesIncludeSecretLocations(Toggle):
     """
-    When enabled, add the linked game secrets to the list of locations
+    When enabled, locations that are usually accessible in the linked game will become easily completable. Be careful while enabling this because things are not guarenteed to work as they should. 
+    As of right now I can't do secret location codes because in Ages you usually give them to farore and she gives you the item, making it's tracking not possible for me to add unlike other normal items (after research/trial and error) 
     """
     display_name = "Secret Locations (EXPERIMENTAL)"
 
