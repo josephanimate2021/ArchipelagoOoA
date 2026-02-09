@@ -46,6 +46,15 @@ class OracleOfAgesRequiredEssences(Range):
     range_end = 8
     default = 8
 
+class OracleOfAgesIncludeSecretLocations(Toggle):
+    """
+    When enabled, add the linked game secrets to the list of locations
+    """
+    display_name = "Secret Locations (EXPERIMENTAL)"
+
+    include_in_patch = True
+    include_in_slot_data = True
+
 class OracleOfAgesRequiredSlates(Range):
     """
     The amount of slate that need to be obtained in order to get to the boss of the eigth dungeons.
@@ -242,6 +251,7 @@ class OracleOfAgesCombatDifficulty(Choice):
 class OracleOfAgesOptions(PerGameCommonOptions):
     start_inventory_from_pool: StartInventoryPool
     goal: OracleOfAgesGoal
+    secret_locations: OracleOfAgesIncludeSecretLocations
     logic_difficulty: OracleOfAgesLogicDifficulty
     required_essences: OracleOfAgesRequiredEssences
     required_slates: OracleOfAgesRequiredSlates

@@ -68,6 +68,7 @@ EOB_ADDR = [
 ]
 
 DEFINES = {
+    "decHlRef16WithCap": "$0237",
     "AREAFLAG_OUTDOORS":"$01",
     "BTN_A": "$01",
     "BTN_B": "$02",
@@ -408,7 +409,6 @@ ASM_FILES = [
     "asm/new_game.yaml",
     "asm/triggers.yaml",
     "asm/cutscenes.yaml",
-    "asm/layouts.yaml",
     "asm/collect.yaml",
     "asm/location.yaml",
     "asm/map_menu.yaml",

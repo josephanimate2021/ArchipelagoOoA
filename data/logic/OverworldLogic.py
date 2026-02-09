@@ -240,7 +240,7 @@ def make_overworld_logic(player: int):
             ooa_has_bracelet(state, player),
             ooa_has_bombs(state, player),
         ])],
-        # ["crescent past east", "tokay chicken house", False, lambda state: all([
+        # ["crescent past east", "tokay chicken hut", False, lambda state: all([
             # ooa_has_bracelet(state, player)
         # ])],
         ["crescent past east", "wild tokay game", False, lambda state: all([
@@ -576,11 +576,14 @@ def make_overworld_logic(player: int):
         
         # SEA OF NO RETURN
         #######################################
-        ["lynna village", "piratian captain", False, lambda state: all([
+        ["lynna city", "piratian captain", False, lambda state: all([
             ooa_can_dive(state, player),
             state.has("Zora Scale", player),
         ])],
         ["piratian captain", "sea of storms past", False, None],
+        ["sea of storms past", "sea of storms present", False, lambda state: all([
+            ooa_can_go_back_to_present(state, player),
+        ])],
         ["crescent past west", "d8 entrance", False, lambda state: all([
             state.has("Tokay Eyeball", player),
             ooa_can_break_pot(state, player),

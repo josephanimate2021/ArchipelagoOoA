@@ -59,7 +59,7 @@ REGIONS = [
     "tokay crystal cave",
     "crescent past east",
     "tokay bomb cave",
-    # "tokay chicken house",
+    # "tokay chicken hut",
     "wild tokay game",
     "hidden tokay cave",
     "tokay pot cave",
@@ -167,7 +167,7 @@ REGIONS = [
     #######
     "piratian captain",
     "sea of storms past",
-    #"sea of storms present",
+    "sea of storms present",
     "d8 entrance",
     "sea of no return",
 
