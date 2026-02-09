@@ -4,13 +4,13 @@ from .data.logic.DungeonsLogic import *
 from .data.logic.OverworldLogic import make_overworld_logic
 from .data.Regions import REGIONS
 
-def create_connections(multiworld: MultiWorld, player: int):
+def create_connections(multiworld: MultiWorld, player: int, options):
     dungeon_entrances = []
     for reg1, reg2 in multiworld.worlds[player].dungeon_entrances.items():
         dungeon_entrances.append([reg1, reg2, True, None])
 
     all_logic = [
-        make_overworld_logic(player),
+        make_overworld_logic(player, options),
         make_d0_logic(player),
         make_d1_logic(player),
         make_d2_logic(player),

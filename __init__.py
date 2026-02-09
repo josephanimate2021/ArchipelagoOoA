@@ -80,7 +80,7 @@ class OracleOfAgesWeb(WebWorld):
         "English",
         "ooa_setup_en.md",
         "ooa_setup/en",
-        ["Dinopony"]
+        ["SenPierre"]
     )]
 
 class OracleOfAgesWorld(World):
@@ -126,6 +126,7 @@ class OracleOfAgesWorld(World):
                    "default_seed",
                    # Locations
                    "advance_shop",
+                   "secret_locations",
                    # Requirements
                    "required_essences", "required_slates",
                    # keysanity
@@ -193,6 +194,8 @@ class OracleOfAgesWorld(World):
         region_id = location_data["region_id"]
         if region_id == "advance shop":
             return self.options.advance_shop.value
+        if location_name in SECRET_LOCATION_NAMES:
+            return self.options.secret_locations
 
         # TODO FUNNY LOCATION ?
 
@@ -266,7 +269,7 @@ class OracleOfAgesWorld(World):
             self.multiworld.get_location(name, self.player).progress_type = LocationProgressType.EXCLUDED
 
     def set_rules(self):
-        create_connections(self.multiworld, self.player)
+        create_connections(self.multiworld, self.player, self.options)
         apply_self_locking_rules(self.multiworld, self.player)
         self.multiworld.completion_condition[self.player] = lambda state: state.has("_beaten_game", self.player)
 

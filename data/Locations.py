@@ -923,6 +923,7 @@ LOCATIONS_DATA = {
     "Sea of Storms (Present): Underwater Cave": {
         "region_id": "sea of storms present",
         "vanilla_item": "Gasha Seed",
+        "conditional": True,
         "flag_byte": 0xc8e8,
         "room": 0x03e8,
         "map_tile": 0x0c7,

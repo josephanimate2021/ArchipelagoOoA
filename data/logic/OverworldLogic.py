@@ -1,8 +1,8 @@
 from .LogicPredicates import *
 
 
-def make_overworld_logic(player: int):
-    return [
+def make_overworld_logic(player: int, options):
+    labrynna_logic = [
         
         # FOREST OF TIME
         #######################################
@@ -581,9 +581,6 @@ def make_overworld_logic(player: int):
             state.has("Zora Scale", player),
         ])],
         ["piratian captain", "sea of storms past", False, None],
-        ["sea of storms past", "sea of storms present", False, lambda state: all([
-            ooa_can_go_back_to_present(state, player),
-        ])],
         ["crescent past west", "d8 entrance", False, lambda state: all([
             state.has("Tokay Eyeball", player),
             ooa_can_break_pot(state, player),
@@ -609,3 +606,10 @@ def make_overworld_logic(player: int):
         ["d8 entrance", "sea of no return", False, lambda state: ooa_has_glove(state, player)],
 
     ]
+
+    if options.secret_locations:
+        labrynna_logic.append(["sea of storms past", "sea of storms present", False, lambda state: all([
+            ooa_can_go_back_to_present(state, player),
+        ])])
+
+    return labrynna_logic
