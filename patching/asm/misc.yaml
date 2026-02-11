@@ -180,7 +180,7 @@
 00//handleSpecialExits: |
     # /ifdef option.secretLocationsEnabled
     # call makeHerosCaveExit
-    call makeHerosCaveEntrance
+    # call makeHerosCaveEntrance
     # /endif
     ld (wWarpDestRoom),a
     push bc
@@ -192,17 +192,14 @@
     pop bc
     ret
 
-04//makeHerosCaveEntrance: |
-    ld a,($c783)
-    ld (wWarpDestGroup),a
-    ld a,$ce        ; Starting room ID
-    ld (wWarpDestRoom),a
-    ld a,$ff        ; Position in starting room
-    ld (wWarpDestPos),a
-    ld a,$03                        ; TRANSITION_DEST_ENTERSCREEN
-    ld (wWarpTransition),a
-    ld a,$04                        ; TRANSITION_SRC_INSTANT
-    ld (wWarpTransition2),a
+# 04//makeHerosCaveEntrance: |
+  # ld a,(wWarpDestRoom)
+  # cp $ce
+  # ret nz
+  # ld a,(wWarpDestGroup)
+  # cp $04
+  # ret nz
+  # ld a,($c94ce) ; room flags for heros cave exit
   # ret
 
 04/45e8/: call handleSpecialExits
