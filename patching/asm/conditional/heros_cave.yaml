@@ -1,5 +1,0 @@
-04//warpSourceD2Present: |
-      db 0,83,07,4,4
-04//group0WarpDestTable: |
-      db 83,25,0,1
-      db 00,00,0,1

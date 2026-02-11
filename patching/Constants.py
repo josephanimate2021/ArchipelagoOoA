@@ -411,6 +411,7 @@ ASM_FILES = [
     "asm/cutscenes.yaml",
     "asm/collect.yaml",
     "asm/location.yaml",
+    "asm/layouts.yaml",
     "asm/map_menu.yaml",
     "asm/progressives.yaml",
     "asm/animals.yaml",

@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from Options import Choice, DeathLink, DefaultOnToggle, PerGameCommonOptions, Range, Toggle, StartInventoryPool, ItemSet, OptionSet
+from Options import Choice, DeathLink, DefaultOnToggle, PerGameCommonOptions, Range, Toggle, StartInventoryPool, ItemSet, OptionSet, NamedRange
 
 from worlds.tloz_ooa.data.Items import ITEMS_DATA
 from worlds.tloz_ooa.data.Constants import TREES_TABLE
@@ -35,6 +35,39 @@ class OracleOfAgesLogicDifficulty(Choice):
 
     default = 0
 
+class OracleOfAgesGashaLocations(Range):
+    """
+    When set to a non-zero value, planting a Gasha tree on a unique soil gives a deterministic item which is taken
+    into account by logic. Once an item has been obtained this way, the soil disappears forever to avoid any chance
+    of softlocking by wasting several Gasha Seeds on the same soil.
+    The value of this option is the number of items that can be obtained that way, the maximum value expecting you
+    to plant a tree on each one of the 16 Gasha spots in the game.
+    """
+    display_name = "Deterministic Gasha Locations"
+
+    range_start = 0
+    range_end = 16
+
+    default = 0
+    include_in_patch = True
+    include_in_slot_data = True
+
+class OracleOfAgesGashaNutKillRequirement(NamedRange):
+    """
+    This option lets you configure how many kills are required to make a gasha tree grow.
+    Using a gasha ring halves this number.
+    """
+    display_name = "Gasha Nut Requirement"
+
+    range_start = 0
+    range_end = 250
+
+    default = 20
+    special_range_names = {
+        "vanilla": 40
+    }
+    include_in_patch = True
+
 
 class OracleOfAgesRequiredEssences(Range):
     """
@@ -48,10 +81,10 @@ class OracleOfAgesRequiredEssences(Range):
 
 class OracleOfAgesIncludeSecretLocations(Toggle):
     """
-    When enabled, locations that are usually accessible in the linked game will become easily completable. Be careful while enabling this because things are not guarenteed to work as they should. 
-    As of right now I can't do secret location codes because in Ages you usually give them to farore and she gives you the item, making it's tracking not possible for me to add unlike other normal items (after research/trial and error) 
+    When enabled, locations that are usually accessible in the linked game will become easily completable. 
+    Be careful while enabling this because things are not guarenteed to work as they should.
     """
-    display_name = "Secret Locations (EXPERIMENTAL)"
+    display_name = "Secret Locations"
 
     include_in_patch = True
     include_in_slot_data = True
@@ -251,6 +284,8 @@ class OracleOfAgesCombatDifficulty(Choice):
 @dataclass
 class OracleOfAgesOptions(PerGameCommonOptions):
     start_inventory_from_pool: StartInventoryPool
+    deterministic_gasha_locations: OracleOfAgesGashaLocations
+    gasha_nut_kill_requirement: OracleOfAgesGashaNutKillRequirement
     goal: OracleOfAgesGoal
     secret_locations: OracleOfAgesIncludeSecretLocations
     logic_difficulty: OracleOfAgesLogicDifficulty

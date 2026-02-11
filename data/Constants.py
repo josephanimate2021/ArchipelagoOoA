@@ -7,10 +7,6 @@ COMPANIONS = [
     "Moosh"
 ]
 
-SECRET_LOCATION_NAMES = [
-    "Sea of Storms (Present): Underwater Cave"
-]
-
 DIRECTIONS = [
     "up",
     "right",

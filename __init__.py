@@ -194,8 +194,9 @@ class OracleOfAgesWorld(World):
         region_id = location_data["region_id"]
         if region_id == "advance shop":
             return self.options.advance_shop.value
-        if location_name in SECRET_LOCATION_NAMES:
-            return self.options.secret_locations
+        
+        if location_data["secret_location"] and self.options.secret_locations:
+            return True
 
         # TODO FUNNY LOCATION ?
 

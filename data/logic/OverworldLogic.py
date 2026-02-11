@@ -2,6 +2,43 @@ from .LogicPredicates import *
 
 
 def make_overworld_logic(player: int, options):
+
+    # credit to Flamestripe for his gasha logic :)
+    gasha_logic = [
+        ["Menu", "gasha tree 1", False, lambda state: ooa_can_harvest_gasha(state, player, 1)],
+        ["gasha tree 1", "gasha tree 2", False, lambda state: ooa_can_harvest_gasha(state, player, 2)],
+        ["gasha tree 2", "gasha tree 3", False, lambda state: ooa_can_harvest_gasha(state, player, 3)],
+        ["gasha tree 3", "gasha tree 4", False, lambda state: ooa_can_harvest_gasha(state, player, 4)],
+        ["gasha tree 4", "gasha tree 5", False, lambda state: ooa_can_harvest_gasha(state, player, 5)],
+        ["gasha tree 5", "gasha tree 6", False, lambda state: ooa_can_harvest_gasha(state, player, 6)],
+        ["gasha tree 6", "gasha tree 7", False, lambda state: ooa_can_harvest_gasha(state, player, 7)],
+        ["gasha tree 7", "gasha tree 8", False, lambda state: ooa_can_harvest_gasha(state, player, 8)],
+        ["gasha tree 8", "gasha tree 9", False, lambda state: ooa_can_harvest_gasha(state, player, 9)],
+        ["gasha tree 9", "gasha tree 10", False, lambda state: ooa_can_harvest_gasha(state, player, 10)],
+        ["gasha tree 10", "gasha tree 11", False, lambda state: ooa_can_harvest_gasha(state, player, 11)],
+        ["gasha tree 11", "gasha tree 12", False, lambda state: ooa_can_harvest_gasha(state, player, 12)],
+        ["gasha tree 12", "gasha tree 13", False, lambda state: ooa_can_harvest_gasha(state, player, 13)],
+        ["gasha tree 13", "gasha tree 14", False, lambda state: ooa_can_harvest_gasha(state, player, 14)],
+        ["gasha tree 14", "gasha tree 15", False, lambda state: ooa_can_harvest_gasha(state, player, 15)],
+        ["gasha tree 15", "gasha tree 16", False, lambda state: ooa_can_harvest_gasha(state, player, 16)], #activate once sea of storms present plot is figured out
+
+        #GASHA PLOT LOGIC
+        ##################
+        #["nuun (ricky)", "nuun highlands spot", False, lambda state: all([
+        #    ooa_can_jump_1_wide_pit(state, player, True),
+        #    any([
+        #        ooa_has_sword(state, player),
+        #        ooa_has_switch_hook(state, player),
+        #        all([
+        #           ooa_option_medium_logic(state, player),
+        #            any([
+        #                ooa_has_bombs(state, player, 2),
+        #                ooa_can_use_ember_seeds(state, player, False),
+        #                (ooa_has_seedshooter(state, player) and ooa_has_gale_seeds(state, player)),
+        #    ])
+        #])]
+    ]
+
     labrynna_logic = [
         
         # FOREST OF TIME
@@ -611,5 +648,9 @@ def make_overworld_logic(player: int, options):
         labrynna_logic.append(["sea of storms past", "sea of storms present", False, lambda state: all([
             ooa_can_go_back_to_present(state, player),
         ])])
+        labrynna_logic.append(["lynna city", "princess zelda rescue", False, lambda state: ooa_has_feather(state, player)])
+
+    for i in range(options.deterministic_gasha_locations):
+        labrynna_logic.append(gasha_logic[i])
 
     return labrynna_logic

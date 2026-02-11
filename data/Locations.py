@@ -255,6 +255,16 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "blackTowerHP",
     },
+    "Black Tower (Present): Princess Zelda Rescue": {
+        "region_id": "princess zelda rescue",
+        "vanilla_item": "Blue Joy Ring",
+        "flag_byte": 0xcae7,
+        "room": 0x7e7,
+        "conditional": True,
+        "secret_location": True,
+        "collect": COLLECT_TOUCH,
+        "symbolic_name": "zeldaRescue",
+    },
     ##########################################
     "Ambi's Palace: East Wing Chest": {
         "region_id": "ambi's palace chest",
@@ -919,16 +929,17 @@ LOCATIONS_DATA = {
         "collect": COLLECT_CHEST,
         "symbolic_name": "seaofstorm",
     },
-    "Sea of Storms (Present): Underwater Cave": {
-        "region_id": "sea of storms present",
-        "vanilla_item": "Gasha Seed",
-        "conditional": True,
-        "flag_byte": 0xc8e8,
-        "room": 0x3e8,
-        "map_tile": 0xc7,
-        "collect": COLLECT_CHEST,
-        "symbolic_name": "seaofstormpresent",
-    },
+    # "Sea of Storms (Present): Underwater Cave": {
+        # "region_id": "sea of storms present",
+        # "vanilla_item": "Gasha Seed",
+        # "conditional": True,
+        # "flag_byte": 0xc8e8,
+        # "room": 0x3e8,
+        # "map_tile": 0xc7,
+        # "secret_location": True,
+        # "collect": COLLECT_CHEST,
+        # "symbolic_name": "seaofstormpresent",
+    # },
     ##########################################
     "Sea of No Return: Chest Under Statue": {
         "region_id": "sea of no return",

@@ -60,12 +60,8 @@ def get_asm_files(patch_data):
         asm_files.append("asm/conditional/qol_mermaid_suit.yaml")
     if patch_data["options"]["goal"] == OracleOfAgesGoal.option_beat_ganon:
         asm_files.append("asm/conditional/ganon_goal.yaml")
-    if patch_data["options"]["secret_locations"]:
-        asm_files.append("asm/layouts_linked.yaml")
+    # if patch_data["options"]["secret_locations"]:
         # asm_files.append("asm/conditional/heros_cave.yaml")
-        # asm_files.append("asm/conditional/secret_locations.yaml")
-    else:
-        asm_files.append("asm/layouts.yaml")
     return asm_files
 
 def define_location_constants(assembler: Z80Assembler, patch_data):
@@ -97,19 +93,23 @@ def define_option_constants(assembler: Z80Assembler, patch_data):
     assembler.define_byte("option.startingPosX", 0x18)
     assembler.define_byte("option.startingPos", 0x21)
 
-    assembler.define_byte("option.animalCompanion", 0x0b + patch_data["options"]["animal_companion"])
-    assembler.define_byte("option.defaultSeedType", 0x20 + patch_data["options"]["default_seed"])
+    assembler.define_byte("option.secretLocationsEnabled", 0x01 if options["secret_locations"] else 0x00)
+    # assembler.define_byte("option.currentsActivatesPortals", 0x01 if options["currents_activates_portals"] else 0x00)
+
+
+    assembler.define_byte("option.animalCompanion", 0x0b + options["animal_companion"])
+    assembler.define_byte("option.defaultSeedType", 0x20 + options["default_seed"])
     assembler.define_byte("option.receivedDamageModifier", options["combat_difficulty"])
     assembler.define_byte("option.openAdvanceShop", options["advance_shop"])
 
     assembler.define_byte("option.requiredEssences", options["required_essences"])
     assembler.define_byte("option.required_slates", options["required_slates"])
     
-    assembler.define_byte("option.keysanity_small_keys", patch_data["options"]["keysanity_small_keys"])
-    keysanity = patch_data["options"]["keysanity_small_keys"] or patch_data["options"]["keysanity_boss_keys"]
+    assembler.define_byte("option.keysanity_small_keys", options["keysanity_small_keys"])
+    keysanity = options["keysanity_small_keys"] or options["keysanity_boss_keys"]
     assembler.define_byte("option.customCompassChimes", 1 if keysanity else 0)
 
-    master_keys_as_boss_keys = patch_data["options"]["master_keys"] == OracleOfAgesMasterKeys.option_all_dungeon_keys
+    master_keys_as_boss_keys = options["master_keys"] == OracleOfAgesMasterKeys.option_all_dungeon_keys
     assembler.define_byte("option.smallKeySprite", 0x43 if master_keys_as_boss_keys else 0x42)
 
 def process_item_name_for_shop_text(item_name: str) -> List[int]:
