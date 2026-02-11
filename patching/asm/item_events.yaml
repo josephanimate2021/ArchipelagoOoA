@@ -38,6 +38,7 @@
     @outgoing:
     call tingleSetFakeId
     call goronDanceSetFakeId
+    call zeldaRescueSetFakeId
     call kingZoraSetFakeId
     call symmetryBrotherSetFakeId
     @incoming:
@@ -194,6 +195,18 @@
     pop hl
     ret
 
+09//zeldaRescueSetFakeId: |
+    push bc
+    ld bc,$e707
+    call compareRoom
+    pop bc
+    ret nz
+    push hl
+    ld a,$38 ; GLOBALFLAG_GOT_RING_FROM_ZELDA
+    call setGlobalFlag
+    pop hl
+    ret
+
 # reset maku tree to state 02 after getting the maku seed. i think so that
 # you can still get the "satchel" item afterward if you haven't already.
 09//makuSeedResetTreeState: |
@@ -207,6 +220,8 @@
 ## check fake ids to track:
 0b/5489/: |
     ld a,GLOBALFLAG_REWARD_KING_ZORA                        # king zora
+    call checkGlobalFlag
+    ld a,$38                        # zelda rescue
     call checkGlobalFlag
 0c/67d7/: db jumpifglobalflagset,GLOBALFLAG_WON_LETTER_DANCE # goron dance w/ letter
 0c/6851/: db jumpifglobalflagset,GLOBALFLAG_WON_LETTER_DANCE # ^
