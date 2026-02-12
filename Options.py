@@ -82,6 +82,7 @@ class OracleOfAgesRequiredEssences(Range):
 class OracleOfAgesIncludeSecretLocations(Toggle):
     """
     When enabled, locations that are usually accessible in the linked game will become easily completable. 
+    Please note that you must have Warp to Start enabled in order to complete hero's cave.
     Be careful while enabling this because things are not guarenteed to work as they should.
     """
     display_name = "Secret Locations"
@@ -289,6 +290,7 @@ class OracleOfAgesOptions(PerGameCommonOptions):
     gasha_nut_kill_requirement: OracleOfAgesGashaNutKillRequirement
     goal: OracleOfAgesGoal
     secret_locations: OracleOfAgesIncludeSecretLocations
+    warp_to_start: OracleOfAgesWarpToStart
     logic_difficulty: OracleOfAgesLogicDifficulty
     required_essences: OracleOfAgesRequiredEssences
     required_slates: OracleOfAgesRequiredSlates

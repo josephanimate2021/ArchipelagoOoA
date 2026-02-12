@@ -33,6 +33,10 @@ TREES_TABLE = {
     "Zora Village": "Zora Village: Seed Tree",
 }
 
+HEROS_CAVE_LOCATIONS = [
+    "Hero's Cave (1F): Push Pots into Both Buttons"
+]
+
 
 DUNGEON_NAMES = [
     "Maku Path",
@@ -294,7 +298,6 @@ LOCATION_GROUPS = {
         'Ancient Tomb (B3F): Single Chest',
         'Ancient Tomb (B3F): Boss',
     ],
-    "D10": [],
     'Trade Sequence': [
         'Yoll Graveyard: Graveyard Poe',
         'Lynna Village: Postman',
