@@ -375,5 +375,9 @@ REGIONS = [
     "gasha tree 13",
     "gasha tree 14",
     "gasha tree 15",
-    "gasha tree 16"
+    "gasha tree 16",
+
+    # heros cave checks
+    "enter hero's cave",
+    "hero's cave pots puzzle"
 ]

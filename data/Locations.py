@@ -1860,6 +1860,17 @@ LOCATIONS_DATA = {
         "symbolic_name": "d8Boss",
     },
     ##########################################
+    # "Hero's Cave (1F): Push Pots into Both Buttons": {
+        # "region_id": "hero's cave pots puzzle",
+        # "vanilla_item": "Small Key (Hero's Cave)",
+        # "secret_location": True,
+        # "conditional": True,
+        # "flag_byte": 0xc9ca,
+        # "room": 0x4ca,
+        # "collect": COLLECT_DROP,
+        # "symbolic_name": "herosCavePotsPuzzle",
+    # },
+    ##########################################
     "Spirit's Grave: Essence": {
         "region_id": "d1 boss",
         "flag_byte": 0xc911,

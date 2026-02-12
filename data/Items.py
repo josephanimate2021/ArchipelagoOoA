@@ -43,10 +43,10 @@ ITEMS_DATA = {
         'classification': ItemClassification.progression,
         'id': 0x0c
     },
-    #   "Bombchus (10)": {
-    #       'classification': ItemClassification.progression,
-    #       'id': 0x0d
-    #   },
+    "Bombchus (10)": {
+        'classification': ItemClassification.progression,
+        'id': 0x0d
+    },
     "Ricky's Flute": {
         'classification': ItemClassification.progression,
         'id': 0x0e,
@@ -214,6 +214,11 @@ ITEMS_DATA = {
         'id': 0x30,
         'subid': 0x08
     },
+    "Small Key (Hero's Cave)": {
+        'classification': ItemClassification.progression,
+        'id': 0x30,
+        'subid': 0x0b
+    },
     "Master Key (Maku Path)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
@@ -263,6 +268,11 @@ ITEMS_DATA = {
         'classification': ItemClassification.progression,
         'id': 0x30,
         'subid': 0x08
+    },
+    "Master Key (Hero's Cave)": {
+        'classification': ItemClassification.progression,
+        'id': 0x30,
+        'subid': 0x0b
     },
     "Boss Key (Spirit's Grave)": {
         'classification': ItemClassification.progression,

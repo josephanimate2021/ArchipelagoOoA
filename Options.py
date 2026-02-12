@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from Options import Choice, DeathLink, DefaultOnToggle, PerGameCommonOptions, Range, Toggle, StartInventoryPool, ItemSet, OptionSet, NamedRange
+from Options import Choice, DeathLink, DefaultOnToggle, PerGameCommonOptions, Range, Toggle, StartInventoryPool, ItemSet, OptionSet, NamedRange, ItemsAccessibility
 
 from worlds.tloz_ooa.data.Items import ITEMS_DATA
 from worlds.tloz_ooa.data.Constants import TREES_TABLE
@@ -283,6 +283,7 @@ class OracleOfAgesCombatDifficulty(Choice):
 
 @dataclass
 class OracleOfAgesOptions(PerGameCommonOptions):
+    accessibility: ItemsAccessibility
     start_inventory_from_pool: StartInventoryPool
     deterministic_gasha_locations: OracleOfAgesGashaLocations
     gasha_nut_kill_requirement: OracleOfAgesGashaNutKillRequirement

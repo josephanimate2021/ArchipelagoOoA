@@ -44,8 +44,7 @@ DUNGEON_NAMES = [
     "Mermaid's Cave Present",
     "Jabu-Jabu's Belly",
     "Ancient Tomb",
-    "Mermaid's Cave Past",
-    "Hero's Cave"
+    "Mermaid's Cave Past"
 ]
 
 REGIONS_CONVERSION_TABLE = {
@@ -119,6 +118,7 @@ ITEM_GROUPS = {
         "Small Key (Jabu-Jabu's Belly)",
         "Small Key (Ancient Tomb)",
         "Small Key (Mermaid's Cave Past)",
+        "Small Key (Hero's Cave)"
     ],
     "Boss Keys": [
         "Boss Key (Spirit's Grave)",
@@ -163,6 +163,7 @@ ITEM_GROUPS = {
         "Master Key (Jabu-Jabu's Belly)",
         "Master Key (Ancient Tomb)",
         "Master Key (Mermaid's Cave Past)",
+        "Master Key (Hero's Cave)"
     ],
 }
 
