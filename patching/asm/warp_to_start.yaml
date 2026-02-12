@@ -3,16 +3,26 @@
     jp nz,$6560     ; _mapMenu_checkRoomVisited
     or a
     ret
-02/5ec8/: call checkTreeVisited
-02/65e1/: call checkTreeVisited
+02/5ec8/: |
+    /ifdef option.secretLocationsEnabled
+    call checkTreeVisited
+    /endif
+02/65e1/: |
+    /ifdef option.secretLocationsEnabled
+    call checkTreeVisited
+    /endif
+
 # always treat starting seed tree as visited for warping purposes.
 02//checkCursorVisited: |
     ld a,(wMapMenu_cursorIndex)
     jp checkTreeVisited
-02/609b/: call checkCursorVisited
+
+02/609b/: |
+    /ifdef option.secretLocationsEnabled
+    call checkCursorVisited
+    /endif
 
 02//treeWarp: |
-      /ifdef option.secretLocationsEnabled
       ld a,(wKeysPressed)
       and $08
       jr z,@done
@@ -31,13 +41,27 @@
       call $5fbf
       @done:
       jp $4fba
-      /endif
 
-02/5ff9/: call checkTreeVisited
-02/6133/: call nz,treeWarp
-02/618b/: call nz,treeWarp
-02/619d/: call checkCursorVisited
-02/66a9/: call checkTreeVisited
+02/5ff9/: |
+    /ifdef option.secretLocationsEnabled
+    call checkTreeVisited
+    /endif
+02/6133/: |
+    /ifdef option.secretLocationsEnabled
+    call nz,treeWarp
+    /endif
+02/618b/: |
+    /ifdef option.secretLocationsEnabled
+    call nz,treeWarp
+    /endif
+02/619d/: |
+    /ifdef option.secretLocationsEnabled
+    call checkCursorVisited
+    /endif
+02/66a9/: |
+    /ifdef option.secretLocationsEnabled
+    call checkTreeVisited
+    /endif
 
 # warp to start location if holding start when opening the map screen.
 02//checkWarpToStart: |

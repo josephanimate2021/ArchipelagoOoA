@@ -95,7 +95,7 @@ def define_option_constants(assembler: Z80Assembler, patch_data):
     assembler.define_byte("option.destTransittion", 0x03 if options['secret_locations'] else 0x05)
     assembler.define_byte("option.srcTransittion", 0x04 if options['secret_locations'] else 0x03)
 
-    assembler.define_byte("option.secretLocationsEnabled", 0x01 if options["secret_locations"] else 0x00)
+    assembler.define_byte("option.secretLocationsEnabled", 1 if options["secret_locations"] else 0)
     # assembler.define_byte("option.currentsActivatesPortals", 0x01 if options["currents_activates_portals"] else 0x00)
 
 
