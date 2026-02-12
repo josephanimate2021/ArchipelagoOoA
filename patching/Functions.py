@@ -87,11 +87,13 @@ def define_location_constants(assembler: Z80Assembler, patch_data):
 def define_option_constants(assembler: Z80Assembler, patch_data):
     options = patch_data["options"]
 
-    assembler.define_byte("option.startingGroup", 0x00)
-    assembler.define_byte("option.startingRoom", 0x39)
-    assembler.define_byte("option.startingPosY", 0x28)
-    assembler.define_byte("option.startingPosX", 0x18)
-    assembler.define_byte("option.startingPos", 0x21)
+    assembler.define_byte("option.startingGroup", 0x04 if options['secret_locations'] else 0x00)
+    assembler.define_byte("option.startingRoom", 0xce if options['secret_locations'] else 0x39)
+    # assembler.define_byte("option.startingPosY", 0x28)
+    # assembler.define_byte("option.startingPosX", 0x18)
+    assembler.define_byte("option.startingPos", 0xff if options['secret_locations'] else 0x21)
+    assembler.define_byte("option.destTransittion", 0x03 if options['secret_locations'] else 0x05)
+    assembler.define_byte("option.srcTransittion", 0x04 if options['secret_locations'] else 0x03)
 
     assembler.define_byte("option.secretLocationsEnabled", 0x01 if options["secret_locations"] else 0x00)
     # assembler.define_byte("option.currentsActivatesPortals", 0x01 if options["currents_activates_portals"] else 0x00)

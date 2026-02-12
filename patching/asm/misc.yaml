@@ -192,16 +192,6 @@
     pop bc
     ret
 
-# 04//makeHerosCaveEntrance: |
-  # ld a,(wWarpDestRoom)
-  # cp $ce
-  # ret nz
-  # ld a,(wWarpDestGroup)
-  # cp $04
-  # ret nz
-  # ld a,($c94ce) ; room flags for heros cave exit
-  # ret
-
 04/45e8/: call handleSpecialExits
 0a/4738/: call handleSpecialExits
 
