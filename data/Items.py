@@ -217,7 +217,7 @@ ITEMS_DATA = {
     "Small Key (Hero's Cave)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x0b
+        'subid': 0x11
     },
     "Master Key (Maku Path)": {
         'classification': ItemClassification.progression,
@@ -272,7 +272,7 @@ ITEMS_DATA = {
     "Master Key (Hero's Cave)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x0b
+        'subid': 0x09
     },
     "Boss Key (Spirit's Grave)": {
         'classification': ItemClassification.progression,

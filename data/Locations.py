@@ -1860,15 +1860,45 @@ LOCATIONS_DATA = {
         "symbolic_name": "d8Boss",
     },
     ##########################################
-    # "Hero's Cave (1F): Push Pots into Both Buttons": {
-        # "region_id": "hero's cave pots puzzle",
+    "Hero's Cave (1F): Push Pots into Both Buttons": {
+        "region_id": "hero's cave pots puzzle",
+        "vanilla_item": "Gasha Seed", # This is for testing purposes. For some reason when I include a small key from the dungeon, the ap location filler errors out.
+        "conditional": True,
+        "dungeon" : 11,
+        "flag_byte": 0xc9ca,
+        "room": 0x4ca,
+        "collect": COLLECT_CHEST,
+        "symbolic_name": "herosCavePotsPuzzle",
+    },
+    # "Hero's Cave (1F): 1st Statue Puzzle": {
+        # "region_id": "hero's cave statue 1 puzzle",
         # "vanilla_item": "Small Key (Hero's Cave)",
-        # "secret_location": True,
         # "conditional": True,
-        # "flag_byte": 0xc9ca,
-        # "room": 0x4ca,
-        # "collect": COLLECT_DROP,
-        # "symbolic_name": "herosCavePotsPuzzle",
+        # "dungeon" : 11,
+        # "flag_byte": 0xc9cb,
+        # "room": 0x4cb,
+        # "collect": COLLECT_CHEST,
+        # "symbolic_name": "herosCaveStatue1Puzzle",
+    # },
+    # "Hero's Cave (1F): Bridge Puzzle": {
+        # "region_id": "hero's cave bridge puzzle 1",
+        # "vanilla_item": "Small Key (Hero's Cave)",
+        # "conditional": True,
+        # "dungeon" : 11,
+        # "flag_byte": 0xc9c7,
+        # "room": 0x4c7,
+        # "collect": COLLECT_CHEST,
+        # "symbolic_name": "herosCaveBridgePuzzle",
+    # },
+    # "Hero's Cave (1F): Shoot Eyes": {
+        # "region_id": "hero's cave shoot eyes",
+        # "vanilla_item": "Gasha Seed",
+        # "conditional": True,
+        # "dungeon" : 11,
+        # "flag_byte": 0xc9c6,
+        # "room": 0x4c6,
+        # "collect": COLLECT_CHEST,
+        # "symbolic_name": "herosCaveShootEyes",
     # },
     ##########################################
     "Spirit's Grave: Essence": {

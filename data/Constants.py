@@ -33,10 +33,6 @@ TREES_TABLE = {
     "Zora Village": "Zora Village: Seed Tree",
 }
 
-HEROS_CAVE_LOCATIONS = [
-    "Hero's Cave (1F): Push Pots into Both Buttons"
-]
-
 
 DUNGEON_NAMES = [
     "Maku Path",
@@ -48,7 +44,9 @@ DUNGEON_NAMES = [
     "Mermaid's Cave Present",
     "Jabu-Jabu's Belly",
     "Ancient Tomb",
-    "Mermaid's Cave Past"
+    "Mermaid's Cave Past",
+    "",
+    "Hero's Cave"
 ]
 
 REGIONS_CONVERSION_TABLE = {
@@ -297,6 +295,9 @@ LOCATION_GROUPS = {
         'Ancient Tomb (1F): Stalfos',
         'Ancient Tomb (B3F): Single Chest',
         'Ancient Tomb (B3F): Boss',
+    ],
+    "D11": [
+        "Hero's Cave (1F): Push Pots into Both Buttons"
     ],
     'Trade Sequence': [
         'Yoll Graveyard: Graveyard Poe',

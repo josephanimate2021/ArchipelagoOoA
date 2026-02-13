@@ -379,5 +379,9 @@ REGIONS = [
 
     # heros cave checks
     "enter hero's cave",
-    "hero's cave pots puzzle"
+    "hero's cave pots puzzle",
+    "hero's cave statue 1 puzzle",
+    "hero's cave bridge puzzle 1",
+    "hero's cave shoot eyes",
+    "hero's cave statue 2 puzzle",
 ]

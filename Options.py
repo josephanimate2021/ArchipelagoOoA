@@ -82,10 +82,22 @@ class OracleOfAgesRequiredEssences(Range):
 class OracleOfAgesIncludeSecretLocations(Toggle):
     """
     When enabled, locations that are usually accessible in the linked game will become easily completable. 
-    Please note that you must have Warp to Start enabled in order to complete hero's cave.
+    Hero's cave will not be included unless you enable it due to a limit of locations that can be filled.
+    This will also remove Moonlit Grotto from a list of dungeons to complete because for some reason the small key in there uses the exact same subid.
     Be careful while enabling this because things are not guarenteed to work as they should.
     """
     display_name = "Secret Locations"
+
+    include_in_patch = True
+    include_in_slot_data = True
+
+class OracleOfAgesHerosCave(Toggle):
+    """
+    When enabled, Hero's Cave will be unlocked via the warp to start option if that's enabled. 
+    To prevent you from getting stuck while getting out. Tree Warp was added (press start and select at the same time to perform a tree warp)
+    Be careful while enabling this because things are not guarenteed to work as they should.
+    """
+    display_name = "Hero's Cave"
 
     include_in_patch = True
     include_in_slot_data = True
@@ -290,6 +302,7 @@ class OracleOfAgesOptions(PerGameCommonOptions):
     gasha_nut_kill_requirement: OracleOfAgesGashaNutKillRequirement
     goal: OracleOfAgesGoal
     secret_locations: OracleOfAgesIncludeSecretLocations
+    heros_cave: OracleOfAgesHerosCave
     warp_to_start: OracleOfAgesWarpToStart
     logic_difficulty: OracleOfAgesLogicDifficulty
     required_essences: OracleOfAgesRequiredEssences

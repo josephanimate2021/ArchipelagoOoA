@@ -80,7 +80,7 @@ class OracleOfAgesWeb(WebWorld):
         "English",
         "ooa_setup_en.md",
         "ooa_setup/en",
-        ["SenPierre"]
+        ["SenPierre", "josephanimate2021"]
     )]
 
 class OracleOfAgesWorld(World):
@@ -125,6 +125,7 @@ class OracleOfAgesWorld(World):
                    "shuffle_dungeons",
                    "default_seed",
                    "warp_to_start",
+                   "heros_cave",
                    # Locations
                    "advance_shop",
                    "secret_locations",
@@ -196,7 +197,11 @@ class OracleOfAgesWorld(World):
         if region_id == "advance shop":
             return self.options.advance_shop.value
         
-        if location_data["secret_location"] and self.options.secret_locations:
+        if self.options.heros_cave and self.options.warp_to_start:
+            if location_name in self.location_name_groups['D11']:
+                return True
+        
+        if self.options.secret_locations and location_data["secret_location"]:
             return True
 
         # TODO FUNNY LOCATION ?

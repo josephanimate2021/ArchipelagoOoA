@@ -21,8 +21,12 @@ def create_connections(multiworld: MultiWorld, player: int, options):
         make_d6present_logic(player),
         make_d7_logic(player),
         make_d8_logic(player),
-        dungeon_entrances,
     ]
+
+    if options.heros_cave and options.warp_to_start:
+        all_logic.append(make_heros_cave_logic(player))
+
+    all_logic.append(dungeon_entrances)
 
     # Check unreachable regions
     unused_region = REGIONS.copy()

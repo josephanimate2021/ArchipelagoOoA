@@ -649,9 +649,9 @@ def make_overworld_logic(player: int, options):
             ooa_can_go_back_to_present(state, player),
         ])])
         labrynna_logic.append(["lynna city", "princess zelda rescue", False, lambda state: ooa_has_feather(state, player)])
-        # if options.warp_to_start:
-            # labrynna_logic.append(["Menu", "enter hero's cave", False, lambda state: ooa_has_ember_seeds(state, player)])
-            # labrynna_logic.append(["enter hero's cave", "hero's cave pots puzzle", False, lambda state: ooa_has_bracelet(state, player)])
+
+    if options.heros_cave and options.warp_to_start:
+        labrynna_logic.append(["Menu", "enter hero's cave", False, lambda state: ooa_has_ember_seeds(state, player)])
 
     for i in range(options.deterministic_gasha_locations):
         labrynna_logic.append(gasha_logic[i])
