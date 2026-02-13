@@ -617,13 +617,7 @@ def make_overworld_logic(player: int, options):
             ooa_can_dive(state, player),
             state.has("Zora Scale", player),
         ])],
-        ["piratian captain", "sea of storms past", False, lambda state: any([
-            all([
-                state.multiworld.worlds[player].options.secret_locations,
-                ooa_can_switch_past_and_present(state, player)
-            ]),
-            None
-        ])],
+        ["piratian captain", "sea of storms past", False, lambda state: ooa_can_switch_past_and_present(state, player) if state.multiworld.worlds[player].options.secret_locations else None],
         ["crescent past west", "d8 entrance", False, lambda state: all([
             state.has("Tokay Eyeball", player),
             ooa_can_break_pot(state, player),

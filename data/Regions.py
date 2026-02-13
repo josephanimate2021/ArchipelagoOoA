@@ -379,9 +379,18 @@ REGIONS = [
 
     # heros cave checks
     "enter hero's cave",
-    "hero's cave pots puzzle",
+    "hero's cave pots puzzle 1",
     "hero's cave statue 1 puzzle",
     "hero's cave bridge puzzle 1",
     "hero's cave shoot eyes",
     "hero's cave statue 2 puzzle",
+    "hero's cave pots puzzle 2",
+    "hero's cave statue 3 puzzle",
+    "hero's cave bridge puzzle 2",
+    "hero's cave color room",
+    "hero's cave water puzzle 1f",
+    "hero's cave water puzzle b1f",
+    "hero's cave basement",
+    "hero's cave final puzzle",
+    "hero's cave reward"
 ]

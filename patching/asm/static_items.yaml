@@ -29,6 +29,12 @@
   dwbe $054b, locations.d7FlowerRoom
   dwbe $0555, locations.d7DiamondPuzzle
 
+  # ------- Hero's Cave items -------
+  /ifdef option.secretLocationsEnabled
+  dwbe $04cd, locations.herosCaveStatue3Puzzle
+  dwbe $06c0, locations.herosCaveBasement
+  /endif
+
 
 0a//staticItemsReplacementsLookup_body: |
   push bc
