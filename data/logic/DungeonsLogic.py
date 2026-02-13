@@ -834,10 +834,7 @@ def make_d8_logic(player: int):
 
 def make_heros_cave_logic(player: int):
     return [
-        ["enter hero's cave", "hero's cave pots puzzle", False, lambda state: all([
-            ooa_has_bracelet(state, player),
-            ooa_has_cane(state, player)
-        ])],
+        ["enter hero's cave", "hero's cave pots puzzle", False, lambda state: ooa_has_cane(state, player)],
         # ["hero's cave pots puzzle", "hero's cave statue 1 puzzle", False, lambda state: all([
             # ooa_has_small_keys(state, player, 11, 1),
             # ooa_has_bombs(state, player),
