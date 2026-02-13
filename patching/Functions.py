@@ -95,7 +95,8 @@ def define_option_constants(assembler: Z80Assembler, patch_data):
     assembler.define_byte("option.destTransittion", 0x05)
     assembler.define_byte("option.srcTransittion", 0x03)
 
-    assembler.define_byte("option.secretLocationsEnabled", 0x01 if options["secret_locations"] else 0x00)
+    if options["secret_locations"]:
+        assembler.define_byte("option.secretLocationsEnabled", 1)
     # assembler.define_byte("option.currentsActivatesPortals", 0x01 if options["currents_activates_portals"] else 0x00)
 
 
@@ -178,7 +179,17 @@ def write_chest_contents(rom: RomData, patch_data):
     This puts the item described in the patch data inside each chest in the game.
     """
     for location_name, location_data in LOCATIONS_DATA.items():
-        if ('collect' not in location_data or 'room' not in location_data or location_data['collect'] != COLLECT_CHEST) and location_name != "Rolling Ridge (Present): Bush Cave Chest":
+        if (location_data.get(
+            "collect", COLLECT_TOUCH
+        ) != COLLECT_CHEST and not location_data.get(
+            "is_chest", False
+        ) and location_name != "Rolling Ridge (Present): Bush Cave Chest") or not (
+            patch_data['options']['secret_locations'] and (
+                (
+                    "dungeon" in location_data and location_data["dungeon"] == 11
+                ) or "secret_location" in location_data
+            )
+        ):
             continue
         if location_name == "Nuun Highlands: Southern Cave":
             chest_addr = rom.get_chest_addr(location_data['room'][patch_data["options"]["animal_companion"]])

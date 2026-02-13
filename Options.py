@@ -82,8 +82,6 @@ class OracleOfAgesRequiredEssences(Range):
 class OracleOfAgesIncludeSecretLocations(Toggle):
     """
     When enabled, locations that are usually accessible in the linked game will become easily completable. 
-    Hero's cave will not be included unless you enable it due to a limit of locations that can be filled.
-    This will also remove Moonlit Grotto from a list of dungeons to complete because for some reason the small key in there uses the exact same subid.
     Be careful while enabling this because things are not guarenteed to work as they should.
     """
     display_name = "Secret Locations"
@@ -302,7 +300,6 @@ class OracleOfAgesOptions(PerGameCommonOptions):
     gasha_nut_kill_requirement: OracleOfAgesGashaNutKillRequirement
     goal: OracleOfAgesGoal
     secret_locations: OracleOfAgesIncludeSecretLocations
-    heros_cave: OracleOfAgesHerosCave
     warp_to_start: OracleOfAgesWarpToStart
     logic_difficulty: OracleOfAgesLogicDifficulty
     required_essences: OracleOfAgesRequiredEssences

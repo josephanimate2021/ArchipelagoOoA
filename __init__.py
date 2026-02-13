@@ -125,7 +125,6 @@ class OracleOfAgesWorld(World):
                    "shuffle_dungeons",
                    "default_seed",
                    "warp_to_start",
-                   "heros_cave",
                    # Locations
                    "advance_shop",
                    "secret_locations",
@@ -197,12 +196,10 @@ class OracleOfAgesWorld(World):
         if region_id == "advance shop":
             return self.options.advance_shop.value
         
-        if self.options.heros_cave and self.options.warp_to_start:
-            if "dungeon" in location_data and location_data["dungeon"] == 11:
-                return True
-        
-        if self.options.secret_locations and location_data["secret_location"]:
-            return True
+        if (
+            "dungeon" in location_data and location_data["dungeon"] == 11
+        ) or "secret_location" in location_data:
+            return self.options.secret_locations
 
         # TODO FUNNY LOCATION ?
 
@@ -349,7 +346,7 @@ class OracleOfAgesWorld(World):
         # If Master Keys are enabled, put one for every dungeon
         if self.options.master_keys != OracleOfAgesMasterKeys.option_disabled:
             for small_key_name in ITEM_GROUPS["Master Keys"]:
-                if self.options.heros_cave or small_key_name != "Master Key (Hero's Cave)":
+                if self.options.secret_locations or small_key_name != "Master Key (Hero's Cave)":
                     item_pool_dict[small_key_name] = 1
                     filler_item_count -= 1
 
@@ -453,7 +450,10 @@ class OracleOfAgesWorld(World):
 
         for i in range(0, 11):
             if i == 10:
-                i = 11
+                if self.options.secret_locations:
+                    i = 11
+                else:
+                    continue
             # Build a list of locations in this dungeon
             dungeon_location_names = [name for name, loc in LOCATIONS_DATA.items()
                                       if "dungeon" in loc and loc["dungeon"] == i]

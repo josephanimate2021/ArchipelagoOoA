@@ -617,7 +617,13 @@ def make_overworld_logic(player: int, options):
             ooa_can_dive(state, player),
             state.has("Zora Scale", player),
         ])],
-        ["piratian captain", "sea of storms past", False, None],
+        ["piratian captain", "sea of storms past", False, lambda state: any([
+            all([
+                state.multiworld.worlds[player].options.secret_locations,
+                ooa_can_switch_past_and_present(state, player)
+            ]),
+            None
+        ])],
         ["crescent past west", "d8 entrance", False, lambda state: all([
             state.has("Tokay Eyeball", player),
             ooa_can_break_pot(state, player),
@@ -645,12 +651,8 @@ def make_overworld_logic(player: int, options):
     ]
 
     if options.secret_locations:
-        labrynna_logic.append(["sea of storms past", "sea of storms present", False, lambda state: all([
-            ooa_can_go_back_to_present(state, player),
-        ])])
+        labrynna_logic.append(["piratian captain", "sea of storms present", False, None])
         labrynna_logic.append(["lynna city", "princess zelda rescue", False, lambda state: ooa_has_feather(state, player)])
-
-    if options.heros_cave and options.warp_to_start:
         labrynna_logic.append(["lynna city", "enter hero's cave", False, lambda state: all([
             ooa_has_bracelet(state, player),
             ooa_can_use_ember_seeds(state, player, True)

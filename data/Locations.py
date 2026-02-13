@@ -911,7 +911,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_CHEST,
     },
     ##########################################
-    "Sea of Storms (Past): Piratian Captain": {
+    "Sea of Storms: Piratian Captain": {
         "region_id": "piratian captain",
         "vanilla_item": "Tokay Eyeball",
         "flag_byte": 0xcaf8,
@@ -925,21 +925,19 @@ LOCATIONS_DATA = {
         "vanilla_item": "Pegasus Ring",
         "flag_byte": 0xc8ff,
         "room": 0x03ff,
-        "map_tile": 0x1c7,
         "collect": COLLECT_CHEST,
         "symbolic_name": "seaofstorm",
     },
-    # "Sea of Storms (Present): Underwater Cave": {
-        # "region_id": "sea of storms present",
-        # "vanilla_item": "Gasha Seed",
-        # "conditional": True,
-        # "flag_byte": 0xc8e8,
-        # "room": 0x3e8,
-        # "map_tile": 0xc7,
-        # "secret_location": True,
-        # "collect": COLLECT_CHEST,
-        # "symbolic_name": "seaofstormpresent",
-    # },
+    "Sea of Storms (Present): Underwater Cave": {
+        "region_id": "sea of storms present",
+        "vanilla_item": "Gasha Seed",
+        "conditional": True,
+        "flag_byte": 0xc8e8,
+        "room": 0x3e8,
+        "secret_location": True,
+        "collect": COLLECT_CHEST,
+        "symbolic_name": "seaofstormpresent",
+    },
     ##########################################
     "Sea of No Return: Chest Under Statue": {
         "region_id": "sea of no return",
@@ -1862,29 +1860,29 @@ LOCATIONS_DATA = {
     ##########################################
     "Hero's Cave (1F): Push Pots into Both Buttons": {
         "region_id": "hero's cave pots puzzle",
-        "vanilla_item": "Small Key (Hero's Cave)", # This is for testing purposes. For some reason when I include a small key from the dungeon, the ap location filler errors out.
+        "vanilla_item": "Small Key (Hero's Cave)",
         "conditional": True,
-        "dungeon" : 11,
+        "dungeon": 11,
         "flag_byte": 0xc9ca,
         "room": 0x4ca,
         "collect": COLLECT_CHEST,
         "symbolic_name": "herosCavePotsPuzzle",
     },
-    "Hero's Cave (1F): 1st Statue Puzzle": {
+    "Hero's Cave (1F): Statue Puzzle #1": {
         "region_id": "hero's cave statue 1 puzzle",
         "vanilla_item": "Small Key (Hero's Cave)",
         "conditional": True,
-        "dungeon" : 11,
+        "dungeon": 11,
         "flag_byte": 0xc9cb,
         "room": 0x4cb,
         "collect": COLLECT_CHEST,
         "symbolic_name": "herosCaveStatue1Puzzle",
     },
-    "Hero's Cave (1F): Bridge Puzzle": {
+    "Hero's Cave (1F): Bridge Puzzle #1": {
         "region_id": "hero's cave bridge puzzle 1",
         "vanilla_item": "Small Key (Hero's Cave)",
         "conditional": True,
-        "dungeon" : 11,
+        "dungeon": 11,
         "flag_byte": 0xc9c7,
         "room": 0x4c7,
         "collect": COLLECT_CHEST,
@@ -1894,11 +1892,21 @@ LOCATIONS_DATA = {
         "region_id": "hero's cave shoot eyes",
         "vanilla_item": "Gasha Seed",
         "conditional": True,
-        "dungeon" : 11,
+        "dungeon": 11,
         "flag_byte": 0xc9c6,
         "room": 0x4c6,
         "collect": COLLECT_CHEST,
         "symbolic_name": "herosCaveShootEyes",
+    },
+    "Hero's Cave (1F): Statue Puzzle #2": {
+        "region_id": "hero's cave statue 2 puzzle",
+        "vanilla_item": "Small Key (Hero's Cave)",
+        "conditional": True,
+        "dungeon": 11,
+        "flag_byte": 0xc9cb,
+        "room": 0x4cb,
+        "collect": COLLECT_CHEST,
+        "symbolic_name": "herosCaveStatue2Puzzle",
     },
     ##########################################
     "Spirit's Grave: Essence": {
