@@ -272,7 +272,7 @@ ITEMS_DATA = {
     "Master Key (Hero's Cave)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x09
+        'subid': 0x0b
     },
     "Boss Key (Spirit's Grave)": {
         'classification': ItemClassification.progression,
