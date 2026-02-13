@@ -198,7 +198,7 @@ class OracleOfAgesWorld(World):
             return self.options.advance_shop.value
         
         if self.options.heros_cave and self.options.warp_to_start:
-            if location_name in self.location_name_groups['D11']:
+            if "dungeon" in location_data and location_data["dungeon"] == 11:
                 return True
         
         if self.options.secret_locations and location_data["secret_location"]:
@@ -349,8 +349,9 @@ class OracleOfAgesWorld(World):
         # If Master Keys are enabled, put one for every dungeon
         if self.options.master_keys != OracleOfAgesMasterKeys.option_disabled:
             for small_key_name in ITEM_GROUPS["Master Keys"]:
-                item_pool_dict[small_key_name] = 1
-                filler_item_count -= 1
+                if self.options.heros_cave or small_key_name != "Master Key (Hero's Cave)":
+                    item_pool_dict[small_key_name] = 1
+                    filler_item_count -= 1
 
         # Add the required rings
         ring_copy = sorted(self.options.required_rings.value.copy())
@@ -450,7 +451,9 @@ class OracleOfAgesWorld(World):
         collection_state = self.multiworld.get_all_state(False)
         D6_remaining_location = []
 
-        for i in range(0, 10):
+        for i in range(0, 11):
+            if i == 10:
+                i = 11
             # Build a list of locations in this dungeon
             dungeon_location_names = [name for name, loc in LOCATIONS_DATA.items()
                                       if "dungeon" in loc and loc["dungeon"] == i]

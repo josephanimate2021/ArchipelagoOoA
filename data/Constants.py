@@ -296,9 +296,6 @@ LOCATION_GROUPS = {
         'Ancient Tomb (B3F): Single Chest',
         'Ancient Tomb (B3F): Boss',
     ],
-    "D11": [
-        "Hero's Cave (1F): Push Pots into Both Buttons"
-    ],
     'Trade Sequence': [
         'Yoll Graveyard: Graveyard Poe',
         'Lynna Village: Postman',

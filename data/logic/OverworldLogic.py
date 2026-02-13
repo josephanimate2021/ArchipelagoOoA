@@ -651,7 +651,7 @@ def make_overworld_logic(player: int, options):
         labrynna_logic.append(["lynna city", "princess zelda rescue", False, lambda state: ooa_has_feather(state, player)])
 
     if options.heros_cave and options.warp_to_start:
-        labrynna_logic.append(["Menu", "enter hero's cave", False, lambda state: all([
+        labrynna_logic.append(["lynna city", "enter hero's cave", False, lambda state: all([
             ooa_has_bracelet(state, player),
             ooa_can_use_ember_seeds(state, player, True)
         ])])

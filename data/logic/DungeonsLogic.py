@@ -835,18 +835,18 @@ def make_d8_logic(player: int):
 def make_heros_cave_logic(player: int):
     return [
         ["enter hero's cave", "hero's cave pots puzzle", False, lambda state: ooa_has_cane(state, player)],
-        # ["hero's cave pots puzzle", "hero's cave statue 1 puzzle", False, lambda state: all([
-            # ooa_has_small_keys(state, player, 11, 1),
-            # ooa_has_bombs(state, player),
-            # ooa_can_jump_2_wide_pit(state, player, False),
-            # ooa_can_break_pot(state, player)
-        # ])],
-        # ["hero's cave statue 1 puzzle", "hero's cave bridge puzzle 1", False, lambda state: all([
-            # ooa_has_small_keys(state, player, 11, 2),
-            # ooa_can_use_pegasus_seeds(state, player),
-            # ooa_has_seedshooter(state, player)
-        # ])],
-        # ["hero's cave bridge puzzle 1", "hero's cave shoot eyes", False, lambda state: ooa_has_small_keys(state, player, 11, 3)],
+        ["hero's cave pots puzzle", "hero's cave statue 1 puzzle", False, lambda state: all([
+            ooa_has_small_keys(state, player, 11, 1),
+            ooa_has_bombs(state, player),
+            ooa_can_jump_2_wide_pit(state, player, False),
+            ooa_can_break_pot(state, player)
+        ])],
+        ["hero's cave statue 1 puzzle", "hero's cave bridge puzzle 1", False, lambda state: all([
+            ooa_has_small_keys(state, player, 11, 2),
+            ooa_can_use_pegasus_seeds(state, player),
+            ooa_has_seedshooter(state, player)
+        ])],
+        ["hero's cave bridge puzzle 1", "hero's cave shoot eyes", False, lambda state: ooa_has_small_keys(state, player, 11, 3)],
         # ["hero's cave shoot eyes", "hero's cave statue 2 puzzle", False, lambda state: ooa_can_jump_1_wide_pit(state, player, False)],
         # ["hero's cave statue 2 puzzle", "hero's cave button puzzle", False, lambda state: all([
             # ooa_has_switch_hook(state, player),
