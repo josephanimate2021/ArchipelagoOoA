@@ -48,8 +48,6 @@
 # data for applyAllTileSubstitutions: group,room,flags,yx,tile
 04//tileSubTable: |
     /ifdef option.secretLocationsEnabled
-    db 01,c7,00,48,d0 # add stair tile in sea of storms past to allow players to time travel to the present sea of storms.
-    db 03,c7,00,48,2c # add statue in sea of storms past underwater prevent players from resurfacing on that area.
     # add two walkable tiles in black tower present entrance (maybe for a hero's cave concept since you can't get anything from rescuing princess zelda in the linked game)
     db 00,76,00,54,a7
     db 00,76,00,55,a7

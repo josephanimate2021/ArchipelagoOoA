@@ -49,6 +49,8 @@
     ; Mark intro as seen
     ld a,$0a
     call setGlobalFlag
+    ld a,$3d
+    call setGlobalFlag
     ld a,$21
     call setGlobalFlag
     
@@ -61,6 +63,7 @@
     # maku tree state (vanished)
     ld a,$01
     ld (wMakuTreeState),a
+
 
     # room flags 3 | 6 | 7
     ld a,$c8
@@ -102,6 +105,9 @@
 
     # room flag 0
     ld a,$01
+    /ifdef option.secretLocationsEnabled
+    ld ($c612),a
+    /endif
     ld ($c738),a # maku tree (present)
     ld ($c876),a # black tower entrance
 
@@ -117,3 +123,8 @@
     pop hl
     ret
 03/6e97/: jp setInitialFlags
+
+ # change default text speed to 5
+3f/4cd8/: db $04
+3f/587b/: db $04
+    
