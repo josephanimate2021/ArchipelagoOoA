@@ -121,6 +121,7 @@ class OracleOfAgesWorld(World):
         # TODO MOAR DATA ?
         options = ["goal", "death_link",
                    # Logic-impacting options
+                   "lynna gardener",
                    "logic_difficulty",
                    "shuffle_dungeons",
                    "default_seed",
@@ -131,7 +132,7 @@ class OracleOfAgesWorld(World):
                    # Requirements
                    "required_essences", "required_slates",
                    # keysanity
-                   "keysanity_small_keys", "keysanity_boss_keys", "keysanity_slates"
+                   "keysanity_small_keys", "keysanity_boss_keys", "keysanity_slates", "master_keys"
                    ]
 
         slot_data = self.options.as_dict(*options)

@@ -44,7 +44,7 @@ def make_overworld_logic(player: int, options):
         # FOREST OF TIME
         #######################################
         ["Menu", "forest of time", False, None],
-        ["Menu", "maple trade", False, lambda state: all([
+        ["black tower worker", "maple trade", False, lambda state: all([
             ooa_can_kill_normal_enemy(state, player, True),
             state.has("Touching Book", player)
         ])],
@@ -53,7 +53,10 @@ def make_overworld_logic(player: int, options):
 
         # LYNNA CITY
         #######################################
-        ["forest of time", "lynna city", True, lambda state: ooa_can_break_bush(state, player)],
+        ["forest of time", "lynna city", True, lambda state: any([
+            ooa_can_break_bush(state, player),
+            state.multiworld.worlds[player].options.lynna_gardener
+        ])],
         ["lynna city", "south lynna tree", False, lambda state: ooa_can_harvest_tree(state, player, True)],
         ["lynna city", "lynna city chest", False, lambda state: ooa_can_use_ember_seeds(state, player, False)],
         ["lynna village", "lynna city chest", False, lambda state: ooa_can_go_back_to_present(state, player)],
@@ -158,7 +161,10 @@ def make_overworld_logic(player: int, options):
         ["lynna city", "shore present", True, lambda state: any([
             ooa_can_swim_deepwater(state, player, True),
             ooa_has_bracelet(state, player),
-            ooa_can_go_back_to_present(state, player),
+            all([
+                ooa_can_go_back_to_present(state, player),
+                ooa_can_jump_1_wide_pit(state, player, True)
+            ]),
             all([
                 ooa_can_break_bush(state, player, True),
                 ooa_can_jump_1_wide_pit(state, player, True)
@@ -446,6 +452,7 @@ def make_overworld_logic(player: int, options):
                 ooa_has_switch_hook(state, player),
             ]),
         ])],
+        ["ridge west past base", "ridge west present", False, lambda state: ooa_can_go_back_to_present(state, player)],
         ["ridge west past base", "goron elder", False, lambda state: state.has("Bomb Flower", player)],
         ["ridge west present", "ridge west past", False, lambda state: all([
             ooa_can_open_portal(state, player),
@@ -455,6 +462,10 @@ def make_overworld_logic(player: int, options):
         ["goron elder", "ridge west past", False, None],
         ["ridge west past", "ridge west past base", False, None],
         ["ridge west past", "ridge west tree", False, lambda state: ooa_can_harvest_tree(state, player, False)],
+        ["ridge west present", "ridge west tree", False, lambda state: all([
+            ooa_can_switch_past_and_present(state, player),
+            ooa_can_harvest_tree(state, player, False)
+        ])],
         #########
         ["ridge west past", "ridge west present", False, lambda state: ooa_can_go_back_to_present(state, player)],
         ["ridge upper present", "ridge west present", False, None],
@@ -483,7 +494,7 @@ def make_overworld_logic(player: int, options):
         #####
         ["ridge upper present", "ridge upper past", False, lambda state: ooa_can_switch_past_and_present(state, player)],
         ["ridge upper present", "treasure hunting goron", False, lambda state: all([
-            ooa_has_bombs(state, player),
+            ooa_has_bombs(state, player, 2),
             ooa_has_ember_seeds(state, player),
             ooa_can_open_portal(state, player),
             ooa_has_bracelet(state, player)
@@ -540,21 +551,23 @@ def make_overworld_logic(player: int, options):
                 ooa_can_jump_3_wide_pit(state, player, False),
             ])
         ])],
+        ["ridge diamonds past", "ridge mid past", False, None],
         ["ridge mid past", "ridge mid present", False, lambda state: ooa_can_go_back_to_present(state, player)],
         ["ridge mid present", "target carts", True, lambda state: all([
             ooa_has_switch_hook(state, player),
             state.has("_access_cart", player),
         ])],
         ["goron shooting gallery", "target carts", False, lambda state: ooa_can_go_back_to_present(state, player)],
-        ["target carts", "target carts 1", True, lambda state: all([
-            ooa_has_seedshooter(state, player),
-            any([
-                ooa_has_ember_seeds(state, player),
-                ooa_has_mystery_seeds(state, player),
-                ooa_has_pegasus_seeds(state, player),
-                ooa_has_scent_seeds(state, player),
-            ])
-        ])],
+        ["target carts", "target carts 1", True, None],
+        # ["target carts", "target carts 1", True, lambda state: all([
+            # ooa_has_seedshooter(state, player),
+            # any([
+                # ooa_has_ember_seeds(state, player),
+                # ooa_has_mystery_seeds(state, player),
+                # ooa_has_pegasus_seeds(state, player),
+                # ooa_has_scent_seeds(state, player),
+            # ])
+        # ])],
         ["target carts 1", "target carts 2", True, None],
         ["ridge mid present", "big bang game", True, lambda state: state.has("Goronade", player)],
         ["ridge mid present", "goron diamond cave", True, lambda state: any([

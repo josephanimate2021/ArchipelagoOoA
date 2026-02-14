@@ -79,6 +79,14 @@ class OracleOfAgesRequiredEssences(Range):
     range_end = 8
     default = 8
 
+class OracleOfAgesLynnaGardener(Toggle):
+    """
+    When enabled, a friendly gardener will have trimmed the bushes outside of Lynna City and cleared the path
+    so you don't have to! This will expand the sphere 0 checks to include everything past the bushes that you
+    normally would need nothing for.
+    """
+    display_name = "Lynna Gardener"
+
 class OracleOfAgesIncludeSecretLocations(Toggle):
     """
     When enabled, locations that are usually accessible in the linked game will become easily completable. 
@@ -296,6 +304,7 @@ class OracleOfAgesCombatDifficulty(Choice):
 class OracleOfAgesOptions(PerGameCommonOptions):
     accessibility: ItemsAccessibility
     start_inventory_from_pool: StartInventoryPool
+    lynna_gardener: OracleOfAgesLynnaGardener
     deterministic_gasha_locations: OracleOfAgesGashaLocations
     gasha_nut_kill_requirement: OracleOfAgesGashaNutKillRequirement
     goal: OracleOfAgesGoal

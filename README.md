@@ -20,6 +20,7 @@ Archipelago 0.6.2 or newer were not able to use the apworld to play The Legend o
 ## Current New Options that are functional that are not in the original apworld repo.
 * duplicate seed trees - In Ages, there are 8 seed trees and 5 seed types. This causes duplicate trees to occur just like in Seasons. In order to give users a freedom to customize what trees are duplicates, this option was added. This was created by [Glan9](https://github.com/Glan9) on github, not myself. So please don't give me credit for this option.
 * warp to start - In ages and seasons Archipelago Randomizer, you can warp back to where you started by pressing the select or start buttons followed by your A and B buttons afterwards. For some reason this option was not functional in the original randomizer even though it's class was added in there. Well it's functional now and enjoy using it while it lasts!
+* lynna gardner - In Flamestripe's Fork of the OoA Apworld (Not Tested), you could enable this feature to cut down on having to use a weapon or something like that each time to cut the grass each time to get to lynna city. This impacts the logic for lynna city and can make a difference in gameplay.
 
 ## Building
 In order to build this code for usage with Archipelago, you need to follow these steps:
