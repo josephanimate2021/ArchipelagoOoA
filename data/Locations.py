@@ -925,8 +925,9 @@ LOCATIONS_DATA = {
         "vanilla_item": "Pegasus Ring",
         "flag_byte": 0xc8ff,
         "room": 0x03ff,
+        "map_tile": 0x1c7,
         "collect": COLLECT_CHEST,
-        "symbolic_name": "seaofstorm",
+        "symbolic_name": "seaofstormpast",
     },
     "Sea of Storms (Present): Underwater Cave": {
         "region_id": "sea of storms present",
@@ -934,6 +935,7 @@ LOCATIONS_DATA = {
         "conditional": True,
         "flag_byte": 0xc8e8,
         "room": 0x3e8,
+        "map_tile": 0xc7,
         "secret_location": True,
         "collect": COLLECT_CHEST,
         "symbolic_name": "seaofstormpresent",

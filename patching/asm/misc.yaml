@@ -131,6 +131,15 @@
 15/6b43/: dw $c71f
 15/6b45/: db $ff
 
+# Sea of storm specific chest. (change if in linked game)
+10/79ab/: dwbe locations.seaofstormpast
+10/79ad/: |
+      /ifdef option.secretLocationsEnabled
+      dwbe locations.seaofstormpresent
+      /else
+      dwbe locations.seaofstormpast
+      /endif
+
 # Veran is beaten
 10//thatallfolks: |
   ld a,GLOBALFLAG_VERAN_BEATEN
