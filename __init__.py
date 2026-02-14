@@ -121,7 +121,7 @@ class OracleOfAgesWorld(World):
         # TODO MOAR DATA ?
         options = ["goal", "death_link",
                    # Logic-impacting options
-                   "lynna gardener",
+                   "lynna_gardener",
                    "logic_difficulty",
                    "shuffle_dungeons",
                    "default_seed",
