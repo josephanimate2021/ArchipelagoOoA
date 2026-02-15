@@ -66,6 +66,7 @@ def make_overworld_logic(player: int, options):
             ooa_has_rupees(state, player, 400)
         ])],
         
+        ["lynna city", "mayor plen's secret", False, None],
         ["lynna city", "mayor plen's house", False, lambda state: ooa_has_long_hook(state, player)],
         ["lynna city", "lynna city comedian trade", False, lambda state: state.has("Cheesy Mustache", player)],
         ["lynna city", "mamamu yan trade", False, lambda state: state.has("Doggie Mask", player)],

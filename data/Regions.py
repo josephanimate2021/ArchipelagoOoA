@@ -10,6 +10,7 @@ REGIONS = [
     "lynna city chest",
     "lynna shop",
     "hidden shop",
+    "mayor plen's secret",
     "mayor plen's house",
     "vasu's gift",
     #######

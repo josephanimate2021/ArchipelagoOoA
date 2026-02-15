@@ -4,7 +4,7 @@ BASE_LOCATION_ID = 27022002000
 
 LOCATIONS_DATA = {
     ##########################################
-    "Forest of Time: Impa's Gift": {
+    "Impa's Gift": {
         "region_id": "starting item",
         "vanilla_item": "Progressive Sword",
         "flag_byte": 0xc739,
@@ -12,7 +12,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "impaGift",
     },
-    "Forest of Time: Nayru's House": {
+    "Nayru's House": {
         "region_id": "nayru's house",
         "vanilla_item": "Progressive Harp",
         "flag_byte": 0xc8ae, 
@@ -21,7 +21,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "nayruHouse",
     },
-    "Forest of Time: Tingle Present": {
+    "Tingle Present": {
         "region_id": "balloon guy's gift",
         "vanilla_item": "Island Chart",
         "flag_byte": 0xc6d0,
@@ -30,7 +30,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "tingleGift",
     },
-    "Forest of Time: Tingle Upgrade": {
+    "Tingle Upgrade": {
         "region_id": "balloon guy's upgrade",
         "vanilla_item": "Seed Satchel",
         "flag_byte": 0xc6d8,
@@ -40,14 +40,14 @@ LOCATIONS_DATA = {
         "symbolic_name": "tingleUpgrade",
     },
     ##########################################
-    "Lynna City: Chest Past Burnt Tree": {
+    "Lynna City Chest": {
         "region_id": "lynna city chest",
         "vanilla_item": "Rupees (30)",
         "flag_byte": 0xc749,
         "room": 0x0049,
         "collect": COLLECT_CHEST,
     },
-    "Lynna City: Shop Item #1": {
+    "Lynna Shop #1": {
         "region_id": "lynna shop",
         "vanilla_item": "Progressive Shield",
         "flag_byte": 0xc643,
@@ -59,7 +59,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "lynnaShop1",
     },
-    "Lynna City: Shop Item #2": {
+    "Lynna City Shop #2": {
         "region_id": "lynna shop",
         "vanilla_item": "Bombs (10)",
         "flag_byte": 0xc643,
@@ -71,7 +71,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "lynnaShop2",
     },
-    "Lynna City: Shop Item #3": {
+    "Lynna Shop #3": {
         "region_id": "lynna shop",
         "vanilla_item": "Flute",
         "flag_byte": 0xc643,
@@ -84,7 +84,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "lynnaShop3",
     },
     # -----
-    "Lynna City: Hidden Shop Item #1": {
+    "Hidden Shop Item #1": {
         "region_id": "hidden shop",
         "vanilla_item": "Gasha Seed",
         "flag_byte": 0xc642,
@@ -95,7 +95,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "hiddenShop1",
     },
-    "Lynna City: Hidden Shop Item #2": {
+    "Hidden Shop Item #2": {
         "region_id": "hidden shop",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc642,
@@ -106,7 +106,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "hiddenShop2",
     },
-    "Lynna City: Hidden Shop Item #3": {
+    "Hidden Shop Item #3": {
         "region_id": "hidden shop",
         "vanilla_item": "Biggoron's Sword", # That's not the Ring box you're looking for.
         "flag_byte": 0xc642,
@@ -117,7 +117,15 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "hiddenShop3",
     },
-    "Lynna City: Mayor Plen's House": {
+    # "Mayor Plen's Secret": {
+        # "region_id": "mayor plen's secret",
+        # "vanilla_item": "Green Luck Ring",
+        # "flag_byte": 0xc8f8,
+        # "room": 0x03f8,
+        # "map_tile": 0x57,
+        # "collect": COLLECT_CHEST,
+    # },
+    "Mayor Plen's House": {
         "region_id": "mayor plen's house",
         "vanilla_item": "Green Luck Ring",
         "flag_byte": 0xc8f9,
@@ -125,7 +133,7 @@ LOCATIONS_DATA = {
         "map_tile": 0x57,
         "collect": COLLECT_CHEST,
     },
-    "Lynna City: Vasu's Gift": {
+    "Vasu's Gift": {
         "region_id":"vasu's gift",
         "vanilla_item": "Friendship Ring",
         "flag_byte": 0xc615,
@@ -134,7 +142,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "vasuGift",
     },
-    "Lynna City: Maku Tree gift": {
+    "Maku Tree gift": {
         "region_id": "maku tree",
         "vanilla_item": "Seed Satchel",
         "flag_byte": 0xc738,
@@ -160,7 +168,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "comedian",
     },
     ##########################################
-    "Lynna Village: Gasha Farmer": {
+    "Gasha Farmer": {
         "region_id": "gasha farmer",
         "vanilla_item": "Gasha Seed",
         "flag_byte": 0xc8fc,
@@ -168,7 +176,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "gashaFarmer",
     },
-    "Lynna Village: Advance Shop Item #1": {
+    "Advance Shop Item #1": {
         "region_id": "advance shop",
         "vanilla_item": "Rupees (100)",
         "flag_byte": 0xc643,
@@ -180,7 +188,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "advanceShop1",
     },
-    "Lynna Village: Advance Shop Item #2": {
+    "Advance Shop Item #2": {
         "region_id": "advance shop",
         "vanilla_item": "GBA Time Ring",
         "flag_byte": 0xc643,
@@ -192,7 +200,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "advanceShop2",
     },
-    "Lynna Village: Advance Shop Item #3": {
+    "Advance Shop Item #3": {
         "region_id": "advance shop",
         "vanilla_item": "Rupees (100)",
         "flag_byte": 0xc643,
@@ -204,7 +212,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "advanceShop3",
     },
-    "Lynna Village: Baseball": {
+    "Lynna Village Shooting Gallery": {
         "region_id": "lynna shooting gallery",
         "vanilla_item": "Red Ring",
         "flag_byte": 0xc6d9,
@@ -238,7 +246,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "sadBoi",
     },
     ##########################################
-    "Black Tower (Past): Supervisor": {
+    "Black Tower Worker": {
         "region_id": "black tower worker",
         "vanilla_item": "Shovel",
         "flag_byte": 0xc9e1,
@@ -247,7 +255,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "towerWorker",
     },
-    "Black Tower (Past): Heart Piece": {
+    "Black Tower Heart Piece": {
         "region_id": "black tower heartpiece",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc886,
@@ -266,7 +274,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "zeldaRescue",
     },
     ##########################################
-    "Ambi's Palace: East Wing Chest": {
+    "East Wing Chest": {
         "region_id": "ambi's palace chest",
         "vanilla_item": "Gold Luck Ring",
         "flag_byte": 0xcacb,
@@ -274,7 +282,7 @@ LOCATIONS_DATA = {
         "map_tile": 0x107,
         "collect": COLLECT_CHEST,
     },
-    "Ambi's Palace: Rescue Nayru": {
+    "Rescue Nayru": {
         "region_id": "rescue nayru",
         "vanilla_item": "Progressive Harp",
         "flag_byte": 0xc6d1,
@@ -286,7 +294,7 @@ LOCATIONS_DATA = {
     ##########################################
     # Maku seed is 0xC85D
     ##########################################
-    "West Lynna: Cave Near Restoration Wall": {
+    "Restoration Wall Heart Piece": {
         "region_id": "restoration wall heartpiece",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc8af,
@@ -295,7 +303,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "restorationWallHP",
     },
     ##########################################
-    "South Shore (Present): Dirt Pile": {
+    "Shore Dirt Spot": {
         "region_id": "south shore dirt",
         "vanilla_item": "Ricky's Gloves",
         "flag_byte": 0xc798,
@@ -304,7 +312,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "southShoreDirt",
     },
     ##########################################
-    "South Shore (Past): Rafton Trade": {
+    "Lynna Village: Rafton Trade": {
         "region_id": "rafton trade",
         "vanilla_item": "Sea Ukulele",
         "flag_byte": 0xc71f,
@@ -313,7 +321,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "rafton",
     },
     ##########################################
-    "Yoll Graveyard: Cheval's Test": {
+    "Cheval's Test": {
         "region_id": "cheval's test",
         "vanilla_item": "Progressive Flippers",
         "flag_byte": 0xcabf,
@@ -322,7 +330,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "chevalTest",
     },
-    "Yoll Graveyard: Cheval's Invention": {
+    "Cheval's Invention": {
         "region_id": "cheval's invention",
         "vanilla_item": "Cheval Rope",
         "flag_byte": 0xcab6,
@@ -331,7 +339,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "chevalInvention",
     },
-    "Yoll Graveyard: Grave Under The Tree": {
+    "Grave Under The Tree": {
         "region_id": "grave under tree",
         "vanilla_item": "Graveyard Key",
         "flag_byte": 0xcaed,
@@ -340,7 +348,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_DROP,
         "symbolic_name": "graveUnderTree",
     },
-    "Yoll Graveyard: Syrup Shop Item #1": {
+    "Syrup Shop Item #1": {
         "region_id": "syrup shop",
         "vanilla_item": "King Zora's Potion",
         "flag_byte": 0xc642,
@@ -351,7 +359,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "syrupShop1",
     },
-    "Yoll Graveyard: Syrup Shop Item #2": {
+    "Syrup Shop Item #2": {
         "region_id": "syrup shop",
         "vanilla_item": "Gasha Seed",
         "flag_byte": 0xc642,
@@ -362,7 +370,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "syrupShop2",
     },
-    "Yoll Graveyard: Syrup Shop Item #3": {
+    "Syrup Shop Item #3": {
         "region_id": "syrup shop",
         "vanilla_item": "Gasha Seed",
         "flag_byte": 0xc642,
@@ -381,7 +389,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "graveyardPoe",
     },
-    "Yoll Graveyard: Heart Piece": {
+    "Yoll Graveyard Heart Piece": {
         "region_id": "yoll graveyard heartpiece",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc78b,
@@ -390,7 +398,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "yollGraveyardHP",
     },
     ##########################################
-    "Fairies' Woods: Single Chest": {
+    "Fairies' Woods Chest": {
         "region_id": "fairies' woods chest",
         "vanilla_item": "Rupees (20)",
         "flag_byte": 0xc784,
@@ -398,7 +406,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_CHEST,
     },
     ##########################################
-    "Deku Forest: Chest in Central Cave": {
+    "Deku Forest Cave East": {
         "region_id": "deku forest cave east",
         "vanilla_item": "Gasha Seed",
         "flag_byte": 0xcab3,
@@ -406,7 +414,7 @@ LOCATIONS_DATA = {
         "map_tile": 0x172,
         "collect": COLLECT_CHEST,
     },
-    "Deku Forest: Chest in Path to Seed Tree": {
+    "Deku Forest Cave West": {
         "region_id": "deku forest cave west",
         "vanilla_item": "Rupees (30)",
         "flag_byte": 0xcab5,
@@ -414,7 +422,7 @@ LOCATIONS_DATA = {
         "map_tile": 0x171,
         "collect": COLLECT_CHEST,
     },
-    "Deku Forest: Soldier's Reward": {
+    "Deku Forest Soldier": {
         "region_id": "deku forest soldier",
         "vanilla_item": "Bombs (10)",
         "flag_byte": 0xc6d9,
@@ -423,7 +431,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "dekuForestSoldier",
     },
-    "Deku Forest: Terrace in Cave Under Tree": {
+    "Deku Forest Heart Piece": {
         "region_id": "deku forest heartpiece",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xcab1,
@@ -432,7 +440,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "dekuForestHP",
     },
     ##########################################
-    "Crescent Island (Present): Underwater Maze Cave": {
+    "Under Crescent Island": {
         "region_id": "under crescent island",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc8fd,
@@ -449,7 +457,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "tokayChef",
     },
     ##########################################
-    "Crescent Island (Past): Water Cave Tokay": {
+    "Hidden Tokay Cave": {
         "region_id": "hidden tokay cave",
         "vanilla_item": "Progressive Shield",
         "flag_byte": 0xcae9,
@@ -458,7 +466,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "hiddenTokayCave",
     },
-    "Crescent Island (Past): Tokay Chicken Hut": {
+    "Tokay Chicken Hut": {
         "region_id": "tokay chicken hut",
         "vanilla_item": "Bombs (10)",
         "flag_byte": 0xc2e3,
@@ -466,7 +474,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "tokayChickenHut",
     },
-    "Crescent Island (Past): Crystal Cave Chest": {
+    "Tokay Crystal Cave": {
         "region_id": "tokay crystal cave",
         "vanilla_item": "Gasha Seed",
         "flag_byte": 0xcaca,
@@ -474,7 +482,7 @@ LOCATIONS_DATA = {
         "map_tile": 0x1bb,
         "collect": COLLECT_CHEST,
     },
-    "Crescent Island (Past): Bomb Cave Chest": {
+    "Tokay Bomb Cave": {
         "region_id": "tokay bomb cave",
         "vanilla_item": "Gasha Seed",
         "flag_byte": 0xc7ce,
@@ -482,7 +490,7 @@ LOCATIONS_DATA = {
         "map_tile": 0x1cd,
         "collect": COLLECT_CHEST,
     },
-    "Crescent Island (Past): Wild Tokay Prize": {
+    "Wild Tokay Game": {
         "region_id": "wild tokay game",
         "vanilla_item": "Scent Seedling",
         "flag_byte": 0xc7de,
@@ -491,7 +499,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "wildTokayGame",
     },
-    "Crescent Island (Past): Market Item #1": {
+    "Tokay Market #1": {
         "region_id": "tokay market 1",
         "vanilla_item": "Progressive Shield",
         "flag_byte": 0xc6d6,
@@ -502,7 +510,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "tokayMarket1",
     },
-    "Crescent Island (Past): Market Item #2": {
+    "Tokay Market #2": {
         "region_id": "tokay market 2",
         "vanilla_item": "Gasha Seed",
         "flag_byte": 0xc6d6,
@@ -513,7 +521,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "tokayMarket2",
     },
-    "Crescent Island (Past): Pot Cave": {
+    "Tokay Pot Cave": {
         "region_id": "tokay pot cave",
         "vanilla_item": "Power Ring L-2",
         "flag_byte": 0xcaf7,
@@ -522,7 +530,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_CHEST,
     },
     ##########################################
-    "Nuun Highlands: Southern Cave": {
+    "Nuun Highlands Cave": {
         "region_id": "nuun highlands cave",
         "vanilla_item": "Light Ring L-1",
         "flag_byte": [0xc7ec, 0xcab8, 0xc7f4],
@@ -530,7 +538,7 @@ LOCATIONS_DATA = {
         "map_tile": 0x37, 
         "collect": COLLECT_CHEST,
     },
-    "Nuun Highlands: Happy Mask Salesman Trade": {
+    "Nuun Highland: Happy Mask Salesman Trade": {
         "region_id": "happy mask salesman trade",
         "vanilla_item": "Doggie Mask",
         "flag_byte": 0xc7e6,
@@ -539,7 +547,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "maskSaleman",
     },
     ##########################################
-    "Symmetry Village: Brothers": {
+    "Symmetry City Brothers": {
         "region_id": "symmetry city brother",
         "vanilla_item": "Cracked Tuni Nut",
         "flag_byte": [0xc86e, 0xc86f],
@@ -557,7 +565,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "middleMan",
     },
     ##########################################
-    "Talus Peaks (Present): Bomb Fairy": {
+    "Bomb Fairy": {
         "region_id": "bomb fairy",
         "vanilla_item": "Bombs (10)", # "Bomb Upgrade",
         "flag_byte": 0xc6d3,
@@ -566,14 +574,14 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "bombFairy",
     },
-    "Talus Peaks (Present): Southeastern Chest": {
+    "Talus Peaks Chest": {
         "region_id": "talus peaks chest",
         "vanilla_item": "Gasha Seed",
         "flag_byte": 0xc763,
         "room": 0x0063,
         "collect": COLLECT_CHEST,
     },
-    "Talus Peaks (Present): Heart Piece": {
+    "Symmetry City Heart Piece": {
         "region_id": "symmetry city heartpiece",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc711,
@@ -582,7 +590,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "symmetryCityHP",
     },
     ##########################################
-    "Talus Peaks (Past): Tokkey's Composition": {
+    "Tokkey's Composition": {
         "region_id": "tokkey's composition",
         "vanilla_item": "Progressive Harp",
         "flag_byte": 0xc88f,
@@ -591,7 +599,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "tokkeyComposition",
     },
-    "Talus Peaks (Past): Tuni Nut Restoration": {
+    "Patch Tuni Nut Ceremony": {
         "region_id": "patch tuni nut ceremony",
         "vanilla_item": "Tuni Nut",
         "flag_byte": 0xc6d3,
@@ -600,7 +608,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "patchTuni",
     },
-    "Talus Peaks (Past): Broken Sword Restoration": {
+    "Patch Broken Sword Ceremony": {
         "region_id": "patch broken sword ceremony",
         "vanilla_item": "Progressive Sword",
         "flag_byte": 0xc6d5,
@@ -610,7 +618,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "patchSword",
     },
     ##########################################
-    "Rolling Ridge Base (Present): Terrace Chest": {
+    "Ridge Chest West Base On Terrace": {
         "region_id": "ridge base chest",
         "vanilla_item": "Rupees (50)",
         "flag_byte": 0xcab9,
@@ -618,7 +626,7 @@ LOCATIONS_DATA = {
         "map_tile": 0x28,
         "collect": COLLECT_CHEST,
     },
-    "Rolling Ridge Base (Present): First Goron Dance": {
+    "First Goron Dance": {
         "region_id": "first goron dance",
         "vanilla_item": "Brother Emblem",
         "flag_byte": 0xc6d0,
@@ -628,7 +636,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "goronDance1",
     },
-    "Rolling Ridge Base (Present): Pool in Mermaid Cave Entrance": {
+    "Pool in d6 Entrance": {
         "region_id": "pool in d6 entrance",
         "vanilla_item": "Toss Ring",
         "flag_byte": 0xc80e,
@@ -636,7 +644,7 @@ LOCATIONS_DATA = {
         "map_tile": 0x3c,
         "collect": COLLECT_CHEST,
     },
-    "Rolling Ridge Base (Present): Trade With Doorkeeper Goron": {
+    "Trade Rock Brisket": {
         "region_id": "trade rock brisket",
         "vanilla_item": "Goron Vase",
         "flag_byte": 0xc7fd,
@@ -646,7 +654,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "tradeRockBrisket",
     },
     ##########################################
-    "Rolling Ridge Base (Past): Goron Elder": {
+    "Goron Elder": {
         "region_id": "goron elder",
         "vanilla_item": "Crown Key",
         "flag_byte": 0xcac3,
@@ -655,7 +663,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "goronElder",
     },
-    "Rolling Ridge Base (Past): Goron Dance With Letter": {
+    "Goron Dance, With Letter": {
         "region_id": "goron dance, with letter",
         "vanilla_item": "Mermaid Key",
         "flag_byte": 0xc6d1,
@@ -665,7 +673,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "goronDance2",
     },
-    "Rolling Ridge Base (Past): Trade With Doorkeeper Goron": {
+    "Trade Goron Vase": {
         "region_id": "trade goron vase",
         "vanilla_item": "Goronade",
         "flag_byte": 0xc7ff,
@@ -674,7 +682,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "tradeGoronVase",
     },
-    "Rolling Ridge Base (Past): Chest Behind Cracked Rocks": {
+    "Ridge Base Past Bomb": {
         "region_id": "ridge base bomb past",
         "vanilla_item": "Rupees (50)",
         "flag_byte": 0xcae0,
@@ -682,7 +690,7 @@ LOCATIONS_DATA = {
         "map_tile": 0x12b,
         "collect": COLLECT_CHEST,
     },
-    "Rolling Ridge Base (Past): Chest Beyond Diamonds": {
+    "Ridge Diamonds Past": {
         "region_id": "ridge diamonds past",
         "vanilla_item": "Rupees (50)",
         "flag_byte": 0xcae1,
@@ -691,7 +699,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_CHEST,
     },
     ##########################################
-    "Rolling Ridge (Present): West Stairs Cave Chest": {
+    "Ridge West Surface Stair": {
         "region_id": "ridge west cave",
         "vanilla_item": "Rupees (30)",
         "flag_byte": 0xcac0,
@@ -699,7 +707,7 @@ LOCATIONS_DATA = {
         "map_tile": 0x18,
         "collect": COLLECT_CHEST,
     },
-    "Rolling Ridge (Present): Cave Under Moblin Keep": {
+    "Under Moblin Keep": {
         "region_id": "under moblin keep",
         "vanilla_item": "Armor Ring L-1",
         "flag_byte": 0xc7be,
@@ -707,7 +715,7 @@ LOCATIONS_DATA = {
         "map_tile": 0x09,
         "collect": COLLECT_CHEST,
     },
-    "Rolling Ridge (Present): Defeat Great Moblin": {
+    "Defeat Great Moblin": {
         "region_id": "defeat great moblin",
         "vanilla_item": "Bomb Flower",
         "flag_byte": 0xc709,
@@ -715,7 +723,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "defeatGreatMoblin",
     },
-    "Rolling Ridge (Present): Goron's Hiding Place": {
+    "Goron's Hiding Place": {
         "region_id": "goron's hiding place",
         "vanilla_item": "Golden Joy Ring",
         "flag_byte": 0xcabd,
@@ -723,7 +731,7 @@ LOCATIONS_DATA = {
         "map_tile": 0x28,
         "collect": COLLECT_CHEST,
     },
-    "Rolling Ridge (Present): Bush Cave Chest": {
+    "Ridge Bush Cave": {
         "region_id": "ridge bush cave",
         "vanilla_item": "Rupees (100)",
         "flag_byte": 0xc81f, 
@@ -731,7 +739,7 @@ LOCATIONS_DATA = {
         "map_tile": 0x11c,
         "collect": COLLECT_GORON_BUSH_ROOM,
     },
-    "Rolling Ridge (Present): Target Carts 1st Prize": {
+    "target carts 1": {
         "region_id": "target carts 1",
         "vanilla_item": "Rock Brisket",
         "flag_byte": 0xcad8,
@@ -741,7 +749,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TARGET_CART,
         "symbolic_name": "targetCart1",
     },
-    "Rolling Ridge (Present): Target Carts 2nd Prize": {
+    "target carts 2": {
         "region_id": "target carts 2",
         "vanilla_item": "Boomerang",
         "flag_byte": 0xcad8,
@@ -751,7 +759,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TARGET_CART,
         "symbolic_name": "targetCart2",
     },
-    "Rolling Ridge (Present): Big Bang Prize": {
+    "Big Bang Game": {
         "region_id": "big bang game",
         "vanilla_item": "Old Mermaid Key",
         "flag_byte": 0xc83e,
@@ -760,7 +768,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_BIGBANG,
         "symbolic_name": "bigBangGame",
     },
-    "Rolling Ridge (Present): Northeast Cave Chest": {
+    "Ridge NE Cave Present": {
         "region_id": "ridge NE cave present",
         "vanilla_item": "Gasha Seed",
         "flag_byte": 0xcaee,
@@ -768,7 +776,7 @@ LOCATIONS_DATA = {
         "map_tile": 0x0d,
         "collect": COLLECT_CHEST,
     },
-    "Rolling Ridge (Present): Chest in Diamonds Room": { # TODO
+    "Goron Diamond Cave": { # TODO
         "region_id": "goron diamond cave",
         "vanilla_item": "Bombs (10)",
         "flag_byte": 0xcadd,
@@ -776,7 +784,7 @@ LOCATIONS_DATA = {
         "map_tile": 0x1c,
         "collect": COLLECT_CHEST,
     },
-    "Rolling Ridge (Present): Heart Piece in Westmost Cave": {
+    "Ridge West Heart Piece": {
         "region_id": "ridge west heartpiece",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xcac1,
@@ -784,7 +792,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "ridgeWestHP",
     },
-    "Rolling Ridge (Present): Far Northeast Heart Piece": {
+    "Ridge Upper Heart Piece": {
         "region_id": "ridge upper heartpiece",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc70d,
@@ -793,7 +801,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "ridgeUpperHP",
     },
     ##########################################
-    "Rolling Ridge (Past): Cave in Goron Face": {
+    "Bomb Goron Head": {
         "region_id": "bomb goron head",
         "vanilla_item": "Rupees (100)",
         "flag_byte": 0xc7fc,
@@ -801,14 +809,14 @@ LOCATIONS_DATA = {
         "map_tile": 0x10d,
         "collect": COLLECT_CHEST,
     },
-    "Rolling Ridge (Past): Treasure Hunting Goron": {
+    "Treasure Hunting Goron": {
         "region_id": "treasure hunting goron",
         "vanilla_item": "Red Luck Ring",
         "flag_byte": 0xc7f7,
         "room": 0x02f7,
         "collect": COLLECT_CHEST,
     },
-    "Rolling Ridge (Past): Baseball": {
+    "Goron shooting gallery Price": {
         "region_id": "goron shooting gallery price",
         "vanilla_item": "Lava Juice",
         "flag_byte": 0xc8e7,
@@ -817,7 +825,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "goronShootingGallery",
     },
-    "Rolling Ridge (Past): Trade With Graceful Goron's Friend": {
+    "Trade Lava Juice": {
         "region_id": "trade lava juice",
         "vanilla_item": "Letter of Introduction",
         "flag_byte": 0xc81f, 
@@ -828,14 +836,14 @@ LOCATIONS_DATA = {
         "symbolic_name": "tradeLavaJuice",
     },
     ##########################################
-    "Zora Village (Present): Western Pool Chest": {
+    "Zora Village Present Chest": {
         "region_id": "zora village present",
         "vanilla_item": "Gasha Seed",
         "flag_byte": 0xc7c0,
         "room": 0x02c0,
         "collect": COLLECT_CHEST,
     },
-    "Zora Village (Present): Zora Palace Chest": {
+    "Zora Palace Chest": {
         "region_id": "zora palace chest",
         "vanilla_item": "Rupees (200)",
         "flag_byte": 0xcaac,
@@ -843,7 +851,7 @@ LOCATIONS_DATA = {
         "map_tile": 0xa1,
         "collect": COLLECT_CHEST,
     },
-    "Zora Village (Present): Statues Cave": {
+    "Zora NW Cave": {
         "region_id": "zora NW cave",
         "vanilla_item": "Charge Ring",
         "flag_byte": 0xcac7,
@@ -851,14 +859,14 @@ LOCATIONS_DATA = {
         "map_tile": 0xa0,
         "collect": COLLECT_CHEST,
     },
-    "Zora Village (Present): Fairies' Coast Chest": {
+    "Fairies' Coast Chest": {
         "region_id": "fairies' coast chest",
         "vanilla_item": "Green Holy Ring",
         "flag_byte": 0xc791,
         "room": 0x0091,
         "collect": COLLECT_CHEST,
     },
-    "Zora Village (Present): Zora King Gift": {
+    "Zora King Gift": {
         "region_id": "zora king gift",
         "vanilla_item": "Library Key",
         "flag_byte": 0xcaab,
@@ -867,7 +875,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "kingZora",
     },
-    "Zora Village (Present): Zora's Reward": {
+    "Zora's Reward": {
         "region_id": "zora's reward",
         "vanilla_item": "Zora Scale",
         "flag_byte": 0xc7a0,
@@ -876,7 +884,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "zoraReward",
     },
     ##########################################
-    "Eyeglass Island Library (Present): Old Man": {
+    "Library Present": {
         "region_id": "library present",
         "vanilla_item": "Book of Seals",
         "flag_byte": 0xcac8,
@@ -885,7 +893,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "libraryPresent",
     },
-    "Eyeglass Island Library (Past): Old Man": {
+    "Library Past": {
         "region_id": "library past",
         "vanilla_item": "Fairy Powder",
         "flag_byte": 0xcae4,
@@ -895,14 +903,14 @@ LOCATIONS_DATA = {
         "symbolic_name": "libraryPast",
     },
     ##########################################
-    "Zora Seas (Present): Southeast Island Chest": {
+    "Zora Seas Chest": {
         "region_id": "zora seas chest",
         "vanilla_item": "Whimsical Ring",
         "flag_byte": 0xc7d5,
         "room": 0x00d5,
         "collect": COLLECT_CHEST,
     },
-    "Zora Seas (Past): Fisherman's Island Cave": {
+    "Fisherman's Island Cave": {
         "region_id": "fisher's island cave",
         "vanilla_item": "Red Holy Ring",
         "flag_byte": 0xc74f,
@@ -911,7 +919,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_CHEST,
     },
     ##########################################
-    "Sea of Storms: Piratian Captain": {
+    "Piratian Captain": {
         "region_id": "piratian captain",
         "vanilla_item": "Tokay Eyeball",
         "flag_byte": 0xcaf8,
@@ -920,7 +928,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "piratianCaptain",
     },
-    "Sea of Storms (Past): Underwater Cave": {
+    "Sea of Storms Past": {
         "region_id": "sea of storms past",
         "vanilla_item": "Pegasus Ring",
         "flag_byte": 0xc8ff,
@@ -929,7 +937,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_CHEST,
         "symbolic_name": "seaofstormpast",
     },
-    "Sea of Storms (Present): Underwater Cave": {
+    "Sea of Storms Present": {
         "region_id": "sea of storms present",
         "vanilla_item": "Gasha Seed",
         "conditional": True,
@@ -941,7 +949,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "seaofstormpresent",
     },
     ##########################################
-    "Sea of No Return: Chest Under Statue": {
+    "Sea of No Return": {
         "region_id": "sea of no return",
         "vanilla_item": "Blue Ring",
         "flag_byte": 0xc86d,
@@ -949,7 +957,7 @@ LOCATIONS_DATA = {
         "collect": COLLECT_CHEST,
     },
     ##########################################
-    "Coast of No Return: Old Zora Trade": {
+    "Rolling Ridge: Old Zora Trade": {
         "region_id": "old zora trade",
         "vanilla_item": "Broken Sword",
         "flag_byte": 0xc7f5,
@@ -968,7 +976,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "mapleTrade",
     },
     ##########################################
-    "Maku Path: Heart Piece": {
+    "Maku Path Heart Piece": {
         "region_id": "maku path heartpiece",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc906,

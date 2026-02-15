@@ -62,6 +62,9 @@ def get_asm_files(patch_data):
         asm_files.append("asm/conditional/ganon_goal.yaml")
     if patch_data["options"]["lynna_gardener"]:
         asm_files.append("asm/conditional/lynna_gardener.yaml")
+    if patch_data["options"]["secret_locations"]:
+        asm_files.append("asm/conditional/secret_locations.yaml")
+    # asm_files.append("asm/conditional/" + ("treewarp" if patch_data["options"]["treewarp"] else "warp_to_start"))
     return asm_files
 
 def define_location_constants(assembler: Z80Assembler, patch_data):

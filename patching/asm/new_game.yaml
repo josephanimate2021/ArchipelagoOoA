@@ -107,6 +107,10 @@
     ld a,$01
     /ifdef option.secretLocationsEnabled
     ld ($c612),a
+    ld ($cde1),a
+    ld a,$14
+    call setGlobalFlag
+    ld a,$01
     /endif
     ld ($c738),a # maku tree (present)
     ld ($c876),a # black tower entrance
@@ -125,6 +129,7 @@
 03/6e97/: jp setInitialFlags
 
  # change default text speed to 5
-3f/4cd8/: db $04
-3f/587b/: db $04
+3f/4ccb/: db $04
+3f/5857/: db $04
+3f/5864/: db $04
     
