@@ -143,29 +143,29 @@ def process_item_name_for_shop_text(item_name: str) -> List[int]:
 
 def define_text_constants(assembler: Z80Assembler, patch_data):
     overworld_shops = [
-        "Lynna City: Shop",
-        "Lynna City: Hidden Shop",
-        "Yoll Graveyard: Syrup Shop",
-        "Lynna Village: Advance Shop",
+        "Lynna Shop",
+        "Hidden Shop",
+        "Syrup Shop",
+        "Advance Shop",
     ]
 
     for shop_name in overworld_shops:
         for i in range(1, 4):
-            location_name = f"{shop_name} Item #{i}"
+            location_name = f"{shop_name} #{i}"
             symbolic_name = LOCATIONS_DATA[location_name]["symbolic_name"]
             text_bytes = []
             if location_name in patch_data["locations"]:
                 item_name_bytes = process_item_name_for_shop_text(patch_data["locations"][location_name])
                 text_bytes = [0x09, 0x01] + item_name_bytes + [0x09, 0x00, 0x0c, 0x18, 0x01]  # Item name
-                if shop_name != "Crescent Island (Past): Market":
+                if shop_name != "Tokay Market":
                     text_bytes.extend([0x20, 0x0c, 0x08, 0x20, 0x03, 0x7b, 0x01])  # Price
                     text_bytes.extend([0x02, 0x00, 0x00])  # OK / No thanks
             assembler.add_floating_chunk(f"text.{symbolic_name}", text_bytes)
 
     #Tokay Market
-    shop_name = "Crescent Island (Past): Market"
+    shop_name = "Tokay Market"
     for i in range(1, 3):
-        location_name = f"{shop_name} Item #{i}"
+        location_name = f"{shop_name} #{i}"
         symbolic_name = LOCATIONS_DATA[location_name]["symbolic_name"]
         text_bytes = []
         if location_name in patch_data["locations"]:
@@ -186,7 +186,7 @@ def write_chest_contents(rom: RomData, patch_data):
             "collect", COLLECT_TOUCH
         ) != COLLECT_CHEST and not location_data.get(
             "is_chest", False
-        ) and location_name != "Rolling Ridge (Present): Bush Cave Chest") or not (
+        ) and location_name != "Bush Cave Chest") or not (
             patch_data['options']['secret_locations'] and (
                 (
                     "dungeon" in location_data and location_data["dungeon"] == 11
@@ -194,7 +194,7 @@ def write_chest_contents(rom: RomData, patch_data):
             )
         ):
             continue
-        if location_name == "Nuun Highlands: Southern Cave":
+        if location_name == "Nuun Highlands Cave":
             chest_addr = rom.get_chest_addr(location_data['room'][patch_data["options"]["animal_companion"]])
         else:
             chest_addr = rom.get_chest_addr(location_data['room'])

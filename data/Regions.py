@@ -120,7 +120,8 @@ REGIONS = [
     "d5 entrance",
     #######
     "ridge base past east",
-    #"rolling ridge past old man",
+    "rolling ridge past old man",
+    "rolling ridge present old man",
     "first goron dance",
     "goron dance, with letter",
     "trade goron vase",

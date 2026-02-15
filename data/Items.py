@@ -43,10 +43,10 @@ ITEMS_DATA = {
         'classification': ItemClassification.progression,
         'id': 0x0c
     },
-    #   "Bombchus (10)": {
-    #       'classification': ItemClassification.progression,
-    #       'id': 0x0d
-    #   },
+    "Bombchus (10)": {
+        'classification': ItemClassification.useful,
+        'id': 0x0d
+    },
     "Ricky's Flute": {
         'classification': ItemClassification.progression,
         'id': 0x0e,
@@ -420,7 +420,7 @@ ITEMS_DATA = {
         'classification': ItemClassification.progression,
         'id': 0x3d
     },
-    "Stationery": {
+    "Stationary": {
         'classification': ItemClassification.progression,
         'id': 0x3e
     },

@@ -27,7 +27,7 @@ TREES_TABLE = {
     "Ambi's Palace": "Ambi's Palace: Seed Tree",
     "Deku Forest": "Deku Forest: Seed Tree",
     "Crescent Island": "Crescent Island: Seed Tree",
-    "Symmetry City": "Symmetry City: Seed Tree",
+    "Symmetry city": "Symmetry city: Seed Tree",
     "Rolling Ridge West": "Rolling Ridge West: Seed Tree",
     "Rolling Ridge East": "Rolling Ridge East: Seed Tree",
     "Zora Village": "Zora Village: Seed Tree",

@@ -136,3 +136,7 @@
     db $51,$e2
 15/51f2/: db $e0
 15/51f3/: dw wonShootingGalery
+
+# 15/5042/: |
+    # ld a,00
+    # jp removeRupeeValue

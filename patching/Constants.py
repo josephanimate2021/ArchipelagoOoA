@@ -609,8 +609,8 @@ SEED_TREE_DATA = {
         "location" : "Crescent Island: Seed Tree",
         "codeAdress" : 0x499b8,
     },
-    "Symmetry City" : {
-        "location" : "Symmetry City: Seed Tree",
+    "Symmetry city" : {
+        "location" : "Symmetry city: Seed Tree",
         "codeAdress" : 0x499a1,
     },
     "Rolling Ridge West" : {
