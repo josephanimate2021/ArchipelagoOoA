@@ -125,7 +125,6 @@ class OracleOfAgesWorld(World):
                    "logic_difficulty",
                    "shuffle_dungeons",
                    "default_seed",
-                   "warp_to_start",
                    # Locations
                    "advance_shop",
                    "secret_locations",
