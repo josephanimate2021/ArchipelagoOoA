@@ -274,17 +274,6 @@ class OracleOfAgesAdvanceShop(Toggle):
     display_name = "Open Advance Shop"
 
 
-
-class OracleOfAgesWarpToStart(DefaultOnToggle):
-    """
-    When enabled, you can warp to start by holding A+B while entering map or inventory screen.
-    This can be used to make backtracking a bit more bearable in seeds where Gale Seeds take time to obtain and prevent
-    most softlock situations from happening.
-    NOTE : You can use can press A + B during the fade to white to avoid using your object.
-    """
-    display_name = "Warp to Start"
-
-
 class OracleOfAgesCombatDifficulty(Choice):
     """
     Modifies the damage taken during combat to make this aspect of the game easier or harder depending on the
@@ -309,7 +298,6 @@ class OracleOfAgesOptions(PerGameCommonOptions):
     gasha_nut_kill_requirement: OracleOfAgesGashaNutKillRequirement
     goal: OracleOfAgesGoal
     secret_locations: OracleOfAgesIncludeSecretLocations
-    warp_to_start: OracleOfAgesWarpToStart
     logic_difficulty: OracleOfAgesLogicDifficulty
     required_essences: OracleOfAgesRequiredEssences
     required_slates: OracleOfAgesRequiredSlates
