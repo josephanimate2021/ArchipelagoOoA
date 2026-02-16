@@ -2131,6 +2131,16 @@ LOCATIONS_DATA = {
         "collect": COLLECT_CHEST,
         "symbolic_name": "seaofstormpresent",
     },
+    "Princess Zelda Rescue": {
+        "region_id": "princess zelda rescue",
+        "vanilla_item": "Blue Joy Ring",
+        "flag_byte": 0xcae7,
+        "room": 0x7e7,
+        "conditional": True,
+        "secret_location": True,
+        "collect": COLLECT_TOUCH,
+        "symbolic_name": "zeldaRescue",
+    },
     "Rolling Ridge (Present): Old Man": {
         "region_id": "rolling ridge present old man",
         "vanilla_item": "Bombchus (10)",
