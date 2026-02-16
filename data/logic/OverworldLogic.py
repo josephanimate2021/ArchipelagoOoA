@@ -356,16 +356,6 @@ def make_overworld_logic(player: int, options):
 
         # SYMMETRY CITY PRESENT
         #######################################
-        ["nuun", "symmetry present", True, lambda state: any([
-            ooa_can_go_back_to_present(state, player),
-            ooa_has_flute(state, player),
-            all([
-                ooa_is_companion_moosh(state, player),
-                ooa_can_break_bush(state, player),
-                ooa_can_jump_3_wide_pit(state, player, False),
-                ooa_option_hard_logic(state, player),
-            ])
-        ])],
         ["symmetry present", "symmetry city tree", False, lambda state: ooa_can_harvest_tree(state, player, False)],
         ["symmetry present", "d4 entrance", False, lambda state: all([
             state.has("Tuni Nut", player),
@@ -664,6 +654,18 @@ def make_overworld_logic(player: int, options):
         labrynna_logic.append(["lynna city", "enter hero's cave", False, lambda state: all([
             ooa_has_bracelet(state, player),
             ooa_can_use_ember_seeds(state, player, True)
+        ])])
+        labrynna_logic.append(["lynna village", "symmetry present", False, None])
+    else:
+        labrynna_logic.append(["nuun", "symmetry present", True, lambda state: any([
+            ooa_can_go_back_to_present(state, player),
+            ooa_has_flute(state, player),
+            all([
+                ooa_is_companion_moosh(state, player),
+                ooa_can_break_bush(state, player),
+                ooa_can_jump_3_wide_pit(state, player, False),
+                ooa_option_hard_logic(state, player),
+            ])
         ])])
 
     for i in range(options.deterministic_gasha_locations):

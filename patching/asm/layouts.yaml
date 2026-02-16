@@ -48,13 +48,9 @@
 # data for applyAllTileSubstitutions: group,room,flags,yx,tile
 04//tileSubTable: |
     /ifdef option.secretLocationsEnabled
-    # build symmetry city bridge if seret locations is enabled
-    db 00,25,00,52,1d
-    db 00,25,00,51,1d
-    db 00,25,00,50,1d
-    db 00,25,00,62,1e
-    db 00,25,00,61,1e
-    db 00,25,00,60,1e
+    # build a bridge between ambi's palace and symmetry city entrance if secret locations is enabled because for some reason the bridge carpenter guy disappears during a made up linked game state.
+    db 01,25,00,60,1f
+    db 01,24,00,69,1f
     # add walkable tiles to black tower present entrance
     db 00,76,00,55,a7
     # end tile adding for black tower entrance present
