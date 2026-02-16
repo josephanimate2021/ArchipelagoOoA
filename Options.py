@@ -91,19 +91,10 @@ class OracleOfAgesIncludeSecretLocations(Toggle):
     """
     When enabled, locations that are usually accessible in the linked game will become easily completable. 
     Be careful while enabling this because things are not guarenteed to work as they should.
+    Please note that enabling this option removes the bridge carpenter guy from nuun highlands for some reason. 
+    To compensate for that, a bridge to symmetry city will have already been built for you :)
     """
     display_name = "Secret Locations"
-
-    include_in_patch = True
-    include_in_slot_data = True
-
-class OracleOfAgesHerosCave(Toggle):
-    """
-    When enabled, Hero's Cave will be unlocked via the warp to start option if that's enabled. 
-    To prevent you from getting stuck while getting out. Tree Warp was added (press start and select at the same time to perform a tree warp)
-    Be careful while enabling this because things are not guarenteed to work as they should.
-    """
-    display_name = "Hero's Cave"
 
     include_in_patch = True
     include_in_slot_data = True
