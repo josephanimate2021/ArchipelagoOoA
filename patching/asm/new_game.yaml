@@ -103,8 +103,13 @@
     # room flag 0
     ld a,$01
     /ifdef option.secretLocationsEnabled
-    ld ($c612),a
+    ld a,$02
+    call setGlobalFlag
+    ld a,$13
+    call setGlobalFlag
     ld a,$14
+    call setGlobalFlag
+    ld a,$3a
     call setGlobalFlag
     ld a,$01
     /endif

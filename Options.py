@@ -79,6 +79,31 @@ class OracleOfAgesRequiredEssences(Range):
     range_end = 8
     default = 8
 
+class OracleOfAgesHerosCave(Toggle):
+    """
+    When enabled. You can press start (or select), B, and A buttons to warp to hero's cave. 
+    NOTE: To prevent you from geting stuck while exiting hero's cave, treewarp will be enabled by default. 
+    That means that even if you have treewarp disabled, it will be enabled regardless.
+    """
+    display_name = "Hero's Cave"
+
+    include_in_patch = True
+    include_in_slot_data = True
+
+class OracleOfAgesTreewarp(Toggle):
+    """
+    When enabled, you will be able to use treewarp to warp yourself back to the start instead of the normal method.
+    This was part of jangler's oracles randomizer and is a piece worth bringing back to the oracle of ages archipelago randomizer for the hero's cave setting.
+    Speaking of that, please note that this setting will be enabled the second you enable the hero's cave option as this option will serve a purpose in not softlocking users
+    as they exit hero's cave. To use treewarp, double press the start and select buttons at the same time as you exit the map screen and you'll warp to lynna city.
+    Be warned that this will cause some breaking changes with the lynna city and south shore logic.
+    """
+    display_name = "Tree Warp"
+
+    include_in_patch = True
+    include_in_slot_data = True
+
+
 class OracleOfAgesLynnaGardener(Toggle):
     """
     When enabled, a friendly gardener will have trimmed the bushes outside of Lynna City and cleared the path
@@ -284,6 +309,8 @@ class OracleOfAgesCombatDifficulty(Choice):
 class OracleOfAgesOptions(PerGameCommonOptions):
     accessibility: ItemsAccessibility
     start_inventory_from_pool: StartInventoryPool
+    heros_cave: OracleOfAgesHerosCave
+    use_treewarp: OracleOfAgesTreewarp
     lynna_gardener: OracleOfAgesLynnaGardener
     deterministic_gasha_locations: OracleOfAgesGashaLocations
     gasha_nut_kill_requirement: OracleOfAgesGashaNutKillRequirement

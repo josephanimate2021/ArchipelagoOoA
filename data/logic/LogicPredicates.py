@@ -793,6 +793,12 @@ def ooa_can_harvest_gasha(state: CollectionState, player: int, count: int):
         ])
     ])
 
+def ooa_option_treewarp(state, player):
+    return any([
+        state.multiworld.worlds[player].options.use_treewarp,
+        state.multiworld.worlds[player].options.heros_cave
+    ])
+
 
 def ooa_self_locking_small_key(state: CollectionState, player: int, region_name: str, dungeon: int):
     item_name = f"Small Key ({DUNGEON_NAMES[dungeon]})"

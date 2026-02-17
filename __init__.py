@@ -122,6 +122,8 @@ class OracleOfAgesWorld(World):
         options = ["goal", "death_link",
                    # Logic-impacting options
                    "lynna_gardener",
+                   "use_treewarp",
+                   "heros_cave",
                    "logic_difficulty",
                    "shuffle_dungeons",
                    "default_seed",
@@ -196,10 +198,11 @@ class OracleOfAgesWorld(World):
         if region_id == "advance shop":
             return self.options.advance_shop.value
         
-        if (
-            "dungeon" in location_data and location_data["dungeon"] == 11
-        ) or "secret_location" in location_data:
+        if "secret_location" in location_data and location_data["secret_location"] is True:
             return self.options.secret_locations
+        
+        if "dungeon" in location_data and location_data["dungeon"] is 11:
+            return self.options.heros_cave
 
         # TODO FUNNY LOCATION ?
 
@@ -346,7 +349,7 @@ class OracleOfAgesWorld(World):
         # If Master Keys are enabled, put one for every dungeon
         if self.options.master_keys != OracleOfAgesMasterKeys.option_disabled:
             for small_key_name in ITEM_GROUPS["Master Keys"]:
-                if self.options.secret_locations or small_key_name != "Master Key (Hero's Cave)":
+                if self.options.heros_cave or small_key_name != "Master Key (Hero's Cave)":
                     item_pool_dict[small_key_name] = 1
                     filler_item_count -= 1
 
@@ -450,7 +453,7 @@ class OracleOfAgesWorld(World):
 
         for i in range(0, 11):
             if i == 10:
-                if self.options.secret_locations:
+                if self.options.heros_cave:
                     i = 11
                 else:
                     continue

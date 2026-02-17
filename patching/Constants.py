@@ -289,7 +289,7 @@ DEFINES = {
     "hMusicVolume":"$b6",
 
     # wram
-    "wFeatherLevel":"$0 # not present in ages",
+    # not present in ages "wFeatherLevel":"$0",
     "wRememberedCompanionId":"$cc24",
     "wRickyState":"$c646",
     "wDimitriState":"$c647",
@@ -358,6 +358,7 @@ DEFINES = {
     "createTreasure":"$27d4",
     "checkGlobalFlag":"$31f3",
     "setGlobalFlag":"$31f9",
+    "unsetGlobalFlag":"$31ff",
     "fadeInFromWhite":"$3299",
     "incMakuTreeState":"$3e53",
     "interactionDelete":"$3b05",
@@ -435,8 +436,7 @@ ASM_FILES = [
     "asm/impa_refill.yaml",
     "asm/combat_difficulty.yaml",
     "asm/tokay_market.yaml",
-    "asm/compass_chimes.yaml",
-	"asm/warp_to_start.yaml"
+    "asm/compass_chimes.yaml"
 ]
 
 RUPEE_VALUES = {

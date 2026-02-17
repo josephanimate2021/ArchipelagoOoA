@@ -48,11 +48,12 @@
 # data for applyAllTileSubstitutions: group,room,flags,yx,tile
 04//tileSubTable: |
     /ifdef option.secretLocationsEnabled
-    # build a bridge between ambi's palace and symmetry city entrance if secret locations is enabled because for some reason the bridge carpenter guy disappears during a made up linked game state.
-    db 01,25,00,60,1f
-    db 01,24,00,69,1f
+    db 01,c7,00,48,d0 # add stair tile in sea of storms past to allow players to time travel to the present sea of storms.
+    db 03,c7,00,48,2c # add statue in sea of storms past underwater prevent players from resurfacing on that area.
     # add walkable tiles to black tower present entrance
     db 00,76,00,55,a7
+    db 00,76,00,54,a7
+    # db 04,c2,00,15,45
     # end tile adding for black tower entrance present
     /endif
     db 00,20,00,61,d7 # portal in talus peaks

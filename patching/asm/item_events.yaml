@@ -37,7 +37,6 @@
     jr z,@incoming
     @outgoing:
     call tingleSetFakeId
-    call zeldaRescueSetFakeId
     call goronDanceSetFakeId
     call kingZoraSetFakeId
     call symmetryBrotherSetFakeId
@@ -191,19 +190,6 @@
     ret nz
     push hl
     ld a,GLOBALFLAG_REWARD_KING_ZORA
-    call setGlobalFlag
-    pop hl
-    ret
-
-# set fake item ID to track getting the "blue joy ring" from princess zelda.
-09//zeldaRescueSetFakeId: |
-    push bc
-    ld bc,$e707
-    call compareRoom
-    pop bc
-    ret nz
-    push hl
-    ld a,$38 ; GLOBALFLAG_GOT_RING_FROM_ZELDA
     call setGlobalFlag
     pop hl
     ret
