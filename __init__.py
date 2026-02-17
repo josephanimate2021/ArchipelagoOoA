@@ -202,7 +202,7 @@ class OracleOfAgesWorld(World):
             return self.options.secret_locations
         
         if "dungeon" in location_data and location_data["dungeon"] is 11:
-            return self.options.heros_cave
+            return self.options.heros_cave != OracleOfAgesHerosCave.option_disabled
 
         # TODO FUNNY LOCATION ?
 
@@ -349,7 +349,7 @@ class OracleOfAgesWorld(World):
         # If Master Keys are enabled, put one for every dungeon
         if self.options.master_keys != OracleOfAgesMasterKeys.option_disabled:
             for small_key_name in ITEM_GROUPS["Master Keys"]:
-                if self.options.heros_cave or small_key_name != "Master Key (Hero's Cave)":
+                if self.options.heros_cave != OracleOfAgesHerosCave.option_disabled or small_key_name != "Master Key (Hero's Cave)":
                     item_pool_dict[small_key_name] = 1
                     filler_item_count -= 1
 
@@ -453,7 +453,7 @@ class OracleOfAgesWorld(World):
 
         for i in range(0, 11):
             if i == 10:
-                if self.options.heros_cave:
+                if self.options.heros_cave != OracleOfAgesHerosCave.option_disabled:
                     i = 11
                 else:
                     continue

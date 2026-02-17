@@ -79,16 +79,19 @@ class OracleOfAgesRequiredEssences(Range):
     range_end = 8
     default = 8
 
-class OracleOfAgesHerosCave(Toggle):
+class OracleOfAgesHerosCave(Choice):
     """
-    When enabled. You can press start (or select), B, and A buttons to warp to hero's cave. 
-    NOTE: To prevent you from geting stuck while exiting hero's cave, treewarp will be enabled by default. 
-    That means that even if you have treewarp disabled, it will be enabled regardless.
+    This option adds hero's cave to a list of checks that you will need to complete.
+    Warp: allows you to press the start or select, B, and A buttons at once in order to warp to hero's cave (treewarp will be enabled by default to prevent you from getting stuck at the exit).
+    Open Near Maku Tree Entrance: Opens up a cave to the right of the d0 present entrance.
     """
     display_name = "Hero's Cave"
 
-    include_in_patch = True
-    include_in_slot_data = True
+    option_disabled = 0
+    option_warp = 1
+    option_open_near_maku_tree_entrance = 2
+
+    default = 0
 
 class OracleOfAgesTreewarp(Toggle):
     """

@@ -1,4 +1,5 @@
 from .LogicPredicates import *
+from ...Options import OracleOfAgesHerosCave
 
 
 def make_overworld_logic(player: int, options):
@@ -668,8 +669,8 @@ def make_overworld_logic(player: int, options):
         labrynna_logic.append(["sea of storms past", "sea of storms present", False, lambda state: ooa_can_go_back_to_present(state, player)])
         labrynna_logic.append(["lynna city", "princess zelda rescue", False, lambda state: ooa_has_feather(state, player)])
 
-    if options.heros_cave:
-        labrynna_logic.append(["Menu", "enter hero's cave", False, lambda state: all([
+    if options.heros_cave != OracleOfAgesHerosCave.option_disabled:
+        labrynna_logic.append(["Menu" if options.heros_cave == OracleOfAgesHerosCave.option_warp else "lynna city", "enter hero's cave", False, lambda state: all([
             ooa_has_bracelet(state, player),
             ooa_can_use_ember_seeds(state, player, True)
         ])])
