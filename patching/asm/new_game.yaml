@@ -128,3 +128,6 @@
     pop hl
     ret
 03/6e97/: jp setInitialFlags
+
+# Set default text speed to 5
+07/418b/: db $04
