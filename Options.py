@@ -70,7 +70,7 @@ class OracleOfAgesGashaNutKillRequirement(NamedRange):
 
 class OracleOfAgesOldMenLocationShuffle(Toggle):
     """
-    Allows shuffling of locations for the old man in rolling ridge present and past if enabled.
+    Allows shuffling of locations for the old man in rolling ridge base present and past if enabled.
     """
 
     display_name = "Shuffle Rolling Ridge Old Men"
@@ -152,7 +152,7 @@ class OracleOfAgesDefaultSeedType(Choice):
 
 class OracleOfAgesDuplicateSeedTrees(OptionSet):
     """
-    The game contains 8 seed trees, but only 5 types of seeds. This means that some types of seeds can appear on
+    The game contains 10 seed trees (8 of which has valid choices), but only 5 types of seeds. This means that some types of seeds can appear on
     multiple trees. This setting lets you choose seed trees that will be guaranteed to not hold a unique type of
     seed. You can choose up to 3.
     Regardless of what you choose, each seed type will appear on at most 2 trees.
