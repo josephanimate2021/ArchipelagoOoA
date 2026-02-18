@@ -53,7 +53,6 @@
     # add walkable tiles to black tower present entrance
     db 00,76,00,55,a7
     db 00,76,00,54,a7
-    # db 04,c2,00,15,45
     # end tile adding for black tower entrance present
     /endif
     db 00,20,00,61,d7 # portal in talus peaks

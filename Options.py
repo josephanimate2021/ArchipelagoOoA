@@ -79,34 +79,6 @@ class OracleOfAgesRequiredEssences(Range):
     range_end = 8
     default = 8
 
-class OracleOfAgesHerosCave(Choice):
-    """
-    This option adds hero's cave to a list of checks that you will need to complete.
-    Warp: allows you to press the start or select, B, and A buttons at once in order to warp to hero's cave (treewarp will be enabled by default to prevent you from getting stuck at the exit).
-    Open Near Maku Tree Entrance: Opens up a cave to the right of the d0 present entrance.
-    """
-    display_name = "Hero's Cave"
-
-    option_disabled = 0
-    option_warp = 1
-    option_open_near_maku_tree_entrance = 2
-
-    default = 0
-
-class OracleOfAgesTreewarp(Toggle):
-    """
-    When enabled, you will be able to use treewarp to warp yourself back to the start instead of the normal method.
-    This was part of jangler's oracles randomizer and is a piece worth bringing back to the oracle of ages archipelago randomizer for the hero's cave setting.
-    Speaking of that, please note that this setting will be enabled the second you enable the hero's cave option as this option will serve a purpose in not softlocking users
-    as they exit hero's cave. To use treewarp, double press the start and select buttons at the same time as you exit the map screen and you'll warp to lynna city.
-    Be warned that this will cause some breaking changes with the lynna city and south shore logic.
-    """
-    display_name = "Tree Warp"
-
-    include_in_patch = True
-    include_in_slot_data = True
-
-
 class OracleOfAgesLynnaGardener(Toggle):
     """
     When enabled, a friendly gardener will have trimmed the bushes outside of Lynna City and cleared the path
@@ -119,8 +91,6 @@ class OracleOfAgesIncludeSecretLocations(Toggle):
     """
     When enabled, locations that are usually accessible in the linked game will become easily completable. 
     Be careful while enabling this because things are not guarenteed to work as they should.
-    Please note that enabling this option removes the bridge carpenter guy from nuun highlands for some reason. 
-    To compensate for that, a bridge to symmetry city will have already been built for you :)
     """
     display_name = "Secret Locations"
 
@@ -312,8 +282,6 @@ class OracleOfAgesCombatDifficulty(Choice):
 class OracleOfAgesOptions(PerGameCommonOptions):
     accessibility: ItemsAccessibility
     start_inventory_from_pool: StartInventoryPool
-    heros_cave: OracleOfAgesHerosCave
-    use_treewarp: OracleOfAgesTreewarp
     lynna_gardener: OracleOfAgesLynnaGardener
     deterministic_gasha_locations: OracleOfAgesGashaLocations
     gasha_nut_kill_requirement: OracleOfAgesGashaNutKillRequirement

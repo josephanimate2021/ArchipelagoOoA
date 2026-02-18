@@ -1,6 +1,5 @@
 from BaseClasses import CollectionState
 from Options import Accessibility
-from ...Options import OracleOfAgesHerosCave
 from ..Constants import *
 
 
@@ -792,12 +791,6 @@ def ooa_can_harvest_gasha(state: CollectionState, player: int, count: int):
             # Can actually harvest the nut, and get kills
             ooa_has_sword(state, player),
         ])
-    ])
-
-def ooa_option_treewarp(state, player):
-    return any([
-        state.multiworld.worlds[player].options.use_treewarp,
-        state.multiworld.worlds[player].options.heros_cave == OracleOfAgesHerosCave.option_warp
     ])
 
 

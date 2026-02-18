@@ -91,21 +91,6 @@
   call objectCopyPosition   ; move it
   jp interactionDelete
 
-28/702f/: | # Replacing red rupee in hero's cave basement with a static item.
-  ld a,(wActiveRoom)
-  cp $c0
-  jp nz,interactionDelete
-  
-  call getThisRoomFlags
-  bit 7,(hl)
-  jp nz,interactionDelete
-
-  ld bc, locations.herosCaveBasement ; Set the item as a gift
-  call createTreasure       ; spawn it
-  call objectCopyPosition   ; move it
-  jp interactionDelete
-
-
   
 ###################################################################################################################
 # dig up item on south shore regardless of ricky state

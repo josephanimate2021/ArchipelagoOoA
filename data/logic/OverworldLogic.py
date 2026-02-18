@@ -1,5 +1,4 @@
 from .LogicPredicates import *
-from ...Options import OracleOfAgesHerosCave
 
 
 def make_overworld_logic(player: int, options):
@@ -56,7 +55,7 @@ def make_overworld_logic(player: int, options):
         #######################################
         ["forest of time", "lynna city", True, lambda state: any([
             ooa_can_break_bush(state, player),
-            ooa_option_treewarp(state, player)
+            state.multiworld.worlds[player].options.lynna_gardener
         ])],
         ["lynna city", "south lynna tree", False, lambda state: ooa_can_harvest_tree(state, player, True)],
         ["lynna city", "lynna city chest", False, lambda state: ooa_can_use_ember_seeds(state, player, False)],
@@ -159,13 +158,7 @@ def make_overworld_logic(player: int, options):
 
         # SHORE PRESENT
         #######################################
-        ["forest of time", "shore present", True, lambda state: any([
-            state.has("Ricky's Gloves", player),
-            all([
-                ooa_option_treewarp(state, player),
-                ooa_can_kill_normal_enemy(state, player, True)
-            ])
-        ])],
+        ["forest of time", "shore present", True,  lambda state: state.has("Ricky's Gloves", player)],
         ["lynna city", "shore present", True, lambda state: any([
             ooa_can_swim_deepwater(state, player, True),
             ooa_has_bracelet(state, player),
@@ -666,11 +659,8 @@ def make_overworld_logic(player: int, options):
     ]
 
     if options.secret_locations:
-        labrynna_logic.append(["sea of storms past", "sea of storms present", False, lambda state: ooa_can_go_back_to_present(state, player)])
         labrynna_logic.append(["lynna city", "princess zelda rescue", False, lambda state: ooa_has_feather(state, player)])
-
-    if options.heros_cave != OracleOfAgesHerosCave.option_disabled:
-        labrynna_logic.append(["Menu" if options.heros_cave == OracleOfAgesHerosCave.option_warp else "lynna city", "enter hero's cave", False, lambda state: all([
+        labrynna_logic.append(["lynna city", "enter hero's cave", False, lambda state: all([
             ooa_has_bracelet(state, player),
             ooa_can_use_ember_seeds(state, player, True)
         ])])

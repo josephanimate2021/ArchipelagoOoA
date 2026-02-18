@@ -11,7 +11,7 @@ from ..data.Constants import *
 from .Constants import *
 from pathlib import Path
 
-from .. import LOCATIONS_DATA, OracleOfAgesMasterKeys, OracleOfAgesGoal, OracleOfAgesHerosCave
+from .. import LOCATIONS_DATA, OracleOfAgesMasterKeys, OracleOfAgesGoal
 
 
 def get_treasure_addr(rom: RomData, item_name: str):
@@ -62,12 +62,9 @@ def get_asm_files(patch_data):
         asm_files.append("asm/conditional/ganon_goal.yaml")
     if patch_data["options"]["lynna_gardener"]:
         asm_files.append("asm/conditional/lynna_gardener.yaml")
-    if patch_data["options"]["heros_cave"] == OracleOfAgesHerosCave.option_warp or patch_data["options"]["use_treewarp"]:
-        asm_files.append("asm/conditional/treewarp.yaml")
-    if not patch_data["options"]["use_treewarp"] or patch_data["options"]["heros_cave"] == OracleOfAgesHerosCave.option_warp:
-        asm_files.append("asm/conditional/warp_to_start.yaml")
-    if patch_data["options"]["heros_cave"] == OracleOfAgesHerosCave.option_open_near_maku_tree_entrance:
-        asm_files.append("asm/conditional/heros_cave_nowarp.yaml")
+    if patch_data["options"]["secret_locations"]:
+        asm_files.append("asm/conditional/secret_locations.yaml")
+    # asm_files.append("asm/conditional/" + ("treewarp" if patch_data["options"]["treewarp"] else "warp_to_start"))
     return asm_files
 
 def define_location_constants(assembler: Z80Assembler, patch_data):
@@ -93,13 +90,13 @@ def define_location_constants(assembler: Z80Assembler, patch_data):
 def define_option_constants(assembler: Z80Assembler, patch_data):
     options = patch_data["options"]
 
-    assembler.define_byte("option.startingGroup", 0x04 if options["heros_cave"] == OracleOfAgesHerosCave.option_warp else 0x00)
-    assembler.define_byte("option.startingRoom", 0x4ce if options["heros_cave"] == OracleOfAgesHerosCave.option_warp else 0x39)
+    assembler.define_byte("option.startingGroup", 0x00)
+    assembler.define_byte("option.startingRoom", 0x39)
     # assembler.define_byte("option.startingPosY", 0x28)
     # assembler.define_byte("option.startingPosX", 0x18)
-    assembler.define_byte("option.startingPos", 0xff if options["heros_cave"] == OracleOfAgesHerosCave.option_warp else 0x21)
-    assembler.define_byte("option.destTransittion", 0x03 if options["heros_cave"] == OracleOfAgesHerosCave.option_warp else 0x05)
-    assembler.define_byte("option.srcTransittion", 0x04 if options["heros_cave"] == OracleOfAgesHerosCave.option_warp else 0x03)
+    assembler.define_byte("option.startingPos", 0x21)
+    assembler.define_byte("option.destTransittion", 0x05)
+    assembler.define_byte("option.srcTransittion", 0x03)
 
     if options["secret_locations"]:
         assembler.define_byte("option.secretLocationsEnabled", 1)
@@ -190,8 +187,12 @@ def write_chest_contents(rom: RomData, patch_data):
         ) != COLLECT_CHEST and not location_data.get(
             "is_chest", False
         ) and location_name != "Bush Cave Chest") or not (
-            patch_data['options']['secret_locations'] and "secret_location" in location_data
-        ) or not (patch_data['options']['heros_cave'] != OracleOfAgesHerosCave.option_disabled and "dungeon" in location_data and location_data["dungeon"] == 11):
+            patch_data['options']['secret_locations'] and (
+                (
+                    "dungeon" in location_data and location_data["dungeon"] == 11
+                ) or "secret_location" in location_data
+            )
+        ):
             continue
         if location_name == "Nuun Highlands Cave":
             chest_addr = rom.get_chest_addr(location_data['room'][patch_data["options"]["animal_companion"]])

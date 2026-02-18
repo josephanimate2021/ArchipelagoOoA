@@ -436,7 +436,8 @@ ASM_FILES = [
     "asm/impa_refill.yaml",
     "asm/combat_difficulty.yaml",
     "asm/tokay_market.yaml",
-    "asm/compass_chimes.yaml"
+    "asm/compass_chimes.yaml",
+	"asm/warp_to_start.yaml"
 ]
 
 RUPEE_VALUES = {

@@ -45,6 +45,7 @@
     ld (wDimitriState),a
     ld a,$ff
     ld (wAnimalTutorialFlags),a
+
     ; Mark intro as seen
     ld a,$0a
     call setGlobalFlag
@@ -52,6 +53,7 @@
     call setGlobalFlag
     ld a,$21
     call setGlobalFlag
+    
     ; Change seeds selected by default inside shooter and satchel
     ld a,option.defaultSeedType - $20
     ld hl,wSatchelSelectedSeeds
@@ -61,6 +63,7 @@
     # maku tree state (vanished)
     ld a,$01
     ld (wMakuTreeState),a
+
 
     # room flags 3 | 6 | 7
     ld a,$c8
@@ -127,7 +130,6 @@
 
     pop hl
     ret
-03/6e97/: jp setInitialFlags
-
+03/6e97/: jp setInitialFlags 
 # Set default text speed to 5
 07/418b/: db $04
