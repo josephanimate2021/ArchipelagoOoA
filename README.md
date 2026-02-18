@@ -39,6 +39,7 @@ Here are two ways to get in!
 ## Thought I was done there? Well there are some requirements that you need to meet in order to colloborate:
 * You need to know Python. This apworld was built for Archipelago using that language.
 * You need to understand the innerworkings of an Archipelago APWorld. You may start learning [here](https://github.com/ArchipelagoMW/Archipelago/blob/main/docs/apworld%20specification.md).
+* I highly recommend that you download this [symbol](./docs/ages.sym) file of the game. It will help you read memory addresses more easily which will help you blend in to the requirements of having knowledge of debugging gameboy games with the [bgb](https://bgb.bircd.org/) emulator. You can also just read the symbol file as if it were a text file. You can do which ever you prefer as long as you meet this requirement.
 * You need your own legally dumped Oracle of Ages ROM either for playtesting or a full randomizer walkthrough. I cannot legally provide you with a ROM if you don't have one, sorry.
 * You need Archipelago v0.5.1 or newer installed in order to test this apworld (I recommend cloning this repo into the lib/worlds folder inside Archipelago that way you don't have to repackage the world every time during testing. And you can just commit your changes while not having to worry about repeating the same steps repetively).
 * You need to have a full understanding of how the oracles randomizer works.
