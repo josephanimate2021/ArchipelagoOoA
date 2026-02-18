@@ -68,6 +68,16 @@ class OracleOfAgesGashaNutKillRequirement(NamedRange):
     }
     include_in_patch = True
 
+class OracleOfAgesOldMenLocationShuffle(Toggle):
+    """
+    Allows shuffling of locations for the old man in rolling ridge present and past if enabled.
+    """
+
+    display_name = "Shuffle Rolling Ridge Old Men"
+
+    include_in_patch = True
+    include_in_slot_data = True
+
 
 class OracleOfAgesRequiredEssences(Range):
     """
@@ -220,7 +230,7 @@ class OracleOfAgesSlateShuffle(Toggle):
     display_name = "Slates Outside Dungeon 8"
 
 
-class OracleOfSeasonsRequiredRings(ItemSet):
+class OracleOfAgesRequiredRings(ItemSet):
     """
     Forces a specified set of rings to appear somewhere in the seed.
     Adding too many rings to this list can cause generation failures.
@@ -230,7 +240,7 @@ class OracleOfSeasonsRequiredRings(ItemSet):
     valid_keys = {name for name, idata in ITEMS_DATA.items() if "ring" in idata}
 
 
-class OracleOfSeasonsExcludedRings(ItemSet):
+class OracleOfAgesExcludedRings(ItemSet):
     """
     Forces a specified set of rings to not appear in the seed.
     List of ring names can be found here: https://zeldawiki.wiki/wiki/Magic_Ring
@@ -286,6 +296,7 @@ class OracleOfAgesOptions(PerGameCommonOptions):
     deterministic_gasha_locations: OracleOfAgesGashaLocations
     gasha_nut_kill_requirement: OracleOfAgesGashaNutKillRequirement
     goal: OracleOfAgesGoal
+    rolling_ridge_old_men_as_locations: OracleOfAgesOldMenLocationShuffle
     secret_locations: OracleOfAgesIncludeSecretLocations
     logic_difficulty: OracleOfAgesLogicDifficulty
     required_essences: OracleOfAgesRequiredEssences
@@ -299,8 +310,8 @@ class OracleOfAgesOptions(PerGameCommonOptions):
     keysanity_boss_keys: OracleOfAgesBossKeyShuffle
     keysanity_maps_compasses: OracleOfAgesMapCompassShuffle
     keysanity_slates: OracleOfAgesSlateShuffle
-    required_rings: OracleOfSeasonsRequiredRings
-    excluded_rings: OracleOfSeasonsExcludedRings
+    required_rings: OracleOfAgesRequiredRings
+    excluded_rings: OracleOfAgesExcludedRings
     shop_prices_factor: OracleOfAgesPricesFactor
     advance_shop: OracleOfAgesAdvanceShop
     combat_difficulty: OracleOfAgesCombatDifficulty

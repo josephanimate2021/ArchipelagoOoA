@@ -2142,17 +2142,19 @@ LOCATIONS_DATA = {
         "symbolic_name": "zeldaRescue",
     },
     "Rolling Ridge (Present): Old Man": {
+        "conditional": True,
         "region_id": "rolling ridge present old man",
-        "vanilla_item": "Bombchus (10)",
-        "flag_byte": 0xc84e,
+        "vanilla_item": "Bombchus (10)", # He originally took rupees from you. Adding this as a placeholder as a way to bring bombchus into the randomizer.
+        "flag_byte": 0xc74e,
         "room": 0x24e,
         "collect": COLLECT_TOUCH,
         "symbolic_name": "ridgePresentOldMan",
     },
     "Rolling Ridge (Past): Old Man": {
+        "conditional": True,
         "region_id": "rolling ridge past old man",
         "vanilla_item": "Rupees (200)",
-        "flag_byte": 0xc9e9,
+        "flag_byte": 0xc8e9,
         "room": 0x3e9,
         "collect": COLLECT_TOUCH,
         "symbolic_name": "ridgePastOldMan",

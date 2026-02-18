@@ -60,6 +60,8 @@ def get_asm_files(patch_data):
         asm_files.append("asm/conditional/qol_mermaid_suit.yaml")
     if patch_data["options"]["goal"] == OracleOfAgesGoal.option_beat_ganon:
         asm_files.append("asm/conditional/ganon_goal.yaml")
+    if patch_data["options"]["rolling_ridge_old_men_as_locations"]:
+        asm_files.append("asm/conditional/old_men_as_locations.yaml")
     if patch_data["options"]["lynna_gardener"]:
         asm_files.append("asm/conditional/lynna_gardener.yaml")
     if patch_data["options"]["secret_locations"]:

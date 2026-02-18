@@ -664,6 +664,10 @@ def make_overworld_logic(player: int, options):
             ooa_has_bracelet(state, player),
             ooa_can_use_ember_seeds(state, player, True)
         ])])
+    
+    if options.rolling_ridge_old_men_as_locations:
+        labrynna_logic.append(["ridge base present", "rolling ridge present old man", False, lambda state: ooa_can_use_ember_seeds(state, player, False)])
+        labrynna_logic.append(["ridge base past west", "rolling ridge past old man", False, lambda state: ooa_can_use_ember_seeds(state, player, False)])
 
     for i in range(options.deterministic_gasha_locations):
         labrynna_logic.append(gasha_logic[i])

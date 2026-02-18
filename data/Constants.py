@@ -14,6 +14,11 @@ DIRECTIONS = [
     "left"
 ]
 
+RIDGE_OLD_MEN_LOCATIONS = [
+    "Rolling Ridge (Present): Old Man",
+    "Rolling Ridge (Past): Old Man"
+]
+
 SEED_ITEMS = [
     "Ember Seeds",
     "Scent Seeds",
