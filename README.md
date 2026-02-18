@@ -6,7 +6,6 @@ Archipelago 0.6.2 or newer were not able to use the apworld to play The Legend o
 
 ## Options I am thinking about addding.
 *  Shuffle Old Men - In Seasons, there are mutiple small trees that you can burn with Ember Seeds which reveals a staircase where you can go inside and either get rupees from the old man or the old man takes the rupees, all of that from fixing the door. As far as I know with Ages, there are two trees in the same spot of Rolling Ridge Past & Present where you burn them and both reveal a staircase leading to the exact same old man.
-* Linked Hero's Cave - In Ages, there is another cave next to the maku path cave in the present that only gets unlocked when you play the linked game.
 * Shuffle Business Scrubs - Just like in Seasons, there are business scrubs that sell items to you for a certain price. Just like in Seasons Archipelago Randomizer, we can carry that over.
 * Placed Essences - In Seasons Archipelago Randomizer, you can set how many essences are placed in the world. Well with Ages, I figured why not apply ths same logic as well. This will make some dungeons barren while the Required Essences option is set which makes more sense so that the user isn't just going into a dungeon with junk items and getting an essense at the end. This will cause them to get more essenses than what they need.
 * Shuffle Essences - In Seasons Archipelago Randomizer, when that option is set, Essences will be placed anywhere in the world instead of dungeons.
@@ -19,7 +18,8 @@ Archipelago 0.6.2 or newer were not able to use the apworld to play The Legend o
 
 ## Current New Options that are functional that are not in the original apworld repo.
 * duplicate seed trees - In Ages, there are 8 seed trees and 5 seed types. This causes duplicate trees to occur just like in Seasons. In order to give users a freedom to customize what trees are duplicates, this option was added. This was created by [Glan9](https://github.com/Glan9) on github, not myself. So please don't give me credit for this option.
-* warp to start - In ages and seasons Archipelago Randomizer, you can warp back to where you started by pressing the select or start buttons followed by your A and B buttons afterwards. For some reason this option was not functional in the original randomizer even though it's class was added in there. Well it's functional now and enjoy using it while it lasts!
+* heros cave - In Ages, people say that you can complete hero's cave after D7, but I am starting to dobut that. To be fair I don't recall playing this part of the game, only the unlinked parts so I won't remember as much as some people think
+  Well with that, this option allows you to open up an entrance to hero's cave on the right side of the maku tree entrance and adding logical checks in the process.
 * lynna gardner - In Flamestripe's Fork of the OoA Apworld (Not Tested), you could enable this feature to cut down on having to use a weapon or something like that each time to cut the grass each time to get to lynna city. This impacts the logic for lynna city and can make a difference in gameplay.
 
 ## Building
