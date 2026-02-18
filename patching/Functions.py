@@ -62,8 +62,8 @@ def get_asm_files(patch_data):
         asm_files.append("asm/conditional/ganon_goal.yaml")
     if patch_data["options"]["lynna_gardener"]:
         asm_files.append("asm/conditional/lynna_gardener.yaml")
-    if patch_data["options"]["secret_locations"]:
-        asm_files.append("asm/conditional/secret_locations.yaml")
+    if patch_data["options"]["heros_cave"]:
+        asm_files.append("asm/conditional/heros_cave.yaml")
     # asm_files.append("asm/conditional/" + ("treewarp" if patch_data["options"]["treewarp"] else "warp_to_start"))
     return asm_files
 
@@ -98,8 +98,8 @@ def define_option_constants(assembler: Z80Assembler, patch_data):
     assembler.define_byte("option.destTransittion", 0x05)
     assembler.define_byte("option.srcTransittion", 0x03)
 
-    if options["secret_locations"]:
-        assembler.define_byte("option.secretLocationsEnabled", 1)
+    if options["heros_cave"]:
+        assembler.define_byte("option.herosCaveEnabled", 1)
     # assembler.define_byte("option.currentsActivatesPortals", 0x01 if options["currents_activates_portals"] else 0x00)
 
 
@@ -187,11 +187,7 @@ def write_chest_contents(rom: RomData, patch_data):
         ) != COLLECT_CHEST and not location_data.get(
             "is_chest", False
         ) and location_name != "Bush Cave Chest") or not (
-            patch_data['options']['secret_locations'] and (
-                (
-                    "dungeon" in location_data and location_data["dungeon"] == 11
-                ) or "secret_location" in location_data
-            )
+            patch_data['options']['heros_cave'] and "dungeon" in location_data and location_data["dungeon"] == 11
         ):
             continue
         if location_name == "Nuun Highlands Cave":

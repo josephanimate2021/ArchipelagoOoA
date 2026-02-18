@@ -1,5 +1,5 @@
-VERSION = "1.0.0 DEV"
-RETRO_COMPAT_VERSION = ["1.0.0 DEV", "0.4.3", "0.4.2", "0.4.1", "0.4.0"]
+VERSION = "1.0.0 BETA 1"
+RETRO_COMPAT_VERSION = ["1.0.0 BETA 1", "0.4.3", "0.4.2", "0.4.1", "0.4.0"]
 
 COMPANIONS = [
     "Ricky",

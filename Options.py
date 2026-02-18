@@ -35,39 +35,6 @@ class OracleOfAgesLogicDifficulty(Choice):
 
     default = 0
 
-class OracleOfAgesGashaLocations(Range):
-    """
-    When set to a non-zero value, planting a Gasha tree on a unique soil gives a deterministic item which is taken
-    into account by logic. Once an item has been obtained this way, the soil disappears forever to avoid any chance
-    of softlocking by wasting several Gasha Seeds on the same soil.
-    The value of this option is the number of items that can be obtained that way, the maximum value expecting you
-    to plant a tree on each one of the 16 Gasha spots in the game.
-    """
-    display_name = "Deterministic Gasha Locations"
-
-    range_start = 0
-    range_end = 16
-
-    default = 0
-    include_in_patch = True
-    include_in_slot_data = True
-
-class OracleOfAgesGashaNutKillRequirement(NamedRange):
-    """
-    This option lets you configure how many kills are required to make a gasha tree grow.
-    Using a gasha ring halves this number.
-    """
-    display_name = "Gasha Nut Requirement"
-
-    range_start = 0
-    range_end = 250
-
-    default = 20
-    special_range_names = {
-        "vanilla": 40
-    }
-    include_in_patch = True
-
 
 class OracleOfAgesRequiredEssences(Range):
     """
@@ -87,12 +54,12 @@ class OracleOfAgesLynnaGardener(Toggle):
     """
     display_name = "Lynna Gardener"
 
-class OracleOfAgesIncludeSecretLocations(Toggle):
+class OracleOfAgesIncludeHerosCave(Toggle):
     """
-    When enabled, locations that are usually accessible in the linked game will become easily completable. 
-    Be careful while enabling this because things are not guarenteed to work as they should.
+    When enabled, a cave will appear on the right side of the maku tree entrance where it will lead to hero's cave, adding that to the logic. 
+    Please note that dungeon shuffle currently isn't possible with Hero's Cave right now. Maybe at a later version it might be a possibility, who knows.
     """
-    display_name = "Secret Locations"
+    display_name = "Hero's Cave"
 
     include_in_patch = True
     include_in_slot_data = True
@@ -283,10 +250,8 @@ class OracleOfAgesOptions(PerGameCommonOptions):
     accessibility: ItemsAccessibility
     start_inventory_from_pool: StartInventoryPool
     lynna_gardener: OracleOfAgesLynnaGardener
-    deterministic_gasha_locations: OracleOfAgesGashaLocations
-    gasha_nut_kill_requirement: OracleOfAgesGashaNutKillRequirement
     goal: OracleOfAgesGoal
-    secret_locations: OracleOfAgesIncludeSecretLocations
+    heros_cave: OracleOfAgesIncludeHerosCave
     logic_difficulty: OracleOfAgesLogicDifficulty
     required_essences: OracleOfAgesRequiredEssences
     required_slates: OracleOfAgesRequiredSlates

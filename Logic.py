@@ -23,7 +23,7 @@ def create_connections(multiworld: MultiWorld, player: int, options):
         make_d8_logic(player),
     ]
 
-    if options.secret_locations:
+    if options.heros_cave:
         all_logic.append(make_heros_cave_logic(player))
 
     all_logic.append(dungeon_entrances)

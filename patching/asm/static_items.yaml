@@ -30,7 +30,7 @@
   dwbe $0555, locations.d7DiamondPuzzle
 
   # ------- Hero's Cave items -------
-  /ifdef option.secretLocationsEnabled
+  /ifdef option.herosCaveEnabled
   dwbe $04cd, locations.herosCaveStatue3Puzzle
   /endif
 
