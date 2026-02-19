@@ -66,8 +66,8 @@ def get_asm_files(patch_data):
         asm_files.append("asm/conditional/lynna_gardener.yaml")
     if patch_data["options"]["secret_locations"]:
         asm_files.append("asm/conditional/secret_locations.yaml")
-    # if patch_data["options"]["miniboss_locations"]:
-        # asm_files.append("asm/conditional/miniboss_locations.yaml")
+    if patch_data["options"]["miniboss_locations"]:
+        asm_files.append("asm/conditional/miniboss_locations.yaml")
     # asm_files.append("asm/conditional/" + ("treewarp" if patch_data["options"]["treewarp"] else "warp_to_start"))
     return asm_files
 
@@ -190,13 +190,13 @@ def write_chest_contents(rom: RomData, patch_data):
             "collect", COLLECT_TOUCH
         ) != COLLECT_CHEST and not location_data.get(
             "is_chest", False
-        ) and location_name != "Bush Cave Chest") or not (
-            patch_data['options']['secret_locations'] and (
+        ) and location_name != "Bush Cave Chest") or (
+            not patch_data['options']['secret_locations'] and (
                 (
                     "dungeon" in location_data and location_data["dungeon"] == 11
                 ) or "secret_location" in location_data
             )
-        ):
+        ) or ("dontOverwriteChestData" in location_data and location_data["dontOverwriteChestData"] is True):
             continue
         if location_name == "Nuun Highlands Cave":
             chest_addr = rom.get_chest_addr(location_data['room'][patch_data["options"]["animal_companion"]])

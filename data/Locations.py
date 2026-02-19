@@ -2116,6 +2116,7 @@ LOCATIONS_DATA = {
         "region_id": "d1 miniboss",
         "vanilla_item": "Bombchus (10)", # Using bombchus as a placeholder for a chance of useful items.
         "conditional": True,
+        "dontOverwriteChestData": True,
         "dungeon": 1,
         "flag_byte": 0xc918,
         "room": 0x418,
