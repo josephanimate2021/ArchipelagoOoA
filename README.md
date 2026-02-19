@@ -17,8 +17,7 @@ Archipelago 0.6.2 or newer were not able to use the apworld to play The Legend o
 
 ## Current New Options that are functional that are not in the original apworld repo.
 * duplicate seed trees - In Ages, there are 8 seed trees and 5 seed types. This causes duplicate trees to occur just like in Seasons. In order to give users a freedom to customize what trees are duplicates, this option was added. This was created by [Glan9](https://github.com/Glan9) on github, not myself. So please don't give me credit for this option.
-* heros cave - In Ages, people say that you can complete hero's cave after D7, but I am starting to dobut that. To be fair I don't recall playing this part of the game, only the unlinked parts so I won't remember as much as some people think
-  Well with that, this option allows you to open up an entrance to hero's cave on the right side of the maku tree entrance and adding logical checks in the process.
+* heros cave - In Ages, people say that you can complete hero's cave after D7, but I am starting to dobut that. To be fair I don't recall playing this part of the game, only the unlinked parts so I won't remember as much as some people think. With that, this option allows you to open up an entrance to hero's cave on the right side of the maku tree entrance and adding logical checks in the process.
 * lynna gardner - In Flamestripe's Fork of the OoA Apworld (Not Tested), you could enable this feature to cut down on having to use a weapon or something like that to cut the grass each time to get to lynna city. This impacts the logic for lynna city and can make a difference in gameplay.
 * rolling ridge old men as locations - This option allows you to convert the old man locations in rolling ridge into checks that you can get. Sure, there's only 2 of them, but it's still worth an add.
 
