@@ -197,6 +197,23 @@ def write_chest_contents(rom: RomData, patch_data):
     Chest locations are packed inside several big tables in the ROM, unlike other more specific locations.
     This puts the item described in the patch data inside each chest in the game.
     """
+    # Had to keep this function because the one in the common folder requires obtaining addresses that I do not know.
+    def get_chest_addr(group_and_room: int):
+        """
+        Return the address where to edit item ID and sub-ID to modify the contents
+        of the chest contained in given room of given group
+        """
+        base_addr = 0x59108
+        room = group_and_room & 0xFF
+        group = group_and_room >> 8
+        current_addr = 0x54000 + rom.read_word(base_addr + (group * 2))
+        while rom.read_byte(current_addr) != 0xff:
+            chest_room = rom.read_byte(current_addr + 1)
+            if chest_room == room:
+                return current_addr + 2
+            current_addr += 4
+        raise Exception(f"Unknown chest in room {group}|{hex_str(room)}")
+        
     for location_name, location_data in LOCATIONS_DATA.items():
         if (location_data.get(
             "collect", COLLECT_TOUCH
@@ -211,9 +228,9 @@ def write_chest_contents(rom: RomData, patch_data):
         ) or ("dontOverwriteChestData" in location_data and location_data["dontOverwriteChestData"] is True):
             continue
         if location_name == "Nuun Highlands Cave":
-            chest_addr = rom.get_chest_addr(location_data['room'][patch_data["options"]["animal_companion"]])
+            chest_addr = get_chest_addr(location_data['room'][patch_data["options"]["animal_companion"]])
         else:
-            chest_addr = rom.get_chest_addr(location_data['room'])
+            chest_addr = get_chest_addr(location_data['room'])
         item_name = patch_data["locations"][location_name]
         item_id, item_subid = get_item_id_and_subid(item_name)
         rom.write_byte(chest_addr, item_id)

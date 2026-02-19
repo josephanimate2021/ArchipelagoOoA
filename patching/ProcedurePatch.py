@@ -62,14 +62,15 @@ class OoAPatchExtensions(APPatchExtension):
         set_file_select_text(assembler, caller.player_name)
 
         # Parse assembler files, compile them and write the result in the ROM
-        print(f"Compiling ASM files...")
+        print("Compiling ASM files...")
+        # write_text_data(rom_data, dictionary, texts, True)
         for file_path in get_asm_files(patch_data):
             data_loaded = yaml.safe_load(pkgutil.get_data(__name__, file_path))
             for metalabel, contents in data_loaded.items():
                 assembler.add_block(Z80Block(metalabel, contents))
         assembler.compile_all()
         for block in assembler.blocks:
-            rom_data.write_bytes(block.addr.full_address(), block.byte_array)
+            rom_data.write_bytes(block.addr.address_in_rom(), block.byte_array)
 
         alter_treasures(rom_data)
         write_chest_contents(rom_data, patch_data)
