@@ -186,9 +186,13 @@ def write_chest_contents(rom: RomData, patch_data):
             "collect", COLLECT_TOUCH
         ) != COLLECT_CHEST and not location_data.get(
             "is_chest", False
-        ) and location_name != "Bush Cave Chest") or not (
-            patch_data['options']['heros_cave'] and "dungeon" in location_data and location_data["dungeon"] == 11
-        ):
+        ) and location_name != "Bush Cave Chest") or (
+            not patch_data['options']['secret_locations'] and (
+                (
+                    "dungeon" in location_data and location_data["dungeon"] == 11
+                ) or "secret_location" in location_data
+            )
+        ) or ("dontOverwriteChestData" in location_data and location_data["dontOverwriteChestData"] is True):
             continue
         if location_name == "Nuun Highlands Cave":
             chest_addr = rom.get_chest_addr(location_data['room'][patch_data["options"]["animal_companion"]])
