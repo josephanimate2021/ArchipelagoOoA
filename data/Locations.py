@@ -2112,6 +2112,16 @@ LOCATIONS_DATA = {
         "collect": COLLECT_CHEST,
         "symbolic_name": "herosCavePresent",
     },
+    "Spirit's Grave: Miniboss": {
+        "region_id": "d1 miniboss",
+        "vanilla_item": "Bombchus (10)", # Using bombchus as a placeholder for a chance of useful items.
+        "conditional": True,
+        "dungeon": 1,
+        "flag_byte": 0xc918,
+        "room": 0x418,
+        "collect": COLLECT_CHEST,
+        "symbolic_name": "d1Miniboss",
+    },
     "Tokay Chicken Hut": {
         "region_id": "tokay chicken hut",
         "vanilla_item": "Bombs (10)",

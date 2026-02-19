@@ -52,6 +52,17 @@ class OracleOfAgesGashaLocations(Range):
     include_in_patch = True
     include_in_slot_data = True
 
+class OracleOfAgesMinibossLocations(Toggle):
+    """
+    When enabled, each time you defeat a miniboss inside a dungeon, 
+    a chest will appear in the miniboss room where if you open it, a randomized item will be inside.
+    This is an option requested by Run_In_A_Week on discord over at the Archipelago Server.
+    """
+    display_name = "Miniboss Locations"
+
+    include_in_patch = True
+    include_in_slot_data = True
+
 class OracleOfAgesGashaNutKillRequirement(NamedRange):
     """
     This option lets you configure how many kills are required to make a gasha tree grow.
@@ -292,6 +303,7 @@ class OracleOfAgesCombatDifficulty(Choice):
 class OracleOfAgesOptions(PerGameCommonOptions):
     accessibility: ItemsAccessibility
     start_inventory_from_pool: StartInventoryPool
+    miniboss_locations: OracleOfAgesMinibossLocations
     lynna_gardener: OracleOfAgesLynnaGardener
     deterministic_gasha_locations: OracleOfAgesGashaLocations
     gasha_nut_kill_requirement: OracleOfAgesGashaNutKillRequirement

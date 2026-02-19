@@ -129,6 +129,7 @@ class OracleOfAgesWorld(World):
                    "advance_shop",
                    "secret_locations",
                    "rolling_ridge_old_men_as_locations",
+                   "miniboss_locations",
                    # Requirements
                    "required_essences", "required_slates",
                    # keysanity
@@ -200,10 +201,16 @@ class OracleOfAgesWorld(World):
         if location_name in RIDGE_OLD_MEN_LOCATIONS:
             return self.options.rolling_ridge_old_men_as_locations
         
-        if (
-            "dungeon" in location_data and location_data["dungeon"] == 11
-        ) or "secret_location" in location_data:
+        if "dungeon" in location_data:
+            if location_data["dungeon"] == 11:
+                return self.options.secret_locations
+            if location_data["region_id"] == "d" + str(location_data["dungeon"]) + " miniboss":
+                return self.options.miniboss_locations
+            
+        if "secret_location" in location_data:
             return self.options.secret_locations
+        
+
 
         # TODO FUNNY LOCATION ?
 

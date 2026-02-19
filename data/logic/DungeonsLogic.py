@@ -23,8 +23,7 @@ def make_d1_logic(player: int):
         ["enter d1", "d1 west terrace", False, lambda state: ooa_can_break_pot(state, player)],
         ["enter d1", "d1 pot chest", False, lambda state: ooa_can_break_pot(state, player)],
 
-        # 2 keys => Risk of softlock if we require only one key. 
-        ["d1 ghini drop", "d1 wide room", False, lambda state: ooa_has_small_keys(state, player, 1, 2)],
+        ["d1 ghini drop", "d1 wide room", False, lambda state: ooa_has_small_keys(state, player, 1, 1)],
         ["d1 wide room", "d1 two-button chest", False, None],
         ["d1 wide room", "d1 one-button chest", False, None],
         ["d1 wide room", "d1 boss", False, lambda state: all([
@@ -34,13 +33,16 @@ def make_d1_logic(player: int):
         ])],
 
         # potentially 3 keys w/ vanilla route
-        ["d1 wide room", "d1 U-room", False, lambda state: all([
+        ["d1 wide room", "d1 miniboss", False, lambda state: all([
             ooa_can_break_bush(state, player),
             ooa_generic_boss_and_miniboss_kill(state, player),
             ooa_has_small_keys(state, player, 1, 3)
         ])],
-        ["d1 west terrace", "d1 U-room", False, None],
-        ["d1 U-room", "d1 basement", False, lambda state: ooa_can_use_ember_seeds(state, player, True)],
+        ["d1 west terrace", "d1 miniboss", False, lambda state: all([
+            ooa_has_small_keys(state, player, 1, 1),
+            ooa_generic_boss_and_miniboss_kill(state, player)
+        ])],
+        ["d1 miniboss", "d1 basement", False, lambda state: ooa_can_use_ember_seeds(state, player, True)],
     ]
 
 
