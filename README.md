@@ -5,7 +5,6 @@ This is a re-hosting of the [code originally developed by SenPierre](https://git
 Archipelago 0.6.2 or newer were not able to use the apworld to play The Legend of Zelda: Oracle of Ages Randomizer. Besides, work on adding new options was already started on this repo anyway at the time of forking this one which was posted on Discord by Ishigh1 on the Archipelago Discord Server.
 
 ## Options I am thinking about addding.
-*  Shuffle Old Men - In Seasons, there are mutiple small trees that you can burn with Ember Seeds which reveals a staircase where you can go inside and either get rupees from the old man or the old man takes the rupees, all of that from fixing the door. As far as I know with Ages, there are two trees in the same spot of Rolling Ridge Past & Present where you burn them and both reveal a staircase leading to the exact same old man.
 * Shuffle Business Scrubs - Just like in Seasons, there are business scrubs that sell items to you for a certain price. Just like in Seasons Archipelago Randomizer, we can carry that over.
 * Placed Essences - In Seasons Archipelago Randomizer, you can set how many essences are placed in the world. Well with Ages, I figured why not apply ths same logic as well. This will make some dungeons barren while the Required Essences option is set which makes more sense so that the user isn't just going into a dungeon with junk items and getting an essense at the end. This will cause them to get more essenses than what they need.
 * Shuffle Essences - In Seasons Archipelago Randomizer, when that option is set, Essences will be placed anywhere in the world instead of dungeons.
@@ -21,6 +20,7 @@ Archipelago 0.6.2 or newer were not able to use the apworld to play The Legend o
 * heros cave - In Ages, people say that you can complete hero's cave after D7, but I am starting to dobut that. To be fair I don't recall playing this part of the game, only the unlinked parts so I won't remember as much as some people think
   Well with that, this option allows you to open up an entrance to hero's cave on the right side of the maku tree entrance and adding logical checks in the process.
 * lynna gardner - In Flamestripe's Fork of the OoA Apworld (Not Tested), you could enable this feature to cut down on having to use a weapon or something like that to cut the grass each time to get to lynna city. This impacts the logic for lynna city and can make a difference in gameplay.
+* rolling ridge old men as locations - This option allows you to convert the old man locations in rolling ridge into checks that you can get. Sure, there's only 2 of them, but it's still worth an add.
 
 ## Building
 In order to build this code for usage with Archipelago, you need to follow these steps:
