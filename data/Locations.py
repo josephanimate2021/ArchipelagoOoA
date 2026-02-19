@@ -2115,6 +2115,7 @@ LOCATIONS_DATA = {
     "Spirit's Grave: Miniboss": {
         "region_id": "d1 miniboss",
         "vanilla_item": "Bombchus (10)", # Using bombchus as a placeholder for a chance of useful items.
+        "dontOverwriteChestData": True,
         "conditional": True,
         "dungeon": 1,
         "flag_byte": 0xc918,

@@ -4,14 +4,26 @@ import os
 import random
 import Utils
 from settings import get_settings
-from . import RomData
-from .Util import *
-from .z80asm.Assembler import Z80Assembler
+from ..common.patching import RomData
+from ..common.patching.Util import *
+from ..common.patching.z80asm.Assembler import Z80Assembler
 from ..data.Constants import *
+from ..data.Items import ITEMS_DATA
 from .Constants import *
 from pathlib import Path
 
 from .. import LOCATIONS_DATA, OracleOfAgesMasterKeys, OracleOfAgesGoal
+
+def get_item_id_and_subid(item_name: str):
+    if item_name == "Archipelago Item":
+        return 0x41, 0x00
+    elif item_name == "Archipelago Progression Item":
+        return 0x41, 0x01
+
+    item_data = ITEMS_DATA[item_name]
+    item_id = item_data["id"]
+    item_subid = item_data["subid"] if "subid" in item_data else 0x00
+    return item_id, item_subid
 
 
 def get_treasure_addr(rom: RomData, item_name: str):
@@ -66,8 +78,8 @@ def get_asm_files(patch_data):
         asm_files.append("asm/conditional/lynna_gardener.yaml")
     if patch_data["options"]["secret_locations"]:
         asm_files.append("asm/conditional/secret_locations.yaml")
-    if patch_data["options"]["miniboss_locations"]:
-        asm_files.append("asm/conditional/miniboss_locations.yaml")
+    # if patch_data["options"]["miniboss_locations"]:
+        # asm_files.append("asm/conditional/miniboss_locations.yaml")
     # asm_files.append("asm/conditional/" + ("treewarp" if patch_data["options"]["treewarp"] else "warp_to_start"))
     return asm_files
 
@@ -196,7 +208,7 @@ def write_chest_contents(rom: RomData, patch_data):
                     "dungeon" in location_data and location_data["dungeon"] == 11
                 ) or "secret_location" in location_data
             )
-        ):
+        ) or ("dontOverwriteChestData" in location_data and location_data["dontOverwriteChestData"] is True):
             continue
         if location_name == "Nuun Highlands Cave":
             chest_addr = rom.get_chest_addr(location_data['room'][patch_data["options"]["animal_companion"]])

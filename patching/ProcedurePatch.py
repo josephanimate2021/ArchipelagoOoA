@@ -9,8 +9,8 @@ from worlds.Files import APProcedurePatch, APTokenMixin, APPatchExtension
 
 from .Functions import *
 from .Constants import *
-from .RomData import RomData
-from .z80asm.Assembler import Z80Assembler, Z80Block
+from ..common.patching.RomData import RomData
+from ..common.patching.z80asm.Assembler import Z80Assembler, Z80Block
 
 from tkinter.filedialog import askopenfilename
 
@@ -32,13 +32,23 @@ class OoAPatchExtensions(APPatchExtension):
         #if patch_data["options"]["enforce_potion_in_shop"]:
         #    patch_data["locations"]["Horon Village: Shop #3"] = "Potion"
 
-        assembler = Z80Assembler()
+        # if patch_data["options"]["cross_items"]:
+            # file_name = get_settings().tloz_ooa_options.seasons_rom_file
+            # file_path = Utils.user_path(file_name)
+            # rom_file = open(file_path, "rb")
+            # seasons_rom = bytes(rom_file.read())
+            # rom_file.close()
+
+            # for bank in range(0x40, 0x80):
+                # bank = 0xdd  # TODO: this is an invalid instruction that hangs the game, it's easier to debug but looks worse, remove/comment out once stable
+                # rom_data.add_bank(bank)
+            # rom_data.update_rom_size()
+        # else:
+        seasons_rom = bytes()
+
+        assembler = Z80Assembler(EOB_ADDR, DEFINES, rom, seasons_rom)
 
         # Define static values & data blocks
-        for i, offset in enumerate(EOB_ADDR):
-            assembler.end_of_banks[i] = offset
-        for key, value in DEFINES.items():
-            assembler.define(key, value)
         for symbolic_name, price in patch_data["shop_prices"].items():
             assembler.define_byte(f"shopPrices.{symbolic_name}", RUPEE_VALUES[price])
         define_location_constants(assembler, patch_data)
