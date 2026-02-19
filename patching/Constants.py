@@ -16,13 +16,13 @@ EOB_ADDR = [
   0x3f88, # 0e
   0x3f90, # 0f
   0x3ef4, # 10
-  0x3f33, # 11
+  0x3f73, # 11
   0x3e8f, # 12
   0x3ef0, # 13
   0x3acd, # 14
   0x3bfb, # 15
   0x3e03, # 16
-  0x3ee3, # 17 - garbage data here (lots of space here)
+  0x2ee3, # 17 - garbage data here (lots of space here)
   0x399e, # 18 - garbage data here
   0x3fdf, # 19
   0x3ed0, # 1a
@@ -55,14 +55,16 @@ EOB_ADDR = [
   0x4000, # 35
   0x4000, # 36
   0x4000, # 37
-  0x3afb, # 38 - lots of space here
+  0x2afb, # 38 - lots of space here
   0x4000, # 39
   0x4000, # 3a
   0x4000, # 3b
   0x4000, # 3c
   0x4000, # 3d
   0x4000, # 3e
-  0x3d0a  # 3f 
+  0x3d0a,  # 3f 
+  # New banks
+  0x0000  # 40
 ]
 
 DEFINES = {
