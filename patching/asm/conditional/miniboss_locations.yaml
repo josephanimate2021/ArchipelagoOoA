@@ -2,3 +2,11 @@
 16/5331/chestGroup6Data: |
   db $58, $18, locations.d1MinibossDefeat
   db $ff
+
+
+# Modify the minibosses to make a chest appear when they get defeated.
+0f/4580/enemyBoss_beginMiniboss: |
+    ld b,2d
+    jr ++
+    ld bc, $12 | $02
+    jp objectCreateInteraction
