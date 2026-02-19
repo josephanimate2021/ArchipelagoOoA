@@ -330,7 +330,7 @@
 # remove "boomerang" from random prizes (it's guaranteed second instead).
 15/66e5/: db $03,$03,$03 # prize indexes in a table
 # don't give boomerang as a shooting gallery prize either.
-15/52b6/: db jumpalways,c3,52,scriptend
+15/52b6/: db jumpalways,$c3,$52,scriptend
 
 # trade lava juice without having the mermaid key.
 15/6879/: jr nc,$00
