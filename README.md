@@ -45,7 +45,7 @@ Here are two ways to get in!
 * You need to have a full understanding of how the oracles randomizer works.
 
 ## Want to test the latest build of Archipelago with this world?
-Visit [here](../ArchipelagoOoA-withApSourceCodeBuiltIn) and follow these steps:
+Visit [here](../../ArchipelagoOoA-withApSourceCodeBuiltIn) and follow these steps:
 1. Go to Code -> Copy icon next to the URL and click on it.
 2. Open your terminal and run git clone and then the url you just copied. Be sure to add the --recurse-submodules arguement to the command otherwise you may be recieving just a build with archipelago without my world in it. If you don't have Git installed on your computer, download it [here](https://git-scm.com)
 3. Once that's cloned, head over to the Archipelago Folder and look for a file called Launcher. double click on it (assuming your default launcher is Python) and wait for it to do it's thing. You may need to follow some additional steps so just be warned of that.
