@@ -43,3 +43,10 @@ Here are two ways to get in!
 * You need your own legally dumped Oracle of Ages ROM either for playtesting or a full randomizer walkthrough. I cannot legally provide you with a ROM if you don't have one, sorry.
 * You need Archipelago v0.5.1 or newer installed in order to test this apworld (I recommend cloning this repo into the lib/worlds folder inside Archipelago that way you don't have to repackage the world every time during testing. And you can just commit your changes while not having to worry about repeating the same steps repetively).
 * You need to have a full understanding of how the oracles randomizer works.
+
+## Want to test the latest build of Archipelago with this world?
+Visit [here](https://github.com/josephanimate2021/ArchipelagoOoA-withApSourceCodeBuiltIn) and follow these steps:
+1. Go to Code -> Copy icon next to the URL and click on it.
+2. Open your terminal and run git clone and then the url you just copied. Be sure to add the --recurse-submodules arguement to the command otherwise you may be recieving just a build with archipelago without my world in it. If you don't have Git installed on your computer, download it [here](https://git-scm.com)
+3. Once that's cloned, head over to the Archipelago Folder and look for a file called Launcher. double click on it (assuming your default launcher is Python) and wait for it to do it's thing. You may need to follow some additional steps so just be warned of that.
+4. Once Archipelago is launched, use it like how you would with any other archipelago installation to test my world. if you did things correctly, once you click on the Gneerate Template Options button, my world should be in there. The file name is The Legend of Zelda: Oracle of Ages.yaml
