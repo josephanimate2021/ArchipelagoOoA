@@ -49,3 +49,6 @@ Visit [here](https://github.com/josephanimate2021/ArchipelagoOoA-withApSourceCod
 2. Open your terminal and run git clone and then the url you just copied. Be sure to add the --recurse-submodules arguement to the command otherwise you may be recieving just a build with archipelago without my world in it. If you don't have Git installed on your computer, download it [here](https://git-scm.com)
 3. Once that's cloned, head over to the Archipelago Folder and look for a file called Launcher. double click on it (assuming your default launcher is Python) and wait for it to do it's thing. You may need to follow some additional steps so just be warned of that.
 4. Once Archipelago is launched, use it like how you would with any other archipelago installation to test my world. if you did things correctly, once you click on the Gneerate Template Options button, my world should be in there. The file name is The Legend of Zelda: Oracle of Ages.yaml
+
+## Requested Features that are being worked on:
+* Ambi's Palace As a Dungeon - Normally, i would not consider Ambi's Palace to be a dungeon, but a commenter from [mashy's video](https://youtube.com/watch?v=MgDrlOFINCc&lc=Ugwu35obzAjzsDfILW54AaABAg.ATVsNVmdbgUATY7u6h5N8x&si=l9zuUlHtL72z8dTJ) requested for this feature to be added. side entrances will stay in tact
