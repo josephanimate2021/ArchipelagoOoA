@@ -28,24 +28,24 @@ RAM_ADDRS = {
     "is_dead": (0xCDD5, 1, "System Bus"),
 }
 
-# GASHA_ADDRS = {
-    # "Mount Cucco Gasha Spot": (0xc71f, 0x00),
-    # "Tarm Ruins Gasha Spot": (0xc722, 0x01),
-    # "Goron Mountain West Gasha Spot": (0xc738, 0x02),
-    # "Goron Mountain East Gasha Spot": (0xc73b, 0x03),
-    # "Onox Gasha Spot": (0xc744, 0x04),
-    # "Sunken City Gasha Spot": (0xc73f, 0x05),
-    # "Holodrum Plain Island Gasha Spot": (0xc775, 0x06),
-    # "Spool Swamp North Gasha Spot": (0xc780, 0x07),
-    # "Eyeglass Lake Gasha Spot": (0xc789, 0x08),
-    # "Lower Holodrum Plain Gasha Spot": (0xc795, 0x09),
-    # "North Horon Gasha Spot": (0xc7a6, 0x0a),
-    # "Eastern Suburbs Gasha Spot": (0xc7ac, 0x0b),
-    # "Spool Swamp South Gasha Spot": (0xc7c0, 0x0c),
-    # "Samasa Desert Gasha Spot": (0xc7ef, 0x0d),
-    # "Western Coast Gasha Spot": (0xc7f0, 0x0e),
-    # "Horon Village Gasha Spot": (0xc7c8, 0x0f),
-# }
+GASHA_ADDRS = {
+    "Sea of Storms (Present) Gasha Spot": (0xc7d7, 0x00),
+    "Crescent Island West (Present) Gasha Spot": (0xc7cb, 0x01),
+    "Crescent Island East (Present) Gasha Spot": (0xc7ad, 0x02),
+    "Fairies' Woods Gasha Spot": (0xc790, 0x03),
+    "Yoll Graveyard Gasha Spot": (0xc77b, 0x04),
+    "Talus Peeks (Present) Gasha Spot": (0xc730, 0x05),
+    "Rolling Ridge (Present, East) Gasha Spot": (0xc72c, 0x06),
+    "Nuun Highlands Gasha Spot": (0xc705, 0x07),
+    "Zora Vilage Gasha Spot": (0xc8d0, 0x08),
+    "Crescent Island West (Past) Gasha Spot": (0xc8ca, 0x09),
+    "Southern Shore Gasha Spot": (0xc895, 0x0a),
+    "Lynna Village Gasha Spot": (0xc855, 0x0b),
+    "Deku Forest Gasha Spot": (0xc834, 0x0c),
+    "Rolling Ridge (Past, Upper) Gasha Spot": (0xc80a, 0x0d),
+    "Talus Peeks (Past) Gasha Spot": (0xc801, 0x0e),
+    "Rolling Ridge (Past, West) Gasha Spot": (0xc828, 0x0f),
+}
 
 
 class OracleOfAgesClient(BizHawkClient):
