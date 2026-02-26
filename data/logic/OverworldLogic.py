@@ -1,4 +1,5 @@
 from .LogicPredicates import *
+from ...Options import *
 
 
 def make_overworld_logic(player: int, options):
@@ -665,7 +666,7 @@ def make_overworld_logic(player: int, options):
             ooa_can_use_ember_seeds(state, player, True)
         ])])
     
-    if options.rolling_ridge_old_men_as_locations:
+    if options.shuffle_old_men == OraclesOldMenShuffle.option_turn_into_locations:
         labrynna_logic.append(["ridge base present", "rolling ridge present old man", False, lambda state: ooa_can_use_ember_seeds(state, player, False)])
         labrynna_logic.append(["ridge base past west", "rolling ridge past old man", False, lambda state: ooa_can_use_ember_seeds(state, player, False)])
 

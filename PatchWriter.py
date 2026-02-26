@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 from BaseClasses import ItemClassification
 from .patching.ProcedurePatch import OoAProcedurePatch
 from .data.Constants import *
-from .data.Locations import LOCATIONS_DATA
+from .Options import OracleOfAgesOptions
 
 
 if TYPE_CHECKING:
@@ -21,15 +21,8 @@ def ooa_create_appp_patch(world: "OracleOfAgesWorld") -> OoAProcedurePatch:
     patch_data = {
         "version": VERSION,
 
-        "options": world.options.as_dict(*[
-            "goal", "logic_difficulty", "required_essences", "secret_locations", "rolling_ridge_old_men_as_locations",
-            "required_slates", "animal_companion", "default_seed", "shuffle_dungeons", "master_keys", "miniboss_locations",
-            "keysanity_small_keys", "keysanity_boss_keys", "keysanity_maps_compasses", "keysanity_slates",
-            "required_rings", "excluded_rings", "shop_prices_factor", "advance_shop",
-            "combat_difficulty", "death_link", "lynna_gardener"
-        ]),
-        "dungeon_entrances": {a.replace(" entrance", ""): b.replace("enter ", "")
-                              for a, b in world.dungeon_entrances.items()},
+        "options": world.options.as_dict(*[option_name for option_name in OracleOfAgesOptions.type_hints if hasattr(OracleOfAgesOptions.type_hints[option_name], "include_in_patch")]),
+        "dungeon_entrances": {a.replace(" entrance", ""): b.replace("enter ", "") for a, b in world.dungeon_entrances.items()},
         
         "locations": {},
         "shop_prices": world.shop_prices

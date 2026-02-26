@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, Set, Dict, Any
 from NetUtils import ClientStatus
 import worlds._bizhawk as bizhawk
 from worlds._bizhawk.client import BizHawkClient
-from . import LOCATIONS_DATA, ITEMS_DATA, OracleOfAgesGoal
+from . import LOCATIONS_DATA, ITEMS_DATA, OraclesGoal
 from .Data import build_item_id_to_name_dict, build_location_name_to_id_dict
 
 if TYPE_CHECKING:
@@ -27,6 +27,25 @@ RAM_ADDRS = {
     "current_map_id": (0xCC30, 1, "System Bus"),
     "is_dead": (0xCDD5, 1, "System Bus"),
 }
+
+# GASHA_ADDRS = {
+    # "Mount Cucco Gasha Spot": (0xc71f, 0x00),
+    # "Tarm Ruins Gasha Spot": (0xc722, 0x01),
+    # "Goron Mountain West Gasha Spot": (0xc738, 0x02),
+    # "Goron Mountain East Gasha Spot": (0xc73b, 0x03),
+    # "Onox Gasha Spot": (0xc744, 0x04),
+    # "Sunken City Gasha Spot": (0xc73f, 0x05),
+    # "Holodrum Plain Island Gasha Spot": (0xc775, 0x06),
+    # "Spool Swamp North Gasha Spot": (0xc780, 0x07),
+    # "Eyeglass Lake Gasha Spot": (0xc789, 0x08),
+    # "Lower Holodrum Plain Gasha Spot": (0xc795, 0x09),
+    # "North Horon Gasha Spot": (0xc7a6, 0x0a),
+    # "Eastern Suburbs Gasha Spot": (0xc7ac, 0x0b),
+    # "Spool Swamp South Gasha Spot": (0xc7c0, 0x0c),
+    # "Samasa Desert Gasha Spot": (0xc7ef, 0x0d),
+    # "Western Coast Gasha Spot": (0xc7f0, 0x0e),
+    # "Horon Village Gasha Spot": (0xc7c8, 0x0f),
+# }
 
 
 class OracleOfAgesClient(BizHawkClient):
@@ -155,6 +174,14 @@ class OracleOfAgesClient(BizHawkClient):
                     local_checked_locations.add(location_id)
                     break
 
+        # Check how many deterministic Gasha Nuts have been opened, and mark their matching locations as checked
+        byte_offset = 0xc64c - RAM_ADDRS["location_flags"][0]
+        gasha_counter = flag_bytes[byte_offset] >> 2
+        for i in range(gasha_counter):
+            name = f"Gasha Nut #{i + 1}"
+            location_id = self.location_name_to_id[name]
+            local_checked_locations.add(location_id)
+
         # Send locations
         if self.local_checked_locations != local_checked_locations:
             self.local_checked_locations = local_checked_locations
@@ -201,11 +228,11 @@ class OracleOfAgesClient(BizHawkClient):
     async def process_game_completion(self, ctx: "BizHawkClientContext", flag_bytes, current_room: int):
         game_clear = False
         if ctx.slot_data is not None:
-            if ctx.slot_data["goal"] == OracleOfAgesGoal.option_beat_veran:
+            if ctx.slot_data["goal"] == OraclesGoal.option_beat_vanila_boss:
                 veran_flag_offset = 0xC6D8 - RAM_ADDRS["location_flags"][0]
                 veran_was_beaten = (flag_bytes[veran_flag_offset] & 0x80 == 0x80)
                 game_clear = veran_was_beaten
-            elif ctx.slot_data["goal"] == OracleOfAgesGoal.option_beat_ganon:
+            elif ctx.slot_data["goal"] == OraclesGoal.option_beat_ganon:
                 # Room with Zelda lying down was reached, and Ganon was beaten
                 ganon_flag_offset = 0xCAF1 - RAM_ADDRS["location_flags"][0]
                 ganon_was_beaten = (flag_bytes[ganon_flag_offset] & 0x80 == 0x80)
@@ -241,8 +268,8 @@ class OracleOfAgesClient(BizHawkClient):
         local_tracker = dict(self.local_tracker)
 
         # Gasha handling
-        # byte_offset = 0xC64a - RAM_ADDRS["location_flags"][0]
-        # gasha_seed_bytes = flag_bytes[byte_offset] + flag_bytes[byte_offset + 1] * 0x100
+        byte_offset = 0xC64d - RAM_ADDRS["location_flags"][0]
+        gasha_seed_bytes = flag_bytes[byte_offset] + flag_bytes[byte_offset + 1] * 0x100
         # for gasha_name in GASHA_ADDRS:
             # (byte_addr, flag) = GASHA_ADDRS[gasha_name]
 
@@ -260,22 +287,6 @@ class OracleOfAgesClient(BizHawkClient):
 
         # Position tracking
         local_tracker["Current Room"] = current_room
-
-        # Wild seed/bomb tracking
-        wild_item_data = [
-            (0x03, "Bombs"),
-            (0x20, "Ember"),
-            (0x21, "Scent"),
-            (0x22, "Pegasus"),
-            (0x23, "Gale"),
-            (0x24, "Mystery"),
-        ]
-        base_offset = 0xc692 - RAM_ADDRS["location_flags"][0]
-        for item_id, item_name in wild_item_data:
-            byte_offset = base_offset + item_id // 8
-            mask = 0x01 << item_id % 8
-            if flag_bytes[byte_offset] & mask:
-                local_tracker[f"Obtained {item_name}"] = True
 
         updates = {}
         for key, value in local_tracker.items():

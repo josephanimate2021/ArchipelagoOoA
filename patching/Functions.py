@@ -12,7 +12,8 @@ from ..data.Items import ITEMS_DATA
 from .Constants import *
 from pathlib import Path
 
-from .. import LOCATIONS_DATA, OracleOfAgesMasterKeys, OracleOfAgesGoal
+from ..data.Locations import LOCATIONS_DATA
+from ..common.Options import *
 
 def get_item_id_and_subid(item_name: str):
     if item_name == "Archipelago Item":
@@ -70,9 +71,9 @@ def get_asm_files(patch_data):
         asm_files.append("asm/conditional/skip_joke.yaml")
     if get_settings()["tloz_ooa_options"]["qol_mermaid_suit"]:
         asm_files.append("asm/conditional/qol_mermaid_suit.yaml")
-    if patch_data["options"]["goal"] == OracleOfAgesGoal.option_beat_ganon:
+    if patch_data["options"]["goal"] == OraclesGoal.option_beat_ganon:
         asm_files.append("asm/conditional/ganon_goal.yaml")
-    if patch_data["options"]["rolling_ridge_old_men_as_locations"]:
+    if patch_data["options"]["shuffle_old_men"] == OraclesOldMenShuffle.option_turn_into_locations:
         asm_files.append("asm/conditional/old_men_as_locations.yaml")
     if patch_data["options"]["lynna_gardener"]:
         asm_files.append("asm/conditional/lynna_gardener.yaml")
@@ -108,9 +109,11 @@ def define_option_constants(assembler: Z80Assembler, patch_data):
 
     assembler.define_byte("option.startingGroup", 0x00)
     assembler.define_byte("option.startingRoom", 0x39)
-    # assembler.define_byte("option.startingPosY", 0x28)
-    # assembler.define_byte("option.startingPosX", 0x18)
-    assembler.define_byte("option.startingPos", 0x21)
+    assembler.define_byte("option.startingPosY", 0x2)
+    assembler.define_byte("option.startingPosX", 0x1)
+    assembler.define_byte("option.warpingGroup", 0x00)
+    assembler.define_byte("option.warpingRoom", 0x39)
+    assembler.define_byte("option.warpingPos", 0x21)
     assembler.define_byte("option.destTransittion", 0x05)
     assembler.define_byte("option.srcTransittion", 0x03)
 
@@ -131,7 +134,7 @@ def define_option_constants(assembler: Z80Assembler, patch_data):
     keysanity = options["keysanity_small_keys"] or options["keysanity_boss_keys"]
     assembler.define_byte("option.customCompassChimes", 1 if keysanity else 0)
 
-    master_keys_as_boss_keys = options["master_keys"] == OracleOfAgesMasterKeys.option_all_dungeon_keys
+    master_keys_as_boss_keys = options["master_keys"] == OraclesMasterKeys.option_all_dungeon_keys
     assembler.define_byte("option.smallKeySprite", 0x43 if master_keys_as_boss_keys else 0x42)
 
 def process_item_name_for_shop_text(item_name: str) -> List[int]:
@@ -326,8 +329,12 @@ def set_dungeon_warps(rom: RomData, patch_data):
 
 def define_dungeon_items_text_constants(assembler: Z80Assembler, patch_data):
 
-    for i in range(0, 10): # D0 has no map, no compass, no boss key, and the unique small key use the default text. 
+    for i in range(11): # D0 and Linked Hero's Cave has no map, no compass, no boss key, and the unique small key use the default text. 
         # " for\nDungeon X"
+        if i == 10:
+            if not patch_data["options"]["secret_locations"]:
+                continue
+            i = 11
         trueI = i if i != 9 else 6
         dungeon_precision = [0x03, 0x39, 0x44, 0x05, 0xe6, 0x20, (0x30 + trueI)]
         dungeon_tag = f"D{trueI}"
@@ -356,8 +363,8 @@ def define_dungeon_items_text_constants(assembler: Z80Assembler, patch_data):
         small_key_text.extend([0x09, 0x00, 0x21, 0x00])  # "\color(WHITE)!(end)"
         assembler.add_floating_chunk(f"text.smallKey{dungeon_tag}", small_key_text)
 
-        # Hero's Cave only has Small Keys, so skip other texts
-        if i == 0:
+        # Linked Hero's Cave and Maku Path only have Small Keys, so skip other texts
+        if i == 0 or i == 11:
             continue
 
         # ###### Boss keys ##############################################
@@ -480,11 +487,11 @@ def set_character_sprite_from_settings(rom: RomData):
     rom.write_byte(0x8d9c, 0x20 | palette_byte)
 
 def apply_misc_option(rom: RomData, patch_data):
-    if patch_data["options"]["master_keys"] != OracleOfAgesMasterKeys.option_disabled:
+    if patch_data["options"]["master_keys"] != OraclesMasterKeys.option_disabled:
         # Remove small key consumption on keydoor opened
         rom.write_byte(0x18366, 0x00)
         # Change obtention text
         rom.write_bytes(0x78247, [0x4d, 0x61, 0x73, 0x74, 0x65, 0x72, 0x20, 0x4b, 0x65, 0x79, 0x09, 0x01, 0x21, 0x00]) # I really wish that the dictionnay of ages would be more useful...
-    if patch_data["options"]["master_keys"] == OracleOfAgesMasterKeys.option_all_dungeon_keys:
+    if patch_data["options"]["master_keys"] == OraclesMasterKeys.option_all_dungeon_keys:
         # Remove boss key consumption on boss keydoor opened (boss door behave like normal locked door)
         rom.write_word(0x1835e, 0x0000)

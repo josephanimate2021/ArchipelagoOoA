@@ -119,24 +119,8 @@ class OracleOfAgesWorld(World):
     def fill_slot_data(self) -> dict:
         # Put options that are useful to the tracker inside slot data
         # TODO MOAR DATA ?
-        options = ["goal", "death_link",
-                   # Logic-impacting options
-                   "lynna_gardener",
-                   "logic_difficulty",
-                   "shuffle_dungeons",
-                   "default_seed",
-                   # Locations
-                   "advance_shop",
-                   "secret_locations",
-                   "rolling_ridge_old_men_as_locations",
-                   "miniboss_locations",
-                   # Requirements
-                   "required_essences", "required_slates",
-                   # keysanity
-                   "keysanity_small_keys", "keysanity_boss_keys", "keysanity_slates", "master_keys"
-                   ]
 
-        slot_data = self.options.as_dict(*options)
+        slot_data = self.options.as_dict(*[option_name for option_name in OracleOfAgesOptions.type_hints if hasattr(OracleOfAgesOptions.type_hints[option_name], "include_in_slot_data")])
         slot_data["animal_companion"] = COMPANIONS[self.options.animal_companion.value]
         slot_data["default_seed"] = SEED_ITEMS[self.options.default_seed.value]
 
@@ -151,7 +135,7 @@ class OracleOfAgesWorld(World):
         
         self.restrict_non_local_items()
 
-        if self.options.shuffle_dungeons == "shuffle":
+        if self.options.shuffle_dungeons:
             self.shuffle_dungeons()
 
         self.randomize_shop_prices()
@@ -180,15 +164,8 @@ class OracleOfAgesWorld(World):
         self.dungeon_entrances = dict(zip(self.dungeon_entrances, shuffled_dungeons))
 
     def randomize_shop_prices(self):
-        prices_pool = get_prices_pool()
-        self.random.shuffle(prices_pool)
-        global_prices_factor = self.options.shop_prices_factor.value / 100.0
-        for key, divider in self.shop_prices.items():
-            floating_price = prices_pool.pop() * global_prices_factor / divider
-            for i, value in enumerate(VALID_RUPEE_VALUES):
-                if value > floating_price:
-                    self.shop_prices[key] = VALID_RUPEE_VALUES[i-1]
-                    break
+        from .common.generation.GenerateEarly import randomize_shop_prices
+        randomize_shop_prices(self)
 
     def location_is_active(self, location_name, location_data):
         if "conditional" not in location_data or location_data["conditional"] is False:
@@ -199,7 +176,7 @@ class OracleOfAgesWorld(World):
             return self.options.advance_shop.value
         
         if location_name in RIDGE_OLD_MEN_LOCATIONS:
-            return self.options.rolling_ridge_old_men_as_locations
+            return self.options.shuffle_old_men == OraclesOldMenShuffle.option_turn_into_locations
         
         if "dungeon" in location_data:
             if location_data["dungeon"] == 11:
@@ -249,9 +226,9 @@ class OracleOfAgesWorld(World):
     def create_events(self):
         self.create_event("maku seed", "Maku Seed")
 
-        if self.options.goal == OracleOfAgesGoal.option_beat_veran:
+        if self.options.goal == OraclesGoal.option_beat_vanila_boss:
             self.create_event("veran beaten", "_beaten_game")
-        elif self.options.goal == OracleOfAgesGoal.option_beat_ganon:
+        elif self.options.goal == OraclesGoal.option_beat_ganon:
             self.create_event("ganon beaten", "_beaten_game")
 
         self.create_event("ridge move vine seed", "_access_cart")
@@ -334,11 +311,11 @@ class OracleOfAgesWorld(World):
                 continue
 
 
-            if self.options.master_keys != OracleOfAgesMasterKeys.option_disabled and "Small Key" in item_name:
+            if self.options.master_keys != OraclesMasterKeys.option_disabled and "Small Key" in item_name:
                 # Small Keys don't exist if Master Keys are set to replace them
                 filler_item_count += 1
                 continue
-            if self.options.master_keys == OracleOfAgesMasterKeys.option_all_dungeon_keys and "Boss Key" in item_name:
+            if self.options.master_keys == OraclesMasterKeys.option_all_dungeon_keys and "Boss Key" in item_name:
                 # Boss keys don't exist if Master Keys are set to replace them
                 filler_item_count += 1
                 continue
@@ -355,7 +332,7 @@ class OracleOfAgesWorld(World):
             item_pool_dict[item_name] = item_pool_dict.get(item_name, 0) + 1
 
         # If Master Keys are enabled, put one for every dungeon
-        if self.options.master_keys != OracleOfAgesMasterKeys.option_disabled:
+        if self.options.master_keys != OraclesMasterKeys.option_disabled:
             for small_key_name in ITEM_GROUPS["Master Keys"]:
                 if self.options.secret_locations or small_key_name != "Master Key (Hero's Cave)":
                     item_pool_dict[small_key_name] = 1

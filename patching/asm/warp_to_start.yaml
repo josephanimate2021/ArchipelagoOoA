@@ -5,12 +5,12 @@
     cp BTN_B | BTN_A
     jr nz,@done
     
-    ld a,option.startingGroup
+    ld a,option.warpingGroup
     set 7,a
     ld (wWarpDestGroup),a
-    ld a,option.startingRoom        ; Starting room ID
+    ld a,option.warpingRoom        ; Warping room ID
     ld (wWarpDestRoom),a
-    ld a,option.startingPos         ; Position in starting room
+    ld a,option.warpingPos         ; Position in warping room
     ld (wWarpDestPos),a
     ld a,option.destTransittion                        ; TRANSITION_DEST_FALL
     ld (wWarpTransition),a
