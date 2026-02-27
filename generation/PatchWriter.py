@@ -4,13 +4,13 @@ import yaml
 
 from typing import TYPE_CHECKING
 from BaseClasses import ItemClassification
-from .patching.ProcedurePatch import OoAProcedurePatch
-from .data.Constants import *
-from .Options import OracleOfAgesOptions
+from ..patching.ProcedurePatch import OoAProcedurePatch
+from ..data.Constants import *
+from ..Options import OracleOfAgesOptions
 
 
 if TYPE_CHECKING:
-    from . import OracleOfAgesWorld
+    from .. import OracleOfAgesWorld
 
 def ooa_create_appp_patch(world: "OracleOfAgesWorld") -> OoAProcedurePatch:
     patch = OoAProcedurePatch()
@@ -25,7 +25,8 @@ def ooa_create_appp_patch(world: "OracleOfAgesWorld") -> OoAProcedurePatch:
         "dungeon_entrances": {a.replace(" entrance", ""): b.replace("enter ", "") for a, b in world.dungeon_entrances.items()},
         
         "locations": {},
-        "shop_prices": world.shop_prices
+        "shop_prices": world.shop_prices,
+        "warp_to_start_variables": world.determine_warp_to_start_variables()
     }
 
     for loc in world.multiworld.get_locations(world.player):

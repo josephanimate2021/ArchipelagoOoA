@@ -366,8 +366,9 @@ REGIONS = [
     "symmetry city heartpiece",
     "ridge west heartpiece",
     "ridge upper heartpiece",
+]
 
-    ## gasha trees
+GASHA_REGIONS = [
     "gasha tree 1",
     "gasha tree 2",
     "gasha tree 3",
@@ -384,21 +385,23 @@ REGIONS = [
     "gasha tree 14",
     "gasha tree 15",
     "gasha tree 16",
+]
 
-    # heros cave checks
-    "enter hero's cave",
-    "hero's cave pots puzzle 1",
-    "hero's cave statue 1 puzzle",
-    "hero's cave bridge puzzle 1",
-    "hero's cave shoot eyes",
-    "hero's cave statue 2 puzzle",
-    "hero's cave pots puzzle 2",
-    "hero's cave statue 3 puzzle",
-    "hero's cave bridge puzzle 2",
-    "hero's cave color room",
-    "hero's cave water puzzle 1f",
-    "hero's cave water puzzle b1f",
-    "hero's cave basement",
-    "hero's cave final puzzle",
-    "hero's cave reward"
+D11_REGIONS = [
+    "d11 entrance",
+    "enter d11",
+    "d11 pots puzzle 1",
+    "d11 statue 1 puzzle",
+    "d11 bridge puzzle 1",
+    "d11 shoot eyes",
+    "d11 statue 2 puzzle",
+    "d11 pots puzzle 2",
+    "d11 statue 3 puzzle",
+    "d11 bridge puzzle 2",
+    "d11 color room",
+    "d11 water puzzle 1f",
+    "d11 water puzzle b1f",
+    "d11 basement",
+    "d11 final puzzle",
+    "d11 reward"
 ]

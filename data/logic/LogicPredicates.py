@@ -1,6 +1,7 @@
 from BaseClasses import CollectionState
 from Options import Accessibility
 from ..Constants import *
+from ...Options import *
 
 
 # Items predicates ############################################################
@@ -118,6 +119,12 @@ def ooa_has_boss_key(state: CollectionState, player: int, dungeon_id: int):
 def ooa_option_medium_logic(state: CollectionState, player: int):
     return state.multiworld.worlds[player].options.logic_difficulty in ["medium", "hard"]
 
+def ooa_option_lynna_gardner(state: CollectionState, player: int):
+    return any([
+        state.multiworld.worlds[player].options.lynna_gardener,
+        state.multiworld.worlds[player].options.warp_to_start_location == OracleOfAgesWarpToStartLocation.option_near_timeportal
+    ])
+
 
 def ooa_option_hard_logic(state: CollectionState, player: int):
     return state.multiworld.worlds[player].options.logic_difficulty == "hard"
@@ -136,7 +143,7 @@ def ooa_is_companion_dimitri(state: CollectionState, player: int):
 
 
 def ooa_has_essences(state: CollectionState, player: int, target_count: int):
-    essence_count = [state.has(essence, player) for essence in ESSENCES].count(True)
+    essence_count = [state.has(essence, player) for essence in ITEM_GROUPS["Essences"]].count(True)
     return essence_count >= target_count
 
 

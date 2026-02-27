@@ -834,40 +834,40 @@ def make_d8_logic(player: int):
         ])],
     ] 
 
-def make_heros_cave_logic(player: int):
+def make_d11_logic(player: int):
     return [
-        ["enter hero's cave", "hero's cave pots puzzle 1", False, lambda state: ooa_has_cane(state, player)],
-        ["hero's cave pots puzzle 1", "hero's cave statue 1 puzzle", False, lambda state: all([
+        ["enter d11", "d11 pots puzzle 1", False, lambda state: ooa_has_cane(state, player)],
+        ["d11 pots puzzle 1", "d11 statue 1 puzzle", False, lambda state: all([
             ooa_has_small_keys(state, player, 11, 1),
             ooa_has_bombs(state, player),
             ooa_can_jump_2_wide_pit(state, player, False)
         ])],
-        ["hero's cave statue 1 puzzle", "hero's cave bridge puzzle 1", False, lambda state: all([
+        ["d11 statue 1 puzzle", "d11 bridge puzzle 1", False, lambda state: all([
             ooa_has_small_keys(state, player, 11, 2),
             ooa_can_use_pegasus_seeds(state, player),
             ooa_has_seedshooter(state, player)
         ])],
-        ["hero's cave bridge puzzle 1", "hero's cave shoot eyes", False, lambda state: all([
+        ["d11 bridge puzzle 1", "d11 shoot eyes", False, lambda state: all([
             ooa_has_small_keys(state, player, 11, 3),
             any([
                 ooa_can_use_ember_seeds(state, player, True),
                 ooa_can_use_scent_seeds_for_smell(state, player)
             ])
         ])],
-        ["hero's cave shoot eyes", "hero's cave statue 2 puzzle", False, None],
-        ["hero's cave shoot eyes", "hero's cave pots puzzle 2", False, lambda state: all([
+        ["d11 shoot eyes", "d11 statue 2 puzzle", False, None],
+        ["d11 shoot eyes", "d11 pots puzzle 2", False, lambda state: all([
             ooa_has_switch_hook(state, player),
             ooa_has_small_keys(state, player, 11, 4)
         ])],
-        ["hero's cave pots puzzle 2", "hero's cave statue 3 puzzle", False, None],
-        ["hero's cave pots puzzle 2", "hero's cave bridge puzzle 2", False, lambda state: ooa_has_small_keys(state, player, 11, 5)],
-        ["hero's cave bridge puzzle 2", "hero's cave color room", False, None],
-        ["hero's cave bridge puzzle 2", "hero's cave water puzzle 1f", False, lambda state: all([
+        ["d11 pots puzzle 2", "d11 statue 3 puzzle", False, None],
+        ["d11 pots puzzle 2", "d11 bridge puzzle 2", False, lambda state: ooa_has_small_keys(state, player, 11, 5)],
+        ["d11 bridge puzzle 2", "d11 color room", False, None],
+        ["d11 bridge puzzle 2", "d11 water puzzle 1f", False, lambda state: all([
             ooa_has_small_keys(state, player, 11, 6),
             ooa_can_dive(state, player)
         ])],
-        ["hero's cave water puzzle 1f", "hero's cave water puzzle b1f", False, lambda state: ooa_has_small_keys(state, player, 11, 7)],
-        ["hero's cave water puzzle b1f", "hero's cave basement", False, lambda state: ooa_has_small_keys(state, player, 11, 8)],
-        ["hero's cave basement", "hero's cave final puzzle", False, None],
-        ["hero's cave basement", "hero's cave reward", False, lambda state: ooa_can_kill_normal_enemy(state, player)]
+        ["d11 water puzzle 1f", "d11 water puzzle b1f", False, lambda state: ooa_has_small_keys(state, player, 11, 7)],
+        ["d11 water puzzle b1f", "d11 basement", False, lambda state: ooa_has_small_keys(state, player, 11, 8)],
+        ["d11 basement", "d11 final puzzle", False, None],
+        ["d11 basement", "d11 reward", False, lambda state: ooa_can_kill_normal_enemy(state, player)]
     ]

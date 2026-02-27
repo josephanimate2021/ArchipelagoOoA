@@ -4,8 +4,9 @@ from typing import TYPE_CHECKING, Set, Dict, Any
 from NetUtils import ClientStatus
 import worlds._bizhawk as bizhawk
 from worlds._bizhawk.client import BizHawkClient
-from . import LOCATIONS_DATA, ITEMS_DATA, OraclesGoal
-from .Data import build_item_id_to_name_dict, build_location_name_to_id_dict
+from .data import LOCATIONS_DATA, ITEMS_DATA
+from .Options import OraclesGoal
+from .generation.Data import build_item_id_to_name_dict, build_location_name_to_id_dict
 
 if TYPE_CHECKING:
     from worlds._bizhawk.context import BizHawkClientContext
@@ -60,7 +61,7 @@ class OracleOfAgesClient(BizHawkClient):
 
     def __init__(self) -> None:
         super().__init__()
-        self.item_id_to_name = build_item_id_to_name_dict()
+        self.item_id_to_name = build_item_id_to_name_dict(ITEMS_DATA)
         self.location_name_to_id = build_location_name_to_id_dict()
         self.local_checked_locations = set()
         self.local_scouted_locations = set()
@@ -270,18 +271,18 @@ class OracleOfAgesClient(BizHawkClient):
         # Gasha handling
         byte_offset = 0xC64d - RAM_ADDRS["location_flags"][0]
         gasha_seed_bytes = flag_bytes[byte_offset] + flag_bytes[byte_offset + 1] * 0x100
-        # for gasha_name in GASHA_ADDRS:
-            # (byte_addr, flag) = GASHA_ADDRS[gasha_name]
+        for gasha_name in GASHA_ADDRS:
+            (byte_addr, flag) = GASHA_ADDRS[gasha_name]
 
             # Check if the seed has been harvested
-            # byte_offset = byte_addr - RAM_ADDRS["location_flags"][0]
-            # if flag_bytes[byte_offset] & 0x20:
-                # local_tracker[f"Harvested {gasha_name}"] = True
-            # else:
+            byte_offset = byte_addr - RAM_ADDRS["location_flags"][0]
+            if flag_bytes[byte_offset] & 0x20:
+                local_tracker[f"Harvested {gasha_name}"] = True
+            else:
                 # Check if the seed is currently planted
-                # flag_mask = 0x01 << flag
-                # if not gasha_seed_bytes & flag_mask:
-                    # continue
+                flag_mask = 0x01 << flag
+                if not gasha_seed_bytes & flag_mask:
+                    continue
 
             # local_tracker[f"Planted {gasha_name}"] = True
 

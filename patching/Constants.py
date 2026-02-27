@@ -565,7 +565,17 @@ DUNGEON_ENTRANCES = {
         "position": 0x16,
         "shifted": False,
         "default":"d6 past"
-    }
+    },
+    # TODO: Figure out entrance/exit addresses for Ambi's Palace in order to add it to the dungeon shuffle table like a commenter from mashy's first OoA randomizer with hero's cave in it requested. 
+    # "ambi's palace": {
+        # "addr": 0x139b4,
+        # "map_tile": 0x106,
+        # "room": 0x02,
+        # "group": 0x05,
+        # "position": 0x16,
+        # "shifted": False,
+        # "default":"ambi's palace"
+    # }
 }
 
 DUNGEON_EXITS = {

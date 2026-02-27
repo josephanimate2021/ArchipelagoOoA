@@ -111,11 +111,11 @@ def define_option_constants(assembler: Z80Assembler, patch_data):
     assembler.define_byte("option.startingRoom", 0x39)
     assembler.define_byte("option.startingPosY", 0x2)
     assembler.define_byte("option.startingPosX", 0x1)
-    assembler.define_byte("option.warpingGroup", 0x00)
-    assembler.define_byte("option.warpingRoom", 0x39)
-    assembler.define_byte("option.warpingPos", 0x21)
-    assembler.define_byte("option.destTransittion", 0x05)
-    assembler.define_byte("option.srcTransittion", 0x03)
+    assembler.define_byte("option.warpingGroup", patch_data["warp_to_start_variables"]["group"] if "group" in patch_data["warp_to_start_variables"] else 0x00)
+    assembler.define_byte("option.warpingRoom", patch_data["warp_to_start_variables"]["room"] if "room" in patch_data["warp_to_start_variables"] else 0x59)
+    assembler.define_byte("option.warpingPos", patch_data["warp_to_start_variables"]["pos"] if "pos" in patch_data["warp_to_start_variables"] else 0x55)
+    assembler.define_byte("option.warpingDestTransittion", patch_data["warp_to_start_variables"]["dest_transittion"] if "dest_transittion" in patch_data["warp_to_start_variables"] else 0x05)
+    assembler.define_byte("option.warpingSrcTransittion", patch_data["warp_to_start_variables"]["src_transittion"] if "src_transittion" in patch_data["warp_to_start_variables"] else 0x03)
 
     if options["secret_locations"]:
         assembler.define_byte("option.secretLocationsEnabled", 1)

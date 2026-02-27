@@ -56,7 +56,7 @@ def make_overworld_logic(player: int, options):
         #######################################
         ["forest of time", "lynna city", True, lambda state: any([
             ooa_can_break_bush(state, player),
-            state.multiworld.worlds[player].options.lynna_gardener
+            ooa_option_lynna_gardner(state, player)
         ])],
         ["lynna city", "south lynna tree", False, lambda state: ooa_can_harvest_tree(state, player, True)],
         ["lynna city", "lynna city chest", False, lambda state: ooa_can_use_ember_seeds(state, player, False)],

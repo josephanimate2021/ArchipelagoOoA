@@ -1,8 +1,8 @@
 from BaseClasses import MultiWorld
-from . import LOCATIONS_DATA
-from .data.logic.DungeonsLogic import *
-from .data.logic.OverworldLogic import make_overworld_logic
-from .data.Regions import REGIONS
+from ..data import LOCATIONS_DATA
+from ..data.logic.DungeonsLogic import *
+from ..data.logic.OverworldLogic import make_overworld_logic
+from ..data.Regions import REGIONS
 
 def create_connections(multiworld: MultiWorld, player: int, options):
     dungeon_entrances = []
@@ -24,7 +24,7 @@ def create_connections(multiworld: MultiWorld, player: int, options):
     ]
 
     if options.secret_locations:
-        all_logic.append(make_heros_cave_logic(player))
+        all_logic.append(make_d11_logic(player))
 
     all_logic.append(dungeon_entrances)
 

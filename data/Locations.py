@@ -1973,7 +1973,7 @@ LOCATIONS_DATA = {
     ##########################################
     # Any newly added locations will be down here for backwards compatability with the OoA PopTracker Pack.
     "Hero's Cave (1F): Pots Puzzle": {
-        "region_id": "hero's cave pots puzzle 1",
+        "region_id": "d11 pots puzzle 1",
         "vanilla_item": "Small Key (Hero's Cave)",
         "conditional": True,
         "dungeon": 11,
@@ -1983,7 +1983,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "herosCavePotsPuzzle",
     },
     "Hero's Cave (1F): Statue Puzzle #1": {
-        "region_id": "hero's cave statue 1 puzzle",
+        "region_id": "d11 statue 1 puzzle",
         "vanilla_item": "Small Key (Hero's Cave)",
         "conditional": True,
         "dungeon": 11,
@@ -1993,7 +1993,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "herosCaveStatue1Puzzle",
     },
     "Hero's Cave (1F): Bridge Puzzle #1": {
-        "region_id": "hero's cave bridge puzzle 1",
+        "region_id": "d11 bridge puzzle 1",
         "vanilla_item": "Small Key (Hero's Cave)",
         "conditional": True,
         "dungeon": 11,
@@ -2003,7 +2003,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "herosCaveBridgePuzzle",
     },
     "Hero's Cave (1F): Shoot Eyes": {
-        "region_id": "hero's cave shoot eyes",
+        "region_id": "d11 shoot eyes",
         "vanilla_item": "Gasha Seed",
         "conditional": True,
         "dungeon": 11,
@@ -2013,7 +2013,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "herosCaveShootEyes",
     },
     "Hero's Cave (1F): Statue Puzzle #2": {
-        "region_id": "hero's cave statue 2 puzzle",
+        "region_id": "d11 statue 2 puzzle",
         "vanilla_item": "Small Key (Hero's Cave)",
         "conditional": True,
         "dungeon": 11,
@@ -2023,7 +2023,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "herosCaveStatue2Puzzle",
     },
     "Hero's Cave (1F): Pots Puzzle #2": {
-        "region_id": "hero's cave pots puzzle 2",
+        "region_id": "d11 pots puzzle 2",
         "vanilla_item": "Rupees (200)",
         "conditional": True,
         "dungeon": 11,
@@ -2033,7 +2033,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "herosCavePots2Puzzle",
     },
     "Hero's Cave (1F): Statue Puzzle #3": {
-        "region_id": "hero's cave statue 3 puzzle",
+        "region_id": "d11 statue 3 puzzle",
         "vanilla_item": "Small Key (Hero's Cave)",
         "conditional": True,
         "dungeon": 11,
@@ -2043,7 +2043,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "herosCaveStatue3Puzzle",
     },
     "Hero's Cave (1F): Bridge Puzzle #2": {
-        "region_id": "hero's cave bridge puzzle 2",
+        "region_id": "d11 bridge puzzle 2",
         "vanilla_item": "Gasha Seed",
         "conditional": True,
         "dungeon": 11,
@@ -2053,7 +2053,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "herosCaveBridge2Puzzle",
     },
     "Hero's Cave (1F): Color Room": {
-        "region_id": "hero's cave color room",
+        "region_id": "d11 color room",
         "vanilla_item": "Small Key (Hero's Cave)",
         "conditional": True,
         "dungeon": 11,
@@ -2063,7 +2063,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "herosCaveColorRoom",
     },
     "Hero's Cave (1F): Water Puzzle": {
-        "region_id": "hero's cave water puzzle 1f",
+        "region_id": "d11 water puzzle 1f",
         "vanilla_item": "Small Key (Hero's Cave)",
         "conditional": True,
         "dungeon": 11,
@@ -2073,7 +2073,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "herosCaveFirstFloorWaterPuzzle",
     },
     "Hero's Cave (B1F): Water Puzzle": {
-        "region_id": "hero's cave water puzzle b1f",
+        "region_id": "d11 water puzzle b1f",
         "vanilla_item": "Small Key (Hero's Cave)",
         "conditional": True,
         "dungeon": 11,
@@ -2083,7 +2083,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "herosCaveBasementWaterPuzzle",
     },
     "Hero's Cave (B1F): Basement": {
-        "region_id": "hero's cave basement",
+        "region_id": "d11 basement",
         "vanilla_item": "Rupees (200)",
         "conditional": True,
         "dungeon": 11,
@@ -2093,7 +2093,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "herosCaveBasement",
     },
     "Hero's Cave (1F): Final Puzzle": {
-        "region_id": "hero's cave final puzzle",
+        "region_id": "d11 final puzzle",
         "vanilla_item": "Gasha Seed",
         "conditional": True,
         "dungeon": 11,
@@ -2103,7 +2103,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "herosCaveFinalPuzzle",
     },
     "Hero's Cave (1F): Completion Reward": {
-        "region_id": "hero's cave reward",
+        "region_id": "d11 reward",
         "vanilla_item": "Blue Luck Ring",
         "conditional": True,
         "dungeon": 11,
@@ -2169,5 +2169,85 @@ LOCATIONS_DATA = {
         "room": 0x3e9,
         "collect": COLLECT_TOUCH,
         "symbolic_name": "ridgePastOldMan",
-    }
+    },
+    "Gasha Nut #1": {
+        "region_id": "gasha tree 1",
+        "vanilla_item": "Piece of Heart",
+        "conditional": True
+    },
+    "Gasha Nut #2": {
+        "region_id": "gasha tree 2",
+        "vanilla_item": "Filler Item",
+        "conditional": True
+    },
+    "Gasha Nut #3": {
+        "region_id": "gasha tree 3",
+        "vanilla_item": "Filler Item",
+        "conditional": True
+    },
+    "Gasha Nut #4": {
+        "region_id": "gasha tree 4",
+        "vanilla_item": "Filler Item",
+        "conditional": True
+    },
+    "Gasha Nut #5": {
+        "region_id": "gasha tree 5",
+        "vanilla_item": "Filler Item",
+        "conditional": True
+    },
+    "Gasha Nut #6": {
+        "region_id": "gasha tree 6",
+        "vanilla_item": "Filler Item",
+        "conditional": True
+    },
+    "Gasha Nut #7": {
+        "region_id": "gasha tree 7",
+        "vanilla_item": "Filler Item",
+        "conditional": True
+    },
+    "Gasha Nut #8": {
+        "region_id": "gasha tree 8",
+        "vanilla_item": "Filler Item",
+        "conditional": True
+    },
+    "Gasha Nut #9": {
+        "region_id": "gasha tree 9",
+        "vanilla_item": "Filler Item",
+        "conditional": True
+    },
+    "Gasha Nut #10": {
+        "region_id": "gasha tree 10",
+        "vanilla_item": "Filler Item",
+        "conditional": True
+    },
+    "Gasha Nut #11": {
+        "region_id": "gasha tree 11",
+        "vanilla_item": "Filler Item",
+        "conditional": True
+    },
+    "Gasha Nut #12": {
+        "region_id": "gasha tree 12",
+        "vanilla_item": "Filler Item",
+        "conditional": True
+    },
+    "Gasha Nut #13": {
+        "region_id": "gasha tree 13",
+        "vanilla_item": "Filler Item",
+        "conditional": True
+    },
+    "Gasha Nut #14": {
+        "region_id": "gasha tree 14",
+        "vanilla_item": "Filler Item",
+        "conditional": True
+    },
+    "Gasha Nut #15": {
+        "region_id": "gasha tree 15",
+        "vanilla_item": "Filler Item",
+        "conditional": True
+    },
+    "Gasha Nut #16": {
+        "region_id": "gasha tree 16",
+        "vanilla_item": "Filler Item",
+        "conditional": True
+    },
 }
