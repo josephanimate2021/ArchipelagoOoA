@@ -25,6 +25,67 @@ def make_overworld_logic(player: int, options):
 
         #GASHA PLOT LOGIC
         ##################
+        #Past Gasha Plots
+        ["lynna village", "crescent past spot", False, lambda state: all([
+            ooa_can_swim_deepwater(state, player, False), #double check if this includes raft
+            ooa_has_shovel(state, player)
+        ])],
+        ["symmetry past", "talus lake past spot", False, lambda state: all([
+            ooa_can_switch_past_and_present(state, player),
+            ooa_has_bracelet(state, player)
+        ])],
+        ["restoration wall heartpiece", "talus peak past spot", False, lambda state: all([ #the map still refers to here as talus peak, this is the one accessible right out of D2
+            ooa_has_shovel(state, player),
+            ooa_has_bracelet(state, player)
+        ])],
+        ["zora village", "zora village past spot", False, lambda state: ooa_can_break_bush(state, player)],
+        ["lynna village", "lynna village toilet spot", False, None],
+        ["lynna village", "south shore past spot", False, lambda state: all([
+            ooa_has_shovel(state, player),
+            ooa_can_jump_1_wide_pit(state, player, False),
+            any([
+                ooa_can_swim(state, player, False),
+                ooa_can_jump_2_wide_liquid(state, player)
+            ]),
+        ])],
+        ["ridge west past base", "ridge west base spot", False,lambda state: ooa_can_break_bush(state, player)],
+        ["ridge upper present", "ridge upper past spot", False, lambda state: all([
+            ooa_has_shovel(state, player),
+            any([
+                all([
+                    ooa_can_switch_past_and_present(state, player),
+                    ooa_can_break_bush(state, player, False)
+                    ]),
+                all([
+                    ooa_can_open_portal(state, player),
+                    ooa_has_bracelet(state, player)
+                ]),
+            ]),
+        ])],
+        #Present Gasha locations
+        ["yoll graveyard", "yoll graveyard spot", False, None],
+        ["talus peaks", "talus peak present spot", False, lambda state: all([
+            ooa_can_break_bush(state, player, False),
+            ooa_can_switch_past_and_present(state, player)
+        ])],
+        ["deku forest", "fairies woods spot", False, lambda state: all([
+            ooa_can_break_bush(state, player, False),
+            ooa_can_switch_past_and_present(state, player)
+        ])],
+        #["", "nuun highlands spot"], #currents or animal companion, idk how to write this one truthfully
+        ["ridge mid present", "ridge mid present spot", False, lambda state: ooa_has_bracelet(state, player)],
+        ["lynna city", "crescent present islet spot", False, lambda state: all([
+            ooa_can_break_bush(state, player),
+            ooa_can_swim_deepwater(state, player, True)
+        ])],
+        ["crescent present east", "crescent present vine spot", False, lambda state: ooa_has_bracelet(state, player)],
+        ["piratian captain", "sea of storms spot", False, lambda state: all([
+            ooa_can_switch_past_and_present(state, player),
+            ooa_has_shovel(state, player)
+        ])],
+
+
+
         #["nuun (ricky)", "nuun highlands spot", False, lambda state: all([
         #    ooa_can_jump_1_wide_pit(state, player, True),
         #    any([
@@ -393,7 +454,7 @@ def make_overworld_logic(player: int, options):
 
         ["symmetry past", "talus peaks", False, lambda state: all([
             ooa_can_go_back_to_present(state, player),
-            ooa_has_bracelet(state, player)
+            ooa_has_bracelet(state, player)  #what about symmetry past to talus needs bracelet? i think this was to skip extra regions, but it makes two checks require bracelet that don't HARD require it. can change it in the logic rewrite
         ])],
 
         
@@ -506,7 +567,8 @@ def make_overworld_logic(player: int, options):
             ooa_can_go_back_to_present(state, player),
             ooa_can_break_bush(state, player)
         ])],
-        
+        ["ridge upper past", "ridge mid past", False, None],
+
         # ROLLING BASE
         #######################################
         ["ridge upper present", "ridge base present", False, None],
@@ -632,7 +694,7 @@ def make_overworld_logic(player: int, options):
             ooa_can_dive(state, player),
             state.has("Zora Scale", player),
         ])],
-        ["piratian captain", "sea of storms past", False, lambda state: ooa_can_switch_past_and_present(state, player) if state.multiworld.worlds[player].options.secret_locations else None],
+        #["piratian captain", "sea of storms past", False, lambda state: ooa_can_switch_past_and_present(state, player) if state.multiworld.worlds[player].options.secret_locations else None],
         ["crescent past west", "d8 entrance", False, lambda state: all([
             state.has("Tokay Eyeball", player),
             ooa_can_break_pot(state, player),
