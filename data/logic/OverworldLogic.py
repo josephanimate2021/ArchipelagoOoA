@@ -466,7 +466,8 @@ def make_overworld_logic(player: int, options):
             ooa_can_swim(state, player, False),
             ooa_can_jump_3_wide_liquid(state, player)
         ])],
-        ["restoration wall", "talus peaks chest", False, None],
+        ["restoration wall", "talus peaks chest", False, lambda state: ooa_can_go_back_to_present(state, player)],
+        ["restoration wall", "bomb fairy", False, lambda state: ooa_has_bombs(state, player)],
         ["fairies' woods", "restoration wall", True, lambda state: ooa_can_switch_past_and_present(state, player)],
         ["restoration wall", "patch", True, lambda state: any([
             ooa_has_sword(state, player),
