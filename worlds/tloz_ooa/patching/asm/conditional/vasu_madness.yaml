@@ -4,7 +4,26 @@
 00/28a0/: ld bc,option.vasuSlayerRingCheckRequirement
 
 # This script on address 4a51 at bank 0c usually gives the user a wealth ring when they collect 10000 rupees. We need to modify this script to give link a modified item instead.
-# 0c/4a51/: db orroomflag,$02,giveitem,locations.vasuRupeeRingGift.id,locations.vasuRupeeRingGift.subid,jumpalways,$e2,$49
+0c/4a51/: db orroomflag,$02,giveitem,locations.vasuRupeeRingGift.id,locations.vasuRupeeRingGift.subid,jumpalways,$e2,$49
 
 # This script on address 4a4d at bank 0c usually gives the user a slayers ring when they kill 1000 enemies. We need to modify this script to give link a modified item instead.
 0c/4a4d/: db orroomflag,$03,giveitem,locations.vasuSlayersRingGift.id,locations.vasuSlayersRingGift.subid,jumpalways,$e2,$49
+
+# Updates jr to call my custom script instead (RUPEE RING)
+3f/45dd/: |
+  nop
+  db jumpalways
+  dw setFlagBasedOnRupeeCount
+
+# Custom script that checks to see if the total amount of rupees collected meets the user's requirement in order to set global flag $01.
+3f//setFlagBasedOnRupeeCount: |
+  	ld l,<wTotalRupeesCollected
+    call $024a ; incHlRef16WithCap
+    ldi a,(hl)
+    ld h,(hl)
+    ld l,a
+    ld bc,option.vasuRupeeRingCheckRequirement
+    call $01d6 ; compareHlToBc
+    rlca
+    ld a,$01
+    call nc,setGlobalFlag

@@ -263,6 +263,8 @@ DEFINES = {
     "wFileIsCompleted":"$c614",
     "wRingsObtained":"$c616",
     "wTotalSignsDestroyed":"$c626",
+    "<wTotalRupeesCollected":"$27",
+    "wTotalRupeesCollected":"$c627",
     "wTextIndexL":"$cba2",
     "wTextIndexH":"$cba3",
     "wTextNumberSubstitution":"$cba8",

@@ -200,7 +200,7 @@ def define_option_constants(assembler: Z80Assembler, patch_data):
 
     if patch_data["vasu_madness"]:
         assembler.define_byte("option.vasuSlayerRingCheckRequirement", patch_data["amount_of_enemies_defeated_for_slayer_ring_check"])
-        # TODO: Implement rupee ring option after figuruing out how to crawl a way out of the hardcoded $9999 limit.
+        assembler.define_byte("option.vasuRupeeRingCheckRequirement", patch_data["rupee_requirement_for_rupee_ring_check"])
 
     assembler.define_byte("option.warpingGroup", patch_data["warp_to_start_variables"]["group"] if "group" in patch_data["warp_to_start_variables"] else 0x00)
     assembler.define_byte("option.warpingRoom", patch_data["warp_to_start_variables"]["room"] if "room" in patch_data["warp_to_start_variables"] else 0x59)

@@ -47,7 +47,7 @@ class OracleOfAgesVasuRingChecksRequirement(OptionDict):
     display_name = "Vasu Ring Checks Requirement"
 
     default = {
-        # "rupee_requirement_for_rupee_ring_check": 10000,
+        "rupee_requirement_for_rupee_ring_check": 10000,
         "disable_entirely": True,
         "amount_of_enemies_defeated_for_slayer_ring_check": 1000
     }
