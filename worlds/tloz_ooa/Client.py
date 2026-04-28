@@ -14,7 +14,7 @@ ROOM_ZELDA_ENDING = 0x05F1
 
 ROM_ADDRS = {
     "game_identifier": (0x0134, 11, "ROM"),
-    "slot_name": (0xFFFC0, 64, "ROM"),
+    "slot_name": (0xE3FC0, 64, "ROM"),
 }
 
 RAM_ADDRS = {

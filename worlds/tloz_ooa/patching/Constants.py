@@ -58,7 +58,10 @@ EOB_ADDR = [
   0x4000, # 35
   0x4000, # 36
   0x4000, # 37
-  0x2afb, # 38 - lots of space here
+  [ # 38 - lots of space here
+      [0x2afb, 0x3fbf],
+      0x4000 # Slot name take the last 40 byte
+  ],
   0x4000, # 39
   0x4000, # 3a
   0x4000, # 3b

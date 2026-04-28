@@ -377,7 +377,7 @@ def define_collect_properties_table(assembler: Z80Assembler, patch_data):
 def inject_slot_name(rom: RomData, slot_name: str):
     slot_name_as_bytes = list(str.encode(slot_name))
     slot_name_as_bytes += [0x00] * (0x40 - len(slot_name_as_bytes))
-    rom.write_bytes(0xfffc0, slot_name_as_bytes)
+    rom.write_bytes(0xe3fc0, slot_name_as_bytes)
 
     
 def write_seed_tree_content(rom: RomData, patch_data):
