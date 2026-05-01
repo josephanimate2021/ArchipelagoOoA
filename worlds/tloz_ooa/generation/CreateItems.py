@@ -6,6 +6,7 @@ from ..data.Constants import *
 from typing import TYPE_CHECKING
 from .. import OraclesMasterKeys
 from Options import OptionError
+from .CreationRegions import location_is_active
 
 from .. import OracleOfAgesWorld
 
@@ -29,7 +30,7 @@ def build_item_pool_dict(world: OracleOfAgesWorld):
             location.place_locked_item(item)
             #print("placing locked item '",loc_data['vanilla_item'] ,"' in '",loc_name ,"'")
             continue
-        if not world.location_is_active(loc_name, loc_data):
+        if not location_is_active(world, loc_name, loc_data):
             #print("Can't create item '",loc_data['vanilla_item'] ,"' because '",loc_name ,"' is not active")
             continue
 

@@ -4,7 +4,7 @@ import yaml
 
 from typing import ClassVar, Any, Optional, Type, TextIO
 from Options import Option
-from BaseClasses import Item, Region, Location, LocationProgressType
+from BaseClasses import Item, Location, LocationProgressType
 from Options import Accessibility, OptionError
 from typing import Any, Set, List, Dict, Optional, Tuple, ClassVar, TextIO, Union
 from .generation.Data import *
@@ -83,21 +83,58 @@ class OracleOfAgesWorld(World):
         self.dungeon_items = []
         self.pre_fill_seeds = {}
         self.shop_prices = SHOP_PRICES_DIVIDERS.copy()
-
-    def fill_slot_data(self) -> dict:
-        # Put options that are useful to the tracker inside slot data
-        slot_data = {
-            "version": f"{self.version()}",
-            "options": self.options.as_dict(
-                *[option_name for option_name in OracleOfAgesOptions.type_hints
-                  if hasattr(OracleOfAgesOptions.type_hints[option_name], "include_in_slot_data")]),
-            "randomized_entrances": self.randomized_entrances,
-            "shop_costs": self.shop_prices,
-            "vasu_madness": not self.options.vasu_ring_checks_requirement["disable_entirely"]
-        }
-
-        return slot_data
+   
+   
+    # -------------------------------------------------------------------------------------   
+    # REMINDER OF AP WORLD GENERATION PROCESS. This function are called in order: 
+    # -------------------------------------------------------------------------------------   
+    #stage_assert_generate(cls, multiworld: MultiWorld) 
+    #   a class method called at the start of generation to check for the existence of prerequisite files, usually a ROM for games which require one.
+    #generate_early(self) 
+    #   called per player before any items or locations are created. You can set properties on your world here. Already has access to player options and RNG. This is the earliest step where the world should start setting up for the current multiworld, as the multiworld itself is still setting up before this point. You cannot modify local_items, or non_local_items after this step.
+    #create_regions(self) 
+    #   called to place player's regions and their locations into the MultiWorld's regions list. If it's hard to separate, this can be done during generate_early or create_items as well.
+    #create_items(self) 
+    #   called to place player's items into the MultiWorld's itempool. By the end of this step all regions, locations and items have to be in the MultiWorld's regions and itempool. You cannot add or remove items, locations, or regions after this step. Locations cannot be moved to different regions after this step. This includes event items and locations.
+    #set_rules(self) 
+    #   called to set access and item rules on locations and entrances.
+    #connect_entrances(self) 
+    #   by the end of this step, all entrances must exist and be connected to their source and target regions. Entrance randomization should be done here.
+    #generate_basic(self) 
+    #   player-specific randomization that does not affect logic can be done here.
+    #pre_fill(self), fill_hook(self) and post_fill(self) 
+    #   called to modify item placement before, during, and after the regular fill process; all finishing before generate_output. Any items that need to be placed during pre_fill should not exist in the itempool, and if there are any items that need to be filled this way, but need to be in state while you fill other items, they can be returned from get_pre_fill_items.
+    #generate_output(self, output_directory: str) 
+    #   creates the output files if there is output to be generated. When this is called, self.multiworld.get_locations(self.player) has all locations for the player, with attribute item pointing to the item. location.item.player can be used to see if it's a local item.
+    #fill_slot_data(self) and modify_multidata(self, multidata: MultiData)
+    #    can be used to modify the data that will be used by the server to host the MultiWorld.
     
+        
+    # ===================================================================================
+    #
+    # ===================================================================================
+    def generate_early(self):
+        if self.interpret_slot_data(None):
+            return
+        conflicting_rings = self.options.required_rings.value & self.options.excluded_rings.value
+        if len(conflicting_rings) > 0:
+            raise OptionError("Required Rings and Excluded Rings contain the same element(s)", conflicting_rings)
+        
+        if self.options.shuffle_dungeons:
+            self.randomized_entrances = {}
+            for warpName, warpData in WARPS_DATA.items():
+                if "dungeon" not in warpData: # Not a dungeon, skip it
+                    continue; 
+                if "require_option" not in warpData or hasattr(self.options, warpData["require_option"]) and getattr(self.options, warpData["require_option"]):
+                    self.randomized_entrances[warpName] = warpName
+            self.shuffle_entrances()
+        
+        self.restrict_non_local_items()
+        self.randomize_shop_prices()
+        
+    # -----------------------------------------------------------------------------------
+    #
+    # -------------------------------------------------------------------------------------       
     def determine_warp_to_start_variables(self):
         # Mashy wasn't sure if he liked the new warp to start location on his first video on playing my 1.0.0 beta hotfix. 
         # Adding this to not force the new warp to start location on anyone that is still used to the old one.
@@ -116,27 +153,9 @@ class OracleOfAgesWorld(World):
                 # "src_transittion" is a number that will changes the screen before the warp
             }
 
-    def generate_early(self):
-        if self.interpret_slot_data(None):
-            return
-        conflicting_rings = self.options.required_rings.value & self.options.excluded_rings.value
-        if len(conflicting_rings) > 0:
-            raise OptionError("Required Rings and Excluded Rings contain the same element(s)", conflicting_rings)
-        
-        if self.options.shuffle_dungeons:
-            self.randomized_entrances = {}
-            for warpName, warpData in WARPS_DATA.items():
-                if "dungeon" not in warpData: # Not a dungeon, skip it
-                    continue; 
-                if "require_option" not in warpData or hasattr(self.options, warpData["require_option"]) and getattr(self.options, warpData["require_option"]):
-                    self.randomized_entrances[warpName] = warpName
-            self.shuffle_entrances()
-        
-        self.restrict_non_local_items()
-
-
-        self.randomize_shop_prices()
-
+    # -----------------------------------------------------------------------------------
+    #
+    # -----------------------------------------------------------------------------------
     def restrict_non_local_items(self):
         # Restrict non_local_items option in cases where it's incompatible with other options that enforce items
         # to be placed locally (e.g. dungeon items with keysanity off)
@@ -150,11 +169,17 @@ class OracleOfAgesWorld(World):
         if not self.options.keysanity_slates:
             self.options.non_local_items.value -= set(["Slate"])
 
+    # -----------------------------------------------------------------------------------
+    #
+    # -----------------------------------------------------------------------------------
     def shuffle_entrances(self):
         shuffled = list(self.randomized_entrances.values())
         self.random.shuffle(shuffled)
         self.randomized_entrances = dict(zip(self.randomized_entrances, shuffled))
 
+    # -----------------------------------------------------------------------------------
+    #
+    # -----------------------------------------------------------------------------------
     def randomize_shop_prices(self):
         prices_pool = get_prices_pool()
         self.random.shuffle(prices_pool)
@@ -165,106 +190,17 @@ class OracleOfAgesWorld(World):
                 if value > floating_price:
                     self.shop_prices[key] = VALID_RUPEE_VALUES[i-1]
                     break
-
-    def location_is_active(self, location_name, location_data):
-        if "conditional" not in location_data or location_data["conditional"] is False:
-            return True
-
-        region_id = location_data["region_id"]
-        if region_id == "advance shop":
-            return self.options.advance_shop.value
         
-        if "dungeon" in location_data:
-            if location_data["dungeon"] == 11:
-                return self.options.linked_heros_cave.value > 0
-            if location_data["symbolic_name"] == f"d{location_data["dungeon"]}Miniboss":
-                return self.options.miniboss_locations
-            
-        if "secret_location" in location_data and not False:
-            return self.options.secret_locations
-        
-        if "vasu" in region_id:
-            return not self.options.vasu_ring_checks_requirement["disable_entirely"]
-
-        # TODO FUNNY LOCATION ?
-
-        return False
-
-    def create_location(self, region_name: str, location_name: str, local: bool):
-        region = self.multiworld.get_region(region_name, self.player)
-        location = Location(self.player, location_name, self.location_name_to_id[location_name], region)
-        region.locations.append(location)
-        if local:
-            location.item_rule = lambda item: item.player == self.player
-
+    # ===================================================================================
+    #
+    # ===================================================================================
     def create_regions(self):
-        # Create regions
-        
+        from .generation.CreationRegions import ooa_create_region
+        ooa_create_region(self)
 
-        regions = REGIONS.copy()
-
-        for warpName, warpData in WARPS_DATA.items():
-            regions.append(OUTSIDE_TAG + warpName)
-            regions.append(INSIDE_TAG + warpName)
-
-        for region_name in regions:
-            region = Region(region_name, self.player, self.multiworld)
-            self.multiworld.regions.append(region)
-
-        # Create locations
-        for location_name, location_data in LOCATIONS_DATA.items():
-            if not self.location_is_active(location_name, location_data):
-                continue
-
-            is_local = "local" in location_data and location_data["local"] is True
-            self.create_location(location_data['region_id'], location_name, is_local)
-
-        self.create_events()
-        self.exclude_problematic_locations()
-
-    def create_event(self, region_name, event_item_name):
-        region = self.multiworld.get_region(region_name, self.player)
-        location = Location(self.player, region_name + ".event", None, region)
-        region.locations.append(location)
-        location.place_locked_item(Item(event_item_name, ItemClassification.progression, None, self.player))
-
-    def create_events(self):
-        self.create_event("maku seed", "Maku Seed")
-
-        if self.options.goal == OracleOfAgesGoal.option_beat_veran:
-            self.create_event("veran beaten", "_beaten_game")
-        elif self.options.goal == OracleOfAgesGoal.option_beat_ganon:
-            self.create_event("ganon beaten", "_beaten_game")
-
-        self.create_event("ridge move vine seed", "_access_cart")
-
-        self.create_event("d3 S crystal", "_d3_S_crystal")
-        self.create_event("d3 E crystal", "_d3_E_crystal")
-        self.create_event("d3 W crystal", "_d3_W_crystal")
-        self.create_event("d3 N crystal", "_d3_N_crystal")
-        self.create_event("d3 B1F spinner", "_d3_B1F_spinner")
-
-        self.create_event("d6 wall B bombed", "_d6_wall_B_bombed")
-        self.create_event("d6 canal expanded", "_d6_canal_expanded")
-
-        self.create_event("d7 boss", "_finished_d7")
-
-    def exclude_problematic_locations(self):
-        locations_to_exclude = []
-        # If goal essence requirement is set to a specific value, prevent essence-bound checks which require more
-        # essences than this goal to hold anything of value
-        #if self.options.required_essences < 7:
-        #    locations_to_exclude.append("Horon Village: Item Inside Maku Tree (7+ Essences)")
-        #    if self.options.required_essences < 5:
-        #        locations_to_exclude.append("Horon Village: Item Inside Maku Tree (5+ Essences)")
-        #        if self.options.required_essences < 3:
-        #            locations_to_exclude.append("Horon Village: Item Inside Maku Tree (3+ Essences)")
-
-        # TODO PROBLEMATIC LOCATIONS
-
-        for name in locations_to_exclude:
-            self.multiworld.get_location(name, self.player).progress_type = LocationProgressType.EXCLUDED
-
+    # ===================================================================================
+    #
+    # ===================================================================================
     def set_rules(self):
         from .generation.Logic import create_connections, apply_self_locking_rules
         create_connections(self)
@@ -279,21 +215,36 @@ class OracleOfAgesWorld(World):
         #print(unreachable)
         #print(allstate.prog_items)
 
-    def create_item(self, item: str) -> Item :
-        from .common.generation.CreateItems import create_item
-        return create_item(self, item)
-
+    # ===================================================================================
+    #
+    # ===================================================================================
     def create_items(self):
         from .generation.CreateItems import ooa_create_items
         ooa_create_items(self)
 
-    def get_pre_fill_items(self):
-        return self.pre_fill_items
+    # -----------------------------------------------------------------------------------
+    #
+    # -----------------------------------------------------------------------------------
+    def create_item(self, item: str) -> Item :
+        from .common.generation.CreateItems import create_item
+        return create_item(self, item)
 
+    # ===================================================================================
+    #
+    # ===================================================================================
     def pre_fill(self) -> None:
         from .generation.PreFill import pre_fill
         pre_fill(self)
+
+    # -----------------------------------------------------------------------------------
+    #
+    # -----------------------------------------------------------------------------------
+    def get_pre_fill_items(self):
+        return self.pre_fill_items
     
+    # ===================================================================================
+    #
+    # ===================================================================================
     def generate_output(self, output_directory: str):
         patch = ooa_create_appp_patch(self)
         rom_path = os.path.join(output_directory, f"{self.multiworld.get_out_file_name_base(self.player)}"
@@ -301,6 +252,9 @@ class OracleOfAgesWorld(World):
         patch.write(rom_path)
         return
 
+    # -----------------------------------------------------------------------------------
+    #
+    # -----------------------------------------------------------------------------------
     def write_spoiler(self, spoiler_handle):
         spoiler_handle.write(f"Apworld version : {self.version()}\n")
         if self.options.shuffle_dungeons != "vanilla":
@@ -308,7 +262,27 @@ class OracleOfAgesWorld(World):
             for entrance, dungeon in self.randomized_entrances.items():
                 spoiler_handle.write(f"\t- outside {entrance} --> inside {dungeon}\n")
 
+
+    # ===================================================================================
+    #
+    # ===================================================================================
+    def fill_slot_data(self) -> dict:
+        # Put options that are useful to the tracker inside slot data
+        slot_data = {
+            "version": f"{self.version()}",
+            "options": self.options.as_dict(
+                *[option_name for option_name in OracleOfAgesOptions.type_hints
+                  if hasattr(OracleOfAgesOptions.type_hints[option_name], "include_in_slot_data")]),
+            "randomized_entrances": self.randomized_entrances,
+            "shop_costs": self.shop_prices,
+            "vasu_madness": not self.options.vasu_ring_checks_requirement["disable_entirely"]
+        }
+
+        return slot_data
     
+    # -----------------------------------------------------------------------------------
+    #
+    # -----------------------------------------------------------------------------------
     def interpret_slot_data(self, slot_data: Optional[dict[str, Any]]) -> Any:
         if slot_data is not None:
             return slot_data
