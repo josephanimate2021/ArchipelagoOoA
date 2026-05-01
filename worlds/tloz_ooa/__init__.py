@@ -4,7 +4,7 @@ import yaml
 
 from typing import ClassVar, Any, Optional, Type, TextIO
 from Options import Option
-from BaseClasses import Region, Location, LocationProgressType
+from BaseClasses import Item, Region, Location, LocationProgressType
 from Options import Accessibility, OptionError
 from typing import Any, Set, List, Dict, Optional, Tuple, ClassVar, TextIO, Union
 from .generation.Data import *
@@ -38,12 +38,15 @@ class OracleOfAgesWorld(World):
     location_name_groups = LOCATION_GROUPS
 
     pre_fill_items: List[Item]
+    pre_fill_seeds: Dict[str, Item]
     dungeon_items: List[Item]
     randomized_entrances: Dict[str, str] = {}
     shop_prices: Dict[str, int]
 
     settings: ClassVar[OOASettings]
     settings_key = "tloz_ooa_options"
+
+    remaining_progressive_gasha_seeds = 0
 
     ages = True
     seasons = False
@@ -78,6 +81,7 @@ class OracleOfAgesWorld(World):
 
         self.pre_fill_items = []
         self.dungeon_items = []
+        self.pre_fill_seeds = {}
         self.shop_prices = SHOP_PRICES_DIVIDERS.copy()
 
     def fill_slot_data(self) -> dict:
@@ -275,160 +279,9 @@ class OracleOfAgesWorld(World):
         #print(unreachable)
         #print(allstate.prog_items)
 
-    def create_item(self, name: str) -> Item:
-        if name.endswith("!PROG"):
-            # If item name has a "!PROG" suffix, force it to be progression. This is typically used to create the right
-            # amount of progression rupees while keeping them a filler item as default
-            name = name.removesuffix("!PROG")
-            classification = ItemClassification.progression_skip_balancing
-        elif name.endswith("!USEFUL"):
-            # Same for above but with useful. This is typically used for Required Rings,
-            # as we don't want those locked in a barren dungeon
-            name = name.removesuffix("!USEFUL")
-            classification = ITEMS_DATA[name]["classification"]
-            if classification == ItemClassification.filler:
-                classification = ItemClassification.useful
-        else:
-            classification = ITEMS_DATA[name]["classification"]
-        ap_code = self.item_name_to_id[name]
-
-        # A few items become progression only in hard logic
-        progression_items_in_medium_logic = ["Expert's Ring", "Fist Ring", "Toss Ring", "Energy Ring"]
-        if self.options.logic_difficulty == "medium" and name in progression_items_in_medium_logic:
-            classification = ItemClassification.progression
-
-        return Item(name, classification, ap_code, self.player)
-
-    def build_item_pool_dict(self):
-        item_pool_dict = {}
-        filler_item_count = 0
-        remaining_rings = len({name for name, idata in ITEMS_DATA.items() if "ring" in idata}) - len(self.options.excluded_rings.value)
-        for loc_name, loc_data in LOCATIONS_DATA.items():
-
-            if "vanilla_item" not in loc_data:
-                #print("Can't create item from location '",loc_name ,"' because it doesn't have one")
-                continue
-
-            item_name = loc_data['vanilla_item']
-            if "randomized" in loc_data and loc_data["randomized"] is False:
-                item = self.create_item(item_name)
-                location = self.multiworld.get_location(loc_name, self.player)
-                location.place_locked_item(item)
-                #print("placing locked item '",loc_data['vanilla_item'] ,"' in '",loc_name ,"'")
-                continue
-            if not self.location_is_active(loc_name, loc_data):
-                #print("Can't create item '",loc_data['vanilla_item'] ,"' because '",loc_name ,"' is not active")
-                continue
-
-
-            if self.options.master_keys != OraclesMasterKeys.option_disabled and "Small Key" in item_name:
-                # Small Keys don't exist if Master Keys are set to replace them
-                filler_item_count += 1
-                continue
-            if self.options.master_keys == OraclesMasterKeys.option_all_dungeon_keys and "Boss Key" in item_name:
-                # Boss keys don't exist if Master Keys are set to replace them
-                filler_item_count += 1
-                continue
-
-            item_name = loc_data['vanilla_item']
-            if "Ring" in item_name:
-                if remaining_rings > 0:
-                    item_name = "Random Ring"
-                    remaining_rings -= 1
-                else:
-                    filler_item_count += 1
-                    continue
-
-            if "essence" in loc_data and loc_data["essence"] is True:
-                # If essences are not shuffled, place and lock this item directly on the pedestal.
-                # Otherwise, the fill algorithm will take care of placing them anywhere in the multiworld.
-                if not self.options.shuffle_essences:
-                    essence_item = self.create_item(item_name)
-                    self.multiworld.get_location(loc_name, self.player).place_locked_item(essence_item)
-                    continue
-
-            item_pool_dict[item_name] = item_pool_dict.get(item_name, 0) + 1
-
-        # If Master Keys are enabled, put one for every dungeon
-        if self.options.master_keys != OraclesMasterKeys.option_disabled:
-            for small_key_name in ITEM_GROUPS["Master Keys"]:
-                if self.options.linked_heros_cave.value > 0 or small_key_name != "Master Key (Linked Hero's Cave)":
-                    item_pool_dict[small_key_name] = 1
-                    filler_item_count -= 1
-
-        # Add the required rings
-        ring_copy = sorted(self.options.required_rings.value.copy())
-        for _ in range(len(ring_copy)):
-            ring_name = f"{ring_copy.pop()}!USEFUL"
-            item_pool_dict[ring_name] = item_pool_dict.get(ring_name, 0) + 1
-
-            if item_pool_dict["Random Ring"] > 0:
-                # Take from set ring pool first
-                item_pool_dict["Random Ring"] -= 1
-            else:
-                # Take from filler after
-                filler_item_count -= 1
-
-        # Add as many filler items as required
-        for _ in range(filler_item_count):
-            random_filler_item = self.get_filler_item_name()
-            item_pool_dict[random_filler_item] = item_pool_dict.get(random_filler_item, 0) + 1
-        
-        # Perform adjustments on the item pool
-        item_pool_adjustements = [
-            ["Flute", self.options.animal_companion.current_key.title() + "'s Flute"],  # Put a specific flute
-            ["Gasha Seed", "Seed Satchel"],             # Add a 3rd satchel that is usually obtained in linked games (99 seeds)
-            ["Gasha Seed", "Bombs (10)"],               # Add one more bomb compared to vanilla to reach 99 max bombs
-            ["Gasha Seed", "Potion"],                   # Replace some Gasha Seed by 2 potions.
-            ["Gasha Seed", "Potion"],                   # ^
-            ["Gasha Seed", "Rupees (200)"],              # and one by rupees
-            ["Gasha Seed", "Progressive Sword"],        # Need an additionnal sword to go to L3
-        ]
-
-        for i, pair in enumerate(item_pool_adjustements):
-            original_name = pair[0]
-            replacement_name = pair[1]
-            item_pool_dict[original_name] -= 1
-            item_pool_dict[replacement_name] = item_pool_dict.get(replacement_name, 0) + 1
-
-        return item_pool_dict
-
     def create_items(self):
-        item_pool_dict = self.build_item_pool_dict()
-        
-        # Create items following the dictionary that was previously constructed
-        if (item_pool_dict.get("Random Ring")):
-            self.create_rings(item_pool_dict["Random Ring"])
-            del item_pool_dict["Random Ring"]
-
-        for item_name, quantity in item_pool_dict.items():
-            for i in range(quantity):
-                prefill_item = None
-                if ("Small Key" in item_name or "Master Key" in item_name) and not self.options.keysanity_small_keys:
-                    prefill_item = self.create_item(item_name)
-                elif "Boss Key" in item_name and not self.options.keysanity_boss_keys:
-                    prefill_item = self.create_item(item_name)
-                elif ("Compass" in item_name or "Dungeon Map" in item_name) and not self.options.keysanity_maps_compasses:
-                    prefill_item = self.create_item(item_name)
-                elif "Slate" in item_name and not self.options.keysanity_slates:
-                    prefill_item = self.create_item(item_name)
-                else:
-                    self.multiworld.itempool.append(self.create_item(item_name))        
-                if (prefill_item is not None):
-                    self.dungeon_items.append(prefill_item)
-                    self.pre_fill_items.append(prefill_item)
-
-    def create_rings(self, amount):
-        # Get a subset of as many rings as needed
-        ring_names = [name for name, idata in ITEMS_DATA.items() if "ring" in idata]
-        # Remove excluded rings, and required rings because they'll be added later anyway
-        ring_names = [name for name in ring_names if name not in self.options.required_rings.value and name not in self.options.excluded_rings.value]
-
-        self.random.shuffle(ring_names)
-        del ring_names[amount:]
-        for ring_name in ring_names:
-            self.multiworld.itempool.append(self.create_item(ring_name))
-        self.random_rings_pool = ring_names
+        from .generation.CreateItems import ooa_create_items
+        ooa_create_items(self)
 
     def get_pre_fill_items(self):
         return self.pre_fill_items
@@ -436,18 +289,6 @@ class OracleOfAgesWorld(World):
     def pre_fill(self) -> None:
         from .generation.PreFill import pre_fill
         pre_fill(self)
-                
-
-    def get_filler_item_name(self) -> str:
-        FILLER_ITEM_NAMES = [
-            "Rupees (1)", "Rupees (5)", "Rupees (5)", "Rupees (10)", "Rupees (10)",
-            "Rupees (20)", "Rupees (30)",
-            "Gasha Seed", "Gasha Seed",
-            "Potion"
-        ]
-
-        item_name = self.random.choice(FILLER_ITEM_NAMES)
-        return item_name
     
     def generate_output(self, output_directory: str):
         patch = ooa_create_appp_patch(self)
