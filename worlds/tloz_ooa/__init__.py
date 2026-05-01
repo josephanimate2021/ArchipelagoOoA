@@ -114,82 +114,8 @@ class OracleOfAgesWorld(World):
     #
     # ===================================================================================
     def generate_early(self):
-        if self.interpret_slot_data(None):
-            return
-        conflicting_rings = self.options.required_rings.value & self.options.excluded_rings.value
-        if len(conflicting_rings) > 0:
-            raise OptionError("Required Rings and Excluded Rings contain the same element(s)", conflicting_rings)
-        
-        if self.options.shuffle_dungeons:
-            self.randomized_entrances = {}
-            for warpName, warpData in WARPS_DATA.items():
-                if "dungeon" not in warpData: # Not a dungeon, skip it
-                    continue; 
-                if "require_option" not in warpData or hasattr(self.options, warpData["require_option"]) and getattr(self.options, warpData["require_option"]):
-                    self.randomized_entrances[warpName] = warpName
-            self.shuffle_entrances()
-        
-        self.restrict_non_local_items()
-        self.randomize_shop_prices()
-        
-    # -----------------------------------------------------------------------------------
-    #
-    # -------------------------------------------------------------------------------------       
-    def determine_warp_to_start_variables(self):
-        # Mashy wasn't sure if he liked the new warp to start location on his first video on playing my 1.0.0 beta hotfix. 
-        # Adding this to not force the new warp to start location on anyone that is still used to the old one.
-        if self.options.warp_to_start_location == OracleOfAgesWarpToStartLocation.option_near_timeportal:
-            return {
-                "room": 0x39,
-                "pos": 0x21
-            }
-        else:
-            return {
-                # The syntax is like this:
-                # "room" represents a byte number for the screen that link will go to when warp to start is activated.
-                # "pos" represents a byte number for a position link will be in when warp to start is active.
-                # "group" represents a byte number for a screen group that link will be in once warp to start is activated.
-                # "dest_transittion" is a number that will changes the screen after the warp
-                # "src_transittion" is a number that will changes the screen before the warp
-            }
-
-    # -----------------------------------------------------------------------------------
-    #
-    # -----------------------------------------------------------------------------------
-    def restrict_non_local_items(self):
-        # Restrict non_local_items option in cases where it's incompatible with other options that enforce items
-        # to be placed locally (e.g. dungeon items with keysanity off)
-        if not self.options.keysanity_small_keys:
-            self.options.non_local_items.value -= self.item_name_groups["Small Keys"]
-        if not self.options.keysanity_boss_keys:
-            self.options.non_local_items.value -= self.item_name_groups["Boss Keys"]
-        if not self.options.keysanity_maps_compasses:
-            self.options.non_local_items.value -= self.item_name_groups["Dungeon Maps"]
-            self.options.non_local_items.value -= self.item_name_groups["Compasses"]
-        if not self.options.keysanity_slates:
-            self.options.non_local_items.value -= set(["Slate"])
-
-    # -----------------------------------------------------------------------------------
-    #
-    # -----------------------------------------------------------------------------------
-    def shuffle_entrances(self):
-        shuffled = list(self.randomized_entrances.values())
-        self.random.shuffle(shuffled)
-        self.randomized_entrances = dict(zip(self.randomized_entrances, shuffled))
-
-    # -----------------------------------------------------------------------------------
-    #
-    # -----------------------------------------------------------------------------------
-    def randomize_shop_prices(self):
-        prices_pool = get_prices_pool()
-        self.random.shuffle(prices_pool)
-        global_prices_factor = self.options.shop_prices_factor.value / 100.0
-        for key, divider in self.shop_prices.items():
-            floating_price = prices_pool.pop() * global_prices_factor / divider
-            for i, value in enumerate(VALID_RUPEE_VALUES):
-                if value > floating_price:
-                    self.shop_prices[key] = VALID_RUPEE_VALUES[i-1]
-                    break
+        from .generation.GenerateEarly import ooa_generate_early
+        ooa_generate_early(self)
         
     # ===================================================================================
     #
@@ -280,24 +206,24 @@ class OracleOfAgesWorld(World):
 
         return slot_data
     
-    # -----------------------------------------------------------------------------------
+    
+    # ===================================================================================
     #
-    # -----------------------------------------------------------------------------------
-    def interpret_slot_data(self, slot_data: Optional[dict[str, Any]]) -> Any:
-        if slot_data is not None:
-            return slot_data
-
-        if not hasattr(self.multiworld, "re_gen_passthrough") or self.game not in self.multiworld.re_gen_passthrough:
-            return False
-
-        slot_data = self.multiworld.re_gen_passthrough[self.game]
-
-        for option in [option_name for option_name in OracleOfAgesOptions.type_hints
-                       if hasattr(OracleOfAgesOptions.type_hints[option_name], "include_in_slot_data")]:
-            option_class: Type[Option] = OracleOfAgesOptions.type_hints[option]
-            self.options.__setattr__(option, option_class.from_any(slot_data["options"][option]))
-
-        self.randomized_entrances = slot_data["randomized_entrances"]
-        self.shop_prices = slot_data["shop_costs"]
-
-        return True
+    # =================================================================================== 
+    def determine_warp_to_start_variables(self):
+        # Mashy wasn't sure if he liked the new warp to start location on his first video on playing my 1.0.0 beta hotfix. 
+        # Adding this to not force the new warp to start location on anyone that is still used to the old one.
+        if self.options.warp_to_start_location == OracleOfAgesWarpToStartLocation.option_near_timeportal:
+            return {
+                "room": 0x39,
+                "pos": 0x21
+            }
+        else:
+            return {
+                # The syntax is like this:
+                # "room" represents a byte number for the screen that link will go to when warp to start is activated.
+                # "pos" represents a byte number for a position link will be in when warp to start is active.
+                # "group" represents a byte number for a screen group that link will be in once warp to start is activated.
+                # "dest_transittion" is a number that will changes the screen after the warp
+                # "src_transittion" is a number that will changes the screen before the warp
+            }

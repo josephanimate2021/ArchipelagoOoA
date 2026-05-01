@@ -29,15 +29,3 @@ def build_item_id_to_name_dict() -> Dict[int, str]:
         item_id_to_name[current_index] = item_name
         current_index += 1
     return item_id_to_name
-
-
-def get_prices_pool():
-    prices_pool = [300]                 # 1%
-    prices_pool.extend([200] * 7)       # 8%
-    prices_pool.extend([100] * 15)      # 50%
-    prices_pool.extend([80] * 15)       # 65%
-    prices_pool.extend([60] * 42)       # 80%
-    prices_pool.extend([40] * 15)       # 95%
-    prices_pool.extend([20] * 4)        # 99%
-    prices_pool.append(0)               # 100%
-    return prices_pool
