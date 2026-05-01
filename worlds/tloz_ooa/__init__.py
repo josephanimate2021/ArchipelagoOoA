@@ -279,6 +279,10 @@ class OracleOfAgesWorld(World):
         #print(unreachable)
         #print(allstate.prog_items)
 
+    def create_item(self, item: str) -> Item :
+        from .common.generation.CreateItems import create_item
+        return create_item(self, item)
+
     def create_items(self):
         from .generation.CreateItems import ooa_create_items
         ooa_create_items(self)

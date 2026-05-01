@@ -4,7 +4,6 @@ from ..data.Items import *
 from ..data.Locations import *
 from ..data.Constants import *
 from typing import TYPE_CHECKING
-from ..common.generation.CreateItems import create_item
 from .. import OraclesMasterKeys
 from Options import OptionError
 
@@ -25,7 +24,7 @@ def build_item_pool_dict(world: OracleOfAgesWorld):
 
         item_name = loc_data['vanilla_item']
         if "randomized" in loc_data and loc_data["randomized"] is False:
-            item = create_item(world, item_name)
+            item = world.create_item(item_name)
             location = world.multiworld.get_location(loc_name, world.player)
             location.place_locked_item(item)
             #print("placing locked item '",loc_data['vanilla_item'] ,"' in '",loc_name ,"'")
@@ -57,8 +56,9 @@ def build_item_pool_dict(world: OracleOfAgesWorld):
             # If essences are not shuffled, place and lock this item directly on the pedestal.
             # Otherwise, the fill algorithm will take care of placing them anywhere in the multiworld.
             if not world.options.shuffle_essences:
-                essence_item = create_item(world, item_name)
-                world.multiworld.get_location(loc_name, world.player).place_locked_item(essence_item)
+                essence_item = world.create_item(item_name)
+                loc = world.multiworld.get_location(loc_name, world.player)
+                loc.place_locked_item(essence_item)
                 continue
 
         item_pool_dict[item_name] = item_pool_dict.get(item_name, 0) + 1
@@ -120,7 +120,7 @@ def create_rings(world: OracleOfAgesWorld, amount):
     world.random.shuffle(ring_names)
     del ring_names[amount:]
     for ring_name in ring_names:
-        world.multiworld.itempool.append(create_item(world, ring_name))
+        world.multiworld.itempool.append(world.create_item(ring_name))
     world.random_rings_pool = ring_names
 
 # -----------------------------------------------------------------------------------
@@ -143,7 +143,7 @@ def get_filler_item_name(self) -> str:
 #
 # -----------------------------------------------------------------------------------
 def place_seed(world: OracleOfAgesWorld, seed_name: str, location_name: str):
-    seed_item = create_item(world, seed_name)
+    seed_item = world.create_item(seed_name)
     world.pre_fill_seeds[location_name] = seed_item
     world.pre_fill_items.append(seed_item)
 
@@ -221,15 +221,15 @@ def ooa_create_items(world: OracleOfAgesWorld):
         for i in range(quantity):
             prefill_item = None
             if ("Small Key" in item_name or "Master Key" in item_name) and not world.options.keysanity_small_keys:
-                prefill_item = create_item(world, item_name)
+                prefill_item = world.create_item(item_name)
             elif "Boss Key" in item_name and not world.options.keysanity_boss_keys:
-                prefill_item = create_item(world, item_name)
+                prefill_item = world.create_item(item_name)
             elif ("Compass" in item_name or "Dungeon Map" in item_name) and not world.options.keysanity_maps_compasses:
-                prefill_item = create_item(world, item_name)
+                prefill_item = world.create_item(item_name)
             elif "Slate" in item_name and not world.options.keysanity_slates:
-                prefill_item = create_item(world, item_name)
+                prefill_item = world.create_item(item_name)
             else:
-                world.multiworld.itempool.append(create_item(world, item_name))        
+                world.multiworld.itempool.append(world.create_item(item_name))        
             if (prefill_item is not None):
                 world.dungeon_items.append(prefill_item)
                 world.pre_fill_items.append(prefill_item)

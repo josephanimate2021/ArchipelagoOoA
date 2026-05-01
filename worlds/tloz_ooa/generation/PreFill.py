@@ -3,7 +3,6 @@ from ..data.Constants import *
 from Fill import fill_restrictive, FillError
 from Options import OptionError
 from typing import TYPE_CHECKING
-from .CreateItems import create_item
 
 if TYPE_CHECKING:
     from .. import OracleOfAgesWorld
