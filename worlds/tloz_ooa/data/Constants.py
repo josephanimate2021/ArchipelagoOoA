@@ -134,7 +134,7 @@ ITEM_GROUPS = {
         "Dungeon Map (Moonlit Grotto)",
         "Dungeon Map (Skull Dungeon)",
         "Dungeon Map (Crown Dungeon)",
-        "Dungeon Map (Mermaid's Cave Present)"
+        "Dungeon Map (Mermaid's Cave Present)",
         "Dungeon Map (Jabu-Jabu's Belly)",
         "Dungeon Map (Ancient Tomb)",
         "Dungeon Map (Mermaid's Cave Past)",
@@ -156,6 +156,7 @@ ITEM_GROUPS = {
 
 LOCATION_GROUPS = {
     'D0': [
+        "Maku Path: Heart Piece",
         "Maku Path: Key Chest",
         "Maku Path: Basement",
     ],
@@ -194,7 +195,7 @@ LOCATION_GROUPS = {
         "Moonlit Grotto (1F): Pols Voice Chest",
         "Moonlit Grotto (1F): Armos Drop",
         "Moonlit Grotto (1F): Statue Drop",
-        "Moonlit Grotto (1F): Six-Blocs Drop",
+        "Moonlit Grotto (1F): Six Blocs Drop",
         "Moonlit Grotto (B1F): Moldorm Drop",
         "Moonlit Grotto (B1F): East",
         "Moonlit Grotto (B1F): Torch Chest",
@@ -272,12 +273,12 @@ LOCATION_GROUPS = {
         'Ancient Tomb (B2F): SE Slate Chest',
         'Ancient Tomb (B2F): SW Slate Chest',
         'Ancient Tomb (B1F): NW Chest',
-        'Ancient Tomb (1F): Sarcophagus Chest',
+        'Ancient Tomb (B1F): Sarcophagus Chest',
         'Ancient Tomb (B1F): Blade Trap',
         'Ancient Tomb (B1F): Blue Peg Chest',
         'Ancient Tomb (B1F): Floor Puzzle',
         'Ancient Tomb (B2F): Tile Room',
-        'Ancient Tomb (1F): Stalfos',
+        'Ancient Tomb (B1F): Stalfos',
         'Ancient Tomb (B3F): Single Chest',
         'Ancient Tomb (B3F): Boss',
     ],
@@ -299,19 +300,19 @@ LOCATION_GROUPS = {
 
     ],
     'Trade Sequence': [
-        'Yoll Graveyard: Graveyard Poe',
-        'Lynna Village: Postman',
-        'Lynna Village: Toilet Hand',
-        'Crescent Island: Tokay Chef',
-        'Nuun: Happy Mask Salesman',
-        'Lynna Village: Mamamu Yan',
-        'Symmetry City: Middle man',
-        'Lynna City: Comedian',
-        'Lynna Village: Sad boi',
-        'Maple Trade',
-        'Lynna Village Coast: Rafton',
-        'Shore of No Return: Old Zora',
-        'Restoration Wall: Patch',
+        "Yoll Graveyard: Poe's Gift",
+        "Lynna Village: Postman Trade",
+        "Lynna Village: Toilet Hand Trade",
+        "Crescent Island (Present): Tokay Chef Trade",
+        "Nuun Highlands: Happy Mask Salesman Trade",
+        "Lynna City: Mamamu Yan Trade",
+        "Symmetry Village: Skinny Guy Trade",
+        "Lynna City: Comedian Trade",
+        "Lynna Village: Depressed Child Trade",
+        "Maple Trade",
+        "South Shore (Past): Rafton Trade",
+        "Coast of No Return: Old Zora Trade",
+        "Talus Peaks (Past): Broken Sword Restoration",
     ]
 }
 
