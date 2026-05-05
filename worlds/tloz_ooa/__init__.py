@@ -10,6 +10,7 @@ from typing import Any, Set, List, Dict, Optional, Tuple, ClassVar, TextIO, Unio
 from .generation.Data import *
 from .data.Items import *
 from .Options import *
+from .WebWorld import OracleOfAgesWeb
 from .generation.PatchWriter import ooa_create_appp_patch
 from .data import LOCATIONS_DATA
 from .data.Constants import *
