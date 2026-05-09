@@ -453,6 +453,9 @@ def set_dungeon_warps(rom: RomData, patch_data):
             intoout_warp_position = rom.read_byte(GameboyAddress(0x04, intoout_warp_dest_address + 1).address_in_rom())
             intoout_warp_flag = rom.read_byte(GameboyAddress(0x04, intoout_warp_dest_address + 2).address_in_rom())
 
+            if (intoout_warp_flag == 0x4):
+                intoout_warp_flag = 0x1 # Force set respawn
+
             if dungeon_number == 11: # NOTE : No need to check for the option. If it's not set, it shouldn't be in the array in the first place
                 rom.write_bytes(GameboyAddress(0x0a, 0x7204).address_in_rom(), [
                     intoout_warp_group | 0x80,
@@ -527,9 +530,9 @@ def define_tile_replacements_table(assembler: Z80Assembler, patch_data):
         new_tiles_table.extend([
 
             0x00, 0xd7, 0x20, 0x25, 0x1c,    # Sea of Storms (Present) Gasha Spot
-            0x00, 0xcb, 0x20, 0x72, 0x1c,    # Crescent Island West (Present) Gasha Spot
-            0x00, 0xac, 0x20, 0x36, 0x1c,    # Crescent Island East (Present) Gasha Spot
-            0x00, 0x90, 0x20, 0x71, 0x1c,    # Fairies' Woods Gasha Spot
+            0x00, 0xcb, 0x20, 0x62, 0x1c,    # Crescent Island West (Present) Gasha Spot
+            0x00, 0xad, 0x20, 0x36, 0x1c,    # Crescent Island East (Present) Gasha Spot
+            0x00, 0x90, 0x20, 0x61, 0x1c,    # Fairies' Woods Gasha Spot
             0x00, 0x7b, 0x20, 0x26, 0x1c,    # Yoll Graveyard Gasha Spot
             0x00, 0x30, 0x20, 0x52, 0x1c,    # Talus Peeks (Present) Gasha Spot
             0x00, 0x2c, 0x20, 0x34, 0x1c,    # Rolling Ridge (Present, East) Gasha Spot
