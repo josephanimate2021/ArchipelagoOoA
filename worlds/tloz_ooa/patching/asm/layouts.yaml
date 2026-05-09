@@ -19,10 +19,17 @@
   jr nz,@roomMismatch
   ldi a,(hl)
   or a
-  jr z,@alwaysOn
+  jr z,@valid
+  bit 4,a ; test bit 4 in tile replacement. If true, the condition is reversed
+  jr nz,@negativeTest
   and e
   jr z,@flagMismatch
-  @alwaysOn:
+  jr @valid
+  @negativeTest:
+  sub $10
+  and e
+  jr nz,@flagMismatch
+  @valid:
   push de
   ld d,$cf
   ldi a,(hl)
