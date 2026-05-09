@@ -8,6 +8,7 @@
 38//checkDeterministicGashaLoot: |
 
     ; Read the top 6 bits of wGashaSpotFlags to get the currently harvested count
+    xor a ; ensure C is 0
     ld a,(wGashaSpotFlags)
     rra
     rra
@@ -17,6 +18,7 @@
     cp option.deterministicGashaLootCount
     jr c,@deterministic
     xor a
+    ret
     
     @deterministic:
     ; Spawn the appropriate treasure

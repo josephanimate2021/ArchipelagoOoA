@@ -18,8 +18,11 @@
   cp c
   jr nz,@roomMismatch
   ldi a,(hl)
+  or a
+  jr z,@alwaysOn
   and e
-  jr nz,@flagMismatch
+  jr z,@flagMismatch
+  @alwaysOn:
   push de
   ld d,$cf
   ldi a,(hl)
