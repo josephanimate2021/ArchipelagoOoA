@@ -6,8 +6,9 @@
 # Current deterministic loot index is stored inside the 6 upper bits of wGashaSpotFlags,
 # which means we need to perform some bit shifts before being able to read/write it.
 38//checkDeterministicGashaLoot: |
+
     ; Read the top 6 bits of wGashaSpotFlags to get the currently harvested count
-    ld a,(hl)
+    ld a,(wGashaSpotFlags)
     rra
     rra
     ld b,a  ; Store deterministic treasure index in b
