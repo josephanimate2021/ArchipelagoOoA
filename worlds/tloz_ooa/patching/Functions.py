@@ -175,6 +175,14 @@ def define_location_constants(assembler: Z80Assembler, patch_data):
         assembler.define_byte(f"locations.{symbolic_name}.subid", item_subid)
         assembler.define_word(f"locations.{symbolic_name}", (item_id << 8) + item_subid)
 
+    # Process deterministic Gasha Nut locations to define a table
+    deterministic_gasha_table = []
+    for i in range(int(patch_data["options"]["deterministic_gasha_locations"])):
+        item = patch_data["locations"][f"Gasha Nut #{i + 1}"]
+        item_id, item_subid = get_item_id_and_subid(item)
+        deterministic_gasha_table.extend([item_id, item_subid])
+    assembler.add_floating_chunk("deterministicGashaLootTable", deterministic_gasha_table)
+
 def set_faq_text(assembler: Z80Assembler):
     faq_intro_text = text_to_binary(("Welcome to the "
                         "OoA randomizer "
@@ -222,6 +230,7 @@ def define_option_constants(assembler: Z80Assembler, patch_data):
 
     master_keys_as_boss_keys = patch_data["options"]["master_keys"] == OraclesMasterKeys.option_all_dungeon_keys
     assembler.define_byte("option.smallKeySprite", 0x43 if master_keys_as_boss_keys else 0x42)
+    assembler.define_byte("option.deterministicGashaLootCount", options["deterministic_gasha_locations"])
 
     if options["secret_locations"]:
         assembler.add_floating_chunk("unsetglobalflag_librarySecret", [
@@ -503,6 +512,32 @@ def define_tile_replacements_table(assembler: Z80Assembler, patch_data):
             0x03, 0xc7, 0x00, 0x48, 0x2c, # add statue in sea of storms past underwater prevent players from resurfacing on that area.
             0x00, 0x76, 0x00, 0x55, 0xa7, # add walkable tiles to black tower present entrance
             0x00, 0x76, 0x00, 0x54, 0xa7, # ^
+        ])
+
+    
+    """
+    Define a list of entries following the format of `tileReplacementsTable` (see ASM for more info) which end up
+    being tile replacements on various rooms in the game.
+    """
+    # Remove Gasha spots when harvested once if deterministic Gasha locations are enabled
+    if patch_data["options"]["deterministic_gasha_locations"] > 0:
+        new_tiles_table.extend([
+            0x00, 0xa6, 0x20, 0x54, 0xe1,  # North Horon: Gasha Spot Above Impa
+            0x00, 0xc8, 0x20, 0x67, 0xe1,  # Horon Village: Gasha Spot Near Mayor's House
+            0x00, 0xac, 0x20, 0x27, 0xe1,  # Eastern Suburbs: Gasha Spot
+            0x00, 0x95, 0x20, 0x32, 0xe1,  # Holodrum Plain: Gasha Spot Near Mrs. Ruul's House
+            0x00, 0x75, 0x20, 0x34, 0xe1,  # Holodrum Plain: Gasha Spot on Island Above D1
+            0x00, 0x80, 0x20, 0x53, 0xe1,  # Spool Swamp: Gasha Spot Near Floodgate Keyhole
+            0x00, 0xc0, 0x20, 0x61, 0xe1,  # Spool Swamp: Gasha Spot Near Portal
+            0x00, 0x3f, 0x20, 0x44, 0xe1,  # Sunken City: Gasha Spot
+            0x00, 0x1f, 0x20, 0x21, 0xe1,  # Mt. Cucco: Gasha Spot
+            0x00, 0x38, 0x20, 0x25, 0xe1,  # Goron Mountain: Gasha Spot Left of Entrance
+            0x00, 0x3b, 0x20, 0x53, 0xe1,  # Goron Mountain: Gasha Spot Right of Entrance
+            0x00, 0x89, 0x20, 0x24, 0xe1,  # Eyeglass Lake: Gasha Spot Near D5
+            0x00, 0x22, 0x20, 0x45, 0xe1,  # Tarm Ruins: Gasha Spot
+            0x00, 0xf0, 0x20, 0x22, 0xe1,  # Western Coast: Gasha Spot South of Graveyard
+            0x00, 0xef, 0x20, 0x66, 0xe1,  # Samasa Desert: Gasha Spot
+            0x00, 0x44, 0x20, 0x44, 0xe1,  # Path to Onox Castle: Gasha Spot
         ])
 
     assembler.add_floating_chunk("tileReplacementsTable", new_tiles_table)

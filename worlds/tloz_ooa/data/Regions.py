@@ -91,6 +91,7 @@ REGIONS = [
     "nuun (moosh)",
     "nuun (dimitri)",
     "nuun highlands cave",
+    "nuun highlands top",
     #######
     "symmetry present",
     "d4 entrance",
@@ -381,6 +382,24 @@ REGIONS = [
     "symmetry city heartpiece",
     "ridge west heartpiece",
     "ridge upper heartpiece",
+    
+    # Gasha Spots
+    "crescent past spot",
+    "talus lake past spot",
+    "talus peak past spot",
+    "zora village past spot",
+    "lynna village toilet spot",
+    "south shore past spot",
+    "ridge west base spot",
+    "ridge upper past spot",
+    "yoll graveyard spot",
+    "talus peak present spot",
+    "fairies woods spot",
+    "nuun highlands spot",
+    "ridge mid present spot",
+    "crescent present islet spot",
+    "crescent present vine spot",
+    "sea of storms spot",
     
     ## D11, never used if the option is not set, but we can keep the region in the same array as the others
     "d11 entrance",

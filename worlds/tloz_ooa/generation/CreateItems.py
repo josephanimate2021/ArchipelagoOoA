@@ -24,6 +24,7 @@ def build_item_pool_dict(world: OracleOfAgesWorld):
             continue
 
         item_name = loc_data['vanilla_item']
+
         if "randomized" in loc_data and loc_data["randomized"] is False:
             item = world.create_item(item_name)
             location = world.multiworld.get_location(loc_name, world.player)
@@ -33,7 +34,10 @@ def build_item_pool_dict(world: OracleOfAgesWorld):
         if not location_is_active(world, loc_name, loc_data):
             #print("Can't create item '",loc_data['vanilla_item'] ,"' because '",loc_name ,"' is not active")
             continue
-
+    
+        if item_name == "Filler Item":
+            filler_item_count += 1
+            continue
 
         if world.options.master_keys != OraclesMasterKeys.option_disabled and "Small Key" in item_name:
             # Small Keys don't exist if Master Keys are set to replace them
@@ -86,7 +90,7 @@ def build_item_pool_dict(world: OracleOfAgesWorld):
 
     # Add as many filler items as required
     for _ in range(filler_item_count):
-        random_filler_item = get_filler_item_name()
+        random_filler_item = get_filler_item_name(world)
         item_pool_dict[random_filler_item] = item_pool_dict.get(random_filler_item, 0) + 1
     
     # Perform adjustments on the item pool
@@ -127,7 +131,7 @@ def create_rings(world: OracleOfAgesWorld, amount):
 # -----------------------------------------------------------------------------------
 #
 # -----------------------------------------------------------------------------------
-def get_filler_item_name(self) -> str:
+def get_filler_item_name(world: OracleOfAgesWorld) -> str:
     FILLER_ITEM_NAMES = [
         "Rupees (1)", "Rupees (5)", "Rupees (5)", "Rupees (10)", "Rupees (10)",
         "Rupees (20)", "Rupees (30)",
@@ -135,7 +139,7 @@ def get_filler_item_name(self) -> str:
         "Potion"
     ]
 
-    item_name = self.random.choice(FILLER_ITEM_NAMES)
+    item_name = world.random.choice(FILLER_ITEM_NAMES)
     return item_name
 
 

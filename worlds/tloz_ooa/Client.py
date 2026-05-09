@@ -152,7 +152,7 @@ class OracleOfAgesClient(BizHawkClient):
         
         local_checked_locations = set(ctx.locations_checked)
         for name, location in LOCATIONS_DATA.items():
-            if "flag_byte" not in location:
+            if location["flag_byte"] is None:
                 continue
 
             bytes_to_test = location["flag_byte"]
@@ -171,6 +171,15 @@ class OracleOfAgesClient(BizHawkClient):
                     location_id = self.location_name_to_id[name]
                     local_checked_locations.add(location_id)
                     break
+
+        
+        # Check how many deterministic Gasha Nuts have been opened, and mark their matching locations as checked
+        byte_offset = 0xC64C - RAM_ADDRS["location_flags"][0]
+        gasha_counter = flag_bytes[byte_offset] >> 2
+        for i in range(gasha_counter):
+            name = f"Gasha Nut #{i + 1}"
+            location_id = self.location_name_to_id[name]
+            local_checked_locations.add(location_id)
 
         # Send locations
         if self.local_checked_locations != local_checked_locations:

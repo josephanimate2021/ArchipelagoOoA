@@ -161,33 +161,65 @@ class OracleOfAgesLynnaGardener(Toggle):
 
     include_in_patch = True
     include_in_slot_data = True
+    
+
+
+class OracleOfAgesGashaLocations(Range):
+    """
+    When set to a non-zero value, planting a Gasha tree on a unique soil gives a deterministic item which is taken
+    into account by logic. Once an item has been obtained this way, the soil disappears forever to avoid any chance
+    of softlocking by wasting several Gasha Seeds on the same soil.
+    The value of this option is the number of items that can be obtained that way, the maximum value expecting you
+    to plant a tree on each one of the 16 Gasha spots in the game.
+    """
+    display_name = "Deterministic Gasha Locations"
+
+    range_start = 0
+    range_end = 15
+
+    default = 0
+    include_in_patch = True
+    include_in_slot_data = True
 
 @dataclass
 class OracleOfAgesOptions(PerGameCommonOptions):
     start_inventory_from_pool: StartInventoryPool
     goal: OracleOfAgesGoal
     logic_difficulty: OraclesLogicDifficulty
-    required_essences: OraclesRequiredEssences
-    required_slates: OracleOfAgesRequiredSlates
-    warp_to_start_location: OracleOfAgesWarpToStartLocation
-    vasu_ring_checks_requirement: OracleOfAgesVasuRingChecksRequirement
-    miniboss_locations: OracleOfAgesMinibossLocations
-    animal_companion: OraclesAnimalCompanion
-    default_seed: OraclesDefaultSeedType
-    linked_heros_cave: OracleOfAgesLinkedHerosCave
+    death_link: OraclesDeathLink
+
+    # Optional locations
+    advance_shop: OraclesAdvanceShop
+    deterministic_gasha_locations: OracleOfAgesGashaLocations
     secret_locations: OraclesIncludeSecretLocations
-    duplicate_seed_trees: OracleOfAgesDuplicateSeedTrees
+    linked_heros_cave: OracleOfAgesLinkedHerosCave
+    miniboss_locations: OracleOfAgesMinibossLocations
+
+    # Essences
+    required_essences: OraclesRequiredEssences
+    shuffle_essences: OracleOfAgesEssenceSanity
+    
+    # Overworld layout options
+    animal_companion: OraclesAnimalCompanion
     shuffle_dungeons: OraclesDungeonShuffle
-    master_keys: OraclesMasterKeys
+    default_seed: OraclesDefaultSeedType
+    duplicate_seed_trees: OracleOfAgesDuplicateSeedTrees
+    warp_to_start_location: OracleOfAgesWarpToStartLocation
     lynna_gardener: OracleOfAgesLynnaGardener
+
+    # Dungeon Items
+    master_keys: OraclesMasterKeys
     keysanity_small_keys: OraclesSmallKeyShuffle
     keysanity_boss_keys: OraclesBossKeyShuffle
     keysanity_maps_compasses: OraclesMapCompassShuffle
+    required_slates: OracleOfAgesRequiredSlates
     keysanity_slates: OracleOfAgesSlateShuffle
-    shuffle_essences: OracleOfAgesEssenceSanity
+
+    # Numeric requirements for some checks / access to regions
+    vasu_ring_checks_requirement: OracleOfAgesVasuRingChecksRequirement
+    
+    # Miscellaneous options
     required_rings: OraclesRequiredRings
     excluded_rings: OraclesExcludedRings
     shop_prices_factor: OracleOfAgesPricesFactor
-    advance_shop: OraclesAdvanceShop
     combat_difficulty: OraclesCombatDifficulty
-    death_link: OraclesDeathLink

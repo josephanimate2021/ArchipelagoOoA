@@ -73,6 +73,9 @@ def interpret_slot_data(self, slot_data: Optional[dict[str, Any]]) -> Any:
 #
 # -----------------------------------------------------------------------------------
 def ooa_generate_early(world: OracleOfAgesWorld):
+
+    world.remaining_progressive_gasha_seeds = world.options.deterministic_gasha_locations.value
+
     if interpret_slot_data(world, None):
         return
     conflicting_rings = world.options.required_rings.value & world.options.excluded_rings.value

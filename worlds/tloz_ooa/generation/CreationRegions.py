@@ -31,6 +31,9 @@ def location_is_active(world: OracleOfAgesWorld, location_name, location_data):
     if "vasu" in region_id:
         return not world.options.vasu_ring_checks_requirement["disable_entirely"]
 
+    if location_name.startswith("Gasha Nut #"):
+        return int(location_name[11:]) <= world.options.deterministic_gasha_locations
+    
     # TODO FUNNY LOCATION ?
 
     return False
@@ -67,6 +70,10 @@ def create_events(world: OracleOfAgesWorld):
     create_event(world,"d6 canal expanded", "_d6_canal_expanded")
 
     create_event(world,"d7 boss", "_finished_d7")
+    
+    # Create events for reaching Gasha spots, used when Gasha-sanity is on
+    for region_name in GASHA_SPOT_REGIONS:
+        create_event(world, region_name, f"_reached_{region_name}")
 
 # -----------------------------------------------------------------------------------
 #
@@ -111,6 +118,12 @@ def ooa_create_region(world: OracleOfAgesWorld):
     for region_name in regions:
         region = Region(region_name, world.player, world.multiworld)
         world.multiworld.regions.append(region)
+        
+
+    if world.options.deterministic_gasha_locations > 0:
+        for i in range(world.options.deterministic_gasha_locations):
+            region = Region(f"gasha tree {i+1}", world.player, world.multiworld)
+            world.multiworld.regions.append(region)
 
     # Create locations
     for location_name, location_data in LOCATIONS_DATA.items():

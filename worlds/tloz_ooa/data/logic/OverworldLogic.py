@@ -3,7 +3,7 @@ from ..Entrances import *
 
 
 def make_overworld_logic(player: int, options: OracleOfAgesOptions):
-    gasha_logic = [
+    gasha_connections = [
         ["Menu", "gasha tree 1", False, lambda state: ooa_can_harvest_gasha(state, player, 1)],
         ["gasha tree 1", "gasha tree 2", False, lambda state: ooa_can_harvest_gasha(state, player, 2)],
         ["gasha tree 2", "gasha tree 3", False, lambda state: ooa_can_harvest_gasha(state, player, 3)],
@@ -20,83 +20,6 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         ["gasha tree 13", "gasha tree 14", False, lambda state: ooa_can_harvest_gasha(state, player, 14)],
         ["gasha tree 14", "gasha tree 15", False, lambda state: ooa_can_harvest_gasha(state, player, 15)],
        # ["gasha tree 15", "gasha tree 16", False, lambda state: ooa_can_harvest_gasha(state, player, 16)], #activate once sea of storms present plot is figured out
-
-        #GASHA PLOT LOGIC
-        ##################
-        #Past Gasha Plots
-        ["lynna village", "crescent past spot", False, lambda state: all([
-            ooa_can_swim_deepwater(state, player, False), #double check if this includes raft
-            ooa_has_shovel(state, player)
-        ])],
-        ["symmetry past", "talus lake past spot", False, lambda state: all([
-            ooa_can_switch_past_and_present(state, player),
-            ooa_has_bracelet(state, player)
-        ])],
-        ["restoration wall heartpiece", "talus peak past spot", False, lambda state: all([ #the map still refers to here as talus peak, this is the one accessible right out of D2
-            ooa_has_shovel(state, player),
-            ooa_has_bracelet(state, player)
-        ])],
-        ["zora village", "zora village past spot", False, lambda state: ooa_can_break_bush(state, player)],
-        ["lynna village", "lynna village toilet spot", False, None],
-        ["lynna village", "south shore past spot", False, lambda state: all([
-            ooa_has_shovel(state, player),
-            ooa_can_jump_1_wide_pit(state, player, False),
-            any([
-                ooa_can_swim(state, player, False),
-                ooa_can_jump_2_wide_liquid(state, player)
-            ]),
-        ])],
-        ["ridge west past base", "ridge west base spot", False,lambda state: ooa_can_break_bush(state, player)],
-        ["ridge upper present", "ridge upper past spot", False, lambda state: all([
-            ooa_has_shovel(state, player),
-            any([
-                all([
-                    ooa_can_switch_past_and_present(state, player),
-                    ooa_can_break_bush(state, player, False)
-                    ]),
-                all([
-                    ooa_can_open_portal(state, player),
-                    ooa_has_bracelet(state, player)
-                ]),
-            ]),
-        ])],
-        #Present Gasha locations
-        ["yoll graveyard", "yoll graveyard spot", False, None],
-        ["talus peaks", "talus peak present spot", False, lambda state: all([
-            ooa_can_break_bush(state, player, False),
-            ooa_can_switch_past_and_present(state, player)
-        ])],
-        ["deku forest", "fairies woods spot", False, lambda state: all([
-            ooa_can_break_bush(state, player, False),
-            ooa_can_switch_past_and_present(state, player)
-        ])],
-        #["", "nuun highlands spot"], #currents or animal companion, idk how to write this one truthfully
-        ["ridge mid present", "ridge mid present spot", False, lambda state: ooa_has_bracelet(state, player)],
-        ["lynna city", "crescent present islet spot", False, lambda state: all([
-            ooa_can_break_bush(state, player),
-            ooa_can_swim_deepwater(state, player, True)
-        ])],
-        ["crescent present east", "crescent present vine spot", False, lambda state: ooa_has_bracelet(state, player)],
-       # ["piratian captain", "sea of storms spot", False, lambda state: all([
-       #     ooa_can_switch_past_and_present(state, player),
-       #     ooa_has_shovel(state, player)
-       # ])],
-
-
-
-        #["nuun (ricky)", "nuun highlands spot", False, lambda state: all([
-        #    ooa_can_jump_1_wide_pit(state, player, True),
-        #    any([
-        #        ooa_has_sword(state, player),
-        #        ooa_has_switch_hook(state, player),
-        #        all([
-        #           ooa_option_medium_logic(state, player),
-        #            any([
-        #                ooa_has_bombs(state, player, 2),
-        #                ooa_can_use_ember_seeds(state, player, False),
-        #                (ooa_has_seedshooter(state, player) and ooa_has_gale_seeds(state, player)),
-        #    ])
-        #])]
     ]
     labrynna_logic = [
         # FOREST OF TIME
@@ -749,7 +672,131 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         ])],
         [OUTSIDE_TAG + "d8", "sea of no return", False, lambda state: ooa_has_glove(state, player)],
 
+        
+        #GASHA PLOT LOGIC
+        ##################
+        #Past Gasha Plots
+        ["lynna village", "crescent past spot", False, lambda state: all([
+            ooa_can_swim_deepwater(state, player, False), #double check if this includes raft
+            ooa_has_shovel(state, player)
+        ])],
+        ["symmetry past", "talus lake past spot", False, lambda state: all([
+            ooa_can_switch_past_and_present(state, player),
+            ooa_has_bracelet(state, player)
+        ])],
+        ["restoration wall heartpiece", "talus peak past spot", False, lambda state: all([ #the map still refers to here as talus peak, this is the one accessible right out of D2
+            ooa_has_shovel(state, player),
+            ooa_has_bracelet(state, player)
+        ])],
+        ["zora village", "zora village past spot", False, lambda state: ooa_can_break_bush(state, player)],
+        ["lynna village", "lynna village toilet spot", False, None],
+        ["lynna village", "south shore past spot", False, lambda state: all([
+            ooa_has_shovel(state, player),
+            ooa_can_jump_1_wide_pit(state, player, False),
+            any([
+                ooa_can_swim(state, player, False),
+                ooa_can_jump_2_wide_liquid(state, player)
+            ]),
+        ])],
+        ["ridge west past base", "ridge west base spot", False,lambda state: ooa_can_break_bush(state, player)],
+        ["ridge upper present", "ridge upper past spot", False, lambda state: all([
+            ooa_has_shovel(state, player),
+            any([
+                all([
+                    ooa_can_switch_past_and_present(state, player),
+                    ooa_can_break_bush(state, player, False)
+                    ]),
+                all([
+                    ooa_can_open_portal(state, player),
+                    ooa_has_bracelet(state, player)
+                ]),
+            ]),
+        ])],
+        #Present Gasha locations
+        ["yoll graveyard", "yoll graveyard spot", False, None],
+        ["talus peaks", "talus peak present spot", False, lambda state: all([
+            ooa_can_break_bush(state, player, False),
+            ooa_can_switch_past_and_present(state, player)
+        ])],
+        ["deku forest", "fairies woods spot", False, lambda state: all([
+            ooa_can_break_bush(state, player, False),
+            ooa_can_switch_past_and_present(state, player)
+        ])],
+        
+        ["nuun (ricky)", "nuun highlands top", False, lambda state: any([
+            ooa_can_summon_ricky(state, player),
+            ooa_can_go_back_to_present(state, player),
+            all([
+                # Can break bush 1 tile after a holes
+                ooa_can_jump_1_wide_pit(state, player, False),
+                any([
+                    ooa_has_sword(state, player),
+                    ooa_has_switch_hook(state, player),
+                    all([
+                        # Consumables need at least medium logic, since they need a good knowledge of the game
+                        # not to be frustrating
+                        ooa_option_medium_logic(state, player),
+                        any([
+                            ooa_has_bombs(state, player, 2),
+                            ooa_has_bombchus(state, player),
+                            (ooa_has_seedshooter(state, player) and ooa_can_use_ember_seeds(state, player, False)),
+                            (ooa_has_seedshooter(state, player) and ooa_has_gale_seeds(state, player)),
+                        ])
+                    ]),
+                ]),
+            ])
+        ])],
+        ["nuun (moosh)", "nuun highlands top", False, lambda state: any([
+            ooa_can_summon_moosh(state, player),
+            ooa_can_go_back_to_present(state, player),
+            all([
+                ooa_can_break_bush(state, player),
+                ooa_can_jump_3_wide_pit(state, player, False),
+            ])
+        ])],
+        ["nuun (dimitri)", "nuun highlands top", False, lambda state: any([
+            ooa_can_summon_dimitri(state, player),
+            ooa_can_go_back_to_present(state, player),
+            all([
+                state.has("Swimmer's Ring", player),
+                ooa_can_swim(state, player, False),
+                ooa_option_medium_logic(state, player)
+            ])
+        ])],
+        ["nuun highlands top", "nuun highlands spot", False, lambda state: ooa_has_shovel(state, player)],
+        ["ridge mid present", "ridge mid present spot", False, lambda state: ooa_has_bracelet(state, player)],
+        ["lynna city", "crescent present islet spot", False, lambda state: all([
+            ooa_can_break_bush(state, player),
+            ooa_can_swim_deepwater(state, player, True)
+        ])],
+        ["crescent present east", "crescent present vine spot", False, lambda state: ooa_has_bracelet(state, player)],
+       # ["piratian captain", "sea of storms spot", False, lambda state: all([
+       #     ooa_can_switch_past_and_present(state, player),
+       #     ooa_has_shovel(state, player)
+       # ])],
+
+
+
+        #["nuun (ricky)", "nuun highlands spot", False, lambda state: all([
+        #    ooa_can_jump_1_wide_pit(state, player, True),
+        #    any([
+        #        ooa_has_sword(state, player),
+        #        ooa_has_switch_hook(state, player),
+        #        all([
+        #           ooa_option_medium_logic(state, player),
+        #            any([
+        #                ooa_has_bombs(state, player, 2),
+        #                ooa_can_use_ember_seeds(state, player, False),
+        #                (ooa_has_seedshooter(state, player) and ooa_has_gale_seeds(state, player)),
+        #    ])
+        #])]
+
     ]
+
+    
+
+    for i in range(options.deterministic_gasha_locations):
+        labrynna_logic.append(gasha_connections[i])
 
     if options.linked_heros_cave.value > 0:
         labrynna_logic.extend([

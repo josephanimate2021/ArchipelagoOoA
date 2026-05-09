@@ -337,6 +337,7 @@ DEFINES = {
     "wRickyState":"$c646",
     "wDimitriState":"$c647",
     "wAnimalTutorialFlags":"$c649",
+    "wGashaSpotFlags":"$c64c",
     "wDungeonBossKeys":"$c682",
     "wInventoryB":"$c688",
     "wObtainedTreasureFlags":"$c69a",
