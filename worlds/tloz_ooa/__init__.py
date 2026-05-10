@@ -207,6 +207,30 @@ class OracleOfAgesWorld(World):
 
         return slot_data
     
+
+    
+    # ===================================================================================
+    #
+    # =================================================================================== 
+    def interpret_slot_data(self, slot_data: Optional[dict[str, Any]]) -> Any:
+        if slot_data is not None:
+            return slot_data
+
+        if not hasattr(self.multiworld, "re_gen_passthrough") or self.game not in self.multiworld.re_gen_passthrough:
+            return False
+
+        slot_data = self.multiworld.re_gen_passthrough[self.game]
+
+        for option in [option_name for option_name in OracleOfAgesOptions.type_hints
+                        if hasattr(OracleOfAgesOptions.type_hints[option_name], "include_in_slot_data")]:
+            option_class: Type[Option] = OracleOfAgesOptions.type_hints[option]
+            self.options.__setattr__(option, option_class.from_any(slot_data["options"][option]))
+
+        self.randomized_entrances = slot_data["randomized_entrances"]
+        print(self.randomized_entrances)
+        self.shop_prices = slot_data["shop_costs"]
+
+        return True
     
     # ===================================================================================
     #

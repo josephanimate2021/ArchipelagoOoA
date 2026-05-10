@@ -17,7 +17,7 @@
     ; Test if there are still deterministic loot to give
     cp option.deterministicGashaLootCount
     jr c,@deterministic
-    xor a
+    ld c,option.deterministicGashaLootCount
     ret
     
     @deterministic:
@@ -47,15 +47,16 @@
     call interactionIncState
     
     @done:
-    ld a, $01
-    or a
+    ld c,option.deterministicGashaLootCount
     ret
 
 0b//checkDeterministicGashaLoot_head: |
     ld e,$38
     ld hl,checkDeterministicGashaLoot
     call interBankCall
-    jp z,$451d  ; No more, go back to vanila loot logic
+    ld a,b
+    cp c
+    jp nc,$451d  ; No more, go back to vanila loot logic
     ret
 
 # Replace the first check of INTERACID_GASHA_SPOT @state5 to check for

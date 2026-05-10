@@ -45,29 +45,6 @@ def randomize_shop_prices(world: OracleOfAgesWorld):
             if value > floating_price:
                 world.shop_prices[key] = VALID_RUPEE_VALUES[i-1]
                 break
-
-# -----------------------------------------------------------------------------------
-#
-# -----------------------------------------------------------------------------------
-def interpret_slot_data(self, slot_data: Optional[dict[str, Any]]) -> Any:
-    if slot_data is not None:
-        return slot_data
-
-    if not hasattr(self.multiworld, "re_gen_passthrough") or self.game not in self.multiworld.re_gen_passthrough:
-        return False
-
-    slot_data = self.multiworld.re_gen_passthrough[self.game]
-
-    for option in [option_name for option_name in OracleOfAgesOptions.type_hints
-                    if hasattr(OracleOfAgesOptions.type_hints[option_name], "include_in_slot_data")]:
-        option_class: Type[Option] = OracleOfAgesOptions.type_hints[option]
-        self.options.__setattr__(option, option_class.from_any(slot_data["options"][option]))
-
-    self.randomized_entrances = slot_data["randomized_entrances"]
-    self.shop_prices = slot_data["shop_costs"]
-
-    return True
-
             
 # -----------------------------------------------------------------------------------
 #
@@ -76,7 +53,7 @@ def ooa_generate_early(world: OracleOfAgesWorld):
 
     world.remaining_progressive_gasha_seeds = world.options.deterministic_gasha_locations.value
 
-    if interpret_slot_data(world, None):
+    if world.interpret_slot_data(None):
         return
     conflicting_rings = world.options.required_rings.value & world.options.excluded_rings.value
     if len(conflicting_rings) > 0:
