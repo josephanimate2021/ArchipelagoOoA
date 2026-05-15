@@ -65,9 +65,14 @@ REGIONS = [
     "d2 past entrance",
 
     #######
+    "crescent past waters",
     "crescent past west",
     "tokay stolen shovel",
-    "tokay crystal cave",
+    "tokay stolen sword",
+    "tokay stolen satchel",
+    "tokay stolen flippers",
+    "tokay stolen harp",
+    "tokay crystal cave chest",
     "crescent past east",
     "tokay bomb cave",
     "tokay chicken hut",
@@ -77,6 +82,8 @@ REGIONS = [
     "tokay pot cave",
     "tokay market 1",
     "tokay market 2",
+    "crescent past middle",
+    "crescent past middle cave",
     #######
     "crescent present west",
     "d3 entrance",

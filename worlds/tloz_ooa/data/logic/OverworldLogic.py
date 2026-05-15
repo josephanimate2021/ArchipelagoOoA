@@ -258,48 +258,102 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
 
         # CRESCENT PAST
         #######################################
-        ["lynna village", "crescent past west", True, lambda state: ooa_can_swim_deepwater(state, player, False)],
-        ["rafton's raft", "crescent past west", False, None],
-        ["crescent present west", "crescent past west", False, lambda state: ooa_can_open_portal(state, player)],
+        ["lynna village", "crescent past waters", True, lambda state: ooa_can_swim_deepwater(state, player, False)],
+        ["rafton's raft", "crescent past waters", False, None],
+        ["crescent past waters", "crescent past west", False, None],
+        ["crescent past waters", "crescent past east", False, None],
+        ["crescent past waters", "tokay stolen harp", False, None],
+        
         ["crescent past west", "tokay stolen shovel", False, None],
-        ["crescent past west", "tokay crystal cave", False, lambda state: all([
-            any([
-                ooa_has_shovel(state, player),
-                ooa_can_break_crystal(state, player),                    
-            ]),
-            ooa_can_jump_1_wide_pit(state, player, False)
+        ["crescent past west", "tokay stolen sword", False, lambda state: any([
+            ooa_has_shovel(state, player),
+            ooa_can_break_crystal(state, player),                    
         ])],
+        ["tokay stolen sword", "tokay crystal cave chest", False, lambda state: ooa_can_jump_1_wide_pit(state, player, False)],
         ["lynna village", "hidden tokay cave", True, lambda state: ooa_can_dive(state, player)],
+        ["crescent past west", "crescent present west", False, lambda state: ooa_can_go_back_to_present(state, player)],
+        ["crescent present west", "crescent past west", False, lambda state: ooa_can_open_portal(state, player)],
+        
         ["crescent past west", "crescent past east", False, lambda state: ooa_can_break_bush(state, player)],
         ["crescent present west", "crescent past east", False, lambda state: ooa_can_go_back_to_present(state, player)],
         ["crescent past east", "tokay chicken hut", False, lambda state: ooa_has_bracelet(state, player)],
-        ["tokay chicken hut", "tokay bomb cave", False, lambda state: any([
-            ooa_has_bombs(state, player),
-            ooa_has_bombchus(state, player)
-        ])],
+        ["tokay chicken hut", "tokay bomb cave", False, lambda state: ooa_has_explosives(state, player)],
         ["crescent past east", "wild tokay game", False, lambda state: all([
             ooa_has_bracelet(state, player),
-            any([
-                ooa_has_bombs(state, player),
-                ooa_has_bombchus(state, player)
-            ]),
+            ooa_has_explosives(state, player),
         ])],
         ["crescent past east", "tokay pot cave", False, lambda state: ooa_has_long_hook(state, player)],
         ["crescent past east", "tokay market 1", False, lambda state: ooa_has_mystery_seeds(state, player)],
         ["crescent past east", "tokay market 2", False, lambda state: ooa_has_scent_seeds(state, player)],
 
+        ["crescent past east", "crescent past middle", False, lambda state: any([
+            ooa_has_bracelet(state, player),
+            ooa_can_jump_1_wide_pit(state, player, False),
+            ooa_can_switch_past_and_present(state, player),
+        ])],
+        
+        # This one tunnel
+        ["crescent past middle", "tokay stolen harp", False, lambda state: any([
+            ooa_has_switch_hook(state, player),
+            all([
+                any([
+                    ooa_can_jump_1_wide_liquid(state, player, False),
+                    ooa_can_swim(state, player, False),
+                ]),
+                ooa_has_noble_sword(state, player),
+                ooa_option_medium_logic(state, player),
+            ]),
+            all([
+                ooa_can_jump_1_wide_pit(state, player, False),
+                ooa_has_bracelet(state, player),
+                ooa_can_swim(state, player, False),
+            ]),
+            
+        ])],
+        ["tokay stolen harp", "crescent past middle", False, lambda state: all([
+            ooa_can_break_pot(state, player),
+            any([
+                ooa_can_jump_1_wide_liquid(state, player, False),
+                ooa_can_swim(state, player, False),
+            ]),            
+        ])],
+        # /This one tunnel
+
+        ["crescent past middle", "crescent past middle cave", False, lambda state: ooa_has_explosives(state, player)],
+        ["crescent past middle cave", "tokay stolen flippers", False, lambda state: any([
+            ooa_can_swim(state, player, False),
+            all([
+                ooa_has_bombs(state, player), # Not sure this work with bombchus...
+                ooa_can_jump_1_wide_liquid(state, player, False)
+            ])
+        ])],
+
+        ["crescent past middle cave", "tokay stolen satchel", False, lambda state: all([
+            ooa_can_swim(state, player, False),
+            ooa_has_bracelet(state, player)
+        ])],
+        ["tokay stolen satchel", "crescent past middle cave", False, None],
+
+        ["crescent present east", "tokay stolen satchel", False, lambda state: ooa_can_switch_past_and_present(state, player)],
+
         # CRESCENT PRESENT
         #######################################
         ["lynna city", "crescent present west", True, lambda state: ooa_can_swim_deepwater(state, player, True)],
-        ["crescent past west", "crescent present west", False, lambda state: any([
-            ooa_can_go_back_to_present(state, player),
+        ["tokay stolen harp", "crescent present west", False, lambda state: any([
+            ooa_can_go_back_to_present(state, player), # I mean, it's not necessary as it's already covered by the line above, but it make the logic more clear
             all([
                 ooa_has_shovel(state, player),
                 ooa_can_open_portal(state, player)
             ])
         ])],
+
         ["crescent present west", OUTSIDE_TAG + "d3", False, None],
+
         ["lynna city", "under crescent island", True, lambda state: ooa_can_dive(state, player)],
+        
+        ["crescent past east", "crescent present east", True, lambda state: ooa_can_open_portal(state, player)],
+        ["crescent past west", "crescent present east", False, lambda state: ooa_can_go_back_to_present(state, player)],
+
         ["crescent present east", "tokay chef trade", False, lambda state: state.has("Stink Bag", player)],
         ["crescent past west", "crescent island tree", False, lambda state: all([
             any([
@@ -318,8 +372,6 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
                 ])
             ]),
         ])],
-        ["crescent past east", "crescent present east", True, lambda state: ooa_can_open_portal(state, player)],
-        ["crescent past west", "crescent present east", False, lambda state: ooa_can_go_back_to_present(state, player)],
 
         # NUUN
         #######################################
@@ -645,7 +697,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             state.has("Zora Scale", player),
         ])],
         ["piratian captain", "sea of storms past", False, None],
-        ["crescent past west", OUTSIDE_TAG + "d8", False, lambda state: all([
+        ["crescent past waters", OUTSIDE_TAG + "d8", False, lambda state: all([
             state.has("Tokay Eyeball", player),
             ooa_can_break_pot(state, player),
             ooa_can_dive(state, player),
@@ -675,9 +727,9 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         
         #GASHA PLOT LOGIC
         ##################
+        
         #Past Gasha Plots
-        ["lynna village", "crescent past spot", False, lambda state: all([
-            ooa_can_swim_deepwater(state, player, False), #double check if this includes raft
+        ["crescent past waters", "crescent past spot", False, lambda state: all([
             ooa_has_shovel(state, player)
         ])],
         ["symmetry past", "talus lake past spot", False, lambda state: all([
@@ -712,6 +764,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
                 ]),
             ]),
         ])],
+
         #Present Gasha locations
         ["yoll graveyard", "yoll graveyard spot", False, None],
         ["talus peaks", "talus peak present spot", False, lambda state: all([

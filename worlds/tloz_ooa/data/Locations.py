@@ -531,21 +531,53 @@ LOCATIONS_DATA = {
         "symbolic_name": "hiddenTokayCave",
     },
     "Crescent Island (Past): Crystal Cave Chest": {
-        "region_id": "tokay crystal cave",
+        "region_id": "tokay crystal cave chest",
         "vanilla_item": "Gasha Seed",
         "flag_byte": 0xcaca,
         "room": 0x05ca,
         "map_tile": 0x1bb,
         "collect": COLLECT_CHEST,
     },
-    #"Crescent Island (Past): Tokay's Stolen Shovel": {
-    #    "region_id": "tokay stolen shovel",
-    #    "vanilla_item": "Bombs (10)", # Originally you would get your shovel back, but that ain't progressive is it.
-    #    "flag_byte": 0xc8cb,
-    #    "room": 0x01cb,
-    #    "collect": COLLECT_TOUCH,
-    #    "symbolic_name": "tokayShovel",
-    #},
+    "Crescent Island (Past): Tokay's Stolen Shovel": {
+        "region_id": "tokay stolen shovel",
+        "vanilla_item": "Filler Item", # Originally you would get your shovel back, but that ain't progressive is it.
+        "flag_byte": 0xffff,
+        "room": 0x01cb,
+        "collect": COLLECT_TOUCH,
+        "symbolic_name": "tokayShovel",
+    },
+    "Crescent Island (Past): Tokay's Stolen Sword": {
+        "region_id": "tokay stolen sword",
+        "vanilla_item": "Filler Item", # Originally the sword
+        "flag_byte": 0xffff,
+        "room": 0x01cb,
+        "collect": COLLECT_TOUCH,
+        "symbolic_name": "tokaySword",
+    },
+    "Crescent Island (Past): Tokay's Stolen Satchel": {
+        "region_id": "tokay stolen satchel",
+        "vanilla_item": "Filler Item", # Originally the satchel
+        "flag_byte": 0xffff,
+        "room": 0x01cb,
+        "collect": COLLECT_TOUCH,
+        "symbolic_name": "tokaySatchel",
+    },
+    "Crescent Island (Past): Tokay's Stolen Flippers": {
+        "region_id": "tokay stolen flippers",
+        "vanilla_item": "Filler Item", # Originally the flippers
+        "flag_byte": 0xffff,
+        "room": 0x01cb,
+        "collect": COLLECT_TOUCH,
+        "symbolic_name": "tokayFlippers",
+    },
+    "Crescent Island (Past): Tokay's Stolen Harp": {
+        "region_id": "tokay stolen harp",
+        "vanilla_item": "Filler Item", # Originally the flippers
+        "flag_byte": 0xffff,
+        "room": 0x01cb,
+        "collect": COLLECT_TOUCH,
+        "symbolic_name": "tokayHarp",
+    },
     "Crescent Island (Past): Bomb Cave Chest": {
         "region_id": "tokay bomb cave",
         "vanilla_item": "Gasha Seed",

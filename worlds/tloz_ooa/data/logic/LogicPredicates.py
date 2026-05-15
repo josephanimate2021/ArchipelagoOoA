@@ -237,6 +237,9 @@ def ooa_has_bombs(state: CollectionState, player: int, amount: int = 1):
 def ooa_has_bombchus(state: CollectionState, player: int, amount: int = 1):
     return state.has("Bombchus (10)", player, amount)
 
+def ooa_has_explosives(state: CollectionState, player: int, amount: int = 1):
+    return ooa_has_bombs(state, player, amount) or ooa_has_bombchus(state, player, amount)
+
 
 def ooa_has_flute(state: CollectionState, player: int):
     return any([
