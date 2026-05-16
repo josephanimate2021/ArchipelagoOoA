@@ -536,12 +536,12 @@ LOCATIONS_DATA = {
         "flag_byte": 0xcaca,
         "room": 0x05ca,
         "map_tile": 0x1bb,
-        "collect": COLLECT_CHEST,
+        "collect": COLLECT_TOKAY_CRYSTAL_ROOM,
     },
     "Crescent Island (Past): Tokay's Stolen Shovel": {
         "region_id": "tokay stolen shovel",
         "vanilla_item": "Filler Item", # Originally you would get your shovel back, but that ain't progressive is it.
-        "flag_byte": 0xffff,
+        "flag_byte": 0xc8cb,
         "room": 0x01cb,
         "collect": COLLECT_TOUCH,
         "symbolic_name": "tokayShovel",
@@ -549,32 +549,33 @@ LOCATIONS_DATA = {
     "Crescent Island (Past): Tokay's Stolen Sword": {
         "region_id": "tokay stolen sword",
         "vanilla_item": "Filler Item", # Originally the sword
-        "flag_byte": 0xffff,
-        "room": 0x01cb,
-        "collect": COLLECT_TOUCH,
+        "flag_byte": 0xcaca,
+        "bit_mask": 0x40,
+        "room": 0x05ca,
+        "collect": COLLECT_TOKAY_CRYSTAL_ROOM,
         "symbolic_name": "tokaySword",
     },
     "Crescent Island (Past): Tokay's Stolen Satchel": {
         "region_id": "tokay stolen satchel",
         "vanilla_item": "Filler Item", # Originally the satchel
-        "flag_byte": 0xffff,
-        "room": 0x01cb,
+        "flag_byte": 0xc8bb,
+        "room": 0x01bb,
         "collect": COLLECT_TOUCH,
         "symbolic_name": "tokaySatchel",
     },
     "Crescent Island (Past): Tokay's Stolen Flippers": {
         "region_id": "tokay stolen flippers",
         "vanilla_item": "Filler Item", # Originally the flippers
-        "flag_byte": 0xffff,
-        "room": 0x01cb,
+        "flag_byte": 0xcacc,
+        "room": 0x05cc,
         "collect": COLLECT_TOUCH,
         "symbolic_name": "tokayFlippers",
     },
     "Crescent Island (Past): Tokay's Stolen Harp": {
         "region_id": "tokay stolen harp",
         "vanilla_item": "Filler Item", # Originally the flippers
-        "flag_byte": 0xffff,
-        "room": 0x01cb,
+        "flag_byte": 0xc8da,
+        "room": 0x01da,
         "collect": COLLECT_TOUCH,
         "symbolic_name": "tokayHarp",
     },
