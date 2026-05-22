@@ -195,6 +195,7 @@ class OracleOfAgesWorld(World):
     # ===================================================================================
     def fill_slot_data(self) -> dict:
         # Put options that are useful to the tracker inside slot data
+        #print(self.randomized_entrances)
         slot_data = {
             "version": f"{self.version()}",
             "options": self.options.as_dict(
@@ -227,7 +228,7 @@ class OracleOfAgesWorld(World):
             self.options.__setattr__(option, option_class.from_any(slot_data["options"][option]))
 
         self.randomized_entrances = slot_data["randomized_entrances"]
-        print(self.randomized_entrances)
+        #print(self.randomized_entrances)
         self.shop_prices = slot_data["shop_costs"]
 
         return True
