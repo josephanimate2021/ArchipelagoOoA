@@ -389,26 +389,23 @@ def make_d4_logic(player: int):
         # 4 keys
         ["d4 color tile drop", "d4 minecart D", False, lambda state: ooa_has_small_keys(state, player, 4, 4)],
 
-        ["d4 minecart D", "d4 small floor puzzle", False, lambda state: all([
-            ooa_generic_boss_and_miniboss_kill(state, player),
-            ooa_has_bombs(state, player)
+        ["d4 minecart D", "d4 miniboss", False, lambda state: ooa_generic_boss_and_miniboss_kill(state, player)],
+        ["d4 miniboss", "d4 small floor puzzle", False, lambda state: ooa_has_bombs(state, player)],
+        
+        ["d4 minecart D", "d4 large floor puzzle", False, lambda state: all([
+            ooa_can_jump_1_wide_liquid(state, player, False),
+            ooa_has_switch_hook(state, player),
         ])],
-        ["d4 minecart D", "d4 large floor puzzle", False, lambda state: any([
-            all([
-                ooa_can_jump_1_wide_liquid(state, player, False),
-                ooa_has_switch_hook(state, player),
-            ]),
-            all([
-                # We can jump the gap between minecart A and the bridge above,
-                # But it needs that the cariot is not there anymore, 
-                # so you need to kill the miniboss first
-                # Of course it's hard logic.
-                ooa_option_hard_logic(state, player),
-                ooa_generic_boss_and_miniboss_kill(state, player),
-                ooa_can_jump_3_wide_liquid(state, player),
-                ooa_has_cane(state, player),
-                ooa_has_noble_sword(state, player),
-            ])
+
+        ["d4 miniboss", "d4 large floor puzzle", False, lambda state: all([
+            # We can jump the gap between minecart A and the bridge above,
+            # But it needs that the cariot is not there anymore, 
+            # so you need to kill the miniboss first
+            # Of course it's hard logic.
+            ooa_option_hard_logic(state, player),
+            ooa_can_jump_3_wide_liquid(state, player),
+            ooa_has_cane(state, player),
+            ooa_has_noble_sword(state, player),
         ])],
         
         ["d4 large floor puzzle", "d4 boss", False, lambda state: all([
