@@ -41,7 +41,7 @@ LOCATIONS_DATA = {
     },
     "Forest of Time: Tingle Secret": {
         "region_id": "balloon guy's secret",
-        "vanilla_item": "Seed Satchel",
+        "vanilla_item": "Filler Item",
         "flag_byte": 0xc779,
         "bit_mask": 0x60,
         "secret_location": True,
@@ -138,7 +138,7 @@ LOCATIONS_DATA = {
     },
     "Lynna City: Mayor Plen's Secret": {
         "region_id": "mayor plen's secret",
-        "vanilla_item": "Spin Ring",
+        "vanilla_item": "Filler Item",
         "flag_byte": 0xc8f8,
         "conditional": True,
         "secret_location": True,
@@ -204,7 +204,7 @@ LOCATIONS_DATA = {
     },
     "Lynna City: Mamamu Yan Secret": {
         "region_id": "mamamu yan secret",
-        "vanilla_item": "Snowshoe Ring",
+        "vanilla_item": "Filler Item",
         "flag_byte": 0xc7e7,
         "conditional": True,
         "secret_location": True,
@@ -311,7 +311,7 @@ LOCATIONS_DATA = {
     },
     "Black Tower (Present): Rescue Zelda": {
         "region_id": "princess zelda rescue",
-        "vanilla_item": "Blue Joy Ring",
+        "vanilla_item": "Filler Item",
         "flag_byte": 0xcae7,
         "room": 0x7e7,
         "conditional": True,
@@ -605,7 +605,7 @@ LOCATIONS_DATA = {
     },
     "Crescent Island (Present): Wild Tokay Secret": {
         "region_id": "wild tokay secret",
-        "vanilla_item": "Bombs (10)", # A bomb upgrade was the vanila item, but I prefered to tell it that I got normal bombs instead.
+        "vanilla_item": "Filler Item",
         "flag_byte": 0xc7e5,
         "conditional": True,
         "secret_location": True,
@@ -965,7 +965,7 @@ LOCATIONS_DATA = {
     },
     "Rolling Ridge (Past): Elder's Secret": {
         "region_id": "elder secret",
-        "vanilla_item": "Biggoron's Sword",
+        "vanilla_item": "Filler Item",
         "flag_byte": 0xc8e7,
         "room": 0x03e7,
         "conditional": True,
@@ -1026,7 +1026,7 @@ LOCATIONS_DATA = {
     },
     "Zora Village (Present): King Zora's Secret": {
         "region_id": "king zora's secret",
-        "vanilla_item": "Progressive Sword",
+        "vanilla_item": "Filler Item",
         "flag_byte": 0xcaab,
         "room": 0x05ab,
         "bit_mask": 0x40,
@@ -1066,7 +1066,7 @@ LOCATIONS_DATA = {
     },
     "Eyeglass Island Library (Past): Old Man's Secret": {
         "region_id": "library secret",
-        "vanilla_item": "Progressive Shield",
+        "vanilla_item": "Filler Item",
         "flag_byte": 0xcae4,
         "room": 0x05e4,
         "bit_mask": 0x02,
@@ -1113,7 +1113,7 @@ LOCATIONS_DATA = {
     },
     "Sea of Storms (Present): Underwater Cave": {
         "region_id": "sea of storms present",
-        "vanilla_item": "Gasha Seed",
+        "vanilla_item": "Filler Item",
         "conditional": True,
         "flag_byte": 0xc8e8,
         "room": 0x3e8,
@@ -1252,7 +1252,7 @@ LOCATIONS_DATA = {
     },
     "Spirit's Grave: Miniboss": {
     	"region_id": "d1 miniboss",
-    	"vanilla_item": "Small Key (Spirit's Grave)", # Placed that because an interaction I placed drops a small key after it's defeat.
+    	"vanilla_item": "Filler Item",
     	"dungeon" : 1,
         "flag_byte": 0xc918,
         "conditional": True,
@@ -1339,7 +1339,7 @@ LOCATIONS_DATA = {
     },
     "Wing Dungeon (1F): Miniboss": {
     	"region_id": "d2 miniboss",
-    	"vanilla_item": "Small Key (Wing Dungeon)", # Placing this here for the same reason as d1.
+    	"vanilla_item": "Filler Item",
     	"dungeon" : 2,
         "flag_byte": 0xc934,
         "room": 0x0434,
@@ -1470,7 +1470,7 @@ LOCATIONS_DATA = {
     },
     "Moonlit Grotto (B1F): Miniboss": {
     	"region_id": "d3 miniboss",
-    	"vanilla_item": "Small Key (Moonlit Grotto)", # Placing this here for the same reason as D2
+    	"vanilla_item": "Filler Item", 
     	"dungeon" : 3,
         "flag_byte": 0xc94d,
         "room": 0x044d,
@@ -1530,7 +1530,7 @@ LOCATIONS_DATA = {
     },
     'Skull Dungeon (1F): Miniboss': {
     	"region_id": "d4 miniboss",
-    	"vanilla_item": "Small Key (Skull Dungeon)", # Placement is here for the same reason as D3
+    	"vanilla_item": "Filler Item", 
     	"dungeon" : 4,
         "flag_byte": 0xc980,
         "room": 0x0480,
@@ -1615,7 +1615,7 @@ LOCATIONS_DATA = {
     },
     "Crown Dungeon (1F): Miniboss": {
     	"region_id": "d5 miniboss",
-    	"vanilla_item": "Small Key (Crown Dungeon)",
+    	"vanilla_item": "Filler Item", 
     	"dungeon" : 5,
         "flag_byte": 0xc9b4,
         "room": 0x04b4,
@@ -1707,7 +1707,7 @@ LOCATIONS_DATA = {
     ##########################################
     "Mermaid's Cave (Present): Miniboss": {
     	"region_id": "d6 miniboss",
-    	"vanilla_item": "Small Key (Mermaid's Cave Present)",
+    	"vanilla_item": "Filler Item", 
     	"dungeon" : 6,
         "flag_byte": 0xca12,
         "room": 0x0512,
@@ -1872,7 +1872,7 @@ LOCATIONS_DATA = {
     },
     "Jabu-Jabu's Belly (1F): Miniboss": {
     	"region_id": "d7 miniboss",
-    	"vanilla_item": "Small Key (Jabu-Jabu's Belly)",
+    	"vanilla_item": "Filler Item", 
     	"dungeon" : 7,
         "flag_byte": 0xca4a,
         "room": 0x74a,
@@ -2071,7 +2071,7 @@ LOCATIONS_DATA = {
     },
     'Ancient Tomb (B2F): Miniboss': {
     	"region_id": "d8 miniboss",
-    	"vanilla_item": "Small Key (Ancient Tomb)",
+    	"vanilla_item": "Filler Item", 
     	"dungeon" : 8,
         "flag_byte": 0xca82,
         "room": 0x0582,
