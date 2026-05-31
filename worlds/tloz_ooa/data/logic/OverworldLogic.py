@@ -649,7 +649,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         ])],
         ["ridge mid present", "goron shooting gallery", False, lambda state: ooa_can_switch_past_and_present(state, player)],
         ["goron shooting gallery", "goron shooting gallery price", False, lambda state: ooa_has_sword(state, player)],
-        ["ridge mid past", "ridge east tree", False, lambda state: any([
+        ["ridge mid past", "ridge east tree", False, lambda state: all([
             ooa_can_harvest_tree(state, player, False),
             ooa_option_medium_logic(state, player),
             ooa_can_warp_using_gale_seeds(state, player),
