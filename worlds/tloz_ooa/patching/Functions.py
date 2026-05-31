@@ -11,7 +11,7 @@ from ..data.Constants import *
 from .Constants import *
 from pathlib import Path
 
-from .. import LOCATIONS_DATA
+from ..data.Locations import LOCATIONS_DATA
 from ..data.Entrances import WARPS_DATA, WARP_SOURCE_TABLE, WARP_DEST_TABLE
 from ..Options import *
 

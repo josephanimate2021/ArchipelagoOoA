@@ -1,7 +1,5 @@
 from .Constants import *
 
-BASE_LOCATION_ID = 27022002000
-
 LOCATIONS_DATA = {
     ##########################################
     "Forest of Time: Impa's Gift": {
@@ -648,6 +646,7 @@ LOCATIONS_DATA = {
     "Nuun Highlands: Southern Cave": {
         "region_id": "nuun highlands cave",
         "vanilla_item": "Light Ring L-1",
+        "id": 0xc7ec00,
         "flag_byte": [0xc7ec, 0xcab8, 0xc7f4],
         "room": [0x02ec, 0x05b8, 0x02f4], # Rick, Dim & Moosh respectively
         "map_tile": 0x37, 
@@ -676,6 +675,7 @@ LOCATIONS_DATA = {
     "Symmetry Village: Brothers": {
         "region_id": "symmetry city brother",
         "vanilla_item": "Cracked Tuni Nut",
+        "id": 0xc86e00,
         "flag_byte": [0xc86e, 0xc86f],
         "room": [0x036e, 0x036f],
         "map_tile": 0x104,
@@ -2333,6 +2333,7 @@ LOCATIONS_DATA = {
     "Lynna City: Seed Tree": {
         "region_id": "south lynna tree",
         "local": True,
+        "id": 0xc77800,
         "flag_byte": [0xc778, 0xc878],
         "room": [0x0078, 0x0178],
         "collect": COLLECT_TOUCH,
@@ -2389,6 +2390,7 @@ LOCATIONS_DATA = {
     "Zora Village: Seed Tree": {
         "region_id": "zora village tree",
         "local": True,
+        "id": 0xc7c100,
         "flag_byte": [0xc7c1, 0xc8c1],
         "room": [0x00c1, 0x01c1],
         "collect": COLLECT_TOUCH,

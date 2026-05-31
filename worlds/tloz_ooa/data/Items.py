@@ -1,8 +1,6 @@
 from BaseClasses import ItemClassification
 from ..patching.Constants import DEFINES
 
-BASE_ITEM_ID = 27022002000
-
 ITEMS_DATA = {
     #   "No Item": {
     #   'classification': ItemClassification.filler,

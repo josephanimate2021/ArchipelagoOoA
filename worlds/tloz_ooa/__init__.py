@@ -7,15 +7,16 @@ from Options import Option
 from BaseClasses import Item, Location, LocationProgressType
 from Options import Accessibility, OptionError
 from typing import Any, Set, List, Dict, Optional, Tuple, ClassVar, TextIO, Union
-from .generation.Data import *
 from .data.Items import *
 from .Options import *
 from .WebWorld import OracleOfAgesWeb
 from .generation.PatchWriter import ooa_create_appp_patch
-from .data import LOCATIONS_DATA
 from .data.Constants import *
+from .data.Locations import LOCATIONS_DATA
+from .data.Items import ITEMS_DATA
 from .data.Entrances import *
 from .data.Regions import *
+from .common.Util import build_location_name_to_id_dict, build_item_name_to_id_dict
 from .Client import OracleOfAgesClient  # Unused, but required to register with BizHawkClient
 from .Settings import OOASettings
 from .WebWorld import *
@@ -33,8 +34,8 @@ class OracleOfAgesWorld(World):
     web = OracleOfAgesWeb()
     topology_present = True
 
-    location_name_to_id = build_location_name_to_id_dict()
-    item_name_to_id = build_item_name_to_id_dict()
+    location_name_to_id = build_location_name_to_id_dict(LOCATIONS_DATA)
+    item_name_to_id = build_item_name_to_id_dict(ITEMS_DATA)
     item_name_groups = ITEM_GROUPS
     location_name_groups = LOCATION_GROUPS
 
@@ -70,7 +71,6 @@ class OracleOfAgesWorld(World):
         return cls.world_version.as_simple_string()
 
     def __init__(self, multiworld, player):
-
         self.tracker_world["poptracker_name_mapping"] = {}
         for location_name, location_data in LOCATIONS_DATA.items():
             split = location_name.split(": ")

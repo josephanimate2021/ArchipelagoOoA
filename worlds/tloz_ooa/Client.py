@@ -5,7 +5,7 @@ from NetUtils import ClientStatus
 import worlds._bizhawk as bizhawk
 from worlds._bizhawk.client import BizHawkClient
 from . import LOCATIONS_DATA, ITEMS_DATA, OracleOfAgesGoal
-from .generation.Data import build_item_id_to_name_dict, build_location_name_to_id_dict
+from .common.Util import build_item_id_to_name_dict, build_location_name_to_id_dict
 
 if TYPE_CHECKING:
     from worlds._bizhawk.context import BizHawkClientContext
@@ -59,8 +59,8 @@ class OracleOfAgesClient(BizHawkClient):
 
     def __init__(self) -> None:
         super().__init__()
-        self.item_id_to_name = build_item_id_to_name_dict()
-        self.location_name_to_id = build_location_name_to_id_dict()
+        self.item_id_to_name = build_item_id_to_name_dict(ITEMS_DATA)
+        self.location_name_to_id = build_location_name_to_id_dict(LOCATIONS_DATA)
         self.local_checked_locations = set()
         self.local_scouted_locations = set()
         self.local_tracker = {}
