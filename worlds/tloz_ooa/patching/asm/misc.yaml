@@ -66,7 +66,7 @@
 
 # allow skipping the capcom screen after one second by pressing start
 03//checkSkipCapcom: |
-    ld hl,$cbb3
+    ld hl,wMapMenu_mode
     ld a,$94
     cp (hl)
     ret c
@@ -273,7 +273,7 @@
   jp z,@present
   ld a,$01
   @present:
-  ld ($cbb3),a ;mapmode
+  ld (wMapMenu_mode),a 
   ld hl,galeCheckAvailableTree_body
   ld e,$02
   call interBankCall

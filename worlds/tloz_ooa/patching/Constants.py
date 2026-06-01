@@ -254,6 +254,9 @@ DEFINES = {
 
     # wram
     "wSubscreen1CurrentSlotIndex": "$c085",
+    "wOriginalMinimapGroup": "$c09d",  # Custom address
+    "wOriginalDungeonIndex": "$c09e",  # Custom address
+    "wMinimapCycleToNextMode": "$c09f",  # Custom address
     "wWarpCheck": "$c086",
     "wBigBuffer": "$c300",
     "wKeysPressed":"$c481",
@@ -334,11 +337,13 @@ DEFINES = {
     "wFeatherLevel":"$0 # not present in ages",
     "wRememberedCompanionId":"$cc24",
     "wIntroVar": "$c2e7",
+    "wPaletteThread_mode": "$c4ab",
     "wRickyState":"$c646",
     "wDimitriState":"$c647",
     "wAnimalTutorialFlags":"$c649",
     "wGashaSpotFlags":"$c64c",
     "wDungeonBossKeys":"$c682",
+    "wDungeonMaps":"$c686",
     "wInventoryB":"$c688",
     "wObtainedTreasureFlags":"$c69a",
     "wNetCountInL":"$c6a8",
@@ -361,10 +366,14 @@ DEFINES = {
     "wMakuTreeState":"$c6e8",
     "wJabuWaterLevel":"$c6e9",
     "wStatusBarNeedsRefresh":"$cbe9",
+    "wMenuActiveState": "$cbcd",
+    "wMapMenuCursorIndex":"$cbb6",
     "wActiveGroup":"$cc2d",
     "wActiveRoom":"$cc30",
     "wAreaFlags":"$cc34",
     "wDungeonIndex":"$cc39",
+    "wMinimapGroup": "$c63a",
+    "wFrameCounter": "$cc00",
     "wWarpDestGroup":"$cc47",
     "wWarpDestRoom":"$cc48",
     "wWarpTransition":"$cc49",
@@ -377,10 +386,12 @@ DEFINES = {
     "wLinkObjectIndex":"$cc2c",
     "wMenuLoadState":"$cbcc",
     "wLinkDeathTrigger": "$cdd5",
-    "getFreeInteractionSlot": "$3aef",
+    "wDungeonMapScroll": "$cbb4",
+    "wDungeonMapScrollState": "$cbce",
 
     # rom 00
     "checkFlag": "$0205",
+    "disableLcd": "$02c1",
     "getRandomNumber":"$043e",
     "clearMemory":"$046f",
     "copyMemory":"$0486",
@@ -408,12 +419,14 @@ DEFINES = {
     "interactionIncState": "$23e0",
     "objectCreateInteraction":"$24c5",
     "createTreasure":"$27d4",
+    "fastFadeoutToWhite": "$3623",
     "checkGlobalFlag":"$31f3",
     "setGlobalFlag":"$31f9",
     "fadeInFromWhite":"$3290", # changed address for faster fades
     "incMakuTreeState":"$3e53",
     "interactionDelete":"$3b05",
     "clearStaticObjects":"$319f",
+    "getFreeInteractionSlot": "$3aef",
 
     # rom 02
     "_closeMenu":"$4fba",

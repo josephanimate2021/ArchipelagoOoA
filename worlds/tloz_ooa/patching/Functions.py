@@ -182,6 +182,9 @@ def define_location_constants(assembler: Z80Assembler, patch_data):
         item_id, item_subid = get_item_id_and_subid(item)
         deterministic_gasha_table.extend([item_id, item_subid])
     assembler.add_floating_chunk("deterministicGashaLootTable", deterministic_gasha_table)
+    
+    if patch_data["options"]["linked_heros_cave"]:
+        assembler.define_byte("d11", 0x01)
 
 def set_faq_text(assembler: Z80Assembler):
     faq_intro_text = text_to_binary(("Welcome to the "
