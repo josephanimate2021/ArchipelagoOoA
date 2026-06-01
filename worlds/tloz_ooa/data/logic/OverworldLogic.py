@@ -615,7 +615,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         ["ridge diamonds past", "ridge mid past", False, None],
         ["ridge upper past", "ridge mid past", False, None],
         ["ridge mid past", "ridge mid present", False, lambda state: ooa_can_go_back_to_present(state, player)],
-#       ["ridge mid past", "ridge move vine seed", False, lambda state: ooa_has_switch_hook(state, player)],
+        ["ridge mid past", "ridge move vine seed", False, lambda state: ooa_has_switch_hook(state, player)],
         ["ridge mid present", "target carts", True, lambda state: all([
             ooa_has_switch_hook(state, player),
             state.has("_access_cart", player),
@@ -654,13 +654,10 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ooa_option_medium_logic(state, player),
             ooa_can_warp_using_gale_seeds(state, player),
         ])],
-        ["goron shooting gallery", "ridge east tree", False, lambda state: any([
+        ["ridge mid present", "ridge east tree", False, lambda state: any([
             ooa_can_harvest_tree(state, player, False),
+            ooa_can_switch_past_and_present(state, player),
         ])],
-        #["ridge mid present", "ridge east tree", False, lambda state: any([
-        #    ooa_can_harvest_tree(state, player, False),
-        #    ooa_can_switch_past_and_present(state, player),
-        #])],
         ["goron shooting gallery", "ridge east tree", False, lambda state: ooa_can_harvest_tree(state, player, False)],
         ["ridge mid past", "trade lava juice", False, lambda state: state.has("Lava Juice", player)],
         ["ridge mid past", "ridge bush cave", False, lambda state: ooa_has_switch_hook(state, player)],
