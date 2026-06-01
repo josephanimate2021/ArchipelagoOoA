@@ -77,12 +77,7 @@
     ret
 
 09//checkEssencePostSavedWaifu: |
-    push bc
-    ld bc,$3800 # present
-    call compareRoom
-    pop bc
-    ret nz
-    call getThisRoomFlags
+    ld a,($c738) ; Maku Tree Room flags
     bit 7,a
     ret z
     ld a,(wEssencesObtained)
