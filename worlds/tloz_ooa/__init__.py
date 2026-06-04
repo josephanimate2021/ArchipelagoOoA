@@ -128,6 +128,20 @@ class OracleOfAgesWorld(World):
     # ===================================================================================
     #
     # ===================================================================================
+    def create_items(self):
+        from .generation.CreateItems import ooa_create_items
+        ooa_create_items(self)
+
+    # -----------------------------------------------------------------------------------
+    #
+    # -----------------------------------------------------------------------------------
+    def create_item(self, item: str) -> Item :
+        from .common.generation.CreateItems import create_item
+        return create_item(self, item)
+
+    # ===================================================================================
+    #
+    # ===================================================================================
     def set_rules(self):
         from .generation.Logic import create_connections, apply_self_locking_rules
         create_connections(self)
@@ -142,19 +156,14 @@ class OracleOfAgesWorld(World):
         #print(unreachable)
         #print(allstate.prog_items)
 
-    # ===================================================================================
-    #
-    # ===================================================================================
-    def create_items(self):
-        from .generation.CreateItems import ooa_create_items
-        ooa_create_items(self)
+        
 
-    # -----------------------------------------------------------------------------------
+    # ===================================================================================
     #
-    # -----------------------------------------------------------------------------------
-    def create_item(self, item: str) -> Item :
-        from .common.generation.CreateItems import create_item
-        return create_item(self, item)
+    # ===================================================================================
+    def get_filler_item_name(self) -> str:
+        from .generation.CreateItems import ooa_get_filler_item_name
+        return ooa_get_filler_item_name(self)
 
     # ===================================================================================
     #

@@ -90,7 +90,7 @@ def build_item_pool_dict(world: OracleOfAgesWorld):
 
     # Add as many filler items as required
     for _ in range(filler_item_count):
-        random_filler_item = get_filler_item_name(world)
+        random_filler_item = ooa_get_filler_item_name(world)
         item_pool_dict[random_filler_item] = item_pool_dict.get(random_filler_item, 0) + 1
     
     # Perform adjustments on the item pool
@@ -131,7 +131,7 @@ def create_rings(world: OracleOfAgesWorld, amount):
 # -----------------------------------------------------------------------------------
 #
 # -----------------------------------------------------------------------------------
-def get_filler_item_name(world: OracleOfAgesWorld) -> str:
+def ooa_get_filler_item_name(world: OracleOfAgesWorld) -> str:
     FILLER_ITEM_NAMES = [
         "Rupees (1)", "Rupees (5)", "Rupees (5)", "Rupees (10)", "Rupees (10)",
         "Rupees (20)", "Rupees (30)",
