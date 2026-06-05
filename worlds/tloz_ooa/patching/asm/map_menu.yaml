@@ -243,8 +243,6 @@
   call extendedCheckForDungeonDisplay
   /endif
 
-02/6636/: jp alwaysShowDungeonTileContent
-
 02//alwaysShowDungeonTileContent: |
   ld a,($cbb6) ; (wMapMenu.cursorIndex)
   ld c,a
@@ -269,8 +267,10 @@
   ret
   
   @noIcon:
+  ld a,c
   jp $6639 ; mapMenu_checkRoomVisited
 
+02/6636/: jp alwaysShowDungeonTileContent
 
 
 02//setMapMode: |
