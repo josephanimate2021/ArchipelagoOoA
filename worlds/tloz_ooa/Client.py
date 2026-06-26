@@ -26,6 +26,9 @@ RAM_ADDRS = {
     "current_map_group": (0xCC2d, 1, "System Bus"),
     "current_map_id": (0xCC30, 1, "System Bus"),
     "is_dead": (0xCDD5, 1, "System Bus"),
+
+    "total_collected_rupees":  (0xC627, 1, "System Bus"),
+    "kill_count":  (0xC620, 1, "System Bus"),
 }
 
 GASHA_ADDRS = {
@@ -56,6 +59,8 @@ class OracleOfAgesClient(BizHawkClient):
     local_scouted_locations: Set[int]
     item_id_to_name: Dict[int, str]
     location_name_to_id: Dict[str, int]
+    total_collected_rupees = 0
+    kill_count = 0
 
     def __init__(self) -> None:
         super().__init__()
@@ -117,7 +122,9 @@ class OracleOfAgesClient(BizHawkClient):
                 RAM_ADDRS["location_flags"],        # Location flags
                 RAM_ADDRS["current_map_group"],     # Current map group & id where the player is currently located
                 RAM_ADDRS["current_map_id"],        # ^^^
-                RAM_ADDRS["is_dead"]
+                RAM_ADDRS["is_dead"],
+                RAM_ADDRS["total_collected_rupees"],
+                RAM_ADDRS["kill_count"]
             ])
 
             # If player is not in-game, don't do anything else
@@ -129,6 +136,9 @@ class OracleOfAgesClient(BizHawkClient):
             flag_bytes = read_result[3]
             current_room = (read_result[4][0] << 8) | read_result[5][0]
             is_dead = (read_result[6][0] != 0)
+            hexa_total_rupee = read_result[7][0]
+            self.total_collected_rupees = (hexa_total_rupee & 0x0F) + (hexa_total_rupee >> 4 * 10)
+            self.kill_count = read_result[8][0]
 
             await self.process_checked_locations(ctx, flag_bytes)
             await self.process_scouted_locations(ctx, flag_bytes)
@@ -316,7 +326,9 @@ class OracleOfAgesClient(BizHawkClient):
                 "cmd": "Bounce",
                 "slots": [ctx.slot],
                 "data": {
-                    "Current Room": current_room
+                    "Current Room": current_room,
+                    "Total Collected Rupee": self.total_collected_rupees,
+                    "Kill Count": self.kill_count
                 }
             }])
             del updates["Current Room"]
