@@ -310,6 +310,7 @@ DEFINES = {
     # rom 00
     "interBankCall":"$008a",
     "getNumSetBits":"$0176",
+    "addDecimalToHlRef":"$0181",
     "compareHlToBc":"$01d6",
     "setFlag":"$020e",
     "decHlRef16WithCap":"$0237",

@@ -16,7 +16,7 @@ REGIONS = [
     "mamamu yan secret",
     "mayor plen's house",
     "vasu's gift",
-    #"vasu's rupee ring gift",
+    "vasu's rupee ring gift",
     "vasu's slayers ring gift",
     "vasu's victory ring gift",
     "princess zelda rescue",

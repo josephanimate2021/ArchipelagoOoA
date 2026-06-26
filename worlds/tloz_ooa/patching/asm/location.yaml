@@ -111,9 +111,57 @@
     ld bc,locations.vasuGift
     jp spawnTreasureOnLink
 
-# This script on address 4a55 at bank 0c usually gives the user a victory ring when they finish the game. We need to modify this script to give link a modified item instead.
-0c/4a55/: |
-  db orroomflag,$04,giveitem,locations.vasuVictoryRingGift.id,locations.vasuVictoryRingGift.subid,jumpalways,$e2,$49
+15//vasuAdditionnalRingRewardTable: | # subid, id, roomflag
+    db locations.vasuSlayersRingGift.subid, locations.vasuSlayersRingGift.id, $01
+    db locations.vasuRupeeRingGift.subid, locations.vasuRupeeRingGift.id, $02
+    db locations.vasuVictoryRingGift.subid, locations.vasuVictoryRingGift.id, $04  
+
+# Modify vasu_giveRingInVar3a to give us the proper check instead of a ring here
+15//adaptVasuGiveRing: |
+    ld e,$7a
+    ld a,(de) ; what have been removed
+    sub $34
+    ld hl,vasuAdditionnalRingRewardTable
+    ld b,a
+    rst 10  ; rst_addAToHL
+    ld a,b
+    rst 10  ; rst_addAToHL
+    ld a,b
+    rst 10  ; rst_addAToHL
+    ldi a,(hl)
+    ld c,a
+    ldi a,(hl)
+    ld b,a
+    push hl
+    call spawnTreasureOnLink
+    pop hl
+    ld a,(hl)
+    ld b,a
+    call getThisRoomFlags
+    or b
+    ld (hl),a
+    ret
+
+15/42f5/: jp adaptVasuGiveRing
+
+# Updates enemy kill requirement for vasu slayers ring check.
+00/28a0/: ld bc,option.vasuSlayerRingCheckRequirement
+
+3f//checkRupeeRequirement: |
+    call addDecimalToHlRef
+    jr c,@forceSkip
+    push bc
+    ldi a,(hl)
+    ld c,a
+    ldi a,(hl)
+    ld b,a
+    ld hl,option.vasuRupeeRingCheckRequirement
+    call compareHlToBc
+    pop bc
+    @forceSkip:
+    ret
+
+3f/45da/: call checkRupeeRequirement
 
 15//tokayStolenItem: | # Order is important each item is linked to a subid
     dw locations.tokaySword

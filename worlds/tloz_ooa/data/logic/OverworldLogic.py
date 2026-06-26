@@ -878,7 +878,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
 
     if not options.vasu_ring_checks_requirement["disable_entirely"]:
         labrynna_logic.extend([
-            #[INSIDE_TAG + "vasu's shop", "vasu's rupee ring gift", False, None],
+            [INSIDE_TAG + "vasu's shop", "vasu's rupee ring gift", False, lambda state: ooa_has_rupees(state, player, options.vasu_ring_checks_requirement["rupee_requirement_for_rupee_ring_check"])],
             [INSIDE_TAG + "vasu's shop", "vasu's slayers ring gift", False, lambda state: ooa_can_kill_normal_enemy(state, player)],
         ])
 

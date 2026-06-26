@@ -137,8 +137,6 @@ def get_asm_files(patch_data):
         asm_files.append("asm/conditional/lynna_gardener.yaml")
     if patch_data["options"]["miniboss_locations"]:
         asm_files.append("asm/conditional/miniboss_locations.yaml")
-    if patch_data["vasu_madness"]:
-        asm_files.append("asm/conditional/vasu_madness.yaml")
     if patch_data["options"]["secret_locations"]:
         asm_files.append("asm/conditional/secret_locations.yaml")
     if patch_data["options"]["goal"] == OracleOfAgesGoal.option_beat_ganon:
@@ -210,8 +208,14 @@ def define_option_constants(assembler: Z80Assembler, patch_data):
     assembler.define_byte("option.startingYPos", 0x58)
 
     if patch_data["vasu_madness"]:
-        assembler.define_byte("option.vasuSlayerRingCheckRequirement", patch_data["amount_of_enemies_defeated_for_slayer_ring_check"])
-        # TODO: Implement rupee ring option after figuruing out how to crawl a way out of the hardcoded $9999 limit.
+        assembler.define_word("option.vasuSlayerRingCheckRequirement", patch_data["amount_of_enemies_defeated_for_slayer_ring_check"])
+        ## Game use hexadecimal as decimal for rupee count, so we translate from decimal to hexadecimal to have the correct value
+        ## + we remove one to the count because with current implementation it only work once you go beyond the rupee count given in the option.
+        assembler.define_word("option.vasuRupeeRingCheckRequirement", int(str(patch_data["rupee_requirement_for_rupee_ring_check"]-1),16))
+    else:
+        assembler.define_word("option.vasuSlayerRingCheckRequirement", 1000)
+        assembler.define_word("option.vasuRupeeRingCheckRequirement", int(str(9999),16))
+
 
     assembler.define_byte("option.warpingGroup", patch_data["warp_to_start_variables"]["group"] if "group" in patch_data["warp_to_start_variables"] else 0x00)
     assembler.define_byte("option.warpingRoom", patch_data["warp_to_start_variables"]["room"] if "room" in patch_data["warp_to_start_variables"] else 0x59)
