@@ -2,7 +2,7 @@
 # at actual file creation.
 
 07//initialGlobalFlags: |
-    db $02,$0a,$0c,GLOBALFLAG_WON_FAIRY_HIDING_GAME,$1d,$20,$21,$23,$2b,$33,$3d,$40,$41,$43,$45,$ff
+    db $02,$0a,$0c,GLOBALFLAG_WON_FAIRY_HIDING_GAME,$1d,$20,$21,$23,$2a,$2b,$2e,$33,$3d,$40,$41,$43,$45,$ff
 
 07/4195/startingBomb: db $00
 
