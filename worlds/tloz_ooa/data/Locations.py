@@ -41,7 +41,7 @@ LOCATIONS_DATA = {
         "region_id": "balloon guy's secret",
         "vanilla_item": "Filler Item",
         "flag_byte": 0xc779,
-        "bit_mask": 0x60,
+        "bit_mask": 0x40,
         "secret_location": True,
         "conditional": True,
         "room": 0x0079,
