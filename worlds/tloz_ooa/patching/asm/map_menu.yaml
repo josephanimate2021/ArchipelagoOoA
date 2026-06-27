@@ -243,6 +243,9 @@
   call extendedCheckForDungeonDisplay
   /endif
 
+# replace jr nz,+ in specialCode1 by a simple jr
+02/61fe/: db $18
+
 02//alwaysShowDungeonTileContent: |
   ld a,($cbb6) ; (wMapMenu.cursorIndex)
   ld c,a
@@ -267,7 +270,6 @@
   ret
   
   @noIcon:
-  ld a,c
   jp $6639 ; mapMenu_checkRoomVisited
 
 02/6636/: jp alwaysShowDungeonTileContent

@@ -52,6 +52,7 @@ WARPS_DATA = {
     "d0": {
         "outside_warp": 0x7728,
         "inside_warp": 0x7aec,
+        "custom_txt_id": 0xe9,
         "present": False,
         "dungeon": 0,
     },
@@ -117,6 +118,7 @@ WARPS_DATA = {
         "outside_warp": 0x79b4,
         "inside_warp": 0x7c54,
         "custom_map_tile": 0x13c,
+        "custom_txt_id": 0xe1,
         "present": False,
         "dungeon": 9,
     }

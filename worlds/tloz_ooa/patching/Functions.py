@@ -447,18 +447,35 @@ def set_dungeon_warps(rom: RomData, patch_data):
         
         if ("dungeon" in WARPS_DATA[inside_name]):
             dungeon_number = WARPS_DATA[inside_name]["dungeon"]
-            
-            if dungeon_number == 6 or dungeon_number == 0: # D6 present or maku path
-                continue
-            if dungeon_number == 9:
-                dungeon_number = 6
-            
+                        
             intoout_warp_group = (inside_values[outside_name] & 0xf000) >> 12
             intoout_warp_index = inside_values[outside_name] & 0x00ff
             intoout_warp_dest_address = warp_dest_table[intoout_warp_group] + intoout_warp_index * 3
             intoout_warp_room = rom.read_byte(GameboyAddress(0x04, intoout_warp_dest_address).address_in_rom())
             intoout_warp_position = rom.read_byte(GameboyAddress(0x04, intoout_warp_dest_address + 1).address_in_rom())
             intoout_warp_flag = rom.read_byte(GameboyAddress(0x04, intoout_warp_dest_address + 2).address_in_rom())
+            
+            # Change Minimap popups to indicate the randomized dungeon's name
+            dungeon_txt_id =  0x81 | (dungeon_number << 3)
+            if "custom_txt_id" in WARPS_DATA[inside_name]:
+                dungeon_txt_id = WARPS_DATA[inside_name]["custom_txt_id"]
+            
+            tile_group = intoout_warp_group
+            basetile_room = intoout_warp_room
+            if "custom_map_tile" in WARPS_DATA[outside_name]:
+                tile_group = WARPS_DATA[outside_name]["custom_map_tile"] >> 8
+                basetile_room = WARPS_DATA[outside_name]["custom_map_tile"] & 0xff
+            tile_room = (basetile_room & 0x0f) + (((basetile_room & 0xf0) >> 4) * 14)
+            if (tile_group == 0):
+                rom.write_byte(0xAAAF + tile_room, dungeon_txt_id)
+            if (tile_group == 1):
+                rom.write_byte(0xAB73 + tile_room, dungeon_txt_id)
+
+            # ESSENCE WARP
+            if dungeon_number == 6 or dungeon_number == 0: # No essence warp for D6 present or maku path
+                continue
+            if dungeon_number == 9:
+                dungeon_number = 6
 
             if (intoout_warp_flag == 0x4):
                 intoout_warp_flag = 0x1 # Force set respawn
@@ -478,12 +495,6 @@ def set_dungeon_warps(rom: RomData, patch_data):
                     intoout_warp_position,
                     intoout_warp_flag
                 ])
-
-            ## Change Minimap popups to indicate the randomized dungeon's name
-            #map_tile = intoout_warp_group << 8 | intoout_warp_room
-            #if "custom_map_tile" in WARPS_DATA[outside_name]:
-            #    map_tile = WARPS_DATA[outside_name]["custom_map_tile"]
-            #rom.write_byte(0x???? + map_tile, 0x81 | (dungeon_index << 3))
 
 def define_tile_replacements_table(assembler: Z80Assembler, patch_data):
     # NOTE ; The fifth bit (which normally determine if a map has been visited) is used to know if the test is negative
