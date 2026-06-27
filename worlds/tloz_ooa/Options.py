@@ -51,6 +51,9 @@ class OracleOfAgesVasuRingChecksRequirement(OptionDict):
         "amount_of_enemies_defeated_for_slayer_ring_check": 100,
         "rupee_requirement_for_rupee_ring_check": 1000,
     }
+    
+    include_in_patch = True
+    include_in_slot_data = True
 
 class OracleOfAgesMinibossLocations(Toggle):
     """

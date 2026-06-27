@@ -27,8 +27,8 @@ RAM_ADDRS = {
     "current_map_id": (0xCC30, 1, "System Bus"),
     "is_dead": (0xCDD5, 1, "System Bus"),
 
-    "total_collected_rupees":  (0xC627, 1, "System Bus"),
-    "kill_count":  (0xC620, 1, "System Bus"),
+    "total_collected_rupees":  (0xC627, 2, "System Bus"),
+    "kill_count":  (0xC620, 2, "System Bus"),
 }
 
 GASHA_ADDRS = {
@@ -50,6 +50,17 @@ GASHA_ADDRS = {
     "Rolling Ridge (Past, West) Gasha Spot": (0xc828, 0x0f),
 }
 
+
+def hexa_to_decimal(num) -> int:
+    remaining = num
+    powerOfTen = 0
+    result = 0
+    while (remaining != 0):
+        currentDecimalNumber = (remaining & 0xf) * (pow(10,powerOfTen))
+        result += currentDecimalNumber
+        remaining = remaining >> 4
+        powerOfTen += 1
+    return result
 
 class OracleOfAgesClient(BizHawkClient):
     game = "The Legend of Zelda - Oracle of Ages"
@@ -136,9 +147,9 @@ class OracleOfAgesClient(BizHawkClient):
             flag_bytes = read_result[3]
             current_room = (read_result[4][0] << 8) | read_result[5][0]
             is_dead = (read_result[6][0] != 0)
-            hexa_total_rupee = read_result[7][0]
-            self.total_collected_rupees = (hexa_total_rupee & 0x0F) + (hexa_total_rupee >> 4 * 10)
-            self.kill_count = read_result[8][0]
+            hexa_total_rupee = int.from_bytes(read_result[7], "little")
+            self.total_collected_rupees = hexa_to_decimal(hexa_total_rupee)
+            self.kill_count = int.from_bytes(read_result[8], "little")
 
             await self.process_checked_locations(ctx, flag_bytes)
             await self.process_scouted_locations(ctx, flag_bytes)
@@ -297,6 +308,8 @@ class OracleOfAgesClient(BizHawkClient):
 
         # Position tracking
         local_tracker["Current Room"] = current_room
+        local_tracker["Total Collected Rupee"] = self.total_collected_rupees
+        local_tracker["Kill Count"] = self.kill_count
 
         # Wild seed/bomb tracking
         wild_item_data = [
@@ -321,17 +334,9 @@ class OracleOfAgesClient(BizHawkClient):
             if key not in self.local_tracker or self.local_tracker[key] != value:
                 updates[key] = value
 
-        if "Current Room" in updates:
-            await ctx.send_msgs([{
-                "cmd": "Bounce",
-                "slots": [ctx.slot],
-                "data": {
-                    "Current Room": current_room,
-                    "Total Collected Rupee": self.total_collected_rupees,
-                    "Kill Count": self.kill_count
-                }
-            }])
-            del updates["Current Room"]
+        await self.send_bounce_cmd(ctx, updates, "Current Room")
+        await self.send_bounce_cmd(ctx, updates, "Total Collected Rupee")
+        await self.send_bounce_cmd(ctx, updates, "Kill Count")
 
         if len(updates) > 0:
             await ctx.send_msgs([{
@@ -344,4 +349,17 @@ class OracleOfAgesClient(BizHawkClient):
                 }],
             }])
 
+        print(f"{updates}")
         self.local_tracker = local_tracker
+
+    async def send_bounce_cmd(self, ctx: "BizHawkClientContext", updates: dict, key: str):
+        if key in updates:
+            await ctx.send_msgs([{
+                "cmd": "Bounce",
+                "slots": [ctx.slot],
+                "data": {
+                    key: updates[key]
+                }
+            }])
+            del updates[key]
+        

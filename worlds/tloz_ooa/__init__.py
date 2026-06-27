@@ -212,7 +212,6 @@ class OracleOfAgesWorld(World):
                   if hasattr(OracleOfAgesOptions.type_hints[option_name], "include_in_slot_data")]),
             "randomized_entrances": self.randomized_entrances,
             "shop_costs": self.shop_prices,
-            "vasu_madness": not self.options.vasu_ring_checks_requirement["disable_entirely"]
         }
 
         return slot_data

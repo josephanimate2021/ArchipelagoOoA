@@ -30,12 +30,7 @@ def ooa_create_appp_patch(world: "OracleOfAgesWorld") -> OoAProcedurePatch:
         "locations": {},
         "shop_prices": world.shop_prices,
         "music_order": {},
-        "vasu_madness": not world.options.vasu_ring_checks_requirement["disable_entirely"]
     }
-
-    if patch_data["vasu_madness"]:
-        for i, v in world.options.vasu_ring_checks_requirement.items():
-            patch_data[i] = v
 
     for loc in world.multiworld.get_locations(world.player):
         if loc.address is None:
