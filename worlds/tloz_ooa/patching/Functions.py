@@ -239,6 +239,10 @@ def define_option_constants(assembler: Z80Assembler, patch_data):
     assembler.define_byte("option.smallKeySprite", 0x43 if master_keys_as_boss_keys else 0x42)
     assembler.define_byte("option.deterministicGashaLootCount", options["deterministic_gasha_locations"])
 
+    always_available_potion_option = patch_data["options"]["enforce_potion_in_shop"]
+    assembler.define_byte("option.lynnacityShopSlot3Renewable", 0x00 if always_available_potion_option == OracleOfAgesEnforcePotionInShop.option_lynna_shop else 0x80)
+    assembler.define_byte("option.syrupHutSlot3Renewable", 0x00 if always_available_potion_option == OracleOfAgesEnforcePotionInShop.option_syrup_hut else 0x40)
+
     if options["secret_locations"]:
         assembler.add_floating_chunk("unsetglobalflag_librarySecret", [
             0xb6, (0x4f | 0x80)

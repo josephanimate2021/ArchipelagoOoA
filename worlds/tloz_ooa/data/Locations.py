@@ -70,7 +70,7 @@ LOCATIONS_DATA = {
     },
     "Lynna City: Shop Item #2": {
         "region_id": "lynna shop",
-        "vanilla_item": "Bombs (10)",
+        "vanilla_item": "Flute",
         "flag_byte": 0xc643,
         "room": 0x025e,
         "map_tile": 0x68,
@@ -82,7 +82,7 @@ LOCATIONS_DATA = {
     },
     "Lynna City: Shop Item #3": {
         "region_id": "lynna shop",
-        "vanilla_item": "Flute",
+        "vanilla_item": "Gasha Seed",
         "flag_byte": 0xc643,
         "room": 0x025e,
         "map_tile": 0x68,
@@ -91,11 +91,12 @@ LOCATIONS_DATA = {
         "scouting_mask": 0x10,
         "collect": COLLECT_TOUCH,
         "symbolic_name": "lynnaShop3",
+        "conditional": True,
     },
     # -----
     "Lynna City: Hidden Shop Item #1": {
         "region_id": "hidden shop",
-        "vanilla_item": "Gasha Seed",
+        "vanilla_item": "Bombs (10)",
         "flag_byte": 0xc642,
         "room": 0x027e,
         "bit_mask": 0x01,
@@ -432,6 +433,7 @@ LOCATIONS_DATA = {
         "scouting_mask": 0x10,
         "collect": COLLECT_TOUCH,
         "symbolic_name": "syrupShop3",
+        "conditional": True,
     },
     "Yoll Graveyard: Poe's Gift": {
         "region_id": "graveyard poe trade",

@@ -45,5 +45,12 @@ def ooa_create_appp_patch(world: "OracleOfAgesWorld") -> OoAProcedurePatch:
         if loc_patcher_name != "":
             patch_data["locations"][loc_patcher_name] = item_name
 
+    
+    always_available_potion_option = patch_data["options"]["enforce_potion_in_shop"]
+    if always_available_potion_option == OracleOfAgesEnforcePotionInShop.option_lynna_shop:
+        patch_data["locations"]["Lynna City: Shop Item #3"] = "Potion"
+    if always_available_potion_option == OracleOfAgesEnforcePotionInShop.option_syrup_hut:
+        patch_data["locations"]["Yoll Graveyard: Syrup Shop Item #3"] = "Potion"
+
     patch.write_file("patch.dat", yaml.dump(patch_data).encode('utf-8'))
     return patch

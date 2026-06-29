@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, Set, Dict
 from NetUtils import ClientStatus
 import worlds._bizhawk as bizhawk
 from worlds._bizhawk.client import BizHawkClient
-from . import LOCATIONS_DATA, ITEMS_DATA, OracleOfAgesGoal
+from . import LOCATIONS_DATA, ITEMS_DATA, OracleOfAgesGoal, OracleOfAgesEnforcePotionInShop
 from .common.Util import build_item_id_to_name_dict, build_location_name_to_id_dict
 
 if TYPE_CHECKING:
@@ -242,6 +242,15 @@ class OracleOfAgesClient(BizHawkClient):
         for name, location in LOCATIONS_DATA.items():
             if "scouting_byte" not in location or location["scouting_byte"] == 0xFFFF :
                 continue
+
+            if name == "Lynna City: Shop Item #3":
+                if ctx.slot_data["options"]["enforce_potion_in_shop"] == OracleOfAgesEnforcePotionInShop.option_lynna_shop:
+                    continue
+
+            if name == "Yoll Graveyard: Syrup Shop Item #3":
+                if  ctx.slot_data["options"]["enforce_potion_in_shop"] == OracleOfAgesEnforcePotionInShop.option_syrup_hut:
+                    continue
+
 
             # Check "scouting_byte" to see if map has been visited for scoutable locations
             byte_to_test = location["scouting_byte"]

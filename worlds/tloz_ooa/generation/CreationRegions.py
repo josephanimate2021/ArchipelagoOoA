@@ -6,7 +6,7 @@ from ..data.Locations import LOCATIONS_DATA
 from ..data.Entrances import WARPS_DATA, OUTSIDE_TAG, INSIDE_TAG
 from ..data.Constants import *
 from .. import OracleOfAgesWorld
-from ..Options import OracleOfAgesGoal
+from ..Options import *
 
 # -----------------------------------------------------------------------------------
 #
@@ -30,6 +30,12 @@ def location_is_active(world: OracleOfAgesWorld, location_name, location_data):
     
     if "vasu" in region_id:
         return not world.options.vasu_ring_checks_requirement["disable_entirely"]
+
+    if location_name == "Lynna City: Shop Item #3":
+        return world.options.enforce_potion_in_shop != OracleOfAgesEnforcePotionInShop.option_lynna_shop
+
+    if location_name == "Yoll Graveyard: Syrup Shop Item #3":
+        return world.options.enforce_potion_in_shop != OracleOfAgesEnforcePotionInShop.option_syrup_hut
 
     if location_name.startswith("Gasha Nut #"):
         return int(location_name[11:]) <= world.options.deterministic_gasha_locations

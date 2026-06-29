@@ -159,8 +159,26 @@ class OracleOfAgesLynnaGardener(Toggle):
     When enabled, a friendly gardener will have trimmed the bushes outside of Lynna City and cleared the path
     so you don't have to! This will expand the sphere 0 checks to include everything past the bushes that you
     normally would need nothing for.
+    It is recommended to have this enabled for multiworlds.
     """
     display_name = "Lynna Gardener"
+
+    include_in_patch = True
+    include_in_slot_data = True
+
+class OracleOfAgesEnforcePotionInShop(Choice):
+    """
+    When enabled, the potion will always be available in the selected shop and will refill.
+    WARNING : THIS POTION DOESN'T CURE KING ZORA, you still need to find a specific (blue) potion to cure him
+    - option_disabled : The potion is not available by default, and if it's still in a shop, you can only buy it once
+    - option_lynna_shop : A check will be removed in Lynna City's shop and potions will always be sold here
+    - option_syrup_hut : A check will be removed in Syrup Hut and potions will always be sold here
+    """
+    display_name = "Potion always available"
+
+    option_disabled = 0
+    option_lynna_shop = 1
+    option_syrup_hut = 2
 
     include_in_patch = True
     include_in_slot_data = True
@@ -226,3 +244,4 @@ class OracleOfAgesOptions(PerGameCommonOptions):
     excluded_rings: OraclesExcludedRings
     shop_prices_factor: OracleOfAgesPricesFactor
     combat_difficulty: OraclesCombatDifficulty
+    enforce_potion_in_shop: OracleOfAgesEnforcePotionInShop
