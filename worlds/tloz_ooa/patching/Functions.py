@@ -738,3 +738,6 @@ def apply_misc_option(rom: RomData, patch_data):
     if patch_data["options"]["master_keys"] == OraclesMasterKeys.option_all_dungeon_keys:
         # Remove boss key consumption on boss keydoor opened (boss door behave like normal locked door)
         rom.write_word(0x1835e, 0x0000)
+    
+    rom.write_byte(GameboyAddress(0x0B, 0x4445).address_in_rom(), patch_data["options"]["gasha_nut_kill_requirement"])
+    rom.write_byte(GameboyAddress(0x02, 0x7d03).address_in_rom(), patch_data["options"]["gasha_nut_kill_requirement"] // 2)

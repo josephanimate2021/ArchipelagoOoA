@@ -180,6 +180,8 @@ class OracleOfAgesEnforcePotionInShop(Choice):
     option_lynna_shop = 1
     option_syrup_hut = 2
 
+    default = 0
+
     include_in_patch = True
     include_in_slot_data = True
     
@@ -201,6 +203,21 @@ class OracleOfAgesGashaLocations(Range):
     default = 0
     include_in_patch = True
     include_in_slot_data = True
+    
+class OracleOfAgesGashaNutKillRequirement(NamedRange):
+    """
+    This option lets you configure how many kills are required to make a gasha tree grow.
+    Using a gasha ring halves this number.
+    """
+
+    display_name = "Gasha Nut Requirement"
+
+    range_start = 0
+    range_end = 250
+
+    default = 20
+    special_range_names = {"vanilla": 40}
+    include_in_patch = True
 
 @dataclass
 class OracleOfAgesOptions(PerGameCommonOptions):
@@ -238,6 +255,7 @@ class OracleOfAgesOptions(PerGameCommonOptions):
 
     # Numeric requirements for some checks / access to regions
     vasu_ring_checks_requirement: OracleOfAgesVasuRingChecksRequirement
+    gasha_nut_kill_requirement: OracleOfAgesGashaNutKillRequirement
     
     # Miscellaneous options
     required_rings: OraclesRequiredRings
