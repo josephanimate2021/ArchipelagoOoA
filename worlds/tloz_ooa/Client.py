@@ -22,6 +22,7 @@ RAM_ADDRS = {
     "received_item_index": (0xC6A8, 2, "System Bus"),
     "received_item": (0xCBFB, 1, "System Bus"),
     "location_flags": (0xC600, 0x500, "System Bus"),
+    "global_flags": (0xC6D0, 0x10, "System Bus"),
 
     "current_map_group": (0xCC2d, 1, "System Bus"),
     "current_map_id": (0xCC30, 1, "System Bus"),
@@ -30,6 +31,22 @@ RAM_ADDRS = {
     "total_collected_rupees":  (0xC627, 2, "System Bus"),
     "kill_count":  (0xC620, 2, "System Bus"),
 }
+
+EVENT_FLAGS = {
+    # param1 : IsGlobal
+    # param2 : if global, global id, otherwise room flag address
+    # param3 : mask for room flag
+    "Raft Unlocked": (True, 0x26),
+    "Planted Scent Seed": (False, 0xC8AC, 0x80),
+    "D6 North Wall Bombed": (False, 0xCA3A, 0x01),
+    "D6 Torches Lit": (False, 0xCA43, 0x40),
+    "Cured King Zora": (True, 0x27),
+    "Cured Fairy": (True, 0x30),
+    "Jabu Jabu Permission": (True, 0x31),
+    "Saved Nayru": (True, 0x11),
+    "Obtained Maku Seed": (True, 0x35),
+}
+
 
 GASHA_ADDRS = {
     "Sea of Storms (Present) Gasha Spot": (0xc7d7, 0x00),
@@ -70,6 +87,7 @@ class OracleOfAgesClient(BizHawkClient):
     local_scouted_locations: Set[int]
     item_id_to_name: Dict[int, str]
     location_name_to_id: Dict[str, int]
+    flags_values: Dict[str, bool]
     total_collected_rupees = 0
     kill_count = 0
 
@@ -80,6 +98,7 @@ class OracleOfAgesClient(BizHawkClient):
         self.local_checked_locations = set()
         self.local_scouted_locations = set()
         self.local_tracker = {}
+        self.flags_values = {}
         self.set_deathlink = False
         self.last_deathlink = None
         self.was_alive_last_frame = False
@@ -125,12 +144,15 @@ class OracleOfAgesClient(BizHawkClient):
             self.set_deathlink = False
             await ctx.update_death_link(True)
 
+
+
         try:
             read_result = await bizhawk.read(ctx.bizhawk_ctx, [
                 RAM_ADDRS["game_state"],            # Current state of game (is the player actually in-game?)
                 RAM_ADDRS["received_item_index"],   # Number of received items
                 RAM_ADDRS["received_item"],         # Received item still pending?
                 RAM_ADDRS["location_flags"],        # Location flags
+                RAM_ADDRS["global_flags"],          # global flags
                 RAM_ADDRS["current_map_group"],     # Current map group & id where the player is currently located
                 RAM_ADDRS["current_map_id"],        # ^^^
                 RAM_ADDRS["is_dead"],
@@ -145,14 +167,16 @@ class OracleOfAgesClient(BizHawkClient):
             num_received_items = int.from_bytes(read_result[1], "little")
             received_item_is_empty = (read_result[2][0] == 0)
             flag_bytes = read_result[3]
-            current_room = (read_result[4][0] << 8) | read_result[5][0]
-            is_dead = (read_result[6][0] != 0)
-            hexa_total_rupee = int.from_bytes(read_result[7], "little")
+            global_bytes = read_result[4]
+            current_room = (read_result[5][0] << 8) | read_result[6][0]
+            is_dead = (read_result[7][0] != 0)
+            hexa_total_rupee = int.from_bytes(read_result[8], "little")
             self.total_collected_rupees = hexa_to_decimal(hexa_total_rupee)
-            self.kill_count = int.from_bytes(read_result[8], "little")
+            self.kill_count = int.from_bytes(read_result[9], "little")
 
             await self.process_checked_locations(ctx, flag_bytes)
             await self.process_scouted_locations(ctx, flag_bytes)
+            await self.process_event_flags(ctx, flag_bytes, global_bytes)
             await self.process_tracker_updates(ctx, flag_bytes, current_room)
 
             # Process received items (only if we aren't in Blaino's Gym to prevent him from calling us cheaters)
@@ -234,6 +258,20 @@ class OracleOfAgesClient(BizHawkClient):
                 "locations": list(self.local_scouted_locations),
                 "create_as_hint": int(2)
             }])
+        
+    
+    async def process_event_flags(self, ctx: "BizHawkClientContext", flag_bytes, global_bytes):
+        for flagname, data in EVENT_FLAGS.items():
+            if (data[0]): # is global flag
+                addr = data[1] >> 3
+                flag = 1 << (data[1] & 0x7)
+                self.flags_values[flagname] = global_bytes[addr] & flag != 0
+            else:
+                addr = data[1] - RAM_ADDRS["location_flags"][0]
+                flag = data[2]
+                self.flags_values[flagname] = flag_bytes[addr] & flag == flag
+
+        
 
     async def process_received_items(self, ctx: "BizHawkClientContext", num_received_items: int):
         # If the game hasn't received all items yet and the received item struct doesn't contain an item, then
@@ -311,6 +349,9 @@ class OracleOfAgesClient(BizHawkClient):
         local_tracker["Total Collected Rupee"] = self.total_collected_rupees
         local_tracker["Kill Count"] = self.kill_count
 
+        for event, data in self.flags_values.items():
+            local_tracker[event] = data
+
         # Wild seed/bomb tracking
         wild_item_data = [
             (0x03, "Bombs"),
@@ -339,6 +380,7 @@ class OracleOfAgesClient(BizHawkClient):
         await self.send_bounce_cmd(ctx, updates, "Kill Count")
 
         if len(updates) > 0:
+            print(updates)
             await ctx.send_msgs([{
                 "cmd": "Set",
                 "key": f"OoA_{ctx.team}_{ctx.slot}",
@@ -349,7 +391,6 @@ class OracleOfAgesClient(BizHawkClient):
                 }],
             }])
 
-        print(f"{updates}")
         self.local_tracker = local_tracker
 
     async def send_bounce_cmd(self, ctx: "BizHawkClientContext", updates: dict, key: str):
