@@ -49,24 +49,25 @@ EVENT_FLAGS = {
 
 
 GASHA_ADDRS = {
-    "Sea of Storms (Present) Gasha Spot": (0xc7d7, 0x00),
-    "Crescent Island West (Present) Gasha Spot": (0xc7cb, 0x01),
-    "Crescent Island East (Present) Gasha Spot": (0xc7ad, 0x02),
-    "Fairies' Woods Gasha Spot": (0xc790, 0x03),
-    "Yoll Graveyard Gasha Spot": (0xc77b, 0x04),
-    "Talus Peeks (Present) Gasha Spot": (0xc730, 0x05),
-    "Rolling Ridge (Present, East) Gasha Spot": (0xc72c, 0x06),
-    "Nuun Highlands Gasha Spot": (0xc705, 0x07),
-    "Zora Vilage Gasha Spot": (0xc8d0, 0x08),
-    "Crescent Island West (Past) Gasha Spot": (0xc8ca, 0x09),
-    "Southern Shore Gasha Spot": (0xc895, 0x0a),
-    "Lynna Village Gasha Spot": (0xc855, 0x0b),
-    "Deku Forest Gasha Spot": (0xc834, 0x0c),
-    "Rolling Ridge (Past, Upper) Gasha Spot": (0xc80a, 0x0d),
-    "Talus Peeks (Past) Gasha Spot": (0xc801, 0x0e),
-    "Rolling Ridge (Past, West) Gasha Spot": (0xc828, 0x0f),
-}
 
+    "Nuun Highlands Gasha Spot": (0xc705, 0x00), # 0
+    "Rolling Ridge (Present, East) Gasha Spot": (0xc72c, 0x01), # 1
+    "Talus Peeks (Present) Gasha Spot": (0xc730, 0x02), # 2
+    "Yoll Graveyard Gasha Spot": (0xc77b, 0x03), # 3
+    "Fairies' Woods Gasha Spot": (0xc790, 0x04), # 4
+    "Crescent Island East (Present) Gasha Spot": (0xc7ad, 0x05), # 5
+    "Crescent Island West (Present) Gasha Spot": (0xc7cb, 0x06), # 6
+    "Sea of Storms (Present) Gasha Spot": (0xc7d7, 0x07), # 7
+    "Talus Peeks (Past) Gasha Spot": (0xc801, 0x08), # 8
+    "Rolling Ridge (Past, Upper) Gasha Spot": (0xc80a, 0x09), # 9
+    "Rolling Ridge (Past, West) Gasha Spot": (0xc828, 0x0a), # a
+    "Deku Forest Gasha Spot": (0xc834, 0x0b), # b
+    "Lynna Village Gasha Spot": (0xc855, 0x0c), # c
+    "Southern Shore Gasha Spot": (0xc895, 0x0d), # d
+    "Zora Vilage Gasha Spot": (0xc8d0, 0x0e), # e
+    "Crescent Island West (Past) Gasha Spot": (0xc8ca, 0x0f), # f
+
+}
 
 def hexa_to_decimal(num) -> int:
     remaining = num
@@ -329,20 +330,14 @@ class OracleOfAgesClient(BizHawkClient):
         # Gasha handling
         byte_offset = 0xC64d - RAM_ADDRS["location_flags"][0]
         gasha_seed_bytes = flag_bytes[byte_offset] + flag_bytes[byte_offset + 1] * 0x100
-        for gasha_name in GASHA_ADDRS:
-            (byte_addr, flag) = GASHA_ADDRS[gasha_name]
+        for gasha_name, data in GASHA_ADDRS.items():
+            (byte_addr, flag) = data
 
             # Check if the seed has been harvested
+            flag_mask = 0x01 << flag
             byte_offset = byte_addr - RAM_ADDRS["location_flags"][0]
-            if flag_bytes[byte_offset] & 0x20:
-                local_tracker[f"Harvested {gasha_name}"] = True
-            else:
-                # Check if the seed is currently planted
-                flag_mask = 0x01 << flag
-                if not gasha_seed_bytes & flag_mask:
-                    continue
-
-            local_tracker[f"Planted {gasha_name}"] = True
+            local_tracker[f"Planted {gasha_name}"] = (gasha_seed_bytes & flag_mask) != 0
+            local_tracker[f"Harvested {gasha_name}"] = (flag_bytes[byte_offset] & 0x20) != 0
 
         # Position tracking
         local_tracker["Current Room"] = current_room
@@ -380,7 +375,6 @@ class OracleOfAgesClient(BizHawkClient):
         await self.send_bounce_cmd(ctx, updates, "Kill Count")
 
         if len(updates) > 0:
-            print(updates)
             await ctx.send_msgs([{
                 "cmd": "Set",
                 "key": f"OoA_{ctx.team}_{ctx.slot}",
