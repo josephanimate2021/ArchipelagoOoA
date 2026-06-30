@@ -158,7 +158,8 @@ def define_location_constants(assembler: Z80Assembler, patch_data):
         if location_name in patch_data["locations"]:
             item_name = patch_data["locations"][location_name]
         else:
-            item_name = location_data["vanilla_item"]
+            # Put a fake item for disabled locations, since they are unreachable anwyway
+            item_name =  "Rupees (1)"
 
         if item_name == "Flute":
             item_name = COMPANIONS[patch_data["options"]["animal_companion"]] + "'s Flute"
