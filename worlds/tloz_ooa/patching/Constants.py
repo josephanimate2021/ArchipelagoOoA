@@ -94,6 +94,7 @@ DEFINES = {
     "DEV_RING":"$40",
     "INTERAC_MULTI_BYTE":"$7f # low byte of struct",
     "INTERACID_TREASURE":"$60",
+    "TEXT_WARP_PROTECTION_MARGIN": "$09",
 
     # TREASURES
     # ---------
@@ -389,6 +390,8 @@ DEFINES = {
     "wLinkDeathTrigger": "$cdd5",
     "wDungeonMapScroll": "$cbb4",
     "wDungeonMapScrollState": "$cbce",
+    "wRoomEdgeY": "$cc86",
+    "wRoomEdgeX": "$cc87",
 
     # rom 00
     "checkFlag": "$0205",
@@ -468,6 +471,7 @@ DEFINES = {
     "GLOBALFLAG_GOT_TUNINUT_FROM_BROTHER":"$48",
     "GLOBALFLAG_WON_LYNNA_SHOOTING_GALLERY":"$49",
     "GLOBALFLAG_GAVE_MYST_SEED":"$4a",
+    
 }
 
 RUPEE_VALUES = {
