@@ -237,37 +237,37 @@ class OracleOfAgesClient(BizHawkClient):
 
     async def process_scouted_locations(self, ctx: "BizHawkClientContext", flag_bytes):
         
-        
-        local_scouted_locations = set(ctx.locations_scouted)
-        for name, location in LOCATIONS_DATA.items():
-            if "scouting_byte" not in location or location["scouting_byte"] == 0xFFFF :
-                continue
-
-            if name == "Lynna City: Shop Item #3":
-                if ctx.slot_data["options"]["enforce_potion_in_shop"] == OracleOfAgesEnforcePotionInShop.option_lynna_shop:
+        if ctx.slot_data is not None:
+            local_scouted_locations = set(ctx.locations_scouted)
+            for name, location in LOCATIONS_DATA.items():
+                if "scouting_byte" not in location or location["scouting_byte"] == 0xFFFF :
                     continue
 
-            if name == "Yoll Graveyard: Syrup Shop Item #3":
-                if  ctx.slot_data["options"]["enforce_potion_in_shop"] == OracleOfAgesEnforcePotionInShop.option_syrup_hut:
-                    continue
+                if name == "Lynna City: Shop Item #3":
+                    if ctx.slot_data["options"]["enforce_potion_in_shop"] == OracleOfAgesEnforcePotionInShop.option_lynna_shop:
+                        continue
+
+                if name == "Yoll Graveyard: Syrup Shop Item #3":
+                    if  ctx.slot_data["options"]["enforce_potion_in_shop"] == OracleOfAgesEnforcePotionInShop.option_syrup_hut:
+                        continue
 
 
-            # Check "scouting_byte" to see if map has been visited for scoutable locations
-            byte_to_test = location["scouting_byte"]
-            byte_offset = byte_to_test - RAM_ADDRS["location_flags"][0]
-            bit_mask = location["scouting_mask"] if "scouting_mask" in location else 0x10
-            if flag_bytes[byte_offset] & bit_mask == bit_mask:
-                # Map has been visited, scout the location if it hasn't been already
-                location_id = self.location_name_to_id[name]
-                local_scouted_locations.add(location_id)
+                # Check "scouting_byte" to see if map has been visited for scoutable locations
+                byte_to_test = location["scouting_byte"]
+                byte_offset = byte_to_test - RAM_ADDRS["location_flags"][0]
+                bit_mask = location["scouting_mask"] if "scouting_mask" in location else 0x10
+                if flag_bytes[byte_offset] & bit_mask == bit_mask:
+                    # Map has been visited, scout the location if it hasn't been already
+                    location_id = self.location_name_to_id[name]
+                    local_scouted_locations.add(location_id)
 
-        if self.local_scouted_locations != local_scouted_locations:
-            self.local_scouted_locations = local_scouted_locations
-            await ctx.send_msgs([{
-                "cmd": "LocationScouts",
-                "locations": list(self.local_scouted_locations),
-                "create_as_hint": int(2)
-            }])
+            if self.local_scouted_locations != local_scouted_locations:
+                self.local_scouted_locations = local_scouted_locations
+                await ctx.send_msgs([{
+                    "cmd": "LocationScouts",
+                    "locations": list(self.local_scouted_locations),
+                    "create_as_hint": int(2)
+                }])
         
     
     async def process_event_flags(self, ctx: "BizHawkClientContext", flag_bytes, global_bytes):

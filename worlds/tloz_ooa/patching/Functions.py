@@ -537,8 +537,14 @@ def define_tile_replacements_table(assembler: Z80Assembler, patch_data):
 
     if patch_data["options"]["secret_locations"]: # Format is group, room, room flag, position in YX format, and replacement tile byte.
         new_tiles_table.extend([
-            0x01, 0xc7, 0x00, 0x48, 0xd0, # add stair tile in sea of storms past to allow players to time travel to the present sea of storms.
-            0x03, 0xc7, 0x00, 0x48, 0x2c, # add statue in sea of storms past underwater prevent players from resurfacing on that area.
+            0x01, 0xc6, 0x00, 0x47, 0x30, # add a small sand bank in the sea of storms past to allow players to time travel to the present sea of storms.
+            0x01, 0xc6, 0x00, 0x48, 0x32, # ^
+            0x01, 0xc6, 0x00, 0x57, 0x33, # ^
+            0x01, 0xc6, 0x00, 0x58, 0x35, # ^
+            0x03, 0xc6, 0x00, 0x47, 0x80, # add a tree underwater to avoid surfacing where there is the sand bank
+            0x03, 0xc6, 0x00, 0x48, 0x81, # ^
+            0x03, 0xc6, 0x00, 0x57, 0x90, # ^
+            0x03, 0xc6, 0x00, 0x58, 0x91, # ^
             0x00, 0x76, 0x00, 0x55, 0xa7, # add walkable tiles to black tower present entrance
             0x00, 0x76, 0x00, 0x54, 0xa7, # ^
         ])

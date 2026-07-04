@@ -859,7 +859,7 @@ LOCATIONS_DATA = {
         "map_tile": 0x28,
         "collect": COLLECT_CHEST,
     },
-    "Rolling Ridge (Present): Bush Cave Chest": {
+    "Rolling Ridge (Past): Bush Cave Chest": {
         "region_id": "ridge bush cave",
         "vanilla_item": "Rupees (100)",
         "flag_byte": 0xc81f, 
