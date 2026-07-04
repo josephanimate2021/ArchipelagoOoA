@@ -240,7 +240,10 @@ def make_d3_logic(player: int):
         ["d3 pitfall", "d3 crossing bridge room 1", True, lambda state: any([
             ooa_has_seedshooter(state, player),
             ooa_can_jump_3_wide_pit(state, player, False),
-            ooa_can_toss_ring(state, player),
+            all([
+                ooa_option_medium_logic(state, player),
+                ooa_can_toss_ring(state, player),
+            ]),
             all([
                 ooa_option_hard_logic(state, player),
                 ooa_has_boomerang(state, player)

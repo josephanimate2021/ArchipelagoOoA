@@ -676,7 +676,7 @@ ITEMS_DATA = {
         'ring': 'good'
     },
     "Toss Ring": {
-        'classification': ItemClassification.filler,
+        'classification': ItemClassification.progression,
         'id': 0x2d,
         'subid': 0x16,
         'ring': 'good'
@@ -862,7 +862,7 @@ ITEMS_DATA = {
         'ring': 'good'
     },
     "Energy Ring": {
-        'classification': ItemClassification.filler,
+        'classification': ItemClassification.progression,
         'id': 0x2d,
         'subid': 0x35,
         'ring': 'good'
@@ -934,7 +934,7 @@ ITEMS_DATA = {
         'ring': 'good'
     },
     "Fist Ring": {
-        'classification': ItemClassification.filler,
+        'classification': ItemClassification.progression,
         'id': 0x2d,
         'subid': 0x41,
         'ring': 'good'
