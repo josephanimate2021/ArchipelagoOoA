@@ -634,7 +634,7 @@ ITEMS_DATA = {
         'ring': 'useless'
     },
     "Expert's Ring": {
-        'classification': ItemClassification.filler,
+        'classification': ItemClassification.progression,
         'id': 0x2d,
         'subid': 0x0f,
         'ring': 'good'

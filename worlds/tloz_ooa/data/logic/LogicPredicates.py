@@ -521,7 +521,8 @@ def ooa_can_break_crystal(state: CollectionState, player: int):
             ooa_option_medium_logic(state, player),
             any([
                 state.has("Expert's Ring", player),
-                ooa_has_bombchus(state, player)
+                ooa_has_bombchus(state, player),
+                ooa_can_use_ember_seeds(state, player, False)
             ])
         ])
     ])
