@@ -270,6 +270,7 @@
   ret
   
   @noIcon:
+  ld a,($cbb6) ; (wMapMenu.cursorIndex)
   jp $6639 ; mapMenu_checkRoomVisited
 
 02/6636/: jp alwaysShowDungeonTileContent
