@@ -598,7 +598,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         ])],
         #########
         ["ridge base past west", "ridge base past east", True, lambda state: ooa_can_swim(state, player, False)],
-        ["ridge base past east", "first goron dance", False, lambda state: ooa_has_rupees(state, player, 10)],
+        #["ridge base past east", "first goron dance", False, lambda state: ooa_has_rupees(state, player, 10)], # temporarly removed as it could create a softlock
         ["ridge base past east", "goron dance, with letter", False, lambda state: ooa_has_rupees(state, player, 10) and state.has("Letter of Introduction", player)],
         ["ridge base past east", "trade goron vase", False, lambda state: state.has("Goron Vase", player) and state.has("Brother Emblem", player)],
         #["ridge base past east", "rolling ridge past old man", False, lambda state: ooa_can_use_ember_seeds(state, player, False)],
