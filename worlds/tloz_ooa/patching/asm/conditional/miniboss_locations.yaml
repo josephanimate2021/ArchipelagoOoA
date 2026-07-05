@@ -10,6 +10,8 @@
     # The fourth byte is the object's X position
   # The first of the generic case is always preceed by F2 (offsetting the other bytes)
 
+# WARNING : a object data end with $ff for obj_End, a pointer end with $fe for obj_EndPointer
+
 #There are other behavior that doesn't concern us here, but can be check in macros.s of the disassembly (search for .MACRO obj_Interaction and look around)
 
 # Here we replace the F4 pointer of the mini boss by our custom one where we add our object and add back the miniboss pointer
@@ -22,7 +24,7 @@
 12//additionnalD1MiniBossRoomData: |
   db $f2,$12,$01,$58,$98 # The newly spawn object data
   db $f4,$95,$47 # Keeping the overrided data.
-  db $ff
+  db $fe
 
 ###### D2
 12/6848/: |
@@ -32,7 +34,7 @@
 12//additionnalD2MiniBossRoomData: |
   db $f2,$12,$01,$58,$98 # The newly spawn object data
   db $f4,$75,$48 # Keeping the overrided data.
-  db $ff
+  db $fe
 
 ###### D3
 12/695c/: |
@@ -42,9 +44,9 @@
 12//additionnalD3MiniBossRoomData: |
   db $f2,$12,$01,$58,$98 # The newly spawn object data
   db $f4,$50,$4a # Keeping the overrided data.
-  db $ff
+  db $fe
 
-###### D4
+##### D4
 12/6b85/: |
   db $f3
   dw additionnalD4MiniBossRoomData
@@ -52,7 +54,7 @@
 12//additionnalD4MiniBossRoomData: |
   db $f2,$12,$01,$58,$98 # The newly spawn object data
   db $f4,$2d,$4b # Keeping the overrided data.
-  db $ff
+  db $fe
 
 ###### D5
 12/6d54/: |
@@ -62,7 +64,7 @@
 12//additionnalD5MiniBossRoomData: |
   db $f2,$12,$01,$58,$98 # The newly spawn object data
   db $f4,$bf,$4d # Keeping the overrided data.
-  db $ff
+  db $fe
 
 ###### D6
 12/6f25/: |
@@ -72,7 +74,7 @@
 12//additionnalD6MiniBossRoomData: |
   db $f2,$12,$01,$58,$98 # The newly spawn object data
   db $f4,$1b,$4f # Keeping the overrided data.
-  db $ff
+  db $fe
 
 ###### D7
 12/70d0/: | 
@@ -82,7 +84,7 @@
 12//additionnalD7MiniBossRoomData: | 
   db $f2,$12,$01,$88,$78 ; adds the item
   db $f4,$7a,$51 ; group5Map4aBeforeEventObjectData (which spawns the enemy)
-  db $ff
+  db $fe
 
 ###### D8
 12/724a/: |
@@ -92,4 +94,4 @@
 12//additionnalD8MiniBossRoomData: |
   db $f2,$12,$01,$58,$98 # The newly spawn object data
   db $f4,$88,$51 # Keeping the overrided data.
-  db $ff
+  db $fe
