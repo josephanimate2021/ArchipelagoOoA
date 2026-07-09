@@ -415,19 +415,19 @@ ITEMS_DATA = {
     #     },
 
     "Poe Clock": {
-        'classification': ItemClassification.progression,
+        'classification': ItemClassification.progression_skip_balancing,
         'id': 0x3d
     },
     "Stationery": {
-        'classification': ItemClassification.progression,
+        'classification': ItemClassification.progression_skip_balancing,
         'id': 0x3e
     },
     "Stink Bag": {
-        'classification': ItemClassification.progression,
+        'classification': ItemClassification.progression_skip_balancing,
         'id': 0x3f
     },
     "Tasty Meat": {
-        'classification': ItemClassification.progression,
+        'classification': ItemClassification.progression_skip_balancing,
         'id': 0x47
     },
     "Doggie Mask": {
@@ -435,36 +435,36 @@ ITEMS_DATA = {
         'id': 0x56
     },
     "Dumbbell": {
-        'classification': ItemClassification.progression,
+        'classification': ItemClassification.progression_skip_balancing,
         'id': 0x57
     },
     "Cheesy Mustache": {
-        'classification': ItemClassification.progression,
+        'classification': ItemClassification.progression_skip_balancing,
         'id': 0x5f
     },
     "Funny Joke": {
-        'classification': ItemClassification.progression,
+        'classification': ItemClassification.progression_skip_balancing,
         'id': 0x3c
     },
     "Touching Book": {
-        'classification': ItemClassification.progression,
+        'classification': ItemClassification.progression_skip_balancing,
         'id': 0x35
     },
     "Magic Oar": {
-        'classification': ItemClassification.progression,
+        'classification': ItemClassification.progression_skip_balancing,
         'id': 0x38
     },
     "Sea Ukulele": {
-        'classification': ItemClassification.progression,
+        'classification': ItemClassification.progression_skip_balancing,
         'id': 0x39
     },
     "Broken Sword": {
-         'classification': ItemClassification.progression,
+         'classification': ItemClassification.progression_skip_balancing,
          'id': 0x3a
     },
 
     "Bomb Flower": {
-        'classification': ItemClassification.progression,
+        'classification': ItemClassification.progression_skip_balancing,
         'id': 0x49
     },
     "Book of Seals": {
@@ -488,11 +488,11 @@ ITEMS_DATA = {
         'id': 0x51
     },
     "Goron Vase": {
-        'classification': ItemClassification.progression,
+        'classification': ItemClassification.progression_skip_balancing,
         'id': 0x5c
     },
     "Goronade": {
-        'classification': ItemClassification.progression,
+        'classification': ItemClassification.progression_skip_balancing,
         'id': 0x5d
     },
     "Graveyard Key": {
@@ -504,11 +504,11 @@ ITEMS_DATA = {
         'id': 0x54
     },
     "Lava Juice": {
-        'classification': ItemClassification.progression,
+        'classification': ItemClassification.progression_skip_balancing,
         'id': 0x5a
     },
     "Letter of Introduction": {
-        'classification': ItemClassification.progression,
+        'classification': ItemClassification.progression_skip_balancing,
         'id': 0x59
     },
     "Library Key": {
@@ -528,11 +528,11 @@ ITEMS_DATA = {
         'id': 0x48
     },
     "Rock Brisket": {
-        'classification': ItemClassification.progression,
+        'classification': ItemClassification.progression_skip_balancing,
         'id': 0x5e
     },
     "Scent Seedling": {
-        'classification': ItemClassification.progression,
+        'classification': ItemClassification.progression_skip_balancing,
         'id': 0x4d
     },
     "Slate": {
@@ -544,7 +544,7 @@ ITEMS_DATA = {
         'id': 0x4f
     },
     "Cracked Tuni Nut": {
-        'classification': ItemClassification.progression,
+        'classification': ItemClassification.progression_skip_balancing,
         'id': 0x4c,
         'subid': 0x00
     },
@@ -610,19 +610,19 @@ ITEMS_DATA = {
         'ring': 'good'
     },
     "Red Ring": {
-        'classification': ItemClassification.filler,
+        'classification': ItemClassification.useful,
         'id': 0x2d,
         'subid': 0x0b,
         'ring': 'good'
     },
     "Blue Ring": {
-        'classification': ItemClassification.filler,
+        'classification': ItemClassification.useful,
         'id': 0x2d,
         'subid': 0x0c,
         'ring': 'good'
     },
     "Green Ring": {
-        'classification': ItemClassification.filler,
+        'classification': ItemClassification.useful,
         'id': 0x2d,
         'subid': 0x0d,
         'ring': 'good'
