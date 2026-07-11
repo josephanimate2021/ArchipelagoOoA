@@ -870,11 +870,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ["symmetry past", "symmetry city secret", False, lambda state: state.has("Tuni Nut", player)],
             ["lynna city", "princess zelda rescue", False, lambda state: ooa_has_feather(state, player)],
             ["piratian captain", "sea of storms present", False, lambda state: ooa_can_go_back_to_present(state, player)],
-            ["sea of storms present", "sea of storms spot", False, lambda state: all([
-            ooa_can_switch_past_and_present(state, player),
-            ooa_has_shovel(state, player)
-            ])
-            ]
+            ["sea of storms present", "sea of storms spot", False, lambda state: ooa_has_shovel(state, player)]
         ])
 
     if not options.vasu_ring_checks_requirement["disable_entirely"]:
