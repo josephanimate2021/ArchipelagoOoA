@@ -256,6 +256,10 @@ def make_d3_logic(player: int):
             ooa_has_seedshooter(state, player),
             ooa_can_jump_4_wide_pit(state, player, False),
             all([
+                ooa_can_jump_3_wide_pit(state, player, False),
+                ooa_has_sword(state, player),
+                ]),
+            all([
                 ooa_option_hard_logic(state, player),
                 ooa_has_feather(state, player),
                 any([
