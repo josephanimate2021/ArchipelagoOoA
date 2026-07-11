@@ -220,57 +220,57 @@ ITEMS_DATA = {
     "Master Key (Maku Path)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x00
+        'subid': 0x80
     },
     "Master Key (Spirit's Grave)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x01
+        'subid': 0x81
     },
     "Master Key (Wing Dungeon)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x02
+        'subid': 0x82
     },
     "Master Key (Moonlit Grotto)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x03
+        'subid': 0x83
     },
     "Master Key (Skull Dungeon)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x04
+        'subid': 0x84
     },
     "Master Key (Crown Dungeon)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x05
+        'subid': 0x85
     },
     "Master Key (Mermaid's Cave Past)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x0C
+        'subid': 0x8C
     },
     "Master Key (Mermaid's Cave Present)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x06
+        'subid': 0x86
     },
     "Master Key (Jabu-Jabu's Belly)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x07
+        'subid': 0x87
     },
     "Master Key (Ancient Tomb)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x08
+        'subid': 0x88
     },
     "Master Key (Linked Hero's Cave)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x0b
+        'subid': 0x8b
     },
     "Boss Key (Spirit's Grave)": {
         'classification': ItemClassification.progression,
