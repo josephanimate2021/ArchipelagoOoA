@@ -497,6 +497,7 @@ def make_d5_logic(player: int):
                 ooa_has_seedshooter(state, player),
                 ooa_has_boomerang(state, player),
                 all([
+                    ooa_option_medium_logic(state, player),
                     ooa_can_jump_2_wide_pit(state, player, False),
                     ooa_has_sword(state, player,False),
                 ]),
