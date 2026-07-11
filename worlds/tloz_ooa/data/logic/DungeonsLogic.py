@@ -288,7 +288,7 @@ def make_d3_logic(player: int):
         ["d3 crossing bridge room 1", "d3 bridge chest", False, None],
         # TODO ["d3 crossing bridge room 1", "d3 scent seed bush", False, lambda state: ooa_can_harvest_regrowing_bush(state, player)],
         ["d3 post-subterror", "d3 between two bridge room", True, lambda state: all([
-            ooa_can_jump_2_wide_pit(state, player, False)
+            ooa_can_jump_3_wide_pit(state, player, False)
         ])],
         ["d3 B1F spinner", "d3 miniboss", False, lambda state: all([
             # No need to go through the key door, you can use the warp, which should always be accessible since the spinner in down
