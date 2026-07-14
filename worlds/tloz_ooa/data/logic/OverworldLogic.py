@@ -654,7 +654,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ooa_option_medium_logic(state, player),
             ooa_can_warp_using_gale_seeds(state, player),
         ])],
-        ["ridge mid present", "ridge east tree", False, lambda state: any([
+        ["ridge mid present", "ridge east tree", False, lambda state: all([
             ooa_can_harvest_tree(state, player, False),
             ooa_can_switch_past_and_present(state, player),
         ])],
