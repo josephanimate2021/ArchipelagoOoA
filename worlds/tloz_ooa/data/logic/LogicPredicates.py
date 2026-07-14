@@ -546,6 +546,7 @@ def ooa_can_harvest_tree(state: CollectionState, player: int, can_use_companion:
                 can_use_companion,
                 ooa_option_medium_logic(state, player),
                 ooa_can_summon_dimitri(state, player)
+            ]),
             all([
                 ooa_can_punch(state, player),
                 ooa_option_medium_logic(state, player),
