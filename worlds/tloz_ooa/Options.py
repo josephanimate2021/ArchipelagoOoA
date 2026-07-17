@@ -24,7 +24,7 @@ class OracleOfAgesGoal(Choice):
 
 class OracleOfAgesRequiredSlates(Range):
     """
-    The amount of slate that need to be obtained in order to get to the boss of the eigth dungeons.
+    The amount of slate that need to be obtained in order to get to the boss of the eighth dungeons.
     """
     display_name = "Required Slates"
     range_start = 0
@@ -38,11 +38,9 @@ class OracleOfAgesVasuRingChecksRequirement(OptionDict):
     """
     When enabled, vasu will congradulate you based off of the number of rupees (for Rupee Ring check), and number of enemies defeated (for Slayer's Ring check). 
 
-    NOTE: Both of those moments are seperate, so don't worry if you were thinking that two things were going to be checked just for a singular check.
-
-    Rupee Requirement for Rupee Ring Check (COMING SOON): Determines the amount of rupees that you need to collect in order for vasu to congradulate you on the achievement, resulting in the check being initiated. (MIN: 1)
-    Amount of Enemies Defeated for Slayer Ring Check: Determines the amount of enemies that you need to defeat in order for vasu to congradulate you on the achievement, resulting in the check being initiated. (MIN: 1)
     Disable Entirely: Determines whatever or not vasu will give out mutiple checks when the friendship ring check is finished.
+    Rupee Requirement for Rupee Ring Check: Determines the amount of rupees that you need to collect in order for vasu to give you a check. (from 1 to 9999)
+    Amount of Enemies Defeated for Slayer Ring Check: Determines the amount of enemies that you need to defeat in order for vasu to give you a check. (from 1 to 1000)
     """
     display_name = "Vasu Ring Checks Requirement"
 
@@ -107,7 +105,7 @@ class OracleOfAgesDuplicateSeedTrees(OptionSet):
 class OracleOfAgesLinkedHerosCave(Choice):
     """
     Adds linked hero's cave to a list of locations for you to complete. This option also allows you to mark which location the linked hero's cave will be in.
-    - Maku Tree Entrance Right Side: A cave will be placed to the right side of the maku tree entrance, allowing access despite the finished game flag not being set.
+    - Maku Tree Entrance Right Side: A cave will be placed to the right side of the maku tree entrance
     """
     display_name = "Linked Hero's Cave"
 
@@ -170,9 +168,9 @@ class OracleOfAgesEnforcePotionInShop(Choice):
     """
     When enabled, the potion will always be available in the selected shop and will refill.
     WARNING : THIS POTION DOESN'T CURE KING ZORA, you still need to find a specific (blue) potion to cure him
-    - option_disabled : The potion is not available by default, and if it's still in a shop, you can only buy it once
-    - option_lynna_shop : A check will be removed in Lynna City's shop and potions will always be sold here
-    - option_syrup_hut : A check will be removed in Syrup Hut and potions will always be sold here
+    - disabled : The potion is not available by default, and if it's still in a shop, you can only buy it once
+    - lynna_shop : A check will be removed in Lynna City's shop and potions will always be sold here
+    - syrup_hut : A check will be removed in Syrup Hut and potions will always be sold here
     """
     display_name = "Potion always available"
 
