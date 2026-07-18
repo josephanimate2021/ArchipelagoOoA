@@ -25,7 +25,7 @@ def make_d1_logic(player: int):
         [INSIDE_TAG + "d1", "d1 pot chest", False, lambda state: ooa_can_break_pot(state, player)],
 
         # 2 keys => Risk of softlock if we require only one key. 
-        ["d1 ghini drop", "d1 wide room", False, lambda state: ooa_has_small_keys(state, player, 1, 1)],
+        ["d1 ghini drop", "d1 wide room", False, lambda state: ooa_has_small_keys(state, player, 1, 2)],
         ["d1 wide room", "d1 two-button chest", False, None],
         ["d1 wide room", "d1 one-button chest", False, None],
         ["d1 wide room", "d1 boss", False, lambda state: all([
