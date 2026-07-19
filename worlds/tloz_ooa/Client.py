@@ -345,8 +345,8 @@ class OracleOfAgesClient(BizHawkClient):
             # Check if the seed has been harvested
             flag_mask = 0x01 << flag
             byte_offset = byte_addr - RAM_ADDRS["location_flags"][0]
-            local_tracker[f"Planted {gasha_name}"] = (gasha_seed_bytes & flag_mask) != 0
             local_tracker[f"Harvested {gasha_name}"] = (flag_bytes[byte_offset] & 0x20) != 0
+            local_tracker[f"Planted {gasha_name}"] = (gasha_seed_bytes & flag_mask) != 0 or local_tracker[f"Harvested {gasha_name}"]
 
         # Position tracking
         local_tracker["Current Room"] = current_room
