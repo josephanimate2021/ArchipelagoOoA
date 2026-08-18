@@ -3,5 +3,5 @@
 	url = https://github.com/Ishigh1/tloz_oo-common
 [submodule "worlds/tloz_kinomi/disasembly"]
 	path = worlds/tloz_kinomi/disasembly
-	url = https://github.com/zerotokoops/oracles-disasm
+	url = https://github.com/josephanimate2021/oracles-disasm
 	branch = birthday-rebase
