@@ -18,7 +18,7 @@ from .data.Constants import *
 from .data.Regions import REGIONS
 from .Client import OracleOfAgesClient  # Unused, but required to register with BizHawkClient
 from .patching.ProcedurePatch import ROM_HASH
-
+# TODO: Implement settings for Gifts of Kinomi. Right now in testing phase with the OG ages rom before doing anything major.
 class OOASettings(settings.Group):
     class OOARomFile(settings.UserFilePath):
         """File path of the OOA US rom"""
@@ -85,11 +85,11 @@ class OracleOfAgesWeb(WebWorld):
 
 class OracleOfAgesWorld(World):
     """
-    The Legend of Zelda: Oracles of Ages is one of the rare Capcom entries to the series.
-    Nayru, the oracle of ages, has been possessed by Veran, and she is now making a mess in Labrynna
-    Gather the Essences of Times, exorcice Nayru and defeat Veran to save the timeline of Labrynna
+    The Legend of Zelda: Gifts of Kinomi is a romhack made by ZerotoKoops that combines the two Oracle games into one, with a new story/locations.
+    The game is themed around a birthday for the Oracles and everyone wants to throw a party for them. However, they can't throw the party because
+    Link forgot it was their birthday and didn't get them a gift. The Oracles are sad and Link must go on a quest to find the gifts for them so they can have their party.
     """
-    game = "The Legend of Zelda - Oracle of Ages"
+    game = "The Legend of Zelda - Gifts of Kinomi"
     options_dataclass = OracleOfAgesOptions
     options: OracleOfAgesOptions
     required_client_version = (0, 5, 1)
@@ -107,7 +107,7 @@ class OracleOfAgesWorld(World):
     shop_prices: Dict[str, int]
 
     settings: ClassVar[OOASettings]
-    settings_key = "tloz_ooa_options"
+    settings_key = "tloz_kinomi_options"
 
     def __init__(self, multiworld, player):
         super().__init__(multiworld, player)

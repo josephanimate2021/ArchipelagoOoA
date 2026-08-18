@@ -2,8 +2,7 @@ from dataclasses import dataclass
 
 from Options import Choice, DeathLink, DefaultOnToggle, PerGameCommonOptions, Range, Toggle, StartInventoryPool, ItemSet
 
-from worlds.tloz_ooa.data.Items import ITEMS_DATA
-
+from .data.Items import ITEMS_DATA
 
 class OracleOfAgesGoal(Choice):
     """

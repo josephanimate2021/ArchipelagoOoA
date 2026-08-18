@@ -18,7 +18,7 @@ ROM_HASH = "c4639cc61c049e5a085526bb6cac03bb"
 
 
 class OoAPatchExtensions(APPatchExtension):
-    game = "The Legend of Zelda - Oracle of Ages"
+    game = "The Legend of Zelda - Gifts of Kinomi"
 
     @staticmethod
     def apply_patches(caller: APProcedurePatch, rom: bytes, patch_file: str) -> bytes:
@@ -63,7 +63,7 @@ class OoAPatchExtensions(APPatchExtension):
 
         alter_treasures(rom_data)
         write_chest_contents(rom_data, patch_data)
-        write_seed_tree_content(rom_data, patch_data)
+        #write_seed_tree_content(rom_data, patch_data)
         set_dungeon_warps(rom_data, patch_data)
         #apply_miscellaneous_options(rom_data, patch_data)
 
@@ -77,10 +77,10 @@ class OoAPatchExtensions(APPatchExtension):
 
 class OoAProcedurePatch(APProcedurePatch, APTokenMixin):
     hash = [ROM_HASH]
-    patch_file_ending: str = ".apooa"
+    patch_file_ending: str = ".apookmi"
     result_file_ending: str = ".gbc"
 
-    game = "The Legend of Zelda - Oracle of Ages"
+    game = "The Legend of Zelda - Gifts of Kinomi"
     procedure = [
         ("apply_patches", ["patch.dat"])
     ]
@@ -99,7 +99,7 @@ class OoAProcedurePatch(APProcedurePatch, APTokenMixin):
             basemd5 = hashlib.md5()
             basemd5.update(base_rom_bytes)
             if ROM_HASH != basemd5.hexdigest():
-                raise Exception("Supplied ROM does not match known MD5 for Oracle of Seasons US version."
+                raise Exception("Supplied ROM does not match known MD5 for Oracle of Ages US version."
                                 "Get the correct game and version, then dump it.")
             setattr(cls, "base_rom_bytes", base_rom_bytes)
         return base_rom_bytes

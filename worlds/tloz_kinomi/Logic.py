@@ -4,6 +4,7 @@ from .data.logic.DungeonsLogic import *
 from .data.logic.OverworldLogic import make_overworld_logic
 from .data.Regions import REGIONS
 
+# TODO: Implement logic map (and check for possible softlocks).
 def create_connections(multiworld: MultiWorld, player: int):
     dungeon_entrances = []
     for reg1, reg2 in multiworld.worlds[player].dungeon_entrances.items():

@@ -30,9 +30,9 @@ RAM_ADDRS = {
 
 
 class OracleOfAgesClient(BizHawkClient):
-    game = "The Legend of Zelda - Oracle of Ages"
+    game = "The Legend of Zelda - Gifts of Kinomi"
     system = "GBC"
-    patch_suffix = ".apooa"
+    patch_suffix = ".apookmi"
     local_checked_locations: Set[int]
     local_scouted_locations: Set[int]
     item_id_to_name: Dict[int, str]
