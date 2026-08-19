@@ -50,16 +50,8 @@ def alter_treasures(rom: RomData):
 
 def get_asm_files(patch_data):
     asm_files = ASM_FILES.copy()
-    if get_settings()["tloz_ooa_options"]["qol_quick_flute"]:
+    if get_settings()["tloz_kinomi_options"]["qol_quick_flute"]:
         asm_files.append("asm/conditional/quick_flute.yaml")
-    if get_settings()["tloz_ooa_options"]["skip_tokkey_dance"]:
-        asm_files.append("asm/conditional/skip_dance.yaml")
-    if get_settings()["tloz_ooa_options"]["skip_boi_joke"]:
-        asm_files.append("asm/conditional/skip_joke.yaml")
-    if get_settings()["tloz_ooa_options"]["qol_mermaid_suit"]:
-        asm_files.append("asm/conditional/qol_mermaid_suit.yaml")
-    if patch_data["options"]["goal"] == OracleOfAgesGoal.option_beat_ganon:
-        asm_files.append("asm/conditional/ganon_goal.yaml")
     return asm_files
 
 def define_location_constants(assembler: Z80Assembler, patch_data):
@@ -394,7 +386,7 @@ def set_file_select_text(assembler: Z80Assembler, slot_name: str):
 
     
 def set_heart_beep_interval_from_settings(rom: RomData):
-    heart_beep_interval = get_settings()["tloz_ooa_options"]["heart_beep_interval"]
+    heart_beep_interval = get_settings()["tloz_kinomi_options"]["heart_beep_interval"]
     if heart_beep_interval == "half":
         rom.write_byte(0x914B, 0x3f * 2)
     elif heart_beep_interval == "quarter":
@@ -403,7 +395,7 @@ def set_heart_beep_interval_from_settings(rom: RomData):
         rom.write_bytes(0x914B, [0x00, 0xc9])  # Put a return to avoid beeping entirely
 
 def set_character_sprite_from_settings(rom: RomData):
-    sprite = get_settings()["tloz_ooa_options"]["character_sprite"]
+    sprite = get_settings()["tloz_kinomi_options"]["character_sprite"]
     sprite_dir = Path(Utils.local_path(os.path.join('data', 'sprites', 'oos_ooa')))
     if sprite == "random":
         sprite_filenames = [f for f in os.listdir(sprite_dir) if sprite_dir.joinpath(f).is_file() and f.endswith(".bin")]
@@ -417,7 +409,7 @@ def set_character_sprite_from_settings(rom: RomData):
         sprite_bytes = list(Path(sprite_path).read_bytes())
         rom.write_bytes(0x68000, sprite_bytes)
 
-    palette = get_settings()["tloz_ooa_options"]["character_palette"]
+    palette = get_settings()["tloz_kinomi_options"]["character_palette"]
     if palette == "random":
         palette = random.choice(get_available_random_colors_from_sprite_name(sprite))
 

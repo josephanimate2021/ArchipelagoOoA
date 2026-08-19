@@ -11,6 +11,7 @@ from .Functions import *
 from .Constants import *
 from .RomData import RomData
 from .z80asm.Assembler import Z80Assembler, Z80Block
+from .bps import apply_bps_patch
 
 from tkinter.filedialog import askopenfilename
 
@@ -22,7 +23,7 @@ class OoAPatchExtensions(APPatchExtension):
 
     @staticmethod
     def apply_patches(caller: APProcedurePatch, rom: bytes, patch_file: str) -> bytes:
-        rom_data = RomData(rom)
+        rom_data = RomData(apply_bps_patch(open(Utils.local_path('worlds/tloz_kinomi/patching/kinomi.bps'), 'rb'), rom))
         patch_data = yaml.safe_load(caller.get_file(patch_file).decode("utf-8"))
 
         if not (patch_data["version"] in RETRO_COMPAT_VERSION):
@@ -89,7 +90,7 @@ class OoAProcedurePatch(APProcedurePatch, APTokenMixin):
     def get_source_data(cls) -> bytes:
         base_rom_bytes = getattr(cls, "base_rom_bytes", None)
         if not base_rom_bytes:
-            file_name = get_settings().tloz_ooa_options["rom_file"]
+            file_name = get_settings().tloz_kinomi_options["rom_file"]
             if not os.path.exists(file_name):
                 file_name = Utils.user_path(file_name)
             if not os.path.exists(file_name):

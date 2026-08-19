@@ -4,9 +4,8 @@
 3f//extraItemsToAddTableCustom: |
     db TREASURE_SEED_SATCHEL,   option.defaultSeedType,         $20
     db TREASURE_HEART_CONTAINER,TREASURE_HEART_REFILL,          $40
-    db TREASURE_BOMB_FLOWER,    TREASURE_BOMB_FLOWER_LOWER_HALF,$00
     db TREASURE_TUNE_OF_ECHOES, TREASURE_HARP,                  $01
-    db TREASURE_SHOOTER,        option.defaultSeedType,         $20
+    db TREASURE_SLINGSHOT,        option.defaultSeedType,         $20
     
     db $00  ; End of table
 3f/44e3/: ld hl,extraItemsToAddTableCustom
