@@ -157,12 +157,16 @@ def ooa_option_lynna_gardener(state: CollectionState, player: int):
 
 
 # Various item predicates ###########################################
-
 def ooa_has_rupees(state: CollectionState, player: int, amount: int):
-    # Rupee checks being quite approximative, being able to farm is a
-    # must-have to prevent any stupid lock
+    # Make free shops sphere 1 as players will get them at the start of the game anyway
+    if amount == 0:
+        return True
+    # Rupee checks being quite approximative, being able to farm is a must-have to prevent any stupid lock
     if not ooa_can_farm_rupees(state, player):
         return False
+    # In hard logic, having the shovel is equivalent to having an infinite amount of Rupees thanks to RNG manips
+    if ooa_option_hard_logic(state, player) and ooa_has_shovel(state, player):
+        return True
 
     rupees = state.count("Rupees (1)", player)
     rupees += state.count("Rupees (5)", player) * 5
@@ -173,16 +177,16 @@ def ooa_has_rupees(state: CollectionState, player: int, amount: int):
     rupees += state.count("Rupees (200)", player) * 200
 
     # Secret rooms inside D2 and D6 containing loads of rupees, but only in medium logic
-    if ooa_option_medium_logic(state, player):
-        if state.has("_reached_d2_rupee_room", player):
-            rupees += 150
-        if state.has("_reached_d6_rupee_room", player):
-            rupees += 90
+    #    if ooa_option_medium_logic(state, player):
+    #       if state.has(""_reached_d2_rupee_room"", player):
+    #          rupees += 150
+    #     if state.has(""_reached_d6_rupee_room"", player):
+    #        rupees += 90
 
     ## Old men giving and taking rupees
     #world = state.multiworld.worlds[player]
     #for region_name, value in world.old_man_rupee_values.items():
-    #    event_name = "rupees from " + region_name
+    #    event_name = ""rupees from "" + region_name
     #    if state.has(event_name, player):
     #        rupees += value
 
@@ -194,6 +198,12 @@ def ooa_can_farm_rupees(state: CollectionState, player: int):
     # a significant amount of rupees
     return ooa_has_sword(state, player) or ooa_has_shovel(state, player)
 
+def ooa_has_rupees_for_shop(state: CollectionState, player: int, shop_name: str):
+    world = state.multiworld.worlds[player]
+    required_rupees = world.shop_rupee_requirements.get(shop_name, 0)
+# In shops, players are expected to buy at most 50% of items (in the vast majority of seeds).
+# For edge cases, the logic ensures player is able to farm to compensate for the missing rupees.
+    return ooa_has_rupees(state, player, int(required_rupees * 0.50))
 
 
 def ooa_can_trigger_switch(state: CollectionState, player: int):

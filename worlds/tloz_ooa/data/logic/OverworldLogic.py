@@ -41,10 +41,10 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         ["lynna city", "south lynna tree", False, lambda state: ooa_can_harvest_tree(state, player, True)],
         ["lynna city", "lynna city chest", False, lambda state: ooa_can_use_ember_seeds(state, player, False)],
         ["lynna village", "lynna city chest", False, lambda state: ooa_can_go_back_to_present(state, player)],
-        ["lynna city", "lynna shop", False, lambda state: ooa_has_rupees(state, player, 400)],
+        ["lynna city", "lynna shop", False, lambda state: ooa_has_rupees_for_shop(state, player, 400)],
         ["lynna village", "hidden shop", False, lambda state: all([
             ooa_can_go_back_to_present(state, player),
-            ooa_has_rupees(state, player, 400)
+            ooa_has_rupees_for_shop(state, player, 400)
         ])],
         
         ["lynna city", "mayor plen's house", False, lambda state: ooa_has_long_hook(state, player)],
@@ -62,7 +62,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         ["lynna village", "gasha farmer", False, None],
         ["lynna village", "black tower worker", False, None],
         ["lynna village", "black tower heartpiece", False, lambda state: ooa_can_remove_dirt(state, player, False)],
-        ["lynna village", "advance shop", False, lambda state: ooa_has_rupees(state, player, 400)],
+        ["lynna village", "advance shop", False, lambda state: ooa_has_rupees_for_shop(state, player, 400)],
         ["lynna village", "lynna shooting gallery", False, lambda state: ooa_has_sword(state, player)],
         ["lynna village", "ambi's palace tree", False, lambda state: ooa_can_harvest_tree(state, player, False)],
         ["lynna village", "ambi's palace chest", False, lambda state: any([
@@ -195,7 +195,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
                 ooa_can_swim(state, player, True),
                 ooa_has_long_hook(state, player)                    
             ]),
-            ooa_has_rupees(state, player, 400)
+            ooa_has_rupees_for_shop(state, player, 400)
         ])],
         ["graveyard door", "graveyard poe trade", False, lambda state: ooa_has_bracelet(state, player)],
         ["graveyard door", OUTSIDE_TAG + "d1", False, None],
