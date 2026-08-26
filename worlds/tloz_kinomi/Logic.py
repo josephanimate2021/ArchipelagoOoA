@@ -2,31 +2,33 @@ from BaseClasses import MultiWorld
 from . import LOCATIONS_DATA
 from .data.logic.DungeonsLogic import *
 from .data.logic.OverworldLogic import make_overworld_logic
-from .data.Regions import REGIONS
 
 # TODO: Implement logic map (and check for possible softlocks).
+def make_logic_array(player: int):
+    return [
+        make_overworld_logic(player),
+        make_summerVilla_logic(player),
+        make_spiritGrotto_logic(player),
+        make_fourCornersCave_logic(player),
+        make_seasonsShrine_logic(player),
+        make_lostLabrinth_logic(player),
+        #make_crownDungeon_logic(player),
+        make_tokayTemple_logic(player),
+        #make_makuPath_logic(player),
+    ]
+
 def create_connections(multiworld: MultiWorld, player: int):
     dungeon_entrances = []
     for reg1, reg2 in multiworld.worlds[player].dungeon_entrances.items():
         dungeon_entrances.append([reg1, reg2, True, None])
 
     all_logic = [
-        make_overworld_logic(player),
-        make_d0_logic(player),
-        make_d1_logic(player),
-        make_d2_logic(player),
-        make_d3_logic(player),
-        make_d4_logic(player),
-        make_d5_logic(player),
-        make_d6past_logic(player),
-        make_d6present_logic(player),
-        make_d7_logic(player),
-        make_d8_logic(player),
+        (logic for logic in make_logic_array(player)),
         dungeon_entrances,
     ]
 
     # Check unreachable regions
-    unused_region = REGIONS.copy()
+    unused_region = multiworld.worlds[player].regions
     unused_region.remove("Menu")
     for logic_array in all_logic:
         for entrance_desc in logic_array:

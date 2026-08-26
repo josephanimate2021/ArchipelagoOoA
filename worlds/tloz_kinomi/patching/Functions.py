@@ -11,14 +11,14 @@ from ..data.Constants import *
 from .Constants import *
 from pathlib import Path
 
-from .. import LOCATIONS_DATA, OracleOfAgesMasterKeys, OracleOfAgesGoal
+from .. import LOCATIONS_DATA, GiftsOfKinomiMasterKeys
 
 
 def get_treasure_addr(rom: RomData, item_name: str):
     item_id, item_subid = get_item_id_and_subid(item_name)
-    addr = 0x59332 + (item_id * 4)
+    addr = 0x58abf + (item_id * 4)
     if rom.read_byte(addr) & 0x80 != 0:
-        addr = 0x54000 + rom.read_word(addr + 1)
+        addr = 0x57d97 + rom.read_word(addr + 1)
     return addr + (item_subid * 4)
 
 
@@ -77,14 +77,6 @@ def define_location_constants(assembler: Z80Assembler, patch_data):
 def define_option_constants(assembler: Z80Assembler, patch_data):
     options = patch_data["options"]
 
-    assembler.define_byte("option.startingGroup", 0x00)
-    assembler.define_byte("option.startingRoom", 0x59)
-    assembler.define_byte("option.startingPosY", 0x58)
-    assembler.define_byte("option.startingPosX", 0x58)
-    assembler.define_byte("option.startingPos", 0x55)
-
-    assembler.define_byte("option.animalCompanion", 0x0b + patch_data["options"]["animal_companion"])
-    assembler.define_byte("option.defaultSeedType", 0x20 + patch_data["options"]["default_seed"])
     assembler.define_byte("option.receivedDamageModifier", options["combat_difficulty"])
     assembler.define_byte("option.openAdvanceShop", options["advance_shop"])
 
@@ -95,7 +87,7 @@ def define_option_constants(assembler: Z80Assembler, patch_data):
     keysanity = patch_data["options"]["keysanity_small_keys"] or patch_data["options"]["keysanity_boss_keys"]
     assembler.define_byte("option.customCompassChimes", 1 if keysanity else 0)
 
-    master_keys_as_boss_keys = patch_data["options"]["master_keys"] == OracleOfAgesMasterKeys.option_all_dungeon_keys
+    master_keys_as_boss_keys = patch_data["options"]["master_keys"] == GiftsOfKinomiMasterKeys.option_all_dungeon_keys
     assembler.define_byte("option.smallKeySprite", 0x43 if master_keys_as_boss_keys else 0x42)
 
 def process_item_name_for_shop_text(item_name: str) -> List[int]:
@@ -123,10 +115,10 @@ def process_item_name_for_shop_text(item_name: str) -> List[int]:
 
 def define_text_constants(assembler: Z80Assembler, patch_data):
     overworld_shops = [
-        "Lynna Shop",
+        "Kinomi Shop",
         "Hidden Shop",
         "Syrup Shop",
-        "Advance Shop",
+        "Jiku Clifs Shop",
     ]
 
     for shop_name in overworld_shops:
@@ -141,19 +133,6 @@ def define_text_constants(assembler: Z80Assembler, patch_data):
                     text_bytes.extend([0x20, 0x0c, 0x08, 0x20, 0x03, 0x7b, 0x01])  # Price
                     text_bytes.extend([0x02, 0x00, 0x00])  # OK / No thanks
             assembler.add_floating_chunk(f"text.{symbolic_name}", text_bytes)
-
-    #Tokay Market
-    shop_name = "Tokay Market"
-    for i in range(1, 3):
-        location_name = f"{shop_name} #{i}"
-        symbolic_name = LOCATIONS_DATA[location_name]["symbolic_name"]
-        text_bytes = []
-        if location_name in patch_data["locations"]:
-            item_name_bytes = process_item_name_for_shop_text(patch_data["locations"][location_name])
-            text_bytes = [0x09, 0x01] + item_name_bytes + [0x09, 0x00, 0x0c, 0x18, 0x00]  # Item name
-            assembler.add_floating_chunk(f"text.{symbolic_name}", text_bytes)
-    text_bytes = [0x31, 0x30, 0x20, 0x02, 0x12, 0x01, 0x02, 0x00, 0x00]
-    assembler.add_floating_chunk(f"text.tokayMarket1Validation", text_bytes)
 
 
 def write_chest_contents(rom: RomData, patch_data):
@@ -434,11 +413,11 @@ def set_character_sprite_from_settings(rom: RomData):
     rom.write_byte(0x8d9c, 0x20 | palette_byte)
 
 def apply_misc_option(rom: RomData, patch_data):
-    if patch_data["options"]["master_keys"] != OracleOfAgesMasterKeys.option_disabled:
+    if patch_data["options"]["master_keys"] != GiftsOfKinomiMasterKeys.option_disabled:
         # Remove small key consumption on keydoor opened
         rom.write_byte(0x18366, 0x00)
         # Change obtention text
         rom.write_bytes(0x78247, [0x4d, 0x61, 0x73, 0x74, 0x65, 0x72, 0x20, 0x4b, 0x65, 0x79, 0x09, 0x01, 0x21, 0x00]) # I really wish that the dictionnay of ages would be more useful...
-    if patch_data["options"]["master_keys"] == OracleOfAgesMasterKeys.option_all_dungeon_keys:
+    if patch_data["options"]["master_keys"] == GiftsOfKinomiMasterKeys.option_all_dungeon_keys:
         # Remove boss key consumption on boss keydoor opened (boss door behave like normal locked door)
         rom.write_word(0x1835e, 0x0000)

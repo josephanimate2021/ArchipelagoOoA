@@ -1,833 +1,341 @@
 from .LogicPredicates import *
 
 
-def make_d0_logic(player: int):
+def make_summerVilla_logic(player: int):
     return [
-        ["enter d0", "d0 key chest", False, lambda state: ooa_can_kill_normal_enemy(state, player)],
-        ["enter d0", "d0 behind the door", True, lambda state: ooa_has_small_keys(state, player, 0, 1)],
-        ["d0 behind the door", "d0 basement", False, None],
-        ["d0 behind the door", "maku path heartpiece", False, lambda state: ooa_can_kill_normal_enemy(state, player)],
-        #["d0 behind the door", "d0 heart piece", False, None],
-        ["d0 behind the door", "d0 exit", False, lambda state: ooa_can_kill_normal_enemy(state, player)],
-        ["d0 exit", "d0 behind the door", False, None],
-    ]
-
-def make_d1_logic(player: int):
-    return [
-        # 0 keys
-        ["enter d1", "d1 east terrace", False, lambda state: ooa_can_kill_normal_enemy(state, player, True)],
-        ["d1 east terrace", "d1 ghini drop", False, None],
-        ["d1 east terrace", "d1 crossroad", False, None],
-        ["d1 east terrace", "d1 crystal room", False, lambda state: all([
-            ooa_can_use_ember_seeds(state, player, False),
-            ooa_can_break_crystal(state, player)
-        ])],
-        ["enter d1", "d1 west terrace", False, lambda state: ooa_can_break_pot(state, player)],
-        ["enter d1", "d1 pot chest", False, lambda state: ooa_can_break_pot(state, player)],
-
-        # 2 keys => Risk of softlock if we require only one key. 
-        ["d1 ghini drop", "d1 wide room", False, lambda state: ooa_has_small_keys(state, player, 1, 2)],
-        ["d1 wide room", "d1 two-button chest", False, None],
-        ["d1 wide room", "d1 one-button chest", False, None],
-        ["d1 wide room", "d1 boss", False, lambda state: all([
-            ooa_has_boss_key(state, player, 1),
-            ooa_has_bracelet(state, player),
-            ooa_generic_boss_and_miniboss_kill(state, player),
-        ])],
-
-        # potentially 3 keys w/ vanilla route
-        ["d1 wide room", "d1 U-room", False, lambda state: all([
-            ooa_can_break_bush(state, player),
-            ooa_generic_boss_and_miniboss_kill(state, player),
-            ooa_has_small_keys(state, player, 1, 3)
-        ])],
-        ["d1 west terrace", "d1 U-room", False, None],
-        ["d1 U-room", "d1 basement", False, lambda state: ooa_can_use_ember_seeds(state, player, True)],
-    ]
-
-
-def make_d2_logic(player: int):
-    return [
-        # 0 keys
-        ["enter d2", "d2 bombed terrace", False, lambda state: all([
-            ooa_can_kill_spiked_beetle(state, player),
-            ooa_has_bombs(state, player)
-        ])],
-        ["enter d2", "d2 moblin drop", False, lambda state: all([
-            ooa_can_kill_spiked_beetle(state, player),
-            ooa_can_kill_normal_enemy(state, player)
-        ])],
-
-        # potentially 2 keys w/ vanilla route 
-        ["enter d2", "d2 miniboss arena", False, lambda state: any([
-                all([
-                    ooa_has_small_keys(state, player, 2, 2),
-                    ooa_can_kill_normal_enemy(state, player, True, True)
-                ]),
-                all([
-                    ooa_can_jump_2_wide_pit(state, player, False),
-                    ooa_can_kill_spiked_beetle(state, player)
-                ])
-            ])
-        ],
-        # The key door doesn't need you to kill the beetles to go past it
-        # So come in with keys, and do the 2-wide pit jump from the other side
-        # To get to these items without being able to kill the spiked beetles.
-        # You also don't need to kill swoop for these, as you can just fall down one of the holes they make.
-        # (only relevant in keysanity)
-        ["d2 miniboss arena", "d2 bombed terrace", False, lambda state: all([
-            ooa_can_jump_2_wide_pit(state, player, False),
-            ooa_has_bombs(state, player)
-        ])],
-        ["d2 miniboss arena", "d2 moblin drop", False, lambda state: all([
-            ooa_can_jump_2_wide_pit(state, player, False),
-            ooa_can_kill_normal_enemy(state, player)
-        ])],
-        ["d2 miniboss arena", "d2 basement", False, lambda state: ooa_generic_boss_and_miniboss_kill(state, player)],
-        ["d2 basement", "d2 thwomp tunnel", False, None],
-        ["d2 basement", "d2 thwomp shelf", False, lambda state: any([
-            ooa_can_jump_1_wide_pit(state, player, False),
-            all([
-                ooa_option_hard_logic(state, player),
-                ooa_has_cane(state, player),
-                any([
-                    ooa_has_bombs(state, player),
-                    ooa_can_use_pegasus_seeds(state, player)
-                ])
-            ])
-        ])],
-        ["d2 basement", "d2 basement drop", False, lambda state: ooa_has_feather(state, player)],
-        ["d2 basement", "d2 basement chest", False, lambda state: all([
-            ooa_has_feather(state, player),
-            ooa_can_trigger_lever_from_minecart(state,player),
-            ooa_has_bombs(state, player),
-            ooa_can_kill_normal_enemy(state, player)
-        ])],
-
-        # 3 keys
-        ["d2 basement", "d2 moblin platform", False, lambda state: all([
-            ooa_has_feather(state, player),
-            ooa_has_small_keys(state, player, 2, 3),
-        ])],
-        ["d2 moblin platform", "d2 statue puzzle", False, lambda state: any([
-            ooa_has_bracelet(state, player),
-            ooa_has_cane(state, player),
-            all([
-                # push moblin into doorway, stand on button, use switch hook
-                ooa_option_hard_logic(state, player),
-                ooa_can_push_enemy(state, player),
-                ooa_has_switch_hook(state, player)
-            ])
-        ])],
-
-        # 4 keys
-        ["enter d2", "d2 rope room", False, lambda state: all([
-            ooa_can_kill_normal_enemy(state, player, True, True),
-            ooa_has_small_keys(state, player, 2, 4),
-        ])],
-        ["enter d2", "d2 ladder chest", False, lambda state: all([
-            ooa_can_kill_normal_enemy(state, player, True),
-            ooa_has_small_keys(state, player, 2, 4),
-            ooa_has_bombs(state, player)
-        ])],
-
-        # 5 keys
-        ["d2 statue puzzle", "d2 color room", False, lambda state: ooa_has_small_keys(state, player, 2, 5)],
-        ["d2 color room", "d2 boss", False, lambda state: all([
-            ooa_has_boss_key(state, player, 2),
-            any([
-                ooa_has_bombs(state, player),
-                ooa_option_hard_logic(state, player)
-            ])
-        ])],
-    ]
-
-
-def make_d3_logic(player: int):
-    return [
-        
-        # 0 keys
-        ["enter d3", "d3 pols voice chest", False, lambda state: ooa_has_bombs(state, player)],
-        ["d3 six-blocs drop", "d3 pols voice chest", False, lambda state: all([
-            ooa_can_break_bush(state, player),
-            ooa_can_kill_pols_voice(state, player)
-        ])],
-
-        ["enter d3", "d3 1F spinner", False, lambda state: any([
-            ooa_can_kill_moldorm(state, player, True),
-            ooa_has_bracelet(state, player)
-        ])],
-        ["d3 1F spinner", "d3 S crystal", False, None],
-        ["d3 1F spinner", "d3 E crystal", False, lambda state: ooa_has_bombs(state, player)],
-        ["d3 E crystal", "d3 statue drop", False, lambda state: ooa_has_bombs(state, player)],
-
-        # 1 key
-        ["enter d3", "d3 pitfall", False, lambda state: ooa_has_small_keys(state, player, 3, 1)],
-        # TODO : d3 seeds from bridge room: [enter d3, d3 small key, seed item, or: [sword, fool's ore, bombs]]
-        ["d3 pitfall", "d3 W crystal", False, lambda state: ooa_can_kill_pols_voice(state, player, True)],
-        # you can clip into the blocks enough to hit this crystal with switch hook
-        ["d3 pitfall", "d3 N crystal", False, lambda state: any([
-            ooa_has_seedshooter(state, player),
-            ooa_has_boomerang(state, player),
-            all([
-                ooa_option_hard_logic(state, player),
-                ooa_has_switch_hook(state, player)
-            ])
-        ])],
-        ["d3 pitfall", "d3 armos drop", False, lambda state: ooa_can_kill_armos(state, player)],
-        ["d3 W crystal", "d3 six-blocs drop", False, lambda state: all([
-            any([ # kill moldorm
-                ooa_has_bombs(state, player),
-                all([
-                    ooa_has_scent_seeds(state, player),
-                    ooa_has_seedshooter(state, player),
-                ]),
-                ooa_has_switch_hook(state, player),
-                all([
-                    ooa_has_cane(state, player),
-                    ooa_has_bracelet(state, player),
-                    ooa_option_medium_logic(state, player),
-                ])
-            ]),
-            any([ # hit orb
-                ooa_has_bombs(state, player),
-                ooa_has_seedshooter(state, player),
-                all([
-                    ooa_option_hard_logic(state, player),
-                    any([
-                        ooa_has_switch_hook(state, player),
-                        ooa_has_boomerang(state, player),
-                    ])
-                ])
-            ])
-        ])],
-        ["d3 six-blocs drop", "d3 conveyor belt room", False, lambda state: ooa_can_kill_armos(state, player)],
-        ["d3 pitfall", "d3 B1F spinner", False, lambda state: all([
-            state.has("_d3_S_crystal", player),
-            state.has("_d3_E_crystal", player),
-            state.has("_d3_N_crystal", player),
-            state.has("_d3_W_crystal", player),
-        ])],
-        ["d3 B1F spinner", "d3 crossroad", False, None],
-        ["d3 B1F spinner", "d3 torch chest", False, lambda state: all([
-            ooa_can_use_ember_seeds(state, player, True),
-            ooa_has_seedshooter(state, player),
-        ])],
-        # Have the ability to traverse the first switch room from the bottom to the
-        # door. TODO: HSS + seeds + feather?
-        ["d3 pitfall", "d3 crossing bridge room 1", True, lambda state: any([
-            ooa_has_seedshooter(state, player),
-            ooa_can_jump_3_wide_pit(state, player, False),
-            ooa_can_toss_ring(state, player),
-            all([
-                ooa_option_hard_logic(state, player),
-                ooa_has_boomerang(state, player)
-            ])
-        ])],
-        ["d3 crossing bridge room 1", "d3 between two bridge room", True, lambda state: ooa_has_small_keys(state, player, 3, 4)],
-        # Have the ability to traverse the second switch room from the bottom to the
-        # boss door area (TODO: boomerang logic should be hard?)
-        ["d3 between two bridge room", "d3 crossing bridge room 2", True, lambda state: any([
-            ooa_has_seedshooter(state, player),
-            ooa_can_jump_4_wide_pit(state, player, False),
-            all([
-                ooa_option_hard_logic(state, player),
-                ooa_has_feather(state, player),
-                any([
-                    ooa_has_sword(state, player),
-                    all([
-                        ooa_has_bombs(state, player),
-                        any([
-                            ooa_can_use_ember_seeds(state, player, True),
-                            ooa_can_use_scent_seeds_offensively(state, player)
-                        ]),
-                    ]),
-                ]),
-                any([
-                    ooa_can_jump_3_wide_pit(state, player, False),
-                    ooa_has_switch_hook(state, player),
-                    all([
-                        ooa_has_bracelet(state, player),
-                        ooa_has_small_keys(state, player, 3, 4)
-                    ])
-                ])
-            ])
-        ])],
-        ["d3 crossing bridge room 1", "d3 bridge chest", False, None],
-        # TODO ["d3 crossing bridge room 1", "d3 scent seed bush", False, lambda state: ooa_can_harvest_regrowing_bush(state, player)],
-        ["d3 post-subterror", "d3 between two bridge room", True, lambda state: all([
-            ooa_can_jump_2_wide_pit(state, player, False)
-        ])],
-        ["d3 B1F spinner", "d3 B1F east", False, lambda state: all([
-            # No need to go through the key door, you can use the warp, which should always be accessible since the spinner in down
-            ooa_generic_boss_and_miniboss_kill(state, player), 
-            ooa_has_shovel(state, player),
-            any([
-                ooa_has_seedshooter(state, player),
-                all([
-                    ooa_option_hard_logic(state, player), # Make it medium ?
-                    ooa_has_sword(state, player), # spin slash through corner
-                ])
-            ])
-        ])],
-        ["d3 crossing bridge room 2", "d3 post-subterror", False, None],
-        ["d3 B1F spinner", "d3 post-subterror", False, lambda state: all([
-            ooa_generic_boss_and_miniboss_kill(state, player), 
-            ooa_has_shovel(state, player),
-        ])],
-
-        ["d3 post-subterror", "d3 moldorm drop", False, lambda state: ooa_can_kill_moldorm(state, player, True)],
-        ["d3 crossing bridge room 2", "d3 boss", False, lambda state: all([
-            ooa_has_boss_key(state, player, 3),
-            any([
-                ooa_has_seedshooter(state, player),
-                all([
-                    ooa_option_hard_logic(state, player),
-                    ooa_can_use_seeds(state, player)
-                ])
-            ]),
-            any([
-                ooa_has_ember_seeds(state, player),
-                ooa_has_scent_seeds(state, player),
-            ])
-        ])],
-
-        # 3 keys
-        ["enter d3", "d3 bush beetle room", False, lambda state: all([
-            ooa_can_kill_normal_enemy(state, player, True),
-            ooa_has_small_keys(state, player, 3, 3),
-        ])],
-
-        # 4 keys
-        ["d3 bush beetle room", "d3 mimic room", False, lambda state: all([
-            ooa_can_kill_normal_enemy(state, player, False),
-            ooa_has_small_keys(state, player, 3, 4),
-        ])],
-    ]
-
-def make_d4_logic(player: int):
-    return [
-        ["enter d4", "d4 first chest", False, lambda state: all([
-            any([
-                ooa_can_kill_stalfos(state, player),
-                ooa_can_push_enemy(state, player)
-            ]),
-            any([
-                ooa_has_switch_hook(state, player),
-                ooa_can_jump_1_wide_liquid(state, player, False)
-            ]),
-        ])],
-         ["d4 first chest", "d4 cube chest", False, lambda state: ooa_has_feather(state, player)],
-
-        # No checks require 1 key since cape was introduced (can now open last keydoor
-        # before the others, effectively adding +1 key requirement to most checks)
-
-        # 1 keys
-        ["enter d4", "d4 minecart A", False, lambda state: all([
-            ooa_has_small_keys(state, player, 4, 1),
-            ooa_can_jump_1_wide_liquid(state, player, False)
-        ])],
-        ["d4 minecart A", "d4 first crystal switch", False, lambda state: any([
-            ooa_has_seedshooter(state, player),
-            all([
-                ooa_option_hard_logic(state, player),
-                ooa_has_boomerang(state, player)
-            ])
-        ])],
-        ["d4 minecart A", "d4 minecart chest", False, lambda state: ooa_can_trigger_lever(state, player)],
-
-        # 2 keys
-        ["d4 minecart A", "d4 minecart B", False, lambda state: all([
-            ooa_can_trigger_lever_from_minecart(state, player),
-            ooa_has_bracelet(state, player),
-            ooa_can_kill_stalfos(state, player),
-            ooa_has_small_keys(state, player, 4, 2)
-        ])],
-        ["d4 minecart B", "d4 second crystal switch", False, lambda state: any([
-            ooa_has_seedshooter(state, player),
-            all([
-                ooa_option_hard_logic(state, player),
-                ooa_has_boomerang(state, player)
-            ])
-        ])],
-
-        # 3 keys
-        ["d4 minecart B", "d4 minecart C", False, lambda state: ooa_has_small_keys(state, player, 4, 3)],
-        ["d4 minecart C", "d4 color tile drop", False, lambda state: any([
-            ooa_can_kill_normal_using_seedshooter(state, player),
-            all([
-                ooa_option_medium_logic(state, player),
-                ooa_has_sword(state, player),
-            ]),
-        ])],
-
-        # 4 keys
-        ["d4 color tile drop", "d4 minecart D", False, lambda state: ooa_has_small_keys(state, player, 4, 4)],
-
-        ["d4 minecart D", "d4 small floor puzzle", False, lambda state: all([
-            ooa_generic_boss_and_miniboss_kill(state, player),
-            ooa_has_bombs(state, player)
-        ])],
-        ["d4 minecart D", "d4 large floor puzzle", False, lambda state: any([
-            all([
-                ooa_can_jump_1_wide_liquid(state, player, False),
-                ooa_has_switch_hook(state, player),
-            ]),
-            all([
-                # We can jump the gap between minecart A and the bridge above,
-                # But it needs that the cariot is not there anymore, 
-                # so you need to kill the miniboss first
-                # Of course it's hard logic.
-                ooa_option_hard_logic(state, player),
-                ooa_generic_boss_and_miniboss_kill(state, player),
-                ooa_can_jump_3_wide_liquid(state, player),
-                ooa_has_cane(state, player),
-                ooa_has_noble_sword(state, player),
-            ])
-        ])],
-        
-        ["d4 large floor puzzle", "d4 boss", False, lambda state: all([
-            ooa_has_boss_key(state, player, 4),
-            ooa_has_switch_hook(state, player),
-            any([
-                ooa_has_sword(state, player),
-                #(ooa_option_medium_logic(state, player) and ooa_has_bombs(state, player, 4)),
-                ooa_can_punch(state, player),
-                ooa_has_boomerang(state, player)
-            ])
-        ])],
-        
-        # 5 keys 
-        ["d4 large floor puzzle", "d4 lava pot chest", False, lambda state: all([
-            ooa_has_small_keys(state, player, 4, 5),
-            ooa_has_bracelet(state, player),
-            ooa_has_switch_hook(state, player),
-        ])],
-    ]
-
-def make_d5_logic(player: int):
-    return [
-
-
-        # 0 keys
-        ["enter d5", "d5 switch A", False, lambda state: all([
-            ooa_can_kill_normal_enemy(state, player),
-            any([
-                ooa_can_trigger_switch(state, player),
-                all([
-                    ooa_option_hard_logic(state, player), # Not hard to reproduce but clearly not instinctive to find.
-                    ooa_has_bracelet(state, player),
-                ])
-            ])
-        ])],
-        ["d5 switch A", "d5 blue peg chest", False, None],
-        ["d5 switch A", "d5 dark room", False, lambda state: all([
-            ooa_can_trigger_switch(state, player),
-            any([
-                # Finding the road in the dark room
-                ooa_has_cane(state, player),
-                ooa_has_switch_hook(state, player),
-                all([
-                    ooa_option_medium_logic(state, player),
-                    any([
-                        ooa_can_kill_normal_enemy(state, player, False),
-                        ooa_can_push_enemy(state, player),
-                        ooa_has_boomerang(state, player),
-                        ooa_can_use_pegasus_seeds_for_stun(state, player),
-                    ])
-                ])
-            ])
-        ])],
-        ["d5 switch A", "d5 like-like chest", False, lambda state: any([
-            ooa_can_trigger_far_switch(state, player),
-            all([
-                ooa_option_hard_logic(state, player), # Not hard to reproduce but clearly not instinctive to find.
-                ooa_has_bracelet(state, player),
-            ]),
-            all([
-                ooa_option_hard_logic(state, player),
-                ooa_has_feather(state, player),
-                any([
-                    ooa_can_use_ember_seeds(state, player, False),
-                    ooa_can_use_scent_seeds_for_smell(state, player),
-                    ooa_can_use_mystery_seeds(state, player),
-                ])
-            ])
-        ])],
-        ["d5 switch A", "d5 eyes chest", False, lambda state: any([
-            ooa_has_seedshooter(state, player),
-            all([
-                ooa_can_use_pegasus_seeds(state, player),
-                ooa_has_feather(state, player),
-                ooa_can_use_mystery_seeds(state, player),
-                ooa_can_toss_ring(state, player)
-            ])
-        ])],
-        ["d5 switch A", "d5 two-statue puzzle", False, lambda state: all([
-            ooa_can_break_pot(state, player),
-            any([
-                ooa_has_cane(state, player),
-                ooa_option_medium_logic(state, player),
-            ]),
-            ooa_has_feather(state, player),
-            any([
-                ooa_has_seedshooter(state, player),
-                ooa_has_boomerang(state, player),
-                all([
-                    ooa_option_hard_logic(state, player),
-                    ooa_can_jump_2_wide_pit(state, player, False),
-                    any([
-                        ooa_can_use_ember_seeds(state, player, False),
-                        ooa_can_use_scent_seeds_for_smell(state, player),
-                        ooa_can_use_mystery_seeds(state, player),
-                    ])
-                ])
-            ])
-        ])],
-        ["d5 switch A", "d5 boss", False, lambda state: all([
-            ooa_has_boss_key(state, player, 5),
-            ooa_has_cane(state, player),
-            ooa_has_sword(state, player),
-        ])],
-
-        # 2 keys
-        ["d5 switch A", "d5 crossroads", False, lambda state: all([
-            ooa_can_kill_normal_enemy(state, player, False),
-            ooa_can_jump_2_wide_pit(state, player, False),
-            ooa_has_bracelet(state, player),
-            ooa_has_small_keys(state, player, 5, 2),
-            any([
-                ooa_has_cane(state, player),
-                all([
-                    ooa_option_hard_logic(state, player),
-                    ooa_can_jump_3_wide_pit(state, player, False), # May need a proper check. Bomb jump ?
-                ]),
-                all([
-                    ooa_option_hard_logic(state, player),
-                    ooa_has_sword(state, player),
-                    ooa_has_switch_hook(state, player),
-                ])
-            ])
-        ])],
-        ["d5 crossroads", "d5 diamond chest", False, lambda state: ooa_has_switch_hook(state, player)],
-
-        # 5 keys
-        ["d5 switch A", "d5 three-statue puzzle", False, lambda state: all([
-            ooa_has_cane(state, player),
-            ooa_has_small_keys(state, player, 5, 5),
-        ])],
-        ["d5 switch A", "d5 six-statue puzzle", False, lambda state: all([
-            ooa_has_ember_seeds(state, player),
-            ooa_has_seedshooter(state, player),
-            ooa_has_small_keys(state, player, 5, 5),
-            ooa_can_jump_1_wide_pit(state, player, False),
-        ])],
-        ["d5 crossroads", "d5 red peg chest", False, lambda state: all([
-            ooa_can_trigger_far_switch(state, player),
-            ooa_has_small_keys(state, player, 5, 5),
-        ])],
-        ["d5 red peg chest", "d5 owl puzzle", False, lambda state: any([
-            ooa_option_medium_logic(state, player),
-            ooa_has_cane(state, player)
-        ])],
-    ]
-
-def make_d6past_logic(player: int):
-    return [
-        ["enter d6 past", "d6 wall A bombed", False, lambda state: ooa_has_bombs(state, player)],
-        ["d6 wall A bombed", "d6 past wizzrobe", False, lambda state: ooa_can_kill_wizzrobes(state, player)],
-        ["d6 wall A bombed", "d6 past pool chest", False, lambda state: all([
-            ooa_can_use_ember_seeds(state, player, True),
-            ooa_can_swim(state, player, False),
-        ])],
-        ["d6 wall A bombed", "d6 canal expanded", False, lambda state: all([
-            ooa_can_use_ember_seeds(state, player, False),
-            ooa_has_seedshooter(state, player),
-        ])],
-        ["d6 canal expanded", "d6 past rope chest", False, lambda state: all([
-            ooa_can_dive(state, player),
-            ooa_can_kill_underwater(state, player, True),
-        ])],
-        ["enter d6 past", "d6 past color room", False, lambda state: all([
-            ooa_can_kill_normal_enemy(state, player, True),
-            any([
-                ooa_has_feather(state, player),
-                all([
-                    ooa_option_medium_logic(state, player),
-                    ooa_can_use_mystery_seeds(state, player),
-                ])
-            ])
-        ])],
-        ["enter d6 past", "d6 past stalfos chest", False, lambda state: all([
-            ooa_can_use_ember_seeds(state, player, False),
-            any([
-                ooa_option_hard_logic(state, player),
-                ooa_can_use_scent_seeds_for_smell(state, player),
-                #ooa_can_kill_ranged
-                all([
-                    ooa_can_jump_1_wide_pit(state, player, False),
-                    ooa_can_kill_stalfos(state, player),
-                ])
-            ])
-        ])],
-
-        # past, 1 key
-        ["enter d6 past", "d6 wall B bombed", False, lambda state: all([
-            ooa_has_cane(state, player),
-            ooa_has_bracelet(state, player),
-            ooa_can_jump_1_wide_pit(state, player, False),
-            ooa_has_small_keys(state, player, 9, 1),
-            ooa_has_bombs(state, player)
-        ])],
-        ["d6 wall B bombed", "d6 past spear chest", False, lambda state: ooa_can_dive(state, player)],
-        ["d6 wall B bombed", "d6 past diamond chest", False, lambda state: all([
-            ooa_can_dive(state, player),
-            ooa_has_switch_hook(state, player)
-        ])],
-        # past, 3 keys
-        ["d6 wall B bombed", "d6 boss", False, lambda state: all([
-            ooa_has_boss_key(state, player, 9),
-            ooa_can_dive(state, player),
-            ooa_has_small_keys(state, player, 9, 3),
-            ooa_has_seedshooter(state, player),
-            any([
-                ooa_has_sword(state, player),
-                all([
-                    ooa_has_seedshooter(state, player),
-                    any ([
-                        ooa_has_scent_seeds(state, player),
-                        ooa_has_ember_seeds(state, player),
-                    ]),
-                ]),
-                ooa_can_punch(state, player),
-            ])
-        ])],
-    ]
-
-def make_d6present_logic(player: int):
-    return [
-        ["enter d6 present", "d6 present diamond chest", False, lambda state: ooa_has_switch_hook(state, player)],
-        ["enter d6 present", "d6 present orb room", False, lambda state: any([
-            ooa_can_swim(state, player, False),
-            ooa_can_jump_3_wide_liquid(state, player),
-            ooa_has_switch_hook(state, player),
-        ])],
-        ["d6 present orb room", "d6 present rope chest", False, lambda state: all([
-            any([
-                ooa_has_seedshooter(state, player),
-                all([
-                    ooa_option_hard_logic(state, player),
-                    ooa_can_jump_2_wide_pit(state, player, False),
-                    ooa_has_sword(state, player),
-                ]),
-                ooa_can_jump_3_wide_pit(state, player, False)
-            ]),
-            ooa_can_use_scent_seeds_for_smell(state, player)
-        ])],
-        ["d6 present orb room", "d6 present handmaster room", False, lambda state: any([
-            ooa_has_seedshooter(state, player),
-            all([
-                ooa_option_hard_logic(state, player),
-                ooa_can_jump_2_wide_pit(state, player, False),
-                ooa_has_sword(state, player),
-            ]),
-            ooa_can_jump_4_wide_pit(state, player, False)
-        ])],
-        
-        ["d6 present handmaster room", "d6 present cube chest", False, lambda state: all([
-            ooa_has_switch_hook(state, player),
-            ooa_has_bombs(state, player),
-            any([
-                ooa_option_hard_logic(state, player),
-                ooa_can_jump_1_wide_pit(state, player, False)
-            ])
-        ])],
-        ["d6 present handmaster room", "d6 present spinner chest", False, lambda state: all([
-            state.has("_d6_wall_B_bombed", player),
-            any([
-                # To go past the pit in handmaster room
-                ooa_has_switch_hook(state, player),
-                ooa_can_jump_1_wide_pit(state, player, False),
-            ])
-        ])],
-        
-        ["enter d6 present", "d6 present beamos chest", False, lambda state: all([
-            state.has("_d6_canal_expanded", player),
-            ooa_has_feather(state, player),
-            any([
-                ooa_can_swim(state, player, False),
-                all([
-                    ooa_has_small_keys(state, player, 6, 3),
-                    ooa_has_switch_hook(state, player),
-                ])
-            ])
-        ])],
-
-        # present, 3 keys
-        # only sustainable weapons count for killing the ropes
-        
-        ["d6 present beamos chest", "d6 present rng chest", False, lambda state: all([
-            ooa_has_bracelet(state, player),
-            ooa_can_kill_normal_enemy(state, player, True),
-            ooa_has_small_keys(state, player, 6, 3),
-        ])],
-
-        ["enter d6 present", "d6 present channel chest", False, lambda state: all([
-            state.has("_d6_canal_expanded", player),
-            ooa_has_switch_hook(state, player),
-            ooa_has_small_keys(state, player, 6, 3),
-        ])],
-
-        ["d6 present spinner chest", "d6 present vire chest", False, lambda state: all([
-            any([
-                ooa_has_sword(state, player),
-                state.has("Expert's Ring", player),
-                ooa_option_medium_logic(state, player) # for switch hook kill (?)
-            ]),
-            ooa_has_small_keys(state, player, 6, 3),
-            ooa_has_switch_hook(state, player)
-        ])],
-    ]
-
-def make_d7_logic(player: int):
-    return [
-        
-        # leaving/entering the dungeon (but not loading a file) resets the water level.
-        # this is necessary to make keys work out, since otherwise you can drain the
-        # water level without getting enough keys to refill it! there just aren't
-        # enough chests otherwise.
-        # Now that dungeon entrances are randomized, mermaid suit can't be assumed
-        # anymore. The OG randomizer would allow you to enter jabu without the mermaid
-        # suit but would prevent you from surfacing a level up, since you would
-        # instantly drown then. This was changed in NG; now you're prevented from
-        # entering the dungeon without the mermaid suit.
-        # Be careful never to use the "enter d7" node for the purpose of logic, always
-        # use "enter d7 with suit".
-        ["enter d7", "enter d7 with suit", False, lambda state: ooa_can_dive(state, player)],
-
-        # 0 keys
-        ["enter d7 with suit", "d7 spike chest", False, None],
-        ["enter d7 with suit", "d7 crab chest", False, lambda state: any([
-            ooa_can_kill_underwater(state, player),
-            all([
-                state.has("_d7_drain", player),
-                ooa_can_kill_normal_enemy(state, player)
-            ])
-        ])],
-        ["enter d7 with suit", "d7 diamond puzzle", False, lambda state: ooa_has_switch_hook(state, player)],
-        ["enter d7 with suit", "d7 flower room", False, lambda state: all([
-            ooa_has_long_hook(state, player),
-            ooa_has_feather(state, player)
-        ])],
-        ["enter d7 with suit", "d7 stairway chest", False, lambda state: any([
-            ooa_has_long_hook(state, player),
-            all([
-                state.has("_d7_drain", player),
-                ooa_has_cane(state, player),
-                ooa_has_switch_hook(state, player),
-            ])
-        ])],
-        ["d7 stairway chest", "d7 right wing", False, lambda state: ooa_can_kill_moldorm(state, player)],
-
-        # 3 keys - enough to drain dungeon
-        ["enter d7 with suit", "d7 drain", False, lambda state: any([
-            ooa_has_small_keys(state, player, 7, 3),
-        ])],
-        ["d7 drain", "d7 boxed chest", False, None],
-        ["d7 drain", "d7 cane/diamond puzzle", False, lambda state: all([
-            ooa_has_long_hook(state, player),
-            ooa_has_cane(state, player),
-        ])],
-
-        # 4 keys - enough to choose any water level (middle water level keydoor doesn't
-        # necessarily need to be unlocked since water level resets upon reentry)
-        ["enter d7 with suit", "d7 flood", False, lambda state: all([
-            ooa_has_long_hook(state, player),
-            ooa_has_small_keys(state, player, 7, 4),
-        ])],
-        ["d7 flood", "d7 terrace", False, None],
-        ["d7 flood", "d7 left wing", False, None],
-        ["d7 flood", "d7 boss", False, lambda state: ooa_has_boss_key(state, player, 7)],
-
-        # 5 keys
-        ["d7 flood", "d7 hallway chest", False, lambda state: ooa_has_small_keys(state, player, 7, 5)],
-
-        # 7 keys
-        ["d7 stairway chest", "d7 miniboss chest", False, lambda state: all([
-            ooa_has_feather(state, player),
-            ooa_has_small_keys(state, player, 7, 7),
-            any([
-                ooa_has_sword(state, player),
-                ooa_has_boomerang(state, player),
-                all([
-                    ooa_has_seedshooter(state, player),
-                    ooa_has_scent_seeds(state, player)
-                ])
-            ])
-        ])],
-        ["d7 flood", "d7 post-hallway chest", False, lambda state: ooa_has_small_keys(state, player, 7, 7)],
-        ["d7 drain", "d7 island chest", False, lambda state: all([
-            ooa_has_small_keys(state, player, 7, 7),
-            ooa_has_switch_hook(state, player),
-        ])],
-    ]
-
-def make_d8_logic(player: int):
-    return [
-        
-        ["enter d8", "d8 1f single chest", False, lambda state: all([
-            ooa_has_bombs(state, player),
-            any([
-                ooa_can_kill_normal_enemy(state, player, True),
-                ooa_has_boomerang(state, player),
-                ooa_can_use_pegasus_seeds_for_stun(state, player),
-            ])
-        ])],
-
-        # 1 key - access B1F
-        ["d8 1f single chest", "d8 nw chest", False, lambda state: all([
-            ooa_has_small_keys(state, player, 8, 1),
-            ooa_has_switch_hook(state, player),
-            ooa_has_cane(state, player),
-            ooa_can_use_ember_seeds(state, player, True),
-            ooa_has_seedshooter(state, player),
-        ])],
-        ["d8 nw chest", "d8 ghini chest", False, lambda state: ooa_can_kill_normal_enemy(state, player)],
-
-        # 2 keys - access SE spinner
-        ["d8 ghini chest", "d8 blue peg chest", False, lambda state: ooa_has_small_keys(state, player, 8, 2)],
-        ["d8 blue peg chest", "d8 blade trap", False, None],
-        ["d8 blue peg chest", "d8 sarcophagus chest", False, lambda state: ooa_has_glove(state, player)],
-        ["d8 blue peg chest", "d8 stalfos", False, lambda state: ooa_can_kill_stalfos(state, player)],
-
-        # 4 keys - reach miniboss
-        ["d8 blue peg chest", "d8 maze chest", False, lambda state: all([
-            ooa_has_feather(state, player),
-            ooa_has_sword(state, player),
-            ooa_has_small_keys(state, player, 8, 4)
-        ])],
-        ["d8 maze chest", "d8 nw slate chest", False, None],
-        ["d8 maze chest", "d8 ne slate chest", False, lambda state: all([
-            ooa_has_feather(state, player),
-            ooa_can_swim(state, player, False),
-            ooa_can_use_ember_seeds(state, player, False),
-        ])],
-
-        
-        ["d8 maze chest", "d8 b3f single chest", False, lambda state: ooa_has_glove(state, player)],
-        ["d8 b3f single chest", "d8 tile room", False, lambda state: ooa_has_feather(state, player)],
-        ["d8 tile room", "d8 se slate chest", False, None],
-        ["d8 tile room", "d8 boss", False, lambda state: all([
-            ooa_has_enough_slates(state, player),
-            ooa_has_boss_key(state, player, 8),
-            ooa_has_glove(state, player),
-            ooa_has_sword(state, player),
-        ])],
-
-        # 5 keys
-        ["d8 blue peg chest", "d8 floor puzzle", False, lambda state: ooa_has_small_keys(state, player, 8, 5)],
-        ["d8 maze chest", "d8 sw slate chest", False, lambda state: all([
-            ooa_has_bracelet(state, player),
-            ooa_has_small_keys(state, player, 8, 5)
-        ])],
+        ["enter summer villa", "d0 map chest", False, None],
+        ["enter summer villa", "d0 compass chest", False, None],
+        ["enter summer villa", "d0 small key chest 1f", False, None],
+        ["enter summer villa", "solder trade", False, lambda state: state.has("Wood Clock", player)],
+        ["enter summer villa", "d0 small key chest b1f", False, lambda state: kinomi_can_kill_armos(state, player)],
+        ["enter summer villa", "d0 small key chest 2f", False, None],
+        ["enter summer villa", "d0 boss key chest", False, lambda state: all([
+            kinomi_can_kill_spiked_beetle(state, player),
+            kinomi_has_small_keys(state, player, 0, 1)
+        ])],
+        ["enter summer villa", "d0 shield chest", False, lambda state: kinomi_has_small_keys(state, player, 0, 1)],
+        ["enter summer villa", "d0 boss", False, lambda state: all([
+            kinomi_has_shield(state, player),
+            kinomi_has_boss_key(state, player, 0)
+        ])],
+        ["d0 boss", "d0 sword chest", False, None],
     ] 
+
+def make_spiritGrotto_logic(player: int):
+    return [
+        # LEFT SIDE OF SPIRIT'S GROTTO
+        ["enter spirit's grotto", "d1 left side", False, lambda state: kinomi_can_kill_normal_enemy(state, player)],
+        ["d1 left side", "d1 pots chest", False, lambda state: kinomi_can_break_pot(state, player)],
+        ["d1 left side", "d1 platform chest", False, None],
+        ["d1 left side", "d1 small key drop", False, None],
+        ["d1 left side", "d1 heartpiece", False, lambda state: kinomi_can_press_nonhold_presure_plate_without_blocks(state, player, True)],
+        ["d1 left side", "d1 compass chest", False, lambda state: all([
+            kinomi_has_small_keys(state, player, 1, 2), # 2 keys = prevent softlock (due to keyblock ahead that leads to reharvesting bushes).
+            kinomi_has_bombs(state, player)
+        ])],
+        ["d1 compass chest", "d1 hit blocks", False, lambda state: kinomi_has_sword(state, player)],
+        ["d1 compass chest", "d1 colored tiles heartpiece", False, None],
+        ["d1 compass chest", "d1 miniboss arena", False, lambda state: all([
+            kinomi_has_small_keys(state, player, 1, 1),
+            kinomi_generic_boss_and_miniboss_kill(state, player)
+        ])],
+        ["d1 miniboss arena", "d1 bracelet", False, lambda state: kinomi_can_press_nonhold_presure_plate_without_blocks(state, player, True)],
+
+        # RIGHT SIDE OF SPIRIT'S GROTTO
+        ["enter spirit's grotto", "d1 hit color block", False, lambda state: all([
+            kinomi_can_break_pot(state, player),
+            kinomi_has_sword(state, player)
+        ])],
+        ["enter spirit's grotto", "d1 pully puzzle", False, lambda state: all([
+            kinomi_has_small_keys(state, player, 1, 1),
+            kinomi_has_bracelet(state, player)
+        ])],
+        ["d1 pully puzzle", "d1 rupee under pot", False, None],
+        ["d1 pully puzzle", "d1 boss key chest", False, None],
+        ["d1 pully puzzle", "d1 boss", False, lambda state: all([
+            kinomi_has_small_keys(state, player, 1, 1),
+            kinomi_has_bombs(state, player),
+            kinomi_has_bracelet(state, player),
+            kinomi_has_boss_key(state, player, 1),
+            kinomi_generic_boss_and_miniboss_kill(state, player)
+        ])],
+        ["d1 boss", "d1 final gift", False, None],
+    ]
+
+def make_fourCornersCave_logic(player: int):
+    return [
+        # DESCENDING DOWN
+        ["enter four corners cave", "d3 compass chest", False, lambda state: kinomi_can_jump_pit(state, player)],
+        ["enter four corners cave", "d3 first floor", False, lambda state: kinomi_has_bombs(state, player)],
+        ["d3 first floor", "d3 compass chest", False, None],
+        ["d3 first floor", "d3 small key chest in dark", False, lambda state: all([
+            kinomi_has_small_keys(state, player, 3, 1),
+            kinomi_can_trigger_far_switch(state, player, False, False),
+            kinomi_can_kill_normal_enemy(state, player)
+        ])],
+        ["d3 first floor", "d3 boss", False, lambda state: all([
+            kinomi_has_small_keys(state, player, 3, 1), # Placed this here anyway despite the availability to jump across the pit to prevent softlocks.
+            kinomi_can_jump_pit(state, player),
+            kinomi_has_boomerang(state, player),
+            kinomi_has_boss_key(state, player, 3),
+            kinomi_generic_boss_and_miniboss_kill(state, player)
+        ])],
+        ["d3 boss", "d3 final gift", False, None],
+
+        # RIGHT SIDE OF CROSSPATH
+        ["d3 first floor", "d3 armos small key chest", False, lambda state: all([
+            kinomi_can_kill_normal_enemy(state, player),
+            kinomi_can_kill_armos(state, player)
+        ])],
+        ["d3 first floor", "d3 dungeon map chest", False, lambda state: kinomi_has_small_keys(state, player, 3, 1)],
+        ["d3 dungeon map chest", "d3 armos red rupee chest", False, lambda state: kinomi_can_kill_armos(state, player)],
+
+        # LEFT SIDE OF CROSSPATH
+        ["d3 first floor", "d3 first floor cross left side", False, lambda state: kinomi_can_trigger_far_switch(state, player, False, False)], # because the blue doors are closed by default upon entry
+        ["d3 armos red rupee chest", "d3 first floor cross left side", False, lambda state: kinomi_can_trigger_switch(state, player)], # There is a switch in that room that can be triggered to open the blue door.
+        ["d3 first floor cross left side", "d3 heartpiece chest", False, lambda state: any([
+            kinomi_can_jump_pit(state, player),
+            # I actually do not know any vanila way to do this puzzle, because the first time I played the bridge state did not save correctly.
+        ])],
+        ["d3 first floor cross left side", "d3 miniboss arena", False, None], # bomb requirement was ruled out earlier in the map, and thankfully that's what that miniboss needs.
+        ["d3 first floor cross left side", "d3 20 rupee chest", False, lambda state: all([
+            kinomi_has_small_keys(state, player, 3, 1),
+            kinomi_can_trigger_far_switch(state, player, True, True)
+        ])],
+        ["d3 first floor cross left side", "d3 bemos region", False, lambda state: kinomi_can_jump_4_wide_pit(state, player)],
+        ["d3 20 rupee chest", "d3 bemos region", False, None],
+        ["d3 bemos region", "d3 bemos and armos chest", False, None],
+        ["d3 bemos region", "d3 bommerang chest", False, lambda state: all([
+            kinomi_has_small_keys(state, player, 3, 1),
+            kinomi_can_trigger_far_switch(state, player, True, True)
+        ])],
+
+        # BOTTOM SIDE OF CROSSPATH
+        ["d3 first floor cross left side", "d3 room 55D cross", False, lambda state: kinomi_has_boomerang(state, player)], # allows the user to open the red door inside room 55D.
+        ["d3 room 55D cross", "d3 boss key chest", False, lambda state: kinomi_has_small_keys(state, player, 3, 1)],
+        ["d3 room 55D cross", "d3 giant blade trap chest", False, None],
+        ["d3 room 55D cross", "d3 spikes chest", False, None],
+    ]
+
+def make_seasonsShrine_logic(player: int):
+    return [
+
+        # UNLOCK AUTUMN
+        ["enter seasons shrine", "d4 summer small key drop", False, lambda state: kinomi_can_kill_normal_enemy(state, player)],
+        ["d4 summer small key drop", "d4 summer big rupee chest", False, lambda state: kinomi_has_boomerang(state, player)],
+        ["d4 summer big rupee chest", "d4 autumn fall", False, lambda state: kinomi_has_small_keys(state, player, 4, 1)],
+        ["d4 autumn fall", "d4 autumm compass chest", False, lambda state: any([
+            kinomi_can_swim(state, player),
+            kinomi_can_jump_pit(state, player)
+        ])],
+        ["d4 autumm compass chest", "d4 autumm to summer small key chest", False, (
+            # there is a bug in the code where the switch dosen't do anything in room 52b. So for the time being, we won't need to hit the switch.
+            None
+        )],
+        ["d4 autumm compass chest", "d4 autumm heartpiece", False, lambda state: kinomi_can_jump_pit(state, player)],
+        ["d4 autumm heartpiece", "d4 autumm to summer statue block puzzle", False, None],
+
+        # UNLOCK WINTER
+        ["d4 autumn fall", "d4 winter fall", False, lambda state: kinomi_has_small_keys(state, player, 4, 1)],
+        ["d4 winter fall", "d4 winter small key chest", False, lambda state: kinomi_can_trigger_switch(state, player)],
+        ["d4 winter fall", "d4 second crystal", False, lambda state: all([
+            kinomi_has_small_keys(state, player, 4, 1),
+            kinomi_can_break_d4_crystal(state, player)
+        ])],
+
+        # UNLOCK SPRING
+        ["d4 winter fall", "d4 spring fall", False, lambda state: kinomi_can_jump_pit(state, player)],
+        ["d4 spring fall", "d4 boss", False, lambda state: all([
+            kinomi_has_boss_key(state, player, 4),
+            kinomi_generic_boss_and_miniboss_kill(state, player)
+        ])],
+        ["d4 boss", "gift for din", False, None],
+        ["d4 boss", "impa's seasons house chest", False, None],
+        ["d4 spring fall", "d4 winter north stump region with barrier", False, lambda state: all([
+            kinomi_can_break_flower(state, player),
+            kinomi_has_small_keys(state, player, 4, 1)
+        ])],
+        ["d4 winter north stump region with barrier", "d4 first crystal", False, lambda state: kinomi_can_break_d4_crystal(state, player)],
+        ["d4 winter north stump region without barrier", "d4 winter north stump switch", False, lambda state: all([
+            kinomi_can_break_pot(state, player),
+            kinomi_can_trigger_switch(state, player)
+        ])],
+        ["d4 winter north stump region with barrier", "d4 winter north stump switch", False, lambda state: all([
+            kinomi_can_trigger_switch(state, player),
+            kinomi_has_bombs(state, player)
+        ])],
+        ["d4 spring fall", "d4 spring small key chest", False, lambda state: kinomi_can_use_ember_seeds(state, player, True)],
+        ["d4 spring small key chest", "d4 third crystal", False, lambda state: kinomi_can_break_d4_crystal(state, player)],
+        ["d4 spring fall", "d4 spring kill enemies", False, lambda state: kinomi_can_kill_normal_enemy(state, player, True)],
+
+        # PATH TO MINIBOSS ARENA
+        ["d4 winter fall", "d4 miniboss arena", False, lambda state: all([
+            kinomi_has_small_keys(state, player, 4, 1),
+            kinomi_generic_boss_and_miniboss_kill(state, player)
+        ])],
+        ["d4 miniboss arena", "d4 summer armos small key drop", False, lambda state: kinomi_can_kill_armos(state, player)],
+        ["d4 miniboss arena", "d4 fall miniboss arena chest", False, lambda state: all([
+            kinomi_can_break_mushroom(state, player),
+            kinomi_can_break_pot(state, player),
+            kinomi_can_trigger_switch(state, player),
+            kinomi_can_jump_pit(state, player)
+        ])],
+        ["d4 fall miniboss arena chest", "d4 fall roc's cape gift", False, lambda state: all([
+            any([
+                kinomi_has_bombs(state, player),
+                kinomi_can_jump_pit(state, player) # Incase the randomizer chooses this.
+            ]),
+            kinomi_can_break_mushroom(state, player),
+            kinomi_has_small_keys(state, player, 4, 1) # Put this here to prevent softlocks even though it's possible to bypass the keyblock with the cape.
+        ])],
+        ["d4 fall miniboss arena chest", "d4 spring north stump heartpiece", False, lambda state: kinomi_can_jump_pit(state, player)],
+        ["d4 winter north stump switch", "d4 spring miniboss arena statue puzzle", False, None],
+        ["d4 winter north stump switch", "d4 fourth crystal", False, lambda state: all([
+            kinomi_has_small_keys(state, player, 4, 1),
+            kinomi_can_break_d4_crystal(state, player)
+        ])],
+        ["d4 miniboss arena", "d4 winter north stump region without barrier", False, lambda state: all([
+            state.has("_hit_first_d4_crystal", player),
+            state.has("_hit_second_d4_crystal", player),
+            state.has("_hit_third_d4_crystal", player),
+            state.has("_hit_fourth_d4_crystal", player),
+            kinomi_has_small_keys(state, player, 4, 1),
+        ])],
+        ["d4 winter north stump region without barrier", "d4 boss key chest", False, lambda state: all([
+            kinomi_can_jump_pit(state, player),
+            kinomi_can_use_ember_seeds(state, player, True)
+        ])]
+    ]
+
+def make_lostLabrinth_logic(player: int):
+    return [
+        # LOST LABYRINTH PRESENT MAIN ENTRANCE ROUTE
+        ["enter lost labyrinth", "d2 present dungeon map chest", False, lambda state: kinomi_can_kill_normal_enemy(state, player, True)],
+        ["d2 present dungeon map chest", "d2 present cross with cane", False, lambda state: any([
+            kinomi_can_jump_4_wide_pit(state, player),
+            kinomi_has_cane(state, player)
+        ])],
+        ["d2 present dungeon map chest", "nayru's house", False, None],
+        ["lost labyrinth past entrance 4", "d2 present fix holes", False, lambda state: any([
+            kinomi_has_cane(state, player),
+            kinomi_has_bracelet(state, player)
+        ])],
+        ["d2 present fix holes", "d2 present cross with cane", False, None],
+        ["d2 present fix holes", "d2 present color tiles", False, lambda state: kinomi_has_sword(state, player)],
+        ["d2 present fix holes", "d2 present small key chest", False, None],
+        ["d2 present fix holes", "d2 present color tiles 2", False, lambda state: kinomi_has_small_keys(state, player, 5, 1)],
+        ["d2 present color tiles 2", "d2 present cane chest", False, lambda state: all([
+            kinomi_has_small_keys(state, player, 5, 2),
+            kinomi_can_kill_normal_enemy(state, player)
+        ])],
+
+        # LOST LABYRINTH PAST SMALL KEY CHEST PAST #1
+        ["lost labyrinth past entrance 2", "d2 past kill moldorm", False, lambda state: kinomi_can_kill_moldorm(state, player)],
+
+        # LOST LABYRINTH PAST ENTRANCE 3 ROUTE
+        ["lost labyrinth past entrance 3", "d2 past bomb chest", False, lambda state: kinomi_has_boss_key(state, player, 4)],
+        ["syrup's shop", "d2 past color block puzzle", True, lambda state: kinomi_has_small_keys(state, player, 2, 1)],
+        ["lost labyrinth past entrance 5", "d2 past witch's chest", False, lambda state: all([
+            kinomi_has_small_keys(state, player, 2, 1),
+            state.has("Shield", player), # better to have it for defence with the moving floors.
+            kinomi_can_kill_normal_enemy(state, player)
+        ])],
+
+        # LOST LABYRINTH PAST MAIN ENTRANCE ROUTE 
+        ["lost labyrinth past entrance 3", "d2 past fix holes at entrance", False, lambda state: kinomi_has_cane(state, player)],
+        ["lost labyrinth past entrance 3", "d2 past small key drop", False, lambda state: all([
+            kinomi_has_bombs(state, player),
+            kinomi_can_kill_normal_enemy(state, player),
+            kinomi_can_kill_pols_voice(state, player)
+        ])],
+        ["lost labyrinth past entrance 5", "d2 past small key chest", False, lambda state: all([
+            kinomi_has_small_keys(state, player, 2, 1),
+            kinomi_has_cane(state, player)
+        ])],
+
+        # LOST LABYRINTH PAST RUPTURED MINE ENTRANCE ROUTE
+        ["jiku clifs past springwater region", "d2 past color tiles puzzle", False, lambda state: all([
+            kinomi_has_bombs(state, player),
+            kinomi_has_cane(state, player),
+            kinomi_has_glove(state, player),
+            kinomi_can_jump_pit(state, player),
+            state.has("Old Mining Key", player)
+        ])],
+        ["d2 past color tiles puzzle", "ganon beaten", False, lambda state: all([
+            kinomi_has_small_keys(state, player, 2, 1),
+            kinomi_has_sword(state, player),
+            any([
+                all([
+                    # casual rules
+                    kinomi_can_use_ember_seeds(state, player, False),
+                    kinomi_can_use_mystery_seeds(state, player)
+                ]),
+                all([
+                    kinomi_option_medium_logic(state, player),
+                    any([
+                        all([
+                            kinomi_option_hard_logic(state, player),
+                            kinomi_can_use_seeds(state, player),
+                            # satchel can't use pegasus to damage, but all others work
+                            any([
+                                kinomi_has_ember_seeds(state, player),
+                                kinomi_has_mystery_seeds(state, player),
+                                kinomi_has_scent_seeds(state, player),
+                                kinomi_has_gale_seeds(state, player)
+                            ])
+                        ])
+                    ])
+                ])
+            ])
+        ])],
+
+        # LOST LABYRINTH PRESENT GRAVEYARD ENTRANCE ROUTE
+        ["lost labyrinth graveyard entrance", "d2 present small key drop", False, lambda state: kinomi_can_kill_normal_enemy(state, player)],
+        ["lost labyrinth graveyard entrance", "d2 present stairs maze chest", False, None],
+        ["lost labyrinth graveyard entrance", "d2 present miniboss arena", False, lambda state: kinomi_generic_boss_and_miniboss_kill(state, player)],
+        #["lost labyrinth graveyard entrance", "d2 present miniboss arena", False, lambda state: kinomi_generic_boss_and_miniboss_kill(state, player)],
+        ["d2 present miniboss arena", "d2 present color block puzzle", False, lambda state: all([
+            kinomi_has_sword(state, player),
+            kinomi_can_jump_pit(state, player)
+        ])],
+        ["d2 present miniboss arena", "d2 present rupees chest", False, lambda state: kinomi_has_small_keys(state, player, 5, 1)]
+    ]
+
+def make_tokayTemple_logic(player: int):
+    return [
+        ["tokay desert", "d6 chest near first codepiece", False, lambda state: kinomi_has_small_keys(state, player, 6, 1)],
+        ["tokay desert", "d6 chest near second codepiece", False, lambda state: kinomi_has_bombs(state, player)],
+        ["tokay desert", "d6 chest near third codepiece", False, None],
+        ["tokay desert", "d6 chest near fourth codepiece", False, lambda state: kinomi_can_kill_normal_enemy(state, player)],
+        ["tokay desert", "d6 chest near fifth codepiece", False, lambda state: all([
+            kinomi_has_small_keys(state, player, 6, 2),
+            kinomi_has_cane(state, player)
+        ])],
+        ["tokay desert", "d6 color block downstairs area", False, lambda state: kinomi_has_enough_slates(state, player)],
+        ["d6 color block downstairs area", "d6 color block puzzle", False, lambda state: kinomi_has_glove(state, player)],
+        ["d6 color block downstairs area", "d6 boss", False, lambda state: all([
+            kinomi_has_small_keys(state, player, 6, 1),
+            any([
+                kinomi_option_hard_logic(state, player), # Hard logic can use the ember seeds fast enough without removing keyblock. 
+                all([ # It's possible to proceed without removing last keyblock.
+                    kinomi_option_medium_logic(state, player),
+                    kinomi_can_use_pegasus_seeds(state, player)
+                ]),
+                kinomi_has_small_keys(state, player, 6, 1),
+            ]),
+            kinomi_can_use_ember_seeds(state, player, False),
+            kinomi_has_boss_key(state, player, 6),
+            kinomi_has_cane(state, player)
+        ])],
+        ["d6 boss", "nayru's gift", False, None],
+        ["tokay desert", "d6 armos puzzle", False, lambda state: all([
+            kinomi_has_bombs(state, player),
+            kinomi_has_cane(state, player)
+        ])],
+        ["tokay desert", "d6 chest near slate slots", False, lambda state: kinomi_has_cane(state, player)],
+        ["d6 chest near slate slots", "d6 statue block puzzle", False, None],
+        ["d6 chest near slate slots", "d6 fill holes", False, lambda state: kinomi_has_bombs(state, player)],
+        ["d6 chest near slate slots", "d6 miniboss arena", False, None],
+        ["d6 miniboss arena", "d6 statue block puzzle 2", False, None],
+
+    ]

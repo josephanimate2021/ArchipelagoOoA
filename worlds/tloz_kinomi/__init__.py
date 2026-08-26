@@ -16,7 +16,7 @@ from .PatchWriter import ooa_create_appp_patch
 from .data import LOCATIONS_DATA
 from .data.Constants import *
 from .data.Regions import REGIONS
-from .Client import OracleOfAgesClient  # Unused, but required to register with BizHawkClient
+from .Client import GiftsOfKinomiClient  # Unused, but required to register with BizHawkClient
 from .patching.ProcedurePatch import ROM_HASH
 # TODO: Implement settings for Gifts of Kinomi. Right now in testing phase with the OG ages rom before doing anything major.
 class OOASettings(settings.Group):
@@ -26,83 +26,40 @@ class OOASettings(settings.Group):
         copy_to = "Legend of Zelda, The - Oracle of Ages (USA).gbc"
         md5s = [ROM_HASH]
 
-    class OoACharacterSprite(str):
-        """
-        The name of the sprite file to use (from "data/sprites/oos_ooa/").
-        Putting "link" as a value uses the default game sprite.
-        Putting "random" as a value randomly picks a sprite from your sprites directory for each generated ROM.
-        """
-    class OoACharacterPalette(str):
-        """
-        The color palette used for character sprite throughout the game.
-        Valid values are: "green", "red", "blue", "orange", and "random"
-        """
-    class OoAHeartBeepInterval(str):
-        """
-        A factor applied to the infamous heart beep sound interval.
-        Valid values are: "vanilla", "half", "quarter", "disabled"
-        """
-    
-    class OoAQolMermaidSuit(str):
-        """
-        Defines if you don't want to spam the buttons to swim with the mermaid suit.
-        """
-        
-    class OoAQuickFlute(str):
-        """
-        When enabled, playing the flute and the harp will immobilize you during a very small amount of time compared to vanilla game.
-        """
-
-    class OoASkipTokkeyDance(str):
-        """
-        Defines if you want to skip the small dance that tokkay does
-        """
-
-    class OoASkipSadBoiJoke(str):
-        """
-        Defines if you want to skip the joke you tell to the sad boi
-        """
 
     rom_file: OOARomFile = OOARomFile(OOARomFile.copy_to)
-    heart_beep_interval: Union[OoAHeartBeepInterval, str] = "vanilla"
-    character_sprite: Union[OoACharacterSprite, str] = "link"
-    character_palette: Union[OoACharacterPalette, str] = "green"
-    qol_mermaid_suit: Union[OoAQolMermaidSuit, bool] = True
-    qol_quick_flute: Union[OoAQuickFlute, bool] = True
-    skip_tokkey_dance: Union[OoASkipTokkeyDance, bool] = False
-    skip_boi_joke: Union[OoASkipSadBoiJoke, bool] = False
 
-class OracleOfAgesWeb(WebWorld):
+class GiftsOfKinomiWeb(WebWorld):
     theme = "grass"
     tutorials = [Tutorial(
         "Multiworld Setup Guide",
-        "A guide to setting up Oracle of Ages for Archipelago on your computer.",
+        "A guide to setting up Gifts of Kinomi for Archipelago on your computer.",
         "English",
         "ooa_setup_en.md",
         "ooa_setup/en",
         ["Dinopony"]
     )]
 
-class OracleOfAgesWorld(World):
+class GiftsOfKinomiWorld(World):
     """
     The Legend of Zelda: Gifts of Kinomi is a romhack made by ZerotoKoops that combines the two Oracle games into one, with a new story/locations.
     The game is themed around a birthday for the Oracles and everyone wants to throw a party for them. However, they can't throw the party because
     Link forgot it was their birthday and didn't get them a gift. The Oracles are sad and Link must go on a quest to find the gifts for them so they can have their party.
     """
     game = "The Legend of Zelda - Gifts of Kinomi"
-    options_dataclass = OracleOfAgesOptions
-    options: OracleOfAgesOptions
+    options_dataclass = GiftsOfKinomiOptions
+    options: GiftsOfKinomiOptions
     required_client_version = (0, 5, 1)
-    web = OracleOfAgesWeb()
+    web = GiftsOfKinomiWeb()
     topology_present = True
 
     location_name_to_id = build_location_name_to_id_dict()
     item_name_to_id = build_item_name_to_id_dict()
     item_name_groups = ITEM_GROUPS
-    location_name_groups = LOCATION_GROUPS
 
     pre_fill_items: List[Item]
     dungeon_items: List[Item]
+    regions: List[Item]
     dungeon_entrances: Dict[str, str]
     shop_prices: Dict[str, int]
 
@@ -113,28 +70,24 @@ class OracleOfAgesWorld(World):
         super().__init__(multiworld, player)
         self.pre_fill_items = []
         self.dungeon_items = []
+        self.regions = REGIONS
         self.dungeon_entrances = DUNGEON_ENTRANCES.copy()
         self.shop_prices = SHOP_PRICES_DIVIDERS.copy()
 
     def fill_slot_data(self) -> dict:
         # Put options that are useful to the tracker inside slot data
         # TODO MOAR DATA ?
-        options = ["goal", "death_link",
+        options = ["remove_extra_stairs_from_lost_labyrinth_past", "death_link",
                    # Logic-impacting options
                    "logic_difficulty",
                    "shuffle_dungeons",
-                   "default_seed",
-                   # Locations
-                   "advance_shop",
                    # Requirements
-                   "required_essences", "required_slates",
+                   "required_gifts", "required_slates",
                    # keysanity
                    "keysanity_small_keys", "keysanity_boss_keys", "keysanity_slates"
                    ]
 
         slot_data = self.options.as_dict(*options)
-        slot_data["animal_companion"] = COMPANIONS[self.options.animal_companion.value]
-        slot_data["default_seed"] = SEED_ITEMS[self.options.default_seed.value]
 
         slot_data["dungeon_entrances"] = self.dungeon_entrances
 
@@ -191,8 +144,6 @@ class OracleOfAgesWorld(World):
             return True
 
         region_id = location_data["region_id"]
-        if region_id == "advance shop":
-            return self.options.advance_shop.value
 
         # TODO FUNNY LOCATION ?
 
@@ -229,25 +180,14 @@ class OracleOfAgesWorld(World):
         location.place_locked_item(Item(event_item_name, ItemClassification.progression, None, self.player))
 
     def create_events(self):
-        self.create_event("maku seed", "Maku Seed")
+        self.create_event("ganon beaten", "_beaten_game")
 
-        if self.options.goal == OracleOfAgesGoal.option_beat_veran:
-            self.create_event("veran beaten", "_beaten_game")
-        elif self.options.goal == OracleOfAgesGoal.option_beat_ganon:
-            self.create_event("ganon beaten", "_beaten_game")
+        self.create_event("d4 first crystal", "_hit_first_d4_crystal")
+        self.create_event("d4 second crystal", "_hit_second_d4_crystal")
+        self.create_event("d4 third crystal", "_hit_third_d4_crystal")
+        self.create_event("d4 fourth crystal", "_hit_fourth_d4_crystal")
 
-        self.create_event("ridge move vine seed", "_access_cart")
-
-        self.create_event("d3 S crystal", "_d3_S_crystal")
-        self.create_event("d3 E crystal", "_d3_E_crystal")
-        self.create_event("d3 W crystal", "_d3_W_crystal")
-        self.create_event("d3 N crystal", "_d3_N_crystal")
-        self.create_event("d3 B1F spinner", "_d3_B1F_spinner")
-
-        self.create_event("d6 wall B bombed", "_d6_wall_B_bombed")
-        self.create_event("d6 canal expanded", "_d6_canal_expanded")
-
-        self.create_event("d7 boss", "_finished_d7")
+        self.create_event("syrup's shop", "_has_access_to_syrups_shop")
 
     def exclude_problematic_locations(self):
         locations_to_exclude = []
@@ -316,11 +256,11 @@ class OracleOfAgesWorld(World):
                 continue
 
 
-            if self.options.master_keys != OracleOfAgesMasterKeys.option_disabled and "Small Key" in item_name:
+            if self.options.master_keys != GiftsOfKinomiMasterKeys.option_disabled and "Small Key" in item_name:
                 # Small Keys don't exist if Master Keys are set to replace them
                 filler_item_count += 1
                 continue
-            if self.options.master_keys == OracleOfAgesMasterKeys.option_all_dungeon_keys and "Boss Key" in item_name:
+            if self.options.master_keys == GiftsOfKinomiMasterKeys.option_all_dungeon_keys and "Boss Key" in item_name:
                 # Boss keys don't exist if Master Keys are set to replace them
                 filler_item_count += 1
                 continue
@@ -337,8 +277,8 @@ class OracleOfAgesWorld(World):
             item_pool_dict[item_name] = item_pool_dict.get(item_name, 0) + 1
 
         # If Master Keys are enabled, put one for every dungeon
-        if self.options.master_keys != OracleOfAgesMasterKeys.option_disabled:
-            for small_key_name in ITEM_GROUPS["Master Keys"]:
+        if self.options.master_keys != GiftsOfKinomiMasterKeys.option_disabled:
+            for small_key_name in self.item_name_groups["Master Keys"]:
                 item_pool_dict[small_key_name] = 1
                 filler_item_count -= 1
 
@@ -361,15 +301,7 @@ class OracleOfAgesWorld(World):
             item_pool_dict[random_filler_item] = item_pool_dict.get(random_filler_item, 0) + 1
         
         # Perform adjustments on the item pool
-        item_pool_adjustements = [
-            ["Flute", self.options.animal_companion.current_key.title() + "'s Flute"],  # Put a specific flute
-            ["Gasha Seed", "Seed Satchel"],             # Add a 3rd satchel that is usually obtained in linked games (99 seeds)
-            ["Gasha Seed", "Bombs (10)"],               # Add one more bomb compared to vanilla to reach 99 max bombs
-            ["Gasha Seed", "Potion"],                   # Replace some Gasha Seed by 2 potions.
-            ["Gasha Seed", "Potion"],                   # ^
-            ["Gasha Seed", "Rupees (200)"],              # and one by rupees
-            ["Gasha Seed", "Progressive Sword"],        # Need an additionnal sword to go to L3
-        ]
+        item_pool_adjustements = []
 
         for i, pair in enumerate(item_pool_adjustements):
             original_name = pair[0]
@@ -416,7 +348,6 @@ class OracleOfAgesWorld(World):
         return self.pre_fill_items
 
     def pre_fill(self) -> None:
-        self.pre_fill_seeds()
         self.pre_fill_dungeon_items()
 
         #self.debug_pre_fill("Dimitri's Flute", "Impa Gift")
@@ -438,9 +369,8 @@ class OracleOfAgesWorld(World):
         # To circumvent this, we perform a restricted pre-fill here, placing only those dungeon items
         # before anything else.
         collection_state = self.multiworld.get_all_state(False)
-        D6_remaining_location = []
 
-        for i in range(0, 10):
+        for i in range(1):
             # Build a list of locations in this dungeon
             dungeon_location_names = [name for name, loc in LOCATIONS_DATA.items()
                                       if "dungeon" in loc and loc["dungeon"] == i]
@@ -449,10 +379,8 @@ class OracleOfAgesWorld(World):
 
             # Build a list of dungeon items that are "confined" (i.e. must be placed inside this dungeon)
             # See `create_items` to see how `self.dungeon_items` is populated depending on current options.
-            confined_dungeon_items = [item for item in self.dungeon_items if item.name.endswith(f"({DUNGEON_NAMES[i]})") or (i == 8 and "Slate" in item.name)]
+            confined_dungeon_items = [item for item in self.dungeon_items if item.name.endswith(f"({DUNGEON_NAMES[i]})") or (i == 7 and "Slate" in item.name)]
             if len(confined_dungeon_items) == 0:
-                if i == 9 or i == 6:
-                        D6_remaining_location += dungeon_locations
                 continue  # This list might be empty with some keysanity options
             for item in confined_dungeon_items:
                 collection_state.remove(item)
@@ -463,57 +391,11 @@ class OracleOfAgesWorld(World):
                 try:
                     fill_restrictive(self.multiworld, collection_state, dungeon_locations, confined_dungeon_items,
                                      single_player_placement=True, lock=True, allow_excluded=True)
-                    if i == 9 or i == 6:
-                        D6_remaining_location += dungeon_locations
                     break
                 except FillError as exc:
                     if attempts_remaining == 0:
                         raise exc
                     logging.debug(f"Failed to shuffle dungeon items for player {self.player}. Retrying...")
-
-        # D6 specific item that can appear in both dungeon (the boss key)
-        d6CommonDungeon = "(Mermaid's Cave)"
-        
-        confined_dungeon_items = [item for item in self.dungeon_items if item.name.endswith(d6CommonDungeon) ]
-        
-        for item in confined_dungeon_items:
-            collection_state.remove(item)
-
-        # Preplace D6 Boss key
-        for attempts_remaining in range(2, -1, -1):
-            self.random.shuffle(D6_remaining_location)
-            try:
-                fill_restrictive(self.multiworld, collection_state, D6_remaining_location, confined_dungeon_items,
-                                    single_player_placement=True, lock=True, allow_excluded=True)
-                break
-            except FillError as exc:
-                if attempts_remaining == 0:
-                    raise exc
-                logging.debug(f"Failed to shuffle dungeon items for player {self.player}. Retrying...")
-
-
-    def pre_fill_seeds(self) -> None:
-        
-        def place_seed(seed_name: str, location_name: str):
-            seed_item = self.create_item(seed_name)
-            self.multiworld.get_location(location_name, self.player).place_locked_item(seed_item)
-            self.pre_fill_items.append(seed_item)
-
-        seeds_to_place = set([name for name in SEED_ITEMS if name != SEED_ITEMS[self.options.default_seed.value]])
-
-        manually_placed_trees = ["Lynna City: Seed Tree"]
-        trees_to_process = [name for name in TREES_TABLE if name not in manually_placed_trees]
-
-        # Place default seed type in Horon Village tree
-        place_seed(SEED_ITEMS[self.options.default_seed.value], "Lynna City: Seed Tree")
-
-        # Place remaining seeds on remaining trees
-        self.random.shuffle(trees_to_process)
-        for seed in seeds_to_place:
-            place_seed(seed, trees_to_process.pop())
-
-        while len(trees_to_process) != 0:
-            place_seed(self.random.choice(SEED_ITEMS), trees_to_process.pop())
             
 
     def get_filler_item_name(self) -> str:
