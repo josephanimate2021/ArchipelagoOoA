@@ -44,24 +44,24 @@ WARPS_DATA = {
 #PRESENT TIME
 
     # FOREST OF TIME
-    "nayru's house" :{
-        "outside_warp": 0x765f,
-        "inside_warp": 0x7a0f,
+    "nayru's house": {
+        "outside_warp": 0x7660,
+        "inside_warp": 0x7a10,
         "present": True,
     },
-    "lower tingle cave" :{
-    #   "outside_warp": ,
-    #   "inside_warp": ,
+    "lower tingle cave": {
+        #   "outside_warp": ,
+        #   "inside_warp": ,
         "present": True,
     },
-    "upper tingle stairs" :{
-    #   "outside_warp": 0x763c,
-    #   "inside_warp": ,
+    "upper tingle stairs": {
+        #   "outside_warp": 0x763c,
+        #   "inside_warp": ,
         "present": True,
     },
 
     # LYNNA CITY
-    "vasu's shop" :{
+    "vasu's shop": {
         "outside_warp": 0x7628,
         "inside_warp": 0x7948,
         "present": True,
@@ -72,12 +72,12 @@ WARPS_DATA = {
         "present": True,
     },
     "mayor's house": {
-    #    "outside_warp": 0x7623,
-    #    "inside_warp": 0x7a8f,
+        "outside_warp": 0x7624,
+        "inside_warp": 0x7a90,
         "present": True,
     },
-    #the house where the kid gets frozen in time on the cutscene where veran takes over naryu at the beginning, i dont have a better name for this
-    "house left of mayor's house" : {
+    # the house where the kid gets frozen in time on the cutscene where veran takes over naryu at the beginning, i dont have a better name for this
+    "house left of mayor's house": {
         #   "outside_warp": ,
         #   "inside_warp": ,
         "present": True,
@@ -92,7 +92,7 @@ WARPS_DATA = {
         #   "inside_warp": ,
         "present": True,
     },
-    #house in the top left of the city, iirc its troy's house
+    # house in the top left of the city, iirc its troy's house
     "troy's house": {
         #   "outside_warp": ,
         #   "inside_warp": ,
@@ -129,7 +129,7 @@ WARPS_DATA = {
         "present": True,
     },
 
-    #YOLL GRAVEYARD
+    # YOLL GRAVEYARD
     "chevel grave": {
         #   "outside_warp": ,
         #   "inside_warp": ,
@@ -150,20 +150,20 @@ WARPS_DATA = {
         #   "inside_warp": ,
         "present": True,
     },
-    #NUUN HIGHLANDS
+    # NUUN HIGHLANDS
     "nuun fairy cave": {
         #   "outside_warp": ,
         #   "inside_warp": ,
         "present": True,
     },
-        #putting this here to be a completionist but I don't think this one should be randomized
-        # since the game already cant tell which cave is supposed to be here
+    # putting this here to be a completionist but I don't think this one should be randomized
+    # since the game already cant tell which cave is supposed to be here
     "nuun animal cave": {
         #   "outside_warp": ,
         #   "inside_warp": ,
         "present": True,
     },
-    #PRESENT SYMMETRY
+    # PRESENT SYMMETRY
     "top left symmetry house": {
         #   "outside_warp": ,
         #   "inside_warp": ,
@@ -185,7 +185,7 @@ WARPS_DATA = {
         "present": True,
     },
 
-#WESTERN ROLLING RIDGE
+    # WESTERN ROLLING RIDGE
     "west ridge goron city lower": {
         #   "outside_warp": ,
         #   "inside_warp": ,
@@ -241,33 +241,33 @@ WARPS_DATA = {
         #   "inside_warp": ,
         "present": True,
     },
-    #the connector that takes you from crown dungeon ledge to east ridge
+    # the connector that takes you from crown dungeon ledge to east ridge
     "west to east ridge cave front": {
         #   "outside_warp": ,
         #   "inside_warp": ,
         "present": True,
     },
-    #the connector that takes you from east ridge to crown dungeon ledge
+    # the connector that takes you from east ridge to crown dungeon ledge
     "west to east ridge cave back": {
         #   "outside_warp": ,
         #   "inside_warp": ,
         "present": True,
     },
 
-#EASTERN ROLLING RIDGE
-    #why is rolling ridge so weird
+    # EASTERN ROLLING RIDGE
+    # why is rolling ridge so weird
     "empty cave by echoes portal": {
         #   "outside_warp": ,
         #   "inside_warp": ,
         "present": True,
     },
-    #the connector that takes you to the base of east ridge from the top
+    # the connector that takes you to the base of east ridge from the top
     "upper to lower cave front": {
         #   "outside_warp": ,
         #   "inside_warp": ,
         "present": True,
     },
-    #the connector that takes you to the top of east ridge from the bottom
+    # the connector that takes you to the top of east ridge from the bottom
     "upper to lower cave back": {
         #   "outside_warp": ,
         #   "inside_warp": ,
@@ -279,7 +279,7 @@ WARPS_DATA = {
         "present": True,
     },
 
-    #needs tune of currents to access, it's inside warp is a one way
+    # needs tune of currents to access, it's inside warp is a one way
     "northeast cave heart entrance": {
         #   "outside_warp": ,
         #   "inside_warp": ,
@@ -325,38 +325,32 @@ WARPS_DATA = {
         #   "inside_warp": ,
         "present": True,
     },
-#    "": {
-        #   "outside_warp": ,
-        #   "inside_warp": ,
-#        "present": True,
-#    },
-#LYNNA SEAS
+    #    "": {
+    #   "outside_warp": ,
+    #   "inside_warp": ,
+    #        "present": True,
+    #    },
+    # LYNNA SEAS
     "underwater sea of storms cave": {
         #   "outside_warp": ,
         #   "inside_warp": ,
         "present": True,
     },
 
-
-
-
-
-
-
-#    "": {
+    #    "": {
         #   "outside_warp": ,
         #   "inside_warp": ,
 #        "present": False,
 #    },
 #LYNNA VILLAGE
     "Rafton's House Left": {
-        "outside_warp": 0x785b,
-        "inside_warp": 0x787f,
+        "outside_warp": 0x785c,
+        "inside_warp": 0x7880,
         "present": False,
     },
     "Rafton's House Right": {
-        "outside_warp": 0x785f,
-        "inside_warp": 0x7883,
+        "outside_warp": 0x7860,
+        "inside_warp": 0x7884,
         "present": False,
     },
 
