@@ -98,41 +98,102 @@ ITEMS_DATA = {
         'id': 0x28,
         'subid': 0x00
     },
-    "Rupees (5)": {
+    "Rupees (2)": {
         'classification': ItemClassification.filler,
         'id': 0x28,
         'subid': 0x01
     },
-    "Rupees (10)": {
+    "Rupees (5)": {
         'classification': ItemClassification.filler,
         'id': 0x28,
         'subid': 0x02
     },
-    "Rupees (20)": {
-        'classification': ItemClassification.progression_skip_balancing,
+    "Rupees (10)": {
+        'classification': ItemClassification.filler,
         'id': 0x28,
         'subid': 0x03
     },
-    "Rupees (30)": {
+    "Rupees (20)": {
         'classification': ItemClassification.progression_skip_balancing,
         'id': 0x28,
         'subid': 0x04
     },
-    "Rupees (50)": {
+    "Rupees (40)": {
         'classification': ItemClassification.progression_skip_balancing,
         'id': 0x28,
         'subid': 0x05
     },
-    "Rupees (100)": {
+    "Rupees (30)": {
         'classification': ItemClassification.progression_skip_balancing,
         'id': 0x28,
         'subid': 0x06
     },
-    "Rupees (200)": {
+    "Rupees (60)": {
+        'classification': ItemClassification.progression_skip_balancing,
+        'id': 0x28,
+        'subid': 0x07
+    },
+    "Rupees (70)": {
         'classification': ItemClassification.progression_skip_balancing,
         'id': 0x28,
         'subid': 0x08
     },
+    "Rupees (25)": {
+        'classification': ItemClassification.progression_skip_balancing,
+        'id': 0x28,
+        'subid': 0x09
+    },
+    "Rupees (50)": {
+        'classification': ItemClassification.progression_skip_balancing,
+        'id': 0x28,
+        'subid': 0x0a
+    },
+    "Rupees (100)": {
+        'classification': ItemClassification.progression_skip_balancing,
+        'id': 0x28,
+        'subid': 0x0b
+    },
+    "Rupees (200)": {
+        'classification': ItemClassification.progression_skip_balancing,
+        'id': 0x28,
+        'subid': 0x0c
+    },
+    "Rupees (400)": {
+        'classification': ItemClassification.progression_skip_balancing,
+        'id': 0x28,
+        'subid': 0x0d
+    },
+    "Rupees (150)": {
+        'classification': ItemClassification.progression_skip_balancing,
+        'id': 0x28,
+        'subid': 0x0e
+    },
+    "Rupees (300)": {
+        'classification': ItemClassification.progression_skip_balancing,
+        'id': 0x28,
+        'subid': 0x0f
+    },
+    "Rupees (500)": {
+        'classification': ItemClassification.progression_skip_balancing,
+        'id': 0x28,
+        'subid': 0x10
+    },
+    "Rupees (900)": {
+        'classification': ItemClassification.progression_skip_balancing,
+        'id': 0x28,
+        'subid': 0x11
+    },
+    "Rupees (80)": {
+        'classification': ItemClassification.progression_skip_balancing,
+        'id': 0x28,
+        'subid': 0x12
+    },
+    "Rupees (999)": {
+        'classification': ItemClassification.progression_skip_balancing,
+        'id': 0x28,
+        'subid': 0x13
+    },
+    
     "Heart Container": {
         'classification': ItemClassification.useful,
         'id': 0x2a
@@ -357,6 +418,11 @@ ITEMS_DATA = {
         'classification': ItemClassification.progression,
         'id': 0x41,
         'subid': 0x04
+    },
+    "Mushroom": {
+        'classification': ItemClassification.progression,
+        'id': 0x41,
+        'subid': 0x05
     },
     
     "Old Mining Key": {

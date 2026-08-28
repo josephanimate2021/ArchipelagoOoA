@@ -36,6 +36,7 @@ def make_overworld_logic(player: int):
         ####################################### 
         ["kinomi town", "weird guy's house", False, None],
         ["kinomi town", "daichi plain old man", False, lambda state: kinomi_can_use_ember_seeds(state, player, False)],
+        ["daichi plain old man", "daichi plain old man's rupee", False, None],
         ["kinomi town", "daichi plain gravesite heartpiece", False, lambda state: any([
             state.has("Rod of Seasons", player), # NOTE: The Rod Of Seasons comes with all seasons by default, so there's no need to consider certain seasons in logic.
             kinomi_can_jump_pit(state, player)
@@ -51,7 +52,8 @@ def make_overworld_logic(player: int):
         ])],
         ["daichi plain", "daichi plain underwater heartpiece", False, lambda state: kinomi_can_swim(state, player)],
         ["daichi plain underwater heartpiece", "fall stone reward", False, None],
-        ["daichi plain summer old man", "daichi plain chest", False, None],
+        ["daichi plain summer old man", "daichi plain summer old man's rupee", False, None],
+        ["daichi plain", "daichi plain chest", False, lambda state: kinomi_has_bracelet(state, player)],
         ["kinomi town", "four corners cave entrance", False, lambda state: kinomi_has_bombs(state, player)],
 
         # LAKE OF MEMORIES
@@ -64,6 +66,8 @@ def make_overworld_logic(player: int):
         ])],
         ["lake of memories", "lake of memories old man", False, lambda state: kinomi_can_use_ember_seeds(state, player, False)],
         ["lake of memories old man", "lake of memories old man's chest", False, None],
+        ["lake of memories", "lake of memories underwater cave", False, None],
+        ["lake of memories", "lake of memories heartpiece", False, None],
         ["lake of memories", "lake of memories scrapped chest", False, None],
 
         # HEDGE MAZE
@@ -71,18 +75,25 @@ def make_overworld_logic(player: int):
         ["lake of memories", "hedge maze", False, lambda state: kinomi_can_kill_armos(state, player)],
         ["hedge maze", "hedge maze old man 1", False, None],
         ["hedge maze", "hedge maze old man 2", False, None],
+        ["hedge maze", "hedge maze old man 2's rupee", False, lambda state: kinomi_can_break_pot(state, player)],
         ["hedge maze", "hedge maze stone", False, None],
         ["hedge maze", "hedge maze old man 1's chest", False, None],
 
         # DEEPER WOODS
         #######################################
         ["hedge maze", "deeper woods old man 1", False, lambda state: kinomi_can_use_ember_seeds(state, player, False)],
+        ["deeper woods old man 1", "deeper woods old man 1's heartpiece", False, lambda state: kinomi_can_break_pot(state, player)],
         ["hedge maze", "deeper woods route 2", False, lambda state: any([
             # on basic logic, a player should keep a shield on them so that they can talk to the deku scrub in jiku clifs to get season directions. Those on medium logic don't have to do that.
             all([
                 kinomi_has_shield(state, player),
                 kinomi_has_bracelet(state, player)
             ]),
+            kinomi_option_medium_logic(state, player)
+        ])],
+        ["hedge maze", "deeper woods route 1", False, lambda state: any([
+            # on basic logic, a player should keep a shield on them so that they can talk to the deku scrub in jiku clifs to get season directions. Those on medium logic don't have to do that.
+            kinomi_has_shield(state, player),
             kinomi_option_medium_logic(state, player)
         ])],
         ["hedge maze", "seasons shrine entrance", False, lambda state: all([ 
@@ -93,6 +104,8 @@ def make_overworld_logic(player: int):
             state.has("Autumm Stone", player)
         ])],
         ["deeper woods route 2", "deeper woods old man 2", False, lambda state: kinomi_can_use_ember_seeds(state, player, False)],
+        ["deeper woods route 1", "deeper woods heartpiece under tree", False, lambda state: kinomi_can_use_ember_seeds(state, player, False)],
+        ["deeper woods old man 2", "deeper woods old man 2's rupee", False, lambda state: kinomi_can_break_pot(state, player)],
         ["deeper woods old man 2", "deeper woods underground heartpiece", False, lambda state: kinomi_can_swim(state, player)],
         ["deeper woods underground heartpiece", "familar swamp gift", False, lambda state: all([
             kinomi_can_jump_pit(state, player),
@@ -107,12 +120,14 @@ def make_overworld_logic(player: int):
                 kinomi_can_jump_4_wide_pit(state, player)
             ])
         ])],
-        ["deeper woods route 2", "deeper woods swordsman trade", False, lambda state: state.has("Broken Sword")],
+        ["deeper woods route 2", "deeper woods swordsman trade", False, lambda state: state.has("Broken Sword", player)],
         ["hedge maze", "deeper woods chest", False, None],
 
         # JIKU CLIFS
         #######################################
         ["kinomi town", "jiku clifs", False, lambda state: kinomi_has_bracelet(state, player)],
+        ["jiku clifs", "jiku clifs heartpiece hidding in hole", False, lambda state: kinomi_has_cane(state, player)],
+        ["jiku clifs", "heartpiece under rock", False, None], # You can lift up the bushes with a bracelet.
         ["jiku clifs", "old lady trade", False, lambda state: state.has("Life Potion", player)],
         ["jiku clifs", "jiku clifs shop", False, lambda state: all([
             any([
@@ -122,13 +137,16 @@ def make_overworld_logic(player: int):
             kinomi_can_swim(state, player)
         ])],
         ["jiku clifs shop", "jiku clifs past", False, lambda state: kinomi_can_open_portal(state, player)],
+        ["jiku clifs past", "jiku clifs past underwater heartpiece", False, None],
+        ["lost labyrinth past entrance 3", "jiku clifs past fill holes", False, lambda state: kinomi_has_cane(state, player)],
+        ["jiku clifs past fill holes", "jiku clifs past fill hole next to entrance", False, None],
         ["jiku clifs", "chest inside cave outside lost labyrinth present entrance", False, lambda state: kinomi_can_jump_pit(state, player)],
         ["jiku clifs", "heartpiece inside cave outside lost labyrinth present entrance", False, lambda state: any([
             kinomi_option_medium_logic(state, player), # hopefully you know that as long as you get a percise landing in the right place then you'll get the heartpiece. Tried it once and it worked.
             kinomi_can_jump_pit(state, player),
         ])],
         ["jiku clifs", "lost labyrinth entrance", False, lambda state: state.has("Old Labyrinth Key", player)],
-        ["d2 past small key chest", "jiku clifs past springwater region", False, lambda state: all([
+        ["d2 past small key drop 2", "jiku clifs past springwater region", False, lambda state: all([
             kinomi_has_small_keys(state, player, 2, 1),
             any([
                 kinomi_can_jump_pit(state, player),
@@ -136,6 +154,8 @@ def make_overworld_logic(player: int):
             ])
         ])],
         ["jiku clifs past springwater region", "bomb fairy", False, lambda state: state.has("Bombs (10)", player)],
+        ["jiku clifs past springwater region", "goron dance", False, None],
+        ["jiku clifs past springwater region", "jiku clifs past heartpiece drop", False, lambda state: kinomi_can_kill_normal_enemy(state, player)],
         ["tokay desert", "jiku clifs past heartpiece", False, lambda state: kinomi_has_glove(state, player)],
 
         # LOST LABYRINTH PAST ENTRANCES
@@ -155,8 +175,8 @@ def make_overworld_logic(player: int):
         ["lost labyrinth past entrance 3", "zora's island", False, None],
         ["lost labyrinth past entrance 3", "syrup's shop", False, lambda state: state.has("Witch's Key", player)],
         ["d2 past bomb chest", "lost labyrinth past entrance 5", False, lambda state: kinomi_has_bombs(state, player)],
-        ["d2 past small key chest", "syrup's shop", False, lambda state: kinomi_has_bombs(state, player)], # You can enter syrup's shop from the main entrance as well. Just don't try exiting the shop without using the Witch's key though.
-        ["d2 past color block puzzle", "lost labyrinth past entrance 5", True, lambda state: all([ # It's possible to enter the main past labyrinth from the stairs in syrup's shop.
+        ["d2 past small key drop 2", "syrup's shop", False, lambda state: kinomi_has_bombs(state, player)], # You can enter syrup's shop from the main entrance as well. Just don't try exiting the shop without using the Witch's key though.
+        ["d2 past color tile puzzle", "lost labyrinth past entrance 5", True, lambda state: all([ # It's possible to enter the main past labyrinth from the stairs in syrup's shop.
             kinomi_has_cane(state, player),
             kinomi_has_bombs(state, player),
             kinomi_has_small_keys(state, player, 2, 1)
@@ -164,11 +184,21 @@ def make_overworld_logic(player: int):
 
         # TOKAY DESERT
         #######################################
-        ["jiku clifs past springwater region", "tokay desert", False, lambda state: state.has("_has_access_to_syrups_shop", player)],
-        ["tokay desert", "tokay desert gift", False, None],
-        ["tokay desert", "tokay desert second gift", False, lambda state: any([
+        ["jiku clifs past springwater region", "tokay desert", False, lambda state: all([
+            state.has("_has_access_to_syrups_shop", player),
+            state.has("Mushroom", player)
+        ])],
+        ["tokay desert", "tokay desert outdoor chests", False, lambda state: kinomi_has_glove(state, player)],
+        ["tokay desert outdoor chests", "tokay desert chest", False, None],
+        ["tokay desert outdoor chests", "tokay desert second chest", False, lambda state: any([
             kinomi_can_jump_4_wide_pit(state, player),
             kinomi_has_cane(state, player)
         ])],
+        ["tokay desert outdoor chests", "tokay desert third chest", False, lambda state: any([
+            kinomi_can_jump_pit(state, player),
+            kinomi_has_cane(state, player)
+        ])],
+        ["tokay desert outdoor chests", "tokay desert fourth chest", False, None],
+        ["tokay desert", "chest inside first tokay house", False, None],
         ["d6 chest near slate slots", "chest in bottom screen of graveyard", False, None],
     ]

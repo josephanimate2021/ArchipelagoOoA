@@ -370,7 +370,7 @@ class GiftsOfKinomiWorld(World):
         # before anything else.
         collection_state = self.multiworld.get_all_state(False)
 
-        for i in range(1):
+        for i in range(0, 7):
             # Build a list of locations in this dungeon
             dungeon_location_names = [name for name, loc in LOCATIONS_DATA.items()
                                       if "dungeon" in loc and loc["dungeon"] == i]
@@ -379,7 +379,7 @@ class GiftsOfKinomiWorld(World):
 
             # Build a list of dungeon items that are "confined" (i.e. must be placed inside this dungeon)
             # See `create_items` to see how `self.dungeon_items` is populated depending on current options.
-            confined_dungeon_items = [item for item in self.dungeon_items if item.name.endswith(f"({DUNGEON_NAMES[i]})") or (i == 7 and "Slate" in item.name)]
+            confined_dungeon_items = [item for item in self.dungeon_items if item.name.endswith(f"({DUNGEON_NAMES[i]})") or (i == 5 and "Slate" in item.name)]
             if len(confined_dungeon_items) == 0:
                 continue  # This list might be empty with some keysanity options
             for item in confined_dungeon_items:

@@ -40,8 +40,8 @@ DUNGEON_NAMES = [
     "Lost Labyrinth (Past)",
     "Four Corners Cave",
     "Seasons Shrine",
-    "Lost Labyrinth (Present)",
     "Temple of The Tokay",
+    "Lost Labyrinth (Present)",
     # "Old Crown Dungeon"
 ]
 
@@ -98,8 +98,8 @@ ITEM_GROUPS = {
         "Small Key (Lost Labyrinth (Past))",
         "Small Key (Four Corners Cave)",
         "Small Key (Seasons Shrine)",
+        "Small Key (Temple of The Tokay)",
         "Small Key (Lost Labyrinth (Present))",
-        "Small Key (Temple of The Tokay)"
     ],
     "Boss Keys": [
         "Boss Key (Summer Villa)",
@@ -107,8 +107,7 @@ ITEM_GROUPS = {
         "Boss Key (Lost Labyrinth (Past))",
         "Boss Key (Four Corners Cave)",
         "Boss Key (Seasons Shrine)",
-        "",
-        "Boss Key (Temple of The Tokay)"
+        "Boss Key (Temple of The Tokay)",
     ],
     "Compasses": [
         "Compass (Summer Villa)",
@@ -116,8 +115,8 @@ ITEM_GROUPS = {
         "Compass (Lost Labyrinth (Past))",
         "Compass (Four Corners Cave)",
         "Compass (Seasons Shrine)",
+        "Compass (Temple of The Tokay)",
         "Compass (Lost Labyrinth (Present))",
-        "Compass (Temple of The Tokay)"
     ],
     "Dungeon Maps": [
         "Dungeon Map (Summer Villa)",
@@ -125,8 +124,8 @@ ITEM_GROUPS = {
         "Dungeon Map (Lost Labyrinth (Past))",
         "Dungeon Map (Four Corners Cave)",
         "Dungeon Map (Seasons Shrine)",
+        "Dungeon Map (Temple of The Tokay)",
         "Dungeon Map (Lost Labyrinth (Present))",
-        "Dungeon Map (Temple of The Tokay)"
     ],
     "Master Keys": [
         "Master Key (Summer Villa)",
@@ -134,8 +133,8 @@ ITEM_GROUPS = {
         "Master Key (Lost Labyrinth (Past))",
         "Master Key (Four Corners Cave)",
         "Master Key (Seasons Shrine)",
+        "Master Key (Temple of The Tokay)",
         "Master Key (Lost Labyrinth (Present))",
-        "Master Key (Temple of The Tokay)"
     ],
 }
 
