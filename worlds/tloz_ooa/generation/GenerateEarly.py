@@ -62,8 +62,8 @@ def ooa_generate_early(world: OracleOfAgesWorld):
     if world.options.shuffle_dungeons:
         world.randomized_entrances = {}
         for warpName, warpData in WARPS_DATA.items():
-            if "dungeon" not in warpData: # Not a dungeon, skip it
-                continue; 
+        #    if "dungeon" not in warpData: # Not a dungeon, skip it
+        #        continue;
             if "require_option" not in warpData or hasattr(world.options, warpData["require_option"]) and getattr(world.options, warpData["require_option"]):
                 world.randomized_entrances[warpName] = warpName
         shuffle_entrances(world)

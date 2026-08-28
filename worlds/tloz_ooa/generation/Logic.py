@@ -48,8 +48,7 @@ def create_connections(world: OracleOfAgesWorld):
         
     # Not shuffled warp
     for warp_name, warp_data in WARPS_DATA.items():
-        if warp_name not in world.randomized_entrances:
-            randomized_entrances_logic.append([OUTSIDE_TAG + warp_name, INSIDE_TAG + warp_name, True, None])
+        randomized_entrances_logic.append([OUTSIDE_TAG + warp_name, INSIDE_TAG + warp_name, True, None])
 
     all_logic.append(randomized_entrances_logic)
 
