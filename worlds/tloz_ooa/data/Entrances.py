@@ -51,12 +51,12 @@ WARPS_DATA = {
     },
     "lower tingle cave": {
         "outside_warp": 0x7644,
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 9E, t11
         "present": True,
     },
     "upper tingle stairs": {
         "outside_warp": 0x763c,
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 9E, t67/68
         "present": True,
     },
 
@@ -68,12 +68,12 @@ WARPS_DATA = {
     },
     "lynna city shop": {
         "outside_warp": 0x7714,
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 5E, t68/69
         "present": True,
     },
     "hidden shop": {
         "outside_warp": 0x7710,
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 5E, t64/65  #room 2 5F for the single room connector    #room 2 7E for the shop
         "present": True,
     },
     "mayor's house": {
@@ -84,7 +84,7 @@ WARPS_DATA = {
     # the house where the kid gets frozen in time on the cutscene where veran takes over naryu at the beginning, i dont have a better name for this
     "house left of mayor's house": {
         #   "outside_warp": ,   #room 0 56
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 0E
         "present": True,
     },
     "know it all birds house": {
@@ -158,7 +158,7 @@ WARPS_DATA = {
     },
     "poe grave": {
         #   "outside_warp": ,   #room 0 7c
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 2E
         "present": True,
     },
     # NUUN HIGHLANDS
@@ -324,7 +324,7 @@ WARPS_DATA = {
     },
     "greedy old man bush": {
         #   "outside_warp": ,   #room 0 4D
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 4E
         "present": True,
     },
     "empty cave next to target carts": {
@@ -412,8 +412,8 @@ WARPS_DATA = {
         "present": True,
     },
     "tokay chef house": {
-        #   "outside_warp": , #room 0 DD
-        #   "inside_warp": ,
+        #   "outside_warp": ,   #room 0 DD
+        #   "inside_warp": ,    #room 2 3F
         "present": True,
     },
     "underwater maze cave": {
@@ -438,7 +438,7 @@ WARPS_DATA = {
     },
     "postman house": {
         #   "outside_warp": ,   #room 1 57
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 2F
         "present": False,
     },
     "sad boi house": {
@@ -453,7 +453,7 @@ WARPS_DATA = {
     },
     "toilet hand house": {
         #   "outside_warp": ,   #room 1 55
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 3E
         "present": False,
     },
     #mamamu yan house in the past
@@ -470,7 +470,7 @@ WARPS_DATA = {
     },
     "cheval house": {
         #   "outside_warp": ,   #room 1 79
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 0F
         "present": False,
     },
     "Rafton's House Left": {
@@ -580,7 +580,7 @@ WARPS_DATA = {
     },
     "palace secret entrance": {
         #   "outside_warp": ,   #room 1 27
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 1 E2
         "present": False,
     },
 #PAST WEST RIDGE
@@ -637,7 +637,7 @@ WARPS_DATA = {
     },
     "past mermaid cave front porch": {
         #   "outside_warp": ,   #room 1 3c
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 1 0E
         "present": False,
     },
     "past goron dance hall lower": {
@@ -674,7 +674,7 @@ WARPS_DATA = {
     },
     "past underwater drifting island cave": {
         #   "outside_warp": ,   #room 3 C5
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 4F
         "present": False,
         "is_underwater": True,
     },
