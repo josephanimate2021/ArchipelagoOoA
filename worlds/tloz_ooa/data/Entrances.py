@@ -150,8 +150,8 @@ WARPS_DATA = {
 #    },
 
     "happy mask shop": {
-        #   "outside_warp": ,   #room 0 53
-        #   "inside_warp": ,    #room 2 E6
+        "outside_warp": 0x7618,   #room 0 53
+        "inside_warp": 0x792C,    #room 2 E6
         "present": True,
     },
 
@@ -819,7 +819,7 @@ WARPS_DATA = {
     },
     "underwater hero trials cave": {
         #   "outside_warp": ,   #room 3 8C
-        #   "inside_warp": ,    #room 5 08, or 7 08 because sidescroller
+        #   "inside_warp": ,    #room 7 08 because sidescroller
         "present": False,
         "is_underwater": True,
     },
