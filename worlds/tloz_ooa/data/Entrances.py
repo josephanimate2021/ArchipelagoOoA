@@ -53,12 +53,12 @@ WARPS_DATA = {
 
     "lower tingle cave": {
         "outside_warp": 0x7644,
-        #   "inside_warp": ,    #room 2 9E, t11
+        "inside_warp": 0x78CC,    #room 2 9E, t11
         "present": True,
     },
     "upper tingle stairs": {
         "outside_warp": 0x763c,
-        #   "inside_warp": ,    #room 2 9E, t67/68
+        "inside_warp": 0x78D0,    #room 2 9E, t67/68
         "present": True,
     },
 
@@ -70,14 +70,18 @@ WARPS_DATA = {
     },
     "lynna city shop": {
         "outside_warp": 0x7714,
-        #   "inside_warp": ,    #room 2 5E, t68/69
+        "inside_warp": 0x78A4,    #room 2 5E
         "present": True,
     },
+
+#room 2 5F for the single room connector, outside 5e 0e 2 2
+#room 2 7E for the shop
     "hidden shop": {
         "outside_warp": 0x7710,
-        #   "inside_warp": ,    #room 2 5E, t64/65  #room 2 5F for the single room connector    #room 2 7E for the shop
+        "inside_warp": 0x78A0,   #room 2 5E
         "present": True,
     },
+
     "mayor's house": {
         "outside_warp": 0x7624,
         "inside_warp": 0x7a90,  #room 3 F8
@@ -85,57 +89,66 @@ WARPS_DATA = {
     },
     # the house where the kid gets frozen in time on the cutscene where veran takes over naryu at the beginning, i dont have a better name for this
     "house left of mayor's house": {
-        #   "outside_warp": ,   #room 0 56
-        #   "inside_warp": ,    #room 2 0E
+        "outside_warp": 0x7620,   #room 0 56
+        "inside_warp": 0x7878,    #room 2 0E
         "present": True,
     },
+
     "know it all birds house": {
-        #   "outside_warp": ,   #room 0 55
-        #   "inside_warp": ,    #room 3 F7
+        "outside_warp": 0x761C,   #room 0 55
+        "inside_warp": 0x7A8C,    #room 3 F7
         "present": True,
     },
+
     "mamamu yan house": {
-        #   "outside_warp": ,   #room 0 66
-        #   "inside_warp": ,    #room 2 E7
+        "outside_warp": 0x7630,   #room 0 66
+        "inside_warp": 0x7930,    #room 2 E7
         "present": True,
     },
-    "black tower ruins": {
-        #   "outside_warp": ,   #room 0 76
-        #   "inside_warp": ,    #room 4 E6
-        "present": True,
-        "require_option": "secrets"
-    },
-    # house in the top left of the city, iirc its troy's house
+
+#    "black tower ruins": {
+#        "outside_warp": 0x7638,   #room 0 76
+#        "inside_warp": 0x7b54,    #room 4 E6
+#        "present": True,
+#        "require_option": "Secret Locations"
+#    },
+
     "troy's house": {
-        #   "outside_warp": ,   #room 0 45
-        #   "inside_warp": ,    #room 3 FB
+        "outside_warp": 0x760C,   #room 0 45
+        "inside_warp": 0x7a98,    #room 3 FB
         "present": True,
     },
+
     "left bippin blossom door": {
-        #   "outside_warp": ,   #room 0 47, t23
-        #   "inside_warp": ,    #room 2 EA
+        "outside_warp": 0x7700,   #room 0 47
+        "inside_warp": 0x793C,    #room 2 EA
         "present": True,
     },
+
     "right bippin blossom door": {
-        #   "outside_warp": ,   #room 0 47, t25
-        #   "inside_warp": ,    #room 2 EB
+        "outside_warp": 0x7704,   #room 0 47
+        "inside_warp": 0x7940,    #room 2 EB
         "present": True,
     },
-    "maku road front": {
-        #   "outside_warp": ,   #room 0 48
-        #   "inside_warp": ,    #room 4 04
-        "present": True,
-    },
-    "maku road stairs": {
-        #   "outside_warp": ,   #room 0 38, t48
-        #   "inside_warp": ,    #room 4 01
-        "present": True,
-    },
-    "maku tree hole": {
-        #   "outside_warp": ,   #room 0 38, t23/24
-        #   "inside_warp": ,    #room 5 CF
-        "present": True,
-    },
+
+#    "maku road front": {
+#        "outside_warp": 7708,   #room 0 48
+#        #   "inside_warp": ,    #room 4 04
+#        "present": True,
+#    },
+
+#    "maku road stairs": {
+#       #   "outside_warp": ,   #room 0 38
+#        #   "inside_warp": ,    #room 4 01
+#        "present": True,
+#    },
+
+#    "maku tree hole": {
+#        #   "outside_warp": ,   #room 0 38
+#        #   "inside_warp": ,    #room 5 CF
+#        "present": True,
+#    },
+
     "happy mask shop": {
         #   "outside_warp": ,   #room 0 53
         #   "inside_warp": ,    #room 2 E6
@@ -365,7 +378,7 @@ WARPS_DATA = {
         #   "inside_warp": ,    #room 3 E8
         "present": True,
         "is_underwater": True,
-        "require_option": "secrets"
+        "require_option": "Secret Locations"
     },
     "present drifting island house": {
         #   "outside_warp": ,   #room 0 C5
@@ -451,7 +464,7 @@ WARPS_DATA = {
         #   "outside_warp": ,   #room 1 58, t33
         #   "inside_warp": ,    #room 3 FE
         "present": False,
-        "require_option": "advance_shop"
+        "require_option": "Open Advance Shop"
     },
     "postman house": {
         #   "outside_warp": ,   #room 1 57
@@ -608,13 +621,15 @@ WARPS_DATA = {
         "present": False,
     },
     "past goron city lower": {
-        #   "outside_warp": ,   #room 1 28
-        #   "inside_warp": ,    #room 5 C3
+        "outside_warp": 0x7790,   #room 1 28
+        "inside_warp": 0x7CD8,    #room 5 C3
         "present": False,
     },
+
+    #stairs eb 31 5 2, 0x7D70
     "past goron city upper": {
-        #   "outside_warp": ,   #room 1 18
-        #   "inside_warp": ,    #room 5 EB
+        "outside_warp": 0x7780,   #room 1 18
+        "inside_warp": 0x7D6C,    #room 5 EB
         "present": False,
     },
     #cave with two different sized square holes
