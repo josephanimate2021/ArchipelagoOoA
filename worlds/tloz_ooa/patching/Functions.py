@@ -447,8 +447,11 @@ def set_dungeon_warps(rom: RomData, patch_data):
     for outside_name, inside_name in warp_matchings.items():
         outside_warp_addr: int = WARPS_DATA[outside_name]["outside_warp"]
         inside_warp_addr: int = WARPS_DATA[inside_name]["inside_warp"]
-        rom.write_word(GameboyAddress(0x04, outside_warp_addr).address_in_rom(), outside_values[inside_name])
-        rom.write_word(GameboyAddress(0x04, inside_warp_addr).address_in_rom(), inside_values[outside_name])
+        # 2nd half byte of the high byte is source transition type, it should not be swapped
+        newOutsideValue = (outside_values[inside_name] & 0xF0FF) | (outside_values[outside_name] & 0x0F00)
+        newInsideValue = (inside_values[outside_name] & 0xF0FF) | (inside_values[inside_name] & 0x0F00)
+        rom.write_word(GameboyAddress(0x04, outside_warp_addr).address_in_rom(), newOutsideValue)
+        rom.write_word(GameboyAddress(0x04, inside_warp_addr).address_in_rom(), newInsideValue)
         
         if ("dungeon" in WARPS_DATA[inside_name]):
             dungeon_number = WARPS_DATA[inside_name]["dungeon"]
