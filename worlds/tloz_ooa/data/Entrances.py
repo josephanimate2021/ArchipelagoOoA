@@ -63,7 +63,7 @@ WARPS_DATA = {
     # LYNNA CITY
     "vasu's shop": {
         "outside_warp": 0x7628,
-        "inside_warp": 0x7948,
+        "inside_warp": 0x7948,  #room 2 EE
         "present": True,
     },
     "lynna city shop": {
@@ -78,7 +78,7 @@ WARPS_DATA = {
     },
     "mayor's house": {
         "outside_warp": 0x7624,
-        "inside_warp": 0x7a90,
+        "inside_warp": 0x7a90,  #room 3 F8
         "present": True,
     },
     # the house where the kid gets frozen in time on the cutscene where veran takes over naryu at the beginning, i dont have a better name for this
@@ -89,12 +89,12 @@ WARPS_DATA = {
     },
     "know it all birds house": {
         #   "outside_warp": ,   #room 0 55
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 3 F7
         "present": True,
     },
     "mamamu yan house": {
         #   "outside_warp": ,   #room 0 66
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 E7
         "present": True,
     },
     "black tower ruins": {
@@ -111,12 +111,12 @@ WARPS_DATA = {
     },
     "left bippin blossom door": {
         #   "outside_warp": ,   #room 0 47, t23
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 EA
         "present": True,
     },
     "right bippin blossom door": {
         #   "outside_warp": ,   #room 0 47, t25
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 EB
         "present": True,
     },
     "maku road front": {
@@ -136,7 +136,7 @@ WARPS_DATA = {
     },
     "happy mask shop": {
         #   "outside_warp": ,   #room 0 53
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 E6
         "present": True,
     },
 
@@ -164,7 +164,7 @@ WARPS_DATA = {
     # NUUN HIGHLANDS
     "nuun fairy cave": {
         #   "outside_warp": ,   #room 0 06
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 DF
         "present": True,
     },
     # putting this here to be a completionist but I don't think this one should be randomized
@@ -174,6 +174,9 @@ WARPS_DATA = {
 #           "inside_warp": ,
 #        "present": True,
 #    },
+#   nuun ricky inside #room 2 EC
+#   nuun moosh inside #room 2 F4
+#   nuun dimitri inside #room 5 B8
     # PRESENT SYMMETRY
     "present top left symmetry house": {
         #   "outside_warp": ,   #room 2 02
@@ -226,23 +229,25 @@ WARPS_DATA = {
     #moblin is unbeaten and the stairs to the left over the ledge
 #    "moblin keep left door": {
 #        #   "outside_warp": ,   #room 0 09, t40
-#        #   "inside_warp": ,
+#        #   "inside_warp": ,   #room 2 9F
 #        "present": True,
 #    },
 #    "moblin keep right door": {
 #        #   "outside_warp": ,   #room 0 09, t42
-#        #   "inside_warp": ,
+#        #   "inside_warp": ,   #room 2 9F
 #        "present": True,
 #    },
+#room 2 AE, moblin keep center room; room 2 AF, great moblin arena
 
     "moblin keep sewer stairs": {
         #   "outside_warp": ,   #room 2 09, t40
         #   "inside_warp": ,
         "present": True,
     },
+#moblin keep sewer chest room, room 2 BE
     "moblin keep sewer exit": {
         #   "outside_warp": ,   #room 0 0A, t12
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 BF
         "present": True,
     },
     #the cave directly behind moblin keep
@@ -260,13 +265,14 @@ WARPS_DATA = {
     # the connector that takes you from crown dungeon ledge to east ridge
     "west to east ridge cave front": {
         #   "outside_warp": ,   #room 0 0B
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 F9
         "present": True,
+        #right side of screen room 2 f9
     },
     # the connector that takes you from east ridge to crown dungeon ledge
     "west to east ridge cave back": {
         #   "outside_warp": ,   #room 0 1B
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 FB
         "present": True,
     },
 
@@ -274,7 +280,7 @@ WARPS_DATA = {
     # the cave that becomes treasure hunting goron in the past
     "empty cave by echoes portal": {
         #   "outside_warp": ,   #room 0 0B
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 F6
         "present": True,
     },
     # the connector that takes you to the base of east ridge from the top
@@ -302,9 +308,11 @@ WARPS_DATA = {
         #   "inside_warp": ,
         "present": True,
     },
+
+#room 2 ED present graceful goron room
     "present goron dance hall lower": {
         #   "outside_warp": ,   #room 0 3D
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 FD
         "present": True,
     },
     "present goron dance hall middle": {
@@ -345,7 +353,7 @@ WARPS_DATA = {
 #PRESENT LYNNA SEAS
     "present underwater sea of storms cave": {
         #   "outside_warp": ,   #room 2 B7
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 3 E8
         "present": True,
         "is_underwater": True,
         "require_option": "secrets"
@@ -357,13 +365,13 @@ WARPS_DATA = {
     },
     "present underwater zora duplex left door": {
         #   "outside_warp": ,   #room 2 D0
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 3 E3
         "present": True,
         "is_underwater": True,
     },
     "present underwater zora duplex right door": {
         #   "outside_warp": ,   #room 2 D0
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 3 E4
         "present": True,
         "is_underwater": True,
     },
@@ -398,17 +406,17 @@ WARPS_DATA = {
 #PRESENT CRESCENT
     "southern fairy cave": {
         #   "outside_warp": ,   #room 0 DA
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 3 F6
         "present": True,
     },
     "wild tokay museum": {
         #   "outside_warp": ,   #room 0 BD
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 E5
         "present": True,
     },
-    "upper tokay house": {
+    "present chicken hut": {
         #   "outside_warp": ,   #room 0 CD
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 CF
         "present": True,
     },
     "tokay chef house": {
@@ -427,7 +435,7 @@ WARPS_DATA = {
 
     "shooting gallery": {
         #   "outside_warp": ,   #room 1 58, t30
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 E9
         "present": False,
     },
     "advance shop": {
@@ -443,7 +451,7 @@ WARPS_DATA = {
     },
     "sad boi house": {
         #   "outside_warp": ,   #room 1 56
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 F3
         "present": False,
     },
     "gasha farmer house": {
@@ -546,10 +554,11 @@ WARPS_DATA = {
         #   "outside_warp": ,   #room 1 13
         #   "inside_warp": ,
         "present": False,
+        #basement room 2 e8
     },
     "tokkey dive spot": {
         #   "outside_warp": ,   #room 1 01
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 5 09
         "present": False,
     },
     "patch cave": {
@@ -586,7 +595,7 @@ WARPS_DATA = {
 #PAST WEST RIDGE
     "old zora cave": {
         #   "outside_warp": ,   #room 1 5A
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 F5
         "present": False,
     },
     "past goron city lower": {
@@ -609,6 +618,7 @@ WARPS_DATA = {
         #   "outside_warp": ,   #room 1 0b, t34
         #   "inside_warp": ,
         "present": False,
+        #completed cave is room 2 f7, unsure if theres a difference
     },
     "past west ridge fairy cave": {
         #   "outside_warp": ,   #room 1 0b, t47
@@ -617,8 +627,8 @@ WARPS_DATA = {
     },
 #PAST EAST RIDGE
     "goron face bomb cave": {
-        #   "outside_warp": ,   # room 1 0d
-        #   "inside_warp": ,
+        #   "outside_warp": ,   #room 1 0d
+        #   "inside_warp": ,    #room 2 FC
         "present": False,
     },
     #since you're intended to come from the
@@ -640,9 +650,11 @@ WARPS_DATA = {
         #   "inside_warp": ,    #room 1 0E
         "present": False,
     },
+
+#room 2 EF, graceful goron past
     "past goron dance hall lower": {
         #   "outside_warp": ,   #room 1 3D
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 FF
         "present": False,
     },
     "past goron dance hall middle": {
@@ -652,17 +664,17 @@ WARPS_DATA = {
     },
     "goron shooting gallery": {
         #   "outside_warp": ,   #room 1 1D
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 3 E7
         "present": False,
     },
     "past east ridge fairy cave": {
         #   "outside_warp": ,   #room 1 2D
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 F8
         "present": False,
     },
     "generous old man bush": {
         #   "outside_warp": ,   #room 1 4D
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 3 E9
         "present": False,
     },
 #PAST LYNNA SEAS
@@ -685,13 +697,13 @@ WARPS_DATA = {
     },
     "past underwater zora duplex left door": {
         #   "outside_warp": ,   #room 3 D0, t21
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 3 E5
         "present": False,
         "is_underwater": True,
     },
     "past underwater zora duplex right door": {
         #   "outside_warp": ,   #room 3 D0, t23
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 3 E6
         "present": False,
         "is_underwater": True,
     },
@@ -759,24 +771,24 @@ WARPS_DATA = {
         #   "inside_warp": ,
         "present": False,
     },
-    "chicken hut stairs": {
+    "past chicken hut stairs": {
         #   "outside_warp": ,   #room 1 CD, t11
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 CE
         "present": False,
     },
-    "chicken hut front": {
+    "past chicken hut front": {
         #   "outside_warp": ,   #room 1 CD, t32
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 E3
         "present": False,
     },
     "wild tokay game": {
         #   "outside_warp": ,   #room 1 BD
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 DE
         "present": False,
     },
     "tokay shop": {
         #   "outside_warp": ,   #room 1 AD
-        #   "inside_warp": ,
+        #   "inside_warp": ,    #room 2 E4
         "present": False,
     },
     "underwater hero trials cave": {
