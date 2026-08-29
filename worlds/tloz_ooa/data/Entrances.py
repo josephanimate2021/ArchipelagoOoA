@@ -50,12 +50,12 @@ WARPS_DATA = {
         "present": True,
     },
     "lower tingle cave": {
-        #   "outside_warp": ,
+        "outside_warp": 0x7644,
         #   "inside_warp": ,
         "present": True,
     },
     "upper tingle stairs": {
-        #   "outside_warp": 0x763c,
+        "outside_warp": 0x763c,
         #   "inside_warp": ,
         "present": True,
     },
@@ -67,7 +67,12 @@ WARPS_DATA = {
         "present": True,
     },
     "lynna city shop": {
-        #   "outside_warp": ,
+        "outside_warp": 0x7714,
+        #   "inside_warp": ,
+        "present": True,
+    },
+    "hidden shop": {
+        "outside_warp": 0x7710,
         #   "inside_warp": ,
         "present": True,
     },
@@ -78,270 +83,347 @@ WARPS_DATA = {
     },
     # the house where the kid gets frozen in time on the cutscene where veran takes over naryu at the beginning, i dont have a better name for this
     "house left of mayor's house": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 56
         #   "inside_warp": ,
         "present": True,
     },
     "know it all birds house": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 55
         #   "inside_warp": ,
         "present": True,
     },
     "mamamu yan house": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 66
         #   "inside_warp": ,
         "present": True,
     },
+    "black tower ruins": {
+        #   "outside_warp": ,    #room 0 76
+        #   "inside_warp": ,
+        "present": True,
+        "require_option": "secrets"
+    },
     # house in the top left of the city, iirc its troy's house
     "troy's house": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 45
         #   "inside_warp": ,
         "present": True,
     },
     "left bippin blossom door": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 47, t23
         #   "inside_warp": ,
         "present": True,
     },
     "right bippin blossom door": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 47, t25
         #   "inside_warp": ,
         "present": True,
     },
-    "maku road": {
-        #   "outside_warp": ,
+    "maku road front": {
+        #   "outside_warp": ,   #room 0 48
         #   "inside_warp": ,
         "present": True,
     },
     "maku road stairs": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 38, t48
         #   "inside_warp": ,
         "present": True,
     },
     "maku tree hole": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 38, t23/24
         #   "inside_warp": ,
         "present": True,
     },
-    "happy mask house": {
-        #   "outside_warp": ,
+    "happy mask shop": {
+        #   "outside_warp": ,   #room 0 53
         #   "inside_warp": ,
         "present": True,
     },
 
     # YOLL GRAVEYARD
-    "chevel grave": {
-        #   "outside_warp": ,
+    "cheval grave": {
+        #   "outside_warp": ,   #room 0 5B
         #   "inside_warp": ,
         "present": True,
     },
     "syrup shop": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 5D
         #   "inside_warp": ,
         "present": True,
     },
     "grave under the tree": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 8D, t56
         #   "inside_warp": ,
         "present": True,
     },
     "poe grave": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 7c
         #   "inside_warp": ,
         "present": True,
     },
     # NUUN HIGHLANDS
     "nuun fairy cave": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 06
         #   "inside_warp": ,
         "present": True,
     },
     # putting this here to be a completionist but I don't think this one should be randomized
     # since the game already cant tell which cave is supposed to be here
-    "nuun animal cave": {
-        #   "outside_warp": ,
-        #   "inside_warp": ,
-        "present": True,
-    },
+#    "nuun animal cave": {
+#           "outside_warp": ,
+#           "inside_warp": ,
+#        "present": True,
+#    },
     # PRESENT SYMMETRY
     "top left symmetry house": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 2 02
         #   "inside_warp": ,
         "present": True,
     },
     "top right symmetry house": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 2 04
         #   "inside_warp": ,
         "present": True,
     },
     "bottom left symmetry house": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 2 12
         #   "inside_warp": ,
         "present": True,
     },
     "bottom right symmetry house": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 2 14
         #   "inside_warp": ,
         "present": True,
     },
 
     # WESTERN ROLLING RIDGE
     "west ridge goron city lower": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 28
         #   "inside_warp": ,
         "present": True,
     },
     "west ridge goron city upper": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 18, t4
         #   "inside_warp": ,
         "present": True,
     },
     "west ridge goron city stairs": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 18, t20
         #   "inside_warp": ,
         "present": True,
     },
 
-    "big moblin left door": {
-        #   "outside_warp": ,
-        #   "inside_warp": ,
-        "present": True,
-    },
-    "big moblin right door": {
-        #   "outside_warp": ,
-        #   "inside_warp": ,
-        "present": True,
-    },
     "west ridge fairy cave": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 1B
         #   "inside_warp": ,
         "present": True,
     },
 
     # added to be completionist, not sure what we want to do for these entrances
     # since they're not always accessible
-    "big moblin sewer stairs": {
-        #   "outside_warp": ,
+    #potentially keep the keep after beating great moblin,
+    #but move the cave to the right and be a locked door while great
+    #moblin is unbeaten and the stairs to the left over the ledge
+    "moblin keep left door": {
+        #   "outside_warp": ,   #room 0 09, t40
         #   "inside_warp": ,
         "present": True,
     },
-    "big moblin sewer exit": {
-        #   "outside_warp": ,
+    "moblin keep right door": {
+        #   "outside_warp": ,   #room 0 09, t42
         #   "inside_warp": ,
         "present": True,
     },
+
+    "moblin keep sewer stairs": {
+        #   "outside_warp": ,   #room 2 09, t40
+        #   "inside_warp": ,
+        "present": True,
+    },
+    "moblin keep sewer exit": {
+        #   "outside_warp": ,   #room 0 0A, t12
+        #   "inside_warp": ,
+        "present": True,
+    },
+    #the cave directly behind moblin keep
     "cave behind moblin keep front": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 2 09, t34
         #   "inside_warp": ,
         "present": True,
     },
-    #
+    #the side of the moblin keep connector that takes you to crown dungeon ledge
     "cave behind moblin keep back": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 0B
         #   "inside_warp": ,
         "present": True,
     },
     # the connector that takes you from crown dungeon ledge to east ridge
     "west to east ridge cave front": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 0B
         #   "inside_warp": ,
         "present": True,
     },
     # the connector that takes you from east ridge to crown dungeon ledge
     "west to east ridge cave back": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 1B
         #   "inside_warp": ,
         "present": True,
     },
 
     # EASTERN ROLLING RIDGE
-    # why is rolling ridge so weird
+    # the cave that becomes treasure hunting goron in the past
     "empty cave by echoes portal": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 0B
         #   "inside_warp": ,
         "present": True,
     },
     # the connector that takes you to the base of east ridge from the top
-    "upper to lower cave front": {
-        #   "outside_warp": ,
+    "east ridge upper to lower cave front": {
+        #   "outside_warp": ,   #room 0 0C
         #   "inside_warp": ,
         "present": True,
     },
-    # the connector that takes you to the top of east ridge from the bottom
-    "upper to lower cave back": {
-        #   "outside_warp": ,
+    # the connector that takes you to the top of east ridge from the base
+    "east ridge upper to lower cave back": {
+        #   "outside_warp": ,   #room 0 2B
         #   "inside_warp": ,
         "present": True,
     },
-    "northeast cave front": {
-        #   "outside_warp": ,
+    #where the dance hall ends up at the very top
+    "northeast cave left": {
+        #   "outside_warp": ,   #room 0 0D
         #   "inside_warp": ,
         "present": True,
     },
 
     # needs tune of currents to access, it's inside warp is a one way
-    "northeast cave heart entrance": {
-        #   "outside_warp": ,
+    "northeast cave right entrance": {
+        #   "outside_warp": ,   #room 0 0D
         #   "inside_warp": ,
         "present": True,
     },
     "goron dance hall entrance": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 3D
         #   "inside_warp": ,
         "present": True,
     },
     "goron dance hall middle": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 1C
         #   "inside_warp": ,
         "present": True,
     },
     "ridge base fairy cave": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 3D
         #   "inside_warp": ,
         "present": True,
     },
     "mermaid cave front porch": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 3C
         #   "inside_warp": ,
         "present": True,
     },
     "greedy old man bush": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 4D
         #   "inside_warp": ,
         "present": True,
     },
     "empty cave next to target carts": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 1C
         #   "inside_warp": ,
         "present": True,
     },
     "middle ridge fairy cave": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 1D
         #   "inside_warp": ,
         "present": True,
     },
     "target carts": {
-        #   "outside_warp": ,
-        #   "inside_warp": ,
-        "present": True,
-    },
-    #    "": {
-    #   "outside_warp": ,
-    #   "inside_warp": ,
-    #        "present": True,
-    #    },
-    # LYNNA SEAS
-    "underwater sea of storms cave": {
-        #   "outside_warp": ,
+        #   "outside_warp": ,   #room 0 1D
         #   "inside_warp": ,
         "present": True,
     },
 
-    #    "": {
-        #   "outside_warp": ,
+    # LYNNA SEAS
+    "underwater sea of storms cave": {
+        #   "outside_warp": ,   #room 2 B7
         #   "inside_warp": ,
-#        "present": False,
-#    },
+        "present": True,
+        "is_underwater": True,
+        "require_option": "secrets"
+    },
+    "present drifting island house": {
+        #   "outside_warp": ,   #room 0 C5
+        #   "inside_warp": ,
+        "present": True,
+    },
+    "present underwater zora duplex left door": {
+        #   "outside_warp": ,   #room 2 D0
+        #   "inside_warp": ,
+        "present": True,
+        "is_underwater": True,
+    },
+    "present underwater zora duplex right door": {
+        #   "outside_warp": ,   #room 2 D0
+        #   "inside_warp": ,
+        "present": True,
+        "is_underwater": True,
+    },
+    "present underwater zora house": {
+        #   "outside_warp": ,   #room 2 C1
+        #   "inside_warp": ,
+        "present": True,
+        "is_underwater": True,
+    },
+    "present zora palace": {
+        #   "outside_warp": ,   #room 2 A1
+        #   "inside_warp": ,
+        "present": True,
+        "is_underwater": True,
+    },
+    #bombable cave in the top left of zora village above water
+    "zora crypt cave": {
+        #   "outside_warp": ,   #room 0 A0
+        #   "inside_warp": ,
+        "present": True,
+    },
+    "present fairy queen cave": {
+        #   "outside_warp": ,   #room 0 A3
+        #   "inside_warp": ,
+        "present": True,
+    },
+    "present library": {
+        #   "outside_warp": ,   #room 0 A5
+        #   "inside_warp": ,
+        "present": True,
+    },
+#PRESENT CRESCENT
+    "southern fairy cave": {
+        #   "outside_warp": ,   #room 0 DA
+        #   "inside_warp": ,
+        "present": True,
+    },
+    "wild tokay museum": {
+        #   "outside_warp": ,   #room 0 BD
+        #   "inside_warp": ,
+        "present": True,
+    },
+    "upper tokay house": {
+        #   "outside_warp": ,   #room 0 CD
+        #   "inside_warp": ,
+        "present": True,
+    },
+    "tokay chef house": {
+        #   "outside_warp": , #room 0 DD
+        #   "inside_warp": ,
+        "present": True,
+    },
+    "underwater maze cave": {
+        #   "outside_warp": ,   #room 2 BA
+        #   "inside_warp": ,
+        "present": True,
+        "is_underwater": True,
+    },
+#PAST ENTRANCES
 #LYNNA VILLAGE
     "Rafton's House Left": {
         "outside_warp": 0x785c,
@@ -353,11 +435,29 @@ WARPS_DATA = {
         "inside_warp": 0x7884,
         "present": False,
     },
+    "shooting gallery": {
+        #   "outside_warp": ,   #room 1 58, t30
+        #   "inside_warp": ,
+        "present": False,
+    },
+    "advance shop": {
+        #   "outside_warp": ,   #room 1 58, t33
+        #   "inside_warp": ,
+        "present": False,
+        "require_option": "advance_shop"
+    },
+    "postman house": {
+        #   "outside_warp": ,   #room 1 57
+        #   "inside_warp": ,
+        "present": False,
+    },
+    "": {
+        #   "outside_warp": ,
+        #   "inside_warp": ,
+        "present": False,
+    },
 
-
-
-
-    #DUNGEONS
+    # DUNGEONS
     "d0": {
         "outside_warp": 0x7728,
         "inside_warp": 0x7aec,
