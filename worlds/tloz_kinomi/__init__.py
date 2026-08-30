@@ -331,7 +331,7 @@ class GiftsOfKinomiWorld(World):
         # before anything else.
         collection_state = self.multiworld.get_all_state(False)
 
-        for i in range(0, 7):
+        for i in range(0, 8):
             # Build a list of locations in this dungeon
             dungeon_location_names = [name for name, loc in LOCATIONS_DATA.items()
                                       if "dungeon" in loc and loc["dungeon"] == i]
@@ -357,6 +357,11 @@ class GiftsOfKinomiWorld(World):
                     if attempts_remaining == 0:
                         raise exc
                     logging.debug(f"Failed to shuffle dungeon items for player {self.player}. Retrying...")
+        if __debug__:
+            filename = "my_world.puml"
+            logging.debug("Visualizing Regions...")
+            Utils.visualize_regions(self.multiworld.get_region("Menu", self.player), filename)
+            logging.debug("Regions visualization saved at " + Utils.home_path(filename))
             
 
     def get_filler_item_name(self) -> str:
@@ -366,15 +371,9 @@ class GiftsOfKinomiWorld(World):
                 FILLER_ITEM_NAMES.append(item)
 
         item_name = self.random.choice(FILLER_ITEM_NAMES)
-        print(item_name)
         return item_name
     
     def generate_output(self, output_directory: str):
-        if __debug__:
-            filename = "my_world.puml"
-            logging.debug("Visualizing Regions...")
-            Utils.visualize_regions(self.multiworld.get_region("Menu", self.player), filename)
-            logging.debug("Regions visualization saved at " + Utils.home_path(filename))
         patch = ooa_create_appp_patch(self)
         rom_path = os.path.join(output_directory, f"{self.multiworld.get_out_file_name_base(self.player)}"
                                                   f"{patch.patch_file_ending}")
