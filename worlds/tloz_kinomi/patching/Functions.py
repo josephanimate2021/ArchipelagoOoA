@@ -7,6 +7,7 @@ from settings import get_settings
 from . import RomData
 from .Util import *
 from .z80asm.Assembler import Z80Assembler
+from ..common.patching.z80asm.Assembler import GameboyAddress
 from ..data.Constants import *
 from .Constants import *
 from pathlib import Path
@@ -16,9 +17,10 @@ from .. import LOCATIONS_DATA, GiftsOfKinomiMasterKeys
 
 def get_treasure_addr(rom: RomData, item_name: str):
     item_id, item_subid = get_item_id_and_subid(item_name)
-    addr = 0x58abf + (item_id * 4)
+    base_addr = GameboyAddress(0x16, 0x4abf).address_in_rom()
+    addr = base_addr + (item_id * 4)
     if rom.read_byte(addr) & 0x80 != 0:
-        addr = 0x57d97 + rom.read_word(addr + 1)
+        addr = GameboyAddress(0x16, rom.read_word(base_addr + rom.read_word(addr + 1))).address_in_rom() + 20744
     return addr + (item_subid * 4)
 
 
@@ -41,7 +43,7 @@ def alter_treasures(rom: RomData):
     # Set data for remote Archipelago items
     set_treasure_data(rom, "Archipelago Item", 0x57, 0x5a)
     set_treasure_data(rom, "Archipelago Progression Item", 0x57, 0x59)
-    set_treasure_data(rom, "King Zora's Potion", 0x45, 0x5e)
+    #set_treasure_data(rom, "King Zora's Potion", 0x45, 0x5e)
 
     # Make bombs increase max carriable quantity when obtained from treasures,
     # not drops (see asm/seasons/bomb_bag_behavior)
@@ -77,10 +79,10 @@ def define_location_constants(assembler: Z80Assembler, patch_data):
 def define_option_constants(assembler: Z80Assembler, patch_data):
     options = patch_data["options"]
 
-    assembler.define_byte("option.receivedDamageModifier", options["combat_difficulty"])
-    assembler.define_byte("option.openAdvanceShop", options["advance_shop"])
+    #assembler.define_byte("option.receivedDamageModifier", options["combat_difficulty"])
+    #assembler.define_byte("option.openAdvanceShop", options["advance_shop"])
 
-    assembler.define_byte("option.requiredEssences", options["required_essences"])
+    assembler.define_byte("option.requiredGifts", options["required_gifts"])
     assembler.define_byte("option.required_slates", options["required_slates"])
     
     assembler.define_byte("option.keysanity_small_keys", patch_data["options"]["keysanity_small_keys"])
@@ -115,10 +117,9 @@ def process_item_name_for_shop_text(item_name: str) -> List[int]:
 
 def define_text_constants(assembler: Z80Assembler, patch_data):
     overworld_shops = [
-        "Kinomi Shop",
-        "Hidden Shop",
-        "Syrup Shop",
-        "Jiku Clifs Shop",
+        "Kinomi Town: Shop",
+        "Kinomi Town: Hidden Shop",
+        "Jiku Clifs (Present): Shop",
     ]
 
     for shop_name in overworld_shops:
@@ -129,9 +130,8 @@ def define_text_constants(assembler: Z80Assembler, patch_data):
             if location_name in patch_data["locations"]:
                 item_name_bytes = process_item_name_for_shop_text(patch_data["locations"][location_name])
                 text_bytes = [0x09, 0x01] + item_name_bytes + [0x09, 0x00, 0x0c, 0x18, 0x01]  # Item name
-                if shop_name != "Tokay Market":
-                    text_bytes.extend([0x20, 0x0c, 0x08, 0x20, 0x03, 0x7b, 0x01])  # Price
-                    text_bytes.extend([0x02, 0x00, 0x00])  # OK / No thanks
+                text_bytes.extend([0x20, 0x0c, 0x08, 0x20, 0x03, 0x7b, 0x01])  # Price
+                text_bytes.extend([0x02, 0x00, 0x00])  # OK / No thanks
             assembler.add_floating_chunk(f"text.{symbolic_name}", text_bytes)
 
 

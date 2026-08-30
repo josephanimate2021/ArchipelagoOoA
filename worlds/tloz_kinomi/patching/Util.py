@@ -1,5 +1,8 @@
 from .Constants import *
 from ..data import ITEMS_DATA
+from Utils import home_path
+
+import os
 
 
 def camel_case(text):
@@ -19,6 +22,10 @@ def get_item_id_and_subid(item_name: str):
     item_id = item_data["id"]
     item_subid = item_data["subid"] if "subid" in item_data else 0x00
     return item_id, item_subid
+
+def world_path(file: str = ""):
+    apworld_name = "tloz_kinomi"
+    return os.path.join(home_path(f"worlds/{apworld_name}" if os.path.exists(home_path(f"worlds/{apworld_name}")) else f"custom_worlds/{apworld_name}.apworld"), file)
 
 
 def hex_str(value, size=1):

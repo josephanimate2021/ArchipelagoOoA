@@ -23,7 +23,11 @@ class OoAPatchExtensions(APPatchExtension):
 
     @staticmethod
     def apply_patches(caller: APProcedurePatch, rom: bytes, patch_file: str) -> bytes:
-        rom_data = RomData(apply_bps_patch(open(Utils.local_path('worlds/tloz_kinomi/patching/kinomi.bps'), 'rb'), rom))
+        rom = apply_bps_patch(open(world_path('patching/kinomi.bps'), 'rb'), rom)
+        if __debug__:
+            f = open(Utils.home_path("kinomi_debug.gbc"), "wb")
+            f.write(rom)
+        rom_data = RomData(rom)
         patch_data = yaml.safe_load(caller.get_file(patch_file).decode("utf-8"))
 
         if not (patch_data["version"] in RETRO_COMPAT_VERSION):

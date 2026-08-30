@@ -1,5 +1,6 @@
 from collections.abc import Collection
 from typing import Optional
+from ..common.patching.z80asm.Assembler import GameboyAddress
 
 from .Util import hex_str
 
@@ -58,10 +59,11 @@ class RomData:
         Return the address where to edit item ID and sub-ID to modify the contents
         of the chest contained in given room of given group
         """
-        base_addr = 0x59108
+        print(hex_str(group_and_room))
+        base_addr = GameboyAddress(0x16, 0x55ed).address_in_rom()
         room = group_and_room & 0xFF
         group = group_and_room >> 8
-        current_addr = 0x54000 + self.read_word(base_addr + (group * 2))
+        current_addr =  GameboyAddress(0x16, self.read_word(base_addr + (group * 2))).address_in_rom()
         while self.read_byte(current_addr) != 0xff:
             chest_room = self.read_byte(current_addr + 1)
             if chest_room == room:

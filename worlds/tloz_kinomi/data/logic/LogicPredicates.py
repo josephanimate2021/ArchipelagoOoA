@@ -44,30 +44,32 @@ def kinomi_has_flippers(state: CollectionState, player: int):
 
 def kinomi_has_ember_seeds(state: CollectionState, player: int):
     return any([
-        state.has("Ember Seeds", player),
+        True
+        #state.has("Ember Seeds", player),
         #state.multiworld.worlds[player].options.default_seed == "ember",
         #(state.has("_wild_ember_seeds", player) and kinomi_option_medium_logic(state, player))
     ])
 
 
 def kinomi_has_scent_seeds(state: CollectionState, player: int):
-    return state.has("Scent Seeds", player)
+    return True#state.has("Scent Seeds", player)
 
 
 def kinomi_has_pegasus_seeds(state: CollectionState, player: int):
-    return state.has("Pegasus Seeds", player)
+    return True#state.has("Pegasus Seeds", player)
 
 
 def kinomi_has_mystery_seeds(state: CollectionState, player: int):
     return any([
-        state.has("Mystery Seeds", player),
+        True
+        #state.has("Mystery Seeds", player),
         #   state.multiworld.worlds[player].options.default_seed == "mystery",
         #(state.has("_wild_mystery_seeds", player) and kinomi_option_medium_logic(state, player))
     ])
 
 
 def kinomi_has_gale_seeds(state: CollectionState, player: int):
-    return state.has("Gale Seeds", player)# or state.multiworld.worlds[player].options.default_seed == "gale"
+    return True#state.has("Gale Seeds", player)# or state.multiworld.worlds[player].options.default_seed == "gale"
 
 
 def kinomi_has_small_keys(state: CollectionState, player: int, dungeon_id: int, amount: int = 1):

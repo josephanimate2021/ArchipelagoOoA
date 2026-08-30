@@ -7,7 +7,7 @@ def make_summerVilla_logic(player: int):
         ["enter summer villa", "d0 compass chest", False, None],
         ["enter summer villa", "d0 small key chest 1f", False, None],
         ["enter summer villa", "d0 heartpiece inside water", False, None],
-        ["enter summer villa", "solder trade", False, lambda state: state.has("Wood Clock", player)],
+        ["enter summer villa", "soldier trade", False, lambda state: state.has("Wood Clock", player)],
         ["enter summer villa", "d0 small key chest b1f", False, lambda state: kinomi_can_kill_armos(state, player)],
         ["enter summer villa", "d0 small key chest 2f", False, None],
         ["enter summer villa", "d0 heartpiece drop", False, lambda state: kinomi_can_kill_spiked_beetle(state, player)],
@@ -250,7 +250,7 @@ def make_lostLabrinth_logic(player: int):
         ["d2 present fix holes", "d2 present small key chest", False, None],
         ["d2 present fix holes", "d2 present color tiles 2", False, lambda state: kinomi_has_small_keys(state, player, 6, 1)],
         ["d2 present color tiles 2", "d2 present cane chest", False, lambda state: all([
-            kinomi_has_small_keys(state, player, 5, 2),
+            kinomi_has_small_keys(state, player, 6, 2),
             kinomi_can_kill_normal_enemy(state, player)
         ])],
 
@@ -459,7 +459,7 @@ def make_crownDungeon_logic(player: int):
             ])
         ])],
         ["crown dungeon switch A", "crown dungeon boss", False, lambda state: all([
-            kinomi_has_boss_key(state, player, 5),
+            kinomi_has_boss_key(state, player, 7),
             kinomi_has_cane(state, player),
             kinomi_has_sword(state, player),
         ])],

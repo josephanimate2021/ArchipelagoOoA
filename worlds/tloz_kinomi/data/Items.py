@@ -1,8 +1,6 @@
 from BaseClasses import ItemClassification
 from ..patching.Constants import DEFINES
 
-BASE_ITEM_ID = 27022002000
-
 ITEMS_DATA = {
     #   "No Item": {
     #   'classification': ItemClassification.filler,
@@ -11,8 +9,9 @@ ITEMS_DATA = {
     #    'subid': 0x00
     #    },
     "Shield": {
-        'classification': ItemClassification.progression,
-        'id': 0x01
+        'classification': ItemClassification.progression_deprioritized,
+        'id': 0x01,
+        'subid': 0x03
     },
     "Bombs (10)": {
         'classification': ItemClassification.progression,
@@ -20,7 +19,8 @@ ITEMS_DATA = {
     },
     "Sword": {
         'classification': ItemClassification.progression,
-        'id': 0x05
+        'id': 0x05,
+        'subid': 0x07
     },
     "Boomerang": {
         'classification': ItemClassification.progression,
@@ -33,8 +33,7 @@ ITEMS_DATA = {
     },
     "Harp": {
         'classification': ItemClassification.progression,
-        'id': 0x25,
-        'subid': 0x00                                                                                                           
+        'id': 0x25                                                                                                         
     },
     "Cane of Somaria": {
         'classification': ItemClassification.progression,
@@ -48,7 +47,7 @@ ITEMS_DATA = {
         'classification': ItemClassification.progression,
         'id': 0x0d
     },
-    "Slingshot": {
+    "Progressive Slingshot": {
         'classification': ItemClassification.progression,
         'id': 0x13
     },
@@ -69,11 +68,6 @@ ITEMS_DATA = {
         'classification': ItemClassification.progression,
         'id': 0x19
     },
-    "Progressive Slingshot": {
-        'classification': ItemClassification.progression,
-        'id': 0x19
-    },
-
     "Rupees (1)": {
         'classification': ItemClassification.filler,
         'id': 0x28,
@@ -130,7 +124,7 @@ ITEMS_DATA = {
         'subid': 0x0a
     },
     "Rupees (100)": {
-        'classification': ItemClassification.useful,
+        'classification': ItemClassification.progression_skip_balancing,
         'id': 0x28,
         'subid': 0x0b
     },
@@ -145,7 +139,7 @@ ITEMS_DATA = {
         'subid': 0x0d
     },
     "Rupees (150)": {
-        'classification': ItemClassification.useful,
+        'classification': ItemClassification.progression_skip_balancing,
         'id': 0x28,
         'subid': 0x0e
     },
@@ -165,7 +159,7 @@ ITEMS_DATA = {
         'subid': 0x11
     },
     "Rupees (80)": {
-        'classification': ItemClassification.filler,
+        'classification': ItemClassification.useful,
         'id': 0x28,
         'subid': 0x12
     },
@@ -186,7 +180,8 @@ ITEMS_DATA = {
     },
     "Zora's Flippers": {
         'classification': ItemClassification.progression,
-        'id': 0x2e
+        'id': 0x2e,
+        'subid': 0x02
     },
     "Potion": {
         'classification': ItemClassification.useful,
@@ -444,7 +439,7 @@ ITEMS_DATA = {
         'id': 0x46
     },
     "Witch's Key": {
-        'classification': ItemClassification.useful,
+        'classification': ItemClassification.progression_deprioritized, # Technically is stil needed but won't have much of a need for it since you can enter syrup's shop from lost labyrinth.
         'id': 0x45
     },
     "Slate": {

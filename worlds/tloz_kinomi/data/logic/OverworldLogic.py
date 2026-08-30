@@ -45,7 +45,8 @@ def make_overworld_logic(player: int):
         ["daichi plain", "daichi plain summer old man", False, lambda state: kinomi_has_bracelet(state, player)],
         ["daichi plain", "daichi plain gift under mushroom", False, lambda state: kinomi_can_break_mushroom(state, player)],
         ["daichi plain", "winter cave crystal chest", False, lambda state: kinomi_can_break_crystal(state, player)],
-        ["daichi plain", "winter cave stone reward", False, lambda state: kinomi_can_kill_normal_enemy(state, player, True)],
+        ["daichi plain", "winter cave heartpiece drop", False, None],
+        ["daichi plain", "winter stone reward", False, lambda state: kinomi_can_kill_normal_enemy(state, player, True)],
         ["daichi plain", "daichi plain gravesite basement", False, lambda state: any([
             kinomi_can_jump_pit(state, player),
             kinomi_has_cane(state, player) # Remember, the cane can now fix holes.
@@ -66,7 +67,7 @@ def make_overworld_logic(player: int):
         ])],
         ["lake of memories", "lake of memories old man", False, lambda state: kinomi_can_use_ember_seeds(state, player, False)],
         ["lake of memories old man", "lake of memories old man's chest", False, None],
-        ["lake of memories", "lake of memories underwater cave", False, None],
+        ["lake of memories", "lake of memories shooting gallery", False, None],
         ["lake of memories", "lake of memories heartpiece", False, None],
         ["lake of memories", "lake of memories scrapped chest", False, None],
 
@@ -101,7 +102,7 @@ def make_overworld_logic(player: int):
             state.has("Summer Stone", player),
             state.has("Winter Stone", player),
             state.has("Spring Stone", player),
-            state.has("Autumm Stone", player)
+            state.has("Autumn Stone", player)
         ])],
         ["deeper woods route 2", "deeper woods old man 2", False, lambda state: kinomi_can_use_ember_seeds(state, player, False)],
         ["deeper woods route 1", "deeper woods heartpiece under tree", False, lambda state: kinomi_can_use_ember_seeds(state, player, False)],

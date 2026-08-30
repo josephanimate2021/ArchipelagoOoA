@@ -1,8 +1,15 @@
 from .Constants import *
 
-BASE_LOCATION_ID = 27022002000
-
 LOCATIONS_DATA = {
+    "Maple Trade": {
+        "region_id": "maple trade",
+        "vanilla_item": "Life Potion",
+        "flag_byte": 0xc6d2,
+        "room": 0x0300,
+        "bit_mask": 0x80,
+        "collect": COLLECT_TOUCH,
+        "symbolic_name": "mapleTrade",
+    },
     "Kinomi Town: Ghost's House": {
         "region_id": "ghost's house",
         "vanilla_item": "Falls Key",
@@ -13,15 +20,15 @@ LOCATIONS_DATA = {
     "Kinomi Town: Librarian": {
         "region_id": "old man's library",
         "vanilla_item": "Old Labyrinth Key",
-        "flag_byte": 0xc70e,
-        "room": 0x020e,
+        "flag_byte": 0xc718,
+        "room": 0x0218,
         "collect": COLLECT_TOUCH
     },
     "Kinomi Town: Library Employee": {
         "region_id": "library employee",
         "vanilla_item": "Potion",
-        "flag_byte": 0xc70e,
-        "room": 0x020e,
+        "flag_byte": 0xc72e,
+        "room": 0x022e,
         "collect": COLLECT_TOUCH
     },
     "Kinomi Town: Heart Piece at Link's House": {
@@ -82,7 +89,7 @@ LOCATIONS_DATA = {
     },
     "Kinomi Town: Hidden Shop #2": {
         "region_id": "hidden shop",
-        "vanilla_item": "Piece of Heart",
+        "vanilla_item": "Progressive Slingshot",
         "flag_byte": 0xc642,
         "room": 0x027e,
         "bit_mask": 0x02,
@@ -119,7 +126,7 @@ LOCATIONS_DATA = {
     },
     "Forever Falls: Old Man": {
         "region_id": "forever falls old man",
-        "vanilla_item": "Rupees (200)",
+        "vanilla_item": "Seed Satchel",
         "flag_byte": 0xc74e,
         "room": 0x024e,
         "collect": COLLECT_TOUCH
@@ -167,7 +174,6 @@ LOCATIONS_DATA = {
         "vanilla_item": "Rupees (500)",
         "flag_byte": 0xca09,
         "room": 0x0509,
-        "bit_mask": 0x40,
         "collect": COLLECT_TOUCH
     },
     "Daichi Plain: Gravesite Heart Piece": {
@@ -198,6 +204,27 @@ LOCATIONS_DATA = {
         "room": 0x070c,
         "collect": COLLECT_TOUCH
     },
+    "Daichi Plain: Winter Cave Crystal Chest": {
+        "region_id": "winter cave crystal chest",
+        "vanilla_item": "Rupees (20)",
+        "flag_byte": 0xc82b,
+        "room": 0x032b,
+        "collect": COLLECT_CHEST
+    },
+    "Daichi Plain: Winter Cave Heart Piece Drop": {
+        "region_id": "winter cave heartpiece drop",
+        "vanilla_item": "Piece of Heart",
+        "flag_byte": 0xc82a,
+        "room": 0x032a,
+        "collect": COLLECT_DROP
+    },
+    "Daichi Plain: Winter Cave Stone Chest": {
+        "region_id": "winter stone reward",
+        "vanilla_item": "Winter Stone",
+        "flag_byte": 0xc83b,
+        "room": 0x033b,
+        "collect": COLLECT_CHEST
+    },
     "Daichi Plain: Underwater Gift": {
         "region_id": "daichi plain underwater heartpiece",
         "vanilla_item": "Piece of Heart",
@@ -221,12 +248,12 @@ LOCATIONS_DATA = {
         "room": 0x05fe,
         "collect": COLLECT_CHEST
     },
-    "Lake of Memories: Underwater Cave": {
-        "region_id": "lake of memories underwater cave",
+    "Lake of Memories: Shooting Gallery": {
+        "region_id": "lake of memories shooting gallery",
         "vanilla_item": "Gasha Seed",
-        "flag_byte": 0xc80e,
-        "room": 0x030e,
-        "collect": COLLECT_CHEST,
+        "flag_byte": 0xc7e9,
+        "room": 0x02e9,
+        "collect": COLLECT_TOUCH,
     },
     "Lake of Memories: Scrapped Chest": {
         "region_id": "lake of memories scrapped chest",
@@ -402,7 +429,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Potion",
         "flag_byte": 0xc643,
         "room": 0x03fe,
-        "bit_mask": 0x80,
+        "bit_mask": 0x10,
         "scouting_byte": 0xc8fe,
         "scouting_mask": 0x10,
         "collect": COLLECT_TOUCH,
@@ -418,15 +445,6 @@ LOCATIONS_DATA = {
         "scouting_mask": 0x10,
         "collect": COLLECT_TOUCH,
         "symbolic_name": "seaShop2",
-    },
-    "Maple Trade": {
-        "region_id": "maple trade",
-        "vanilla_item": "Life Potion",
-        "flag_byte": 0xc6d2,
-        "room": 0x0300,
-        "bit_mask": 0x80,
-        "collect": COLLECT_TOUCH,
-        "symbolic_name": "mapleTrade",
     },
     "Jiku Clifs (Present): Shop #3": {
         "region_id": "jiku clifs shop",
@@ -475,8 +493,8 @@ LOCATIONS_DATA = {
     "Jiku Clifs (Past): Goron Dance": {
         "region_id": "goron dance",
         "vanilla_item": "Blue Pearl",
-        "flag_byte": 0xc811,
-        "room": 0x0111,
+        "flag_byte": 0xc72d,
+        "room": 0x022d,
         "collect": COLLECT_TOUCH,
     },
     "Jiku Clifs (Past): Underwater Heart Piece": {
@@ -532,7 +550,7 @@ LOCATIONS_DATA = {
         "dungeon": 5,
         "collect": COLLECT_CHEST,
     },
-    "Tokay Desert: First Chest": {
+    "Tokay Desert: Fourth Chest": {
         "region_id": "tokay desert fourth chest",
         "vanilla_item": "Slate",
         "flag_byte": 0xc751,
@@ -581,6 +599,15 @@ LOCATIONS_DATA = {
         "collect": COLLECT_DROP,
         "dungeon": 0
     },
+    "Summer Villa (1F): Trade with soldier": {
+        "region_id": "soldier trade",
+        "vanilla_item": "Broken Sword",
+        "flag_byte": 0xcab0,
+        "room": 0x05b0,
+        "bit_mask": 0x40,
+        "collect": COLLECT_TOUCH,
+        "dungeon": 0
+    },
     "Summer Villa (1F): Small Key Chest": {
         "region_id": "d0 small key chest 1f",
         "vanilla_item": "Small Key (Summer Villa)",
@@ -610,7 +637,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Heart Container",
         "flag_byte": 0xcab6,
         "room": 0x05b6,
-        "collect": COLLECT_TOUCH,
+        "collect": COLLECT_POOF,
         "dungeon": 0
     },
     "Summer Villa (B1F): Sword Chest": {
@@ -772,7 +799,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc913,
         "room": 0x0413,
         "dungeon": 1,
-        "collect": COLLECT_TOUCH,
+        "collect": COLLECT_POOF,
     },
     "Spirit's Grotto: Final Gift": {
         "region_id": "d1 final gift",
@@ -869,7 +896,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc969,
         "room": 0x0469,
         "dungeon": 2,
-        "collect": COLLECT_TOUCH,
+        "collect": COLLECT_KEYDROP,
     },
     "Lost Labyrinth (Past): Fix Holes Past Arena": {
         "region_id": "d2 past fix holes past arena",
@@ -1006,14 +1033,15 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca64, 
         "room": 0x0564,
         "dungeon": 3,
-        "collect": COLLECT_TOUCH,
+        "collect": COLLECT_POOF,
     },
     "Four Corners Cave: Final Gift": {
         "region_id": "d3 final gift",
         "vanilla_item": "Rod of Seasons",
         "flag_byte": 0xc858, 
-        "room": 0x0368,
-        "collect": COLLECT_CHEST,
+        "room": 0x0358,
+        "dungeon": 3,
+        "collect": COLLECT_TOUCH,
     },
     ##########################################
     "Seasons Shrine (Summer): Small Key Drop": {
@@ -1142,7 +1170,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca3a, 
         "room": 0x053a,
         "dungeon": 4,
-        "collect": COLLECT_TOUCH
+        "collect": COLLECT_POOF
     },
     "Seasons Shrine: Din's Gift": {
         "region_id": "din's gift",
@@ -1157,6 +1185,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Bombs (10)",
         "flag_byte": 0xc81a, 
         "room": 0x031a,
+        "dungeon": 4,
         "collect": COLLECT_CHEST,
     },
     ##########################################
@@ -1254,7 +1283,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc9bf, 
         "room": 0x04bf,
         "dungeon": 5,
-        "collect": COLLECT_TOUCH,
+        "collect": COLLECT_POOF,
     },
     "Temple of the Tokay (1F): Nayru's Gift": {
         "region_id": "nayru's gift",
@@ -1291,7 +1320,7 @@ LOCATIONS_DATA = {
     },
     "Lost Labyrinth (Present): Hit Color Block": {
         "region_id": "d2 present color tiles",
-        "vanilla_item": "Small Key (Lost Labyrinth (Present))",
+        "vanilla_item": "Compass (Lost Labyrinth (Present))",
         "flag_byte": 0xc93e, 
         "room": 0x043e,
         "dungeon": 6,
@@ -1464,19 +1493,10 @@ LOCATIONS_DATA = {
     },
     "Crown Dungeon (B1F): Six-Statue Puzzle": {
     	"region_id": "crown dungeon six-statue puzzle",
-    	"vanilla_item": "Cane of Somaria",
+    	"vanilla_item": "Gasha Seed",
     	"dungeon" : 7,
         "flag_byte": 0xc9a5,
         "room": 0x04a5,
         "collect": COLLECT_CHEST,
-    },
-    "Crown Dungeon (1F): Boss": {
-    	"region_id": "crown dungeon boss",
-    	"vanilla_item": "Heart Container",
-    	"dungeon" : 7,
-        "flag_byte": 0xc9bf,
-        "room": 0x04bf,
-        "collect": COLLECT_POOF,
-        "symbolic_name": "d5Boss",
-    },
+    }
 }
