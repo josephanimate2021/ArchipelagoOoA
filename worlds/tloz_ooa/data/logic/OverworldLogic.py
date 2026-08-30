@@ -1,7 +1,6 @@
 from .LogicPredicates import *
 from ..Entrances import *
 
-
 def make_overworld_logic(player: int, options: OracleOfAgesOptions):
     gasha_connections = [
         ["Menu", "gasha tree 1", False, lambda state: ooa_can_harvest_gasha(state, player, 1)],
@@ -51,9 +50,9 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         ["lynna city", "lynna city comedian trade", False, lambda state: state.has("Cheesy Mustache", player)],
         ["lynna city", "mamamu yan trade", False, lambda state: state.has("Doggie Mask", player)],
 
-        ["lynna city", OUTSIDE_TAG + "vasu's shop", True, None],
-        [INSIDE_TAG + "vasu's shop", "vasu's gift", False, None],
-        [INSIDE_TAG + "vasu's shop", "vasu's victory ring gift", False, None],
+        ["lynna city", Outside("vasu's shop"), True, None],
+        [Inside("vasu's shop"), "vasu's gift", False, None],
+        [Inside("vasu's shop"), "vasu's victory ring gift", False, None],
 
         # LYNNA VILLAGE
         #######################################
@@ -93,7 +92,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             state.has("Island Chart", player)
         ])],
         ["rafton's raft", "rafton trade", False, lambda state: state.has("Magic Oar", player)],
-        ["lynna village", OUTSIDE_TAG + "d0", True, lambda state: ooa_can_remove_dirt(state, player, False)],
+        ["lynna village", Outside("d0"), True, lambda state: ooa_can_remove_dirt(state, player, False)],
 
         # MAKU TREE
         #######################################
@@ -198,7 +197,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ooa_has_rupees(state, player, 400)
         ])],
         ["graveyard door", "graveyard poe trade", False, lambda state: ooa_has_bracelet(state, player)],
-        ["graveyard door", OUTSIDE_TAG + "d1", False, None],
+        ["graveyard door", Outside("d1"), False, None],
 
         # FAIRIES' WOODS
         #######################################
@@ -251,7 +250,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         ["deku forest", "deku forest soldier", False, lambda state: all([
             ooa_can_use_mystery_seeds(state, player)
         ])],
-        ["deku forest", OUTSIDE_TAG + "d2", False, lambda state: any([
+        ["deku forest", Outside("d2"), False, lambda state: any([
             ooa_has_bombs(state, player),
             ooa_has_bombchus(state, player)
         ])],
@@ -347,7 +346,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ])
         ])],
 
-        ["crescent present west", OUTSIDE_TAG + "d3", False, None],
+        ["crescent present west", Outside("d3"), False, None],
 
         ["lynna city", "under crescent island", True, lambda state: ooa_can_dive(state, player)],
         
@@ -412,7 +411,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ])
         ])],
         ["symmetry present", "symmetry city tree", False, lambda state: ooa_can_harvest_tree(state, player, False)],
-        ["symmetry present", OUTSIDE_TAG + "d4", False, lambda state: all([
+        ["symmetry present", Outside("d4"), False, lambda state: all([
             state.has("Tuni Nut", player),
             any([
                 ooa_can_go_back_to_present(state, player),
@@ -534,7 +533,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         #######################################
         ["defeat great moblin", "ridge upper present", False, lambda state: ooa_can_jump_2_wide_pit(state, player, False)],
         ["ridge upper past", "ridge upper present", False, lambda state: ooa_can_go_back_to_present(state, player)],
-        ["ridge upper present", OUTSIDE_TAG + "d5", False, lambda state: state.has("Crown Key", player)],
+        ["ridge upper present", Outside("d5"), False, lambda state: state.has("Crown Key", player)],
         ["ridge mid present", "ridge NE cave present", True, None],
         ["ridge base present", "ridge upper present", False, lambda state: ooa_can_jump_3_wide_pit(state, player, False)],
         ["ridge base past west", "ridge upper past", True, lambda state: all([
@@ -569,7 +568,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         ["ridge upper present", "ridge base present", False, None],
         ["ridge base past east", "ridge base present", False, lambda state: ooa_can_go_back_to_present(state, player)],
         ["ridge base past west", "ridge base present", False, lambda state: ooa_can_go_back_to_present(state, player)],
-        ["ridge base present", OUTSIDE_TAG + "d6 present", False, lambda state: state.has("Old Mermaid Key", player)],
+        ["ridge base present", Outside("d6 present"), False, lambda state: state.has("Old Mermaid Key", player)],
         ["ridge base present", "pool in d6 entrance", False, lambda state: ooa_can_dive(state, player)],
         ["ridge base present", "trade rock brisket", False, lambda state: state.has("Rock Brisket", player) and state.has("Brother Emblem", player)],
         ["ridge base present", "first goron dance", False, lambda state: ooa_has_rupees(state, player, 10)],
@@ -593,7 +592,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ooa_has_bombchus(state, player)
         ])],
         ["ridge base past west", "ridge diamonds past", False, lambda state: ooa_has_switch_hook(state, player)],
-        ["ridge base past west", OUTSIDE_TAG + "d6 past", False, lambda state: all([
+        ["ridge base past west", Outside("d6 past"), False, lambda state: all([
             ooa_can_swim(state, player, False),
             state.has("Mermaid Key", player)
         ])],
@@ -689,7 +688,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         ["zora village", "zora king gift", False, lambda state: all([
             state.has("King Zora's Potion", player)
         ])],
-        ["zora king gift", OUTSIDE_TAG + "d7", False, lambda state: all([
+        ["zora king gift", Outside("d7"), False, lambda state: all([
             state.has("Fairy Powder", player),
         ])],
         ["zora village", "fisher's island cave", False, lambda state: ooa_has_long_hook(state, player)],
@@ -702,7 +701,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             state.has("Zora Scale", player),
         ])],
         ["piratian captain", "sea of storms past", False, None],
-        ["crescent past waters", OUTSIDE_TAG + "d8", False, lambda state: all([
+        ["crescent past waters", Outside("d8"), False, lambda state: all([
             state.has("Tokay Eyeball", player),
             ooa_can_break_pot(state, player),
             ooa_can_dive(state, player),
@@ -727,7 +726,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
                 ])
             ]),
         ])],
-        [OUTSIDE_TAG + "d8", "sea of no return", False, lambda state: ooa_has_glove(state, player)],
+        [Outside("d8"), "sea of no return", False, lambda state: ooa_has_glove(state, player)],
 
         
         #GASHA PLOT LOGIC
@@ -863,7 +862,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
 
     if options.linked_heros_cave.value > 0:
         labrynna_logic.extend([
-            ["lynna city", OUTSIDE_TAG + "d11", False, None]
+            ["lynna city", Outside("d11"), False, None]
         ])
 
     if options.secret_locations:
@@ -888,8 +887,8 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
 
     if not options.vasu_ring_checks_requirement["disable_entirely"]:
         labrynna_logic.extend([
-            [INSIDE_TAG + "vasu's shop", "vasu's rupee ring gift", False, lambda state: ooa_has_rupees(state, player, options.vasu_ring_checks_requirement["rupee_requirement_for_rupee_ring_check"])],
-            [INSIDE_TAG + "vasu's shop", "vasu's slayers ring gift", False, lambda state: all([
+            [Inside("vasu's shop"), "vasu's rupee ring gift", False, lambda state: ooa_has_rupees(state, player, options.vasu_ring_checks_requirement["rupee_requirement_for_rupee_ring_check"])],
+            [Inside("vasu's shop"), "vasu's slayers ring gift", False, lambda state: all([
                 ooa_can_kill_normal_enemy(state, player),
                 ])
             ]

@@ -3,6 +3,17 @@ from ...Options import *
 from ..Constants import DUNGEON_NAMES, ESSENCES, GASHA_SPOT_REGIONS
 
 
+from ..Entrances import INSIDE_TAG, OUTSIDE_TAG
+
+# Entrances predicates ############################################################
+# Quick function to make the entrance logic easier to read and write
+def Inside(entrance:str):
+    return INSIDE_TAG + entrance
+
+def Outside(entrance:str):
+    return OUTSIDE_TAG + entrance
+
+
 # Items predicates ############################################################
 
 def ooa_has_sword(state: CollectionState, player: int, accept_biggoron: bool = True):
