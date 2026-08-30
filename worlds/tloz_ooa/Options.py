@@ -235,12 +235,12 @@ class OracleOfAgesEntranceRandomizer_SurfaceUnderwaterPairing(Toggle):
 
 class OracleOfAgesEntranceRandomizer_DungeonPairing(Toggle):
     """
-    When ER is set to all entrances and this is enabled, dungeon entrance will be grouped together and randomized with each other 
+    When ER is set to all entrances and this is enabled, dungeon entrances will be grouped together and randomized with each other
     instead of being randomized with the others without taking in consideration Past/Present & Surface/Underwater pairing 
     (i.e. even if Past/Present & Surface/Underwater pairing are enabled, D7 can always pair itself with D8)
     If not enabled, dungeon follow the Past/Present & Surface/Underwater pairing like any other entrances
     """
-    display_name = "ER Surface/Underwater Pairing"
+    display_name = "ER Dungeon/Standard Door Pairing"
 
     default = False
 

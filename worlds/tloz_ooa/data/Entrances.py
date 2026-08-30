@@ -598,7 +598,7 @@ WARPS_DATA = {
         "present": False,
     },
     #theres just a lot of seemingly random holes
-    "past west ridge hole cave": {
+    "cave left of treasure hunting goron": {
         #   "outside_warp": ,   #room 1 0b, t47
         #   "inside_warp": ,    #room 5 E6
         "present": False,
@@ -675,13 +675,13 @@ WARPS_DATA = {
         #   "inside_warp": ,    #room 3 CF
         "present": False,
     },
-    "past underwater zora duplex left door": {
+    "past underwater zora duplex left": {
         #   "outside_warp": ,   #room 3 D0, t21
         #   "inside_warp": ,    #room 3 E5
         "present": False,
         "is_underwater": True,
     },
-    "past underwater zora duplex right door": {
+    "past underwater zora duplex right": {
         #   "outside_warp": ,   #room 3 D0, t23
         #   "inside_warp": ,    #room 3 E6
         "present": False,
