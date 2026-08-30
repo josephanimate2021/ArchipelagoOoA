@@ -88,7 +88,7 @@ WARPS_DATA = {
         "present": True,
     },
     # the house where the kid gets frozen in time on the cutscene where veran takes over naryu at the beginning, i dont have a better name for this
-    "house left of mayor's house": {
+    "petrified kid's house": {
         "outside_warp": 0x7620,   #room 0 56
         "inside_warp": 0x7878,    #room 2 0E
         "present": True,
@@ -131,24 +131,6 @@ WARPS_DATA = {
         "present": True,
     },
 
-#    "maku road front": {
-#        "outside_warp": 7708,   #room 0 48
-#        #   "inside_warp": ,    #room 4 04
-#        "present": True,
-#    },
-
-#    "maku road stairs": {
-#       #   "outside_warp": ,   #room 0 38
-#        #   "inside_warp": ,    #room 4 01
-#        "present": True,
-#    },
-
-#    "maku tree hole": {
-#        #   "outside_warp": ,   #room 0 38
-#        #   "inside_warp": ,    #room 5 CF
-#        "present": True,
-#    },
-
     "happy mask shop": {
         "outside_warp": 0x7618,   #room 0 53
         "inside_warp": 0x792C,    #room 2 E6
@@ -182,16 +164,7 @@ WARPS_DATA = {
         #   "inside_warp": ,    #room 2 DF
         "present": True,
     },
-    # putting this here to be a completionist but I don't think this one should be randomized
-    # since the game already cant tell which cave is supposed to be here
-#    "nuun animal cave": {
-#           "outside_warp": ,
-#           "inside_warp": ,
-#        "present": True,
-#    },
-#   nuun ricky inside #room 2 EC
-#   nuun moosh inside #room 2 F4
-#   nuun dimitri inside #room 5 B8
+
     # PRESENT SYMMETRY
     "present top left symmetry house": {
         #   "outside_warp": ,   #room 2 02
@@ -237,23 +210,9 @@ WARPS_DATA = {
         "present": True,
     },
 
-    # added to be completionist, not sure what we want to do for these entrances
-    # since they're not always accessible
-    #potentially keep the keep after beating great moblin,
-    #but move the cave to the right and be a locked door while great
-    #moblin is unbeaten and the stairs to the left over the ledge
-#    "moblin keep left door": {
-#        #   "outside_warp": ,   #room 0 09, t40
-#        #   "inside_warp": ,   #room 2 9F
-#        "present": True,
-#    },
-#    "moblin keep right door": {
-#        #   "outside_warp": ,   #room 0 09, t42
-#        #   "inside_warp": ,   #room 2 9F
-#        "present": True,
-#    },
-#room 2 AE, moblin keep center room; room 2 AF, great moblin arena
-
+    #access from moblin keep always out of logic,
+    # cannot guarantee real entrance not be locked behind itself
+    # through either chest or exit
     "moblin keep sewer stairs": {
         #   "outside_warp": ,   #room 2 09, t40
         #   "inside_warp": ,    #room 5 01
@@ -293,7 +252,7 @@ WARPS_DATA = {
 
     # EASTERN ROLLING RIDGE
     # the cave that becomes treasure hunting goron in the past
-    "empty cave by echoes portal": {
+    "empty cave by echo portal under rock": {
         #   "outside_warp": ,   #room 0 0B
         #   "inside_warp": ,    #room 2 F6
         "present": True,
@@ -339,7 +298,7 @@ WARPS_DATA = {
         #   "inside_warp": ,    #room 3 1E
         "present": True,
     },
-    "present ridge base fairy cave": {
+    "present east ridge base fairy cave": {
         #   "outside_warp": ,   #room 0 3D
         #   "inside_warp": ,    #room 3 4F
         "present": True,
@@ -385,13 +344,13 @@ WARPS_DATA = {
         #   "inside_warp": ,    #room 3 CE
         "present": True,
     },
-    "present underwater zora duplex left door": {
+    "present underwater zora duplex left": {
         #   "outside_warp": ,   #room 2 D0
         #   "inside_warp": ,    #room 3 E3
         "present": True,
         "is_underwater": True,
     },
-    "present underwater zora duplex right door": {
+    "present underwater zora duplex right": {
         #   "outside_warp": ,   #room 2 D0
         #   "inside_warp": ,    #room 3 E4
         "present": True,
@@ -455,7 +414,7 @@ WARPS_DATA = {
 #PAST ENTRANCES
 #LYNNA VILLAGE
 
-    "shooting gallery": {
+    "town shooting gallery": {
         #   "outside_warp": ,   #room 1 58, t30
         #   "inside_warp": ,    #room 2 E9
         "present": False,
@@ -492,23 +451,18 @@ WARPS_DATA = {
         #   "inside_warp": ,    #room 3 FA
         "present": False,
     },
-    #surely we wouldn't be mad enough to do this..... unless?
-    "black tower": {
-        #   "outside_warp": ,   #room 1 76
-        #   "inside_warp": ,    #room 4 E7
-        "present": False,
-    },
+
     "cheval house": {
         #   "outside_warp": ,   #room 1 79
         #   "inside_warp": ,    #room 2 0F
         "present": False,
     },
-    "Rafton's House Left": {
+    "rafton house left": {
         "outside_warp": 0x785c,
         "inside_warp": 0x7880,
         "present": False,
     },
-    "Rafton's House Right": {
+    "rafton's house right": {
         "outside_warp": 0x7860,
         "inside_warp": 0x7884,
         "present": False,
@@ -528,7 +482,7 @@ WARPS_DATA = {
         "present": False,
     },
     #the burnable tree that grants access to the HP
-    "deku forest heart cave tree door": {
+    "deku forest heart cave bush stairs": {
         #   "outside_warp": ,   #room 1 91
         #   "inside_warp": ,    #room 5 B0
         "present": False,
@@ -580,7 +534,7 @@ WARPS_DATA = {
     },
     "tokkey dive spot": {
         #   "outside_warp": ,   #room 1 01
-        #   "inside_warp": ,    #room 5 09
+        #   "inside_warp": ,    #room 7 09
         "present": False,
     },
     "patch cave": {
@@ -588,7 +542,7 @@ WARPS_DATA = {
         #   "inside_warp": ,    #room 3 BE
         "present": False,
     },
-    "restoration wall cave": {
+    "restoration wall base cave": {
         #   "outside_warp": ,   #room 1 43
         #   "inside_warp": ,    #room 3 BF
         "present": False,
@@ -898,3 +852,63 @@ WARPS_DATA = {
         "dungeon": 9,
     }
 }
+
+
+
+
+#    "maku road front": {
+#        "outside_warp": 7708,   #room 0 48
+#        #   "inside_warp": ,    #room 4 04
+#        "present": True,
+#    },
+
+#    "maku road stairs": {
+#       #   "outside_warp": ,   #room 0 38
+#        #   "inside_warp": ,    #room 4 01
+#        "present": True,
+#    },
+
+#    "maku tree hole": {
+#        #   "outside_warp": ,   #room 0 38
+#        #   "inside_warp": ,    #room 5 CF
+#        "present": True,
+#    },
+
+
+
+
+
+    # putting this here to be a completionist but I don't think this one should be randomized
+    # since the game already cant tell which cave is supposed to be here
+#    "nuun animal cave": {
+#           "outside_warp": ,
+#           "inside_warp": ,
+#        "present": True,
+#    },
+#   nuun ricky inside #room 2 EC
+#   nuun moosh inside #room 2 F4
+#   nuun dimitri inside #room 5 B8
+
+    # added to be completionist, not sure what we want to do for these entrances
+    # since they're not always accessible
+    #potentially keep the keep after beating great moblin,
+    #but move the cave to the right and be a locked door while great
+    #moblin is unbeaten and the stairs to the left over the ledge
+#    "moblin keep left door": {
+#        #   "outside_warp": ,   #room 0 09, t40
+#        #   "inside_warp": ,   #room 2 9F
+#        "present": True,
+#    },
+#    "moblin keep right door": {
+#        #   "outside_warp": ,   #room 0 09, t42
+#        #   "inside_warp": ,   #room 2 9F
+#        "present": True,
+#    },
+#room 2 AE, moblin keep center room; room 2 AF, great moblin arena
+
+#    surely we wouldn't be mad enough to do this..... unless?
+#    "black tower": {
+#        #   "outside_warp": ,   #room 1 76
+#        #   "inside_warp": ,    #room 4 E7
+#        "present": False,
+#    },
