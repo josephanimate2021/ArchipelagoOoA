@@ -139,128 +139,134 @@ WARPS_DATA = {
 
     # YOLL GRAVEYARD
     "cheval grave": {
-        #   "outside_warp": ,   #room 0 5B
-        #   "inside_warp": ,    #room 5 BE
+        "outside_warp": 0x768C,   #room 0 5B
+        "inside_warp": 0x7CC4,    #room 5 BE
         "present": True,
     },
     "syrup shop": {
-        #   "outside_warp": ,   #room 0 5D
-        #   "inside_warp": ,    #room 3 ED
+        "outside_warp": 0x762C,   #room 0 5D
+        "inside_warp": 0x7a7c,    #room 3 ED
         "present": True,
     },
     "grave under the tree": {
-        #   "outside_warp": ,   #room 0 8D, t56
-        #   "inside_warp": ,    #room 5 ED
+        "outside_warp": 0x7714,   #room 0 8D, t56
+        "inside_warp": 0x7d78,    #room 5 ED
         "present": True,
     },
     "poe grave": {
-        #   "outside_warp": ,   #room 0 7c
-        #   "inside_warp": ,    #room 2 2E
+        "outside_warp": 0x7640,   #room 0 7c
+        "inside_warp": 0x7888,    #room 2 2E
         "present": True,
     },
     # NUUN HIGHLANDS
     "nuun fairy cave": {
-        #   "outside_warp": ,   #room 0 06
-        #   "inside_warp": ,    #room 2 DF
+        "outside_warp": 0x75e4,   #room 0 06
+        "inside_warp": 0x7918,    #room 2 DF
         "present": True,
     },
 
     # PRESENT SYMMETRY
     "present top left symmetry house": {
-        #   "outside_warp": ,   #room 2 02
-        #   "inside_warp": ,    #room 3 8E
+        "outside_warp": 0x75d4,   #room 0 02
+        "inside_warp": 0x7a08,    #room 3 8E
         "present": True,
     },
     "present top right symmetry house": {
-        #   "outside_warp": ,   #room 2 04
-        #   "inside_warp": ,    #room 3 EA
+        "outside_warp": 0x75d8,   #room 0 04
+        "inside_warp": 0x7a70,    #room 3 EA
         "present": True,
     },
     "present bottom left symmetry house": {
-        #   "outside_warp": ,   #room 2 12
-        #   "inside_warp": ,    #room 3 EB
+        "outside_warp": 0x75dc,   #room 0 12
+        "inside_warp": 0x7a74,    #room 3 EB
         "present": True,
     },
     "present bottom right symmetry house": {
-        #   "outside_warp": ,   #room 2 14
-        #   "inside_warp": ,    #room 3 EC
+        "outside_warp": 0x75e0,   #room 0 14
+        "inside_warp": 0x7a77,    #room 3 EC
         "present": True,
     },
 
     # WESTERN ROLLING RIDGE
     "present goron city lower": {
-        #   "outside_warp": ,   #room 0 28
-        #   "inside_warp": ,    #room 5 B9
+        "outside_warp": 0x7680,   #room 0 28
+        "inside_warp": 0x7cb4,    #room 5 B9
         "present": True,
     },
+
+    #chest stairs at 21 2e 52, deeper stairs at 57 23 52
     "present goron city upper": {
-        #   "outside_warp": ,   #room 0 18, t4
-        #   "inside_warp": ,    #room 5 C0
+        "outside_warp": 0x76c8,   #room 0 18
+        "inside_warp": 0x7cc8,    #room 5 C0
         "present": True,
     },
+
+    #right side inside stairs ID at 2b 2a 52
     "present goron city stairs": {
-        #   "outside_warp": ,   #room 0 18, t20
-        #   "inside_warp": ,    #room 5 C2
+        "outside_warp": 0x76cc,   #room 0 18
+        "inside_warp": 0x7dec,    #room 5 C2
         "present": True,
     },
 
     "present west ridge fairy cave": {
-        #   "outside_warp": ,   #room 0 1B
-        #   "inside_warp": ,    #room 3 3F
+        "outside_warp": 0x76d4,   #room 0 1B
+        "inside_warp": 0x79e0,    #room 3 3F
         "present": True,
     },
 
     #access from moblin keep always out of logic,
     # cannot guarantee real entrance not be locked behind itself
     # through either chest or exit
+    #first sewer room with falling fire, right exit 01 02 73
     "moblin keep sewer stairs": {
-        #   "outside_warp": ,   #room 2 09, t40
-        #   "inside_warp": ,    #room 5 01
+        "outside_warp": 0x76a8,   #room 0 09
+        "inside_warp": 0x7e60,    #room 7 01
         "present": True,
     },
 #moblin keep sewer chest room, room 2 BE
+#staircase back down to side scroller bf 06 72
     "moblin keep sewer exit": {
-        #   "outside_warp": ,   #room 0 0A, t12
-        #   "inside_warp": ,    #room 2 BF
+        "outside_warp": 0x76ac,   #room 0 0A
+        "inside_warp": 0x78fc,    #room 2 BF
         "present": True,
     },
     #the cave directly behind moblin keep
     "cave behind moblin keep front": {
-        #   "outside_warp": ,   #room 2 09, t34
-        #   "inside_warp": ,    #room 5 DA
+        "outside_warp": 0x76a4,   #room 0 09
+        "inside_warp": 0x7d28,    #room 5 DA
         "present": True,
     },
     #the side of the moblin keep connector that takes you to crown dungeon ledge
     "cave behind moblin keep back": {
-        #   "outside_warp": ,   #room 0 0B
-        #   "inside_warp": ,    #room 5 DB
+        "outside_warp": 0x76bc,   #room 0 0B
+        "inside_warp": 0x7d2c,    #room 5 DB
         "present": True,
     },
     # the connector that takes you from crown dungeon ledge to east ridge
     "west to east ridge cave front": {
-        #   "outside_warp": ,   #room 0 0B
-        #   "inside_warp": ,    #room 2 F9
+        "outside_warp": 0x76b8,   #room 0 0B
+        "inside_warp": 0x7964,    #room 2 F9
         "present": True,
-        #right side of screen room 2 f9
     },
     # the connector that takes you from east ridge to crown dungeon ledge
+    # other staircase in room is fb 44 22
     "west to east ridge cave back": {
-        #   "outside_warp": ,   #room 0 1B
-        #   "inside_warp": ,    #room 2 FB
+        "outside_warp": 0x76d0,   #room 0 1B
+        "inside_warp": 0x7970,    #room 2 FB
         "present": True,
     },
 
     # EASTERN ROLLING RIDGE
     # the cave that becomes treasure hunting goron in the past
     "empty cave by echo portal under rock": {
-        #   "outside_warp": ,   #room 0 0B
-        #   "inside_warp": ,    #room 2 F6
+        "outside_warp": 0x76b4,   #room 0 0B
+        #   "inside_warp": 0x,    #room 2 F6
         "present": True,
     },
     # the connector that takes you to the base of east ridge from the top
     "present east ridge upper to lower cave front": {
-        #   "outside_warp": ,   #room 0 0C
-        #   "inside_warp": ,    #room 3 2E
+        #   "outside_warp": 0x,   #room 0 0C
+        #   "inside_warp": 0x,    #room 3 2E
         "present": True,
     },
     # the connector that takes you to the top of east ridge from the base
@@ -894,6 +900,9 @@ WARPS_DATA = {
     #potentially keep the keep after beating great moblin,
     #but move the cave to the right and be a locked door while great
     #moblin is unbeaten and the stairs to the left over the ledge
+
+
+#left door is 44 19 24, right door is 46 1a 24
 #    "moblin keep left door": {
 #        #   "outside_warp": ,   #room 0 09, t40
 #        #   "inside_warp": ,   #room 2 9F
