@@ -7,13 +7,14 @@ from BaseClasses import Tutorial, Region, Location, LocationProgressType
 from Fill import fill_restrictive, FillError
 from Options import Accessibility, OptionError
 from worlds.AutoWorld import WebWorld, World
+import Utils
 from typing import Any, Set, List, Dict, Optional, Tuple, ClassVar, TextIO, Union
 from .Data import *
 from .data.Items import *
 from .Logic import create_connections, apply_self_locking_rules
 from .Options import *
 from .PatchWriter import ooa_create_appp_patch
-from .data import LOCATIONS_DATA
+from .data import LOCATIONS_DATA, ITEMS_DATA
 from .data.Constants import *
 from .data.Regions import REGIONS
 from .Client import GiftsOfKinomiClient  # Unused, but required to register with BizHawkClient
@@ -94,10 +95,6 @@ class GiftsOfKinomiWorld(World):
         return slot_data
 
     def generate_early(self):
-        conflicting_rings = self.options.required_rings.value & self.options.excluded_rings.value
-        if len(conflicting_rings) > 0:
-            raise OptionError("Required Rings and Excluded Rings contain the same element(s)", conflicting_rings)
-        
         self.restrict_non_local_items()
 
         if self.options.shuffle_dungeons == "shuffle":
@@ -237,7 +234,6 @@ class GiftsOfKinomiWorld(World):
     def build_item_pool_dict(self):
         item_pool_dict = {}
         filler_item_count = 0
-        remaining_rings = len({name for name, idata in ITEMS_DATA.items() if "ring" in idata}) - len(self.options.excluded_rings.value)
         for loc_name, loc_data in LOCATIONS_DATA.items():
 
             if "vanilla_item" not in loc_data:
@@ -266,13 +262,6 @@ class GiftsOfKinomiWorld(World):
                 continue
 
             item_name = loc_data['vanilla_item']
-            if "Ring" in item_name:
-                if remaining_rings > 0:
-                    item_name = "Random Ring"
-                    remaining_rings -= 1
-                else:
-                    filler_item_count += 1
-                    continue
 
             item_pool_dict[item_name] = item_pool_dict.get(item_name, 0) + 1
 
@@ -280,19 +269,6 @@ class GiftsOfKinomiWorld(World):
         if self.options.master_keys != GiftsOfKinomiMasterKeys.option_disabled:
             for small_key_name in self.item_name_groups["Master Keys"]:
                 item_pool_dict[small_key_name] = 1
-                filler_item_count -= 1
-
-        # Add the required rings
-        ring_copy = sorted(self.options.required_rings.value.copy())
-        for _ in range(len(ring_copy)):
-            ring_name = f"{ring_copy.pop()}!USEFUL"
-            item_pool_dict[ring_name] = item_pool_dict.get(ring_name, 0) + 1
-
-            if item_pool_dict["Random Ring"] > 0:
-                # Take from set ring pool first
-                item_pool_dict["Random Ring"] -= 1
-            else:
-                # Take from filler after
                 filler_item_count -= 1
 
         # Add as many filler items as required
@@ -315,9 +291,6 @@ class GiftsOfKinomiWorld(World):
         item_pool_dict = self.build_item_pool_dict()
         
         # Create items following the dictionary that was previously constructed
-        if (item_pool_dict.get("Random Ring")):
-            self.create_rings(item_pool_dict["Random Ring"])
-            del item_pool_dict["Random Ring"]
 
         for item_name, quantity in item_pool_dict.items():
             for i in range(quantity):
@@ -331,18 +304,6 @@ class GiftsOfKinomiWorld(World):
                     self.dungeon_items.append(self.create_item(item_name))
                 else:
                     self.multiworld.itempool.append(self.create_item(item_name))        
-
-    def create_rings(self, amount):
-        # Get a subset of as many rings as needed
-        ring_names = [name for name, idata in ITEMS_DATA.items() if "ring" in idata]
-        # Remove excluded rings, and required rings because they'll be added later anyway
-        ring_names = [name for name in ring_names if name not in self.options.required_rings.value and name not in self.options.excluded_rings.value]
-
-        self.random.shuffle(ring_names)
-        del ring_names[amount:]
-        for ring_name in ring_names:
-            self.multiworld.itempool.append(self.create_item(ring_name))
-        self.random_rings_pool = ring_names
 
     def get_pre_fill_items(self):
         return self.pre_fill_items
@@ -399,17 +360,21 @@ class GiftsOfKinomiWorld(World):
             
 
     def get_filler_item_name(self) -> str:
-        FILLER_ITEM_NAMES = [
-            "Rupees (1)", "Rupees (5)", "Rupees (5)", "Rupees (10)", "Rupees (10)",
-            "Rupees (20)", "Rupees (30)",
-            "Gasha Seed", "Gasha Seed",
-            "Potion"
-        ]
+        FILLER_ITEM_NAMES = []
+        for item, details in ITEMS_DATA.items():
+            if details["classification"] == ItemClassification.filler:
+                FILLER_ITEM_NAMES.append(item)
 
         item_name = self.random.choice(FILLER_ITEM_NAMES)
+        print(item_name)
         return item_name
     
     def generate_output(self, output_directory: str):
+        if __debug__:
+            filename = "my_world.puml"
+            logging.debug("Visualizing Regions...")
+            Utils.visualize_regions(self.multiworld.get_region("Menu", self.player), filename)
+            logging.debug("Regions visualization saved at " + Utils.home_path(filename))
         patch = ooa_create_appp_patch(self)
         rom_path = os.path.join(output_directory, f"{self.multiworld.get_out_file_name_base(self.player)}"
                                                   f"{patch.patch_file_ending}")

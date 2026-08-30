@@ -115,7 +115,7 @@ def make_fourCornersCave_logic(player: int):
             kinomi_can_jump_4_wide_pit(state, player),
             kinomi_has_cane(state, player)
         ])],
-        ["d3 20 rupee chest", "d3 bemos region", False, None],
+        ["d3 25 rupee chest", "d3 bemos region", False, None],
         ["d3 bemos region", "d3 bemos and armos chest", False, None],
         ["d3 bemos region", "d3 bommerang chest", False, lambda state: all([
             kinomi_has_small_keys(state, player, 3, 1),
@@ -330,10 +330,9 @@ def make_lostLabrinth_logic(player: int):
         ])],
 
         # LOST LABYRINTH PRESENT GRAVEYARD ENTRANCE ROUTE
-        ["lost labyrinth graveyard entrance", "d2 present small key drop", False, lambda state: kinomi_can_kill_normal_enemy(state, player)],
-        ["lost labyrinth graveyard entrance", "d2 present stairs maze chest", False, None],
-        ["lost labyrinth graveyard entrance", "d2 present miniboss arena", False, lambda state: kinomi_generic_boss_and_miniboss_kill(state, player)],
-        #["lost labyrinth graveyard entrance", "d2 present miniboss arena", False, lambda state: kinomi_generic_boss_and_miniboss_kill(state, player)],
+        ["lost labyrinth forever falls entrance", "d2 present small key drop", False, lambda state: kinomi_can_kill_normal_enemy(state, player)],
+        ["lost labyrinth forever falls entrance", "d2 present stairs maze chest", False, None],
+        ["lost labyrinth forever falls entrance", "d2 present miniboss arena", False, lambda state: kinomi_generic_boss_and_miniboss_kill(state, player)],
         ["d2 present miniboss arena", "d2 present color block puzzle", False, lambda state: all([
             kinomi_has_sword(state, player),
             kinomi_can_jump_pit(state, player)
@@ -378,4 +377,133 @@ def make_tokayTemple_logic(player: int):
         ["d5 chest near slate slots", "d5 miniboss arena", False, None],
         ["d5 miniboss arena", "d5 statue block puzzle 2", False, None],
 
+    ]
+
+def make_crownDungeon_logic(player: int):
+    return [
+        # 0 keys
+        ["kinomi town", "crown dungeon switch A", False, lambda state: all([
+            kinomi_can_kill_normal_enemy(state, player),
+            any([
+                kinomi_can_trigger_switch(state, player),
+                all([
+                    kinomi_option_hard_logic(state, player), # Not hard to reproduce but clearly not instinctive to find.
+                    kinomi_has_bracelet(state, player),
+                ])
+            ])
+        ])],
+        ["crown dungeon switch A", "crown dungeon blue peg chest", False, None],
+        ["crown dungeon switch A", "crown dungeon dark room", False, lambda state: all([
+            kinomi_can_trigger_switch(state, player),
+            any([
+                # Finding the road in the dark room
+                kinomi_has_cane(state, player),
+                all([
+                    kinomi_option_medium_logic(state, player),
+                    any([
+                        kinomi_can_kill_normal_enemy(state, player, False),
+                        kinomi_can_push_enemy(state, player),
+                        kinomi_has_boomerang(state, player),
+                        kinomi_can_use_pegasus_seeds_for_stun(state, player),
+                    ])
+                ])
+            ])
+        ])],
+        ["crown dungeon switch A", "crown dungeon like-like chest", False, lambda state: any([
+            kinomi_can_trigger_far_switch(state, player),
+            all([
+                kinomi_option_hard_logic(state, player), # Not hard to reproduce but clearly not instinctive to find.
+                kinomi_has_bracelet(state, player),
+            ]),
+            all([
+                kinomi_option_hard_logic(state, player),
+                kinomi_can_jump_pit(state, player),
+                any([
+                    kinomi_can_use_ember_seeds(state, player, False),
+                    kinomi_can_use_scent_seeds_for_smell(state, player),
+                    kinomi_can_use_mystery_seeds(state, player),
+                ])
+            ])
+        ])],
+        ["crown dungeon switch A", "crown dungeon eyes chest", False, lambda state: any([
+            kinomi_has_slingshot(state, player),
+            all([
+                kinomi_option_medium_logic(state, player),
+                kinomi_can_use_pegasus_seeds(state, player),
+                kinomi_can_jump_pit(state, player),
+                kinomi_can_use_mystery_seeds(state, player),
+                kinomi_can_toss_ring(state, player)
+            ])
+        ])],
+        ["crown dungeon switch A", "crown dungeon two-statue puzzle", False, lambda state: all([
+            kinomi_can_break_pot(state, player),
+            kinomi_has_cane(state, player),
+            kinomi_can_jump_pit(state, player),
+            any([
+                kinomi_has_slingshot(state, player),
+                kinomi_has_boomerang(state, player),
+                all([
+                    kinomi_option_medium_logic(state, player),
+                    kinomi_can_jump_pit(state, player),
+                    kinomi_has_sword(state, player,False),
+                ]),
+                all([
+                    kinomi_option_hard_logic(state, player),
+                    kinomi_can_jump_pit(state, player),
+                    any([
+                        kinomi_can_use_ember_seeds(state, player, False),
+                        kinomi_can_use_scent_seeds_for_smell(state, player),
+                        kinomi_can_use_mystery_seeds(state, player),
+                    ])
+                ])
+            ])
+        ])],
+        ["crown dungeon switch A", "crown dungeon boss", False, lambda state: all([
+            kinomi_has_boss_key(state, player, 5),
+            kinomi_has_cane(state, player),
+            kinomi_has_sword(state, player),
+        ])],
+
+        # 2 keys
+        ["crown dungeon switch A", "crown dungeon miniboss", False, lambda state: all([
+            kinomi_can_jump_pit(state, player),
+            kinomi_has_bracelet(state, player),
+            kinomi_has_small_keys(state, player, 7, 2), # Require 2 keys to prevent softlock
+        ])],
+        ["crown dungeon miniboss", "crown dungeon crossroads", False, lambda state: all([
+            kinomi_can_kill_normal_enemy(state, player, False),
+            any([
+                kinomi_has_cane(state, player),
+                all([
+                    kinomi_option_hard_logic(state, player),
+                    kinomi_can_jump_pit(state, player), # May need a proper check. Bomb jump ?
+                ]),
+                all([
+                    kinomi_option_hard_logic(state, player),
+                    kinomi_has_sword(state, player),
+                    kinomi_has_cane(state, player),
+                ])
+            ])
+        ])],
+        ["crown dungeon crossroads", "crown dungeon diamond chest", False, lambda state: kinomi_has_cane(state, player)],
+
+        # 5 keys
+        ["crown dungeon switch A", "crown dungeon three-statue puzzle", False, lambda state: all([
+            kinomi_has_cane(state, player),
+            kinomi_has_small_keys(state, player, 7, 5),
+        ])],
+        ["crown dungeon switch A", "crown dungeon six-statue puzzle", False, lambda state: all([
+            kinomi_has_ember_seeds(state, player),
+            kinomi_has_slingshot(state, player),
+            kinomi_has_small_keys(state, player, 7, 5),
+            kinomi_can_jump_pit(state, player),
+        ])],
+        ["crown dungeon crossroads", "crown dungeon red peg chest", False, lambda state: all([
+            kinomi_can_trigger_far_switch(state, player),
+            kinomi_has_small_keys(state, player, 7, 5),
+        ])],
+        ["crown dungeon red peg chest", "crown dungeon owl puzzle", False, lambda state: any([
+            kinomi_option_medium_logic(state, player),
+            kinomi_has_cane(state, player)
+        ])],
     ]

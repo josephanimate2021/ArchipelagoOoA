@@ -42,7 +42,7 @@ DUNGEON_NAMES = [
     "Seasons Shrine",
     "Temple of The Tokay",
     "Lost Labyrinth (Present)",
-    # "Old Crown Dungeon"
+    "Crown Dungeon"
 ]
 
 REGIONS_CONVERSION_TABLE = {
@@ -100,6 +100,7 @@ ITEM_GROUPS = {
         "Small Key (Seasons Shrine)",
         "Small Key (Temple of The Tokay)",
         "Small Key (Lost Labyrinth (Present))",
+        "Small Key (Crown Dungeon)"
     ],
     "Boss Keys": [
         "Boss Key (Summer Villa)",
@@ -108,6 +109,8 @@ ITEM_GROUPS = {
         "Boss Key (Four Corners Cave)",
         "Boss Key (Seasons Shrine)",
         "Boss Key (Temple of The Tokay)",
+        "",
+        "Boss Key (Crown Dungeon)"
     ],
     "Compasses": [
         "Compass (Summer Villa)",
@@ -117,6 +120,7 @@ ITEM_GROUPS = {
         "Compass (Seasons Shrine)",
         "Compass (Temple of The Tokay)",
         "Compass (Lost Labyrinth (Present))",
+        "Compass (Crown Dungeon)"
     ],
     "Dungeon Maps": [
         "Dungeon Map (Summer Villa)",
@@ -126,6 +130,7 @@ ITEM_GROUPS = {
         "Dungeon Map (Seasons Shrine)",
         "Dungeon Map (Temple of The Tokay)",
         "Dungeon Map (Lost Labyrinth (Present))",
+        "Dungeon Map (Crown Dungeon)"
     ],
     "Master Keys": [
         "Master Key (Summer Villa)",
@@ -135,6 +140,7 @@ ITEM_GROUPS = {
         "Master Key (Seasons Shrine)",
         "Master Key (Temple of The Tokay)",
         "Master Key (Lost Labyrinth (Present))",
+        "Master Key (Crown Dungeon)"
     ],
 }
 

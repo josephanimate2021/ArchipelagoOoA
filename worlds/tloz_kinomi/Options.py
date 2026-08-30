@@ -2,8 +2,6 @@ from dataclasses import dataclass
 
 from Options import Choice, DeathLink, DefaultOnToggle, PerGameCommonOptions, Range, Toggle, StartInventoryPool, ItemSet
 
-from .data.Items import ITEMS_DATA
-
 
 class GiftsOfKinomiLogicDifficulty(Choice):
     """
@@ -106,26 +104,6 @@ class GiftsOfKinomiSlateShuffle(Toggle):
     display_name = "Slates Outside Dungeon 8"
 
 
-class OracleOfSeasonsRequiredRings(ItemSet):
-    """
-    Forces a specified set of rings to appear somewhere in the seed.
-    Adding too many rings to this list can cause generation failures.
-    List of ring names can be found here: https://zeldawiki.wiki/wiki/Magic_Ring
-    """
-    display_name = "Required Rings"
-    valid_keys = {name for name, idata in ITEMS_DATA.items() if "ring" in idata}
-
-
-class OracleOfSeasonsExcludedRings(ItemSet):
-    """
-    Forces a specified set of rings to not appear in the seed.
-    List of ring names can be found here: https://zeldawiki.wiki/wiki/Magic_Ring
-    """
-    display_name = "Excluded Rings"
-    default = sorted({name for name, idata in ITEMS_DATA.items() if "ring" in idata and idata["ring"] == "useless"})
-    valid_keys = {name for name, idata in ITEMS_DATA.items() if "ring" in idata}
-
-
 class GiftsOfKinomiPricesFactor(Range):
     """
     A factor (expressed as percentage) that will be applied to all prices inside all shops in the game.
@@ -152,7 +130,5 @@ class GiftsOfKinomiOptions(PerGameCommonOptions):
     keysanity_boss_keys: GiftsOfKinomiBossKeyShuffle
     keysanity_maps_compasses: GiftsOfKinomiMapCompassShuffle
     keysanity_slates: GiftsOfKinomiSlateShuffle
-    required_rings: OracleOfSeasonsRequiredRings
-    excluded_rings: OracleOfSeasonsExcludedRings
     shop_prices_factor: GiftsOfKinomiPricesFactor
     death_link: DeathLink

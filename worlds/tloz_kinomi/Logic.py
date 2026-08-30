@@ -12,17 +12,17 @@ def make_logic_array(player: int):
         make_fourCornersCave_logic(player),
         make_seasonsShrine_logic(player),
         make_lostLabrinth_logic(player),
-        #make_crownDungeon_logic(player),
+        make_crownDungeon_logic(player),
         make_tokayTemple_logic(player),
         #make_makuPath_logic(player),
     ]
 
 def create_connections(multiworld: MultiWorld, player: int):
-    all_logic = make_logic_array(player)
-
     dungeon_entrances = []
     for reg1, reg2 in multiworld.worlds[player].dungeon_entrances.items():
         dungeon_entrances.append([reg1, reg2, True, None])
+
+    all_logic = make_logic_array(player)
     all_logic.append(dungeon_entrances)
 
     # Check unreachable regions

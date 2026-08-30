@@ -200,5 +200,5 @@ def make_overworld_logic(player: int):
         ])],
         ["tokay desert outdoor chests", "tokay desert fourth chest", False, None],
         ["tokay desert", "chest inside first tokay house", False, None],
-        ["d6 chest near slate slots", "chest in bottom screen of graveyard", False, None],
+        ["d5 chest near slate slots", "chest in bottom screen of graveyard", False, None],
     ]
