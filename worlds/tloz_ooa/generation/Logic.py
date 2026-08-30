@@ -34,21 +34,11 @@ def create_connections(world: OracleOfAgesWorld):
 
     
     randomized_entrances_logic = []
-
-    # Shuffled warp
-    for reg1, reg2 in world.randomized_entrances.items():
-        randomized_entrances_logic.append([OUTSIDE_TAG + reg1, INSIDE_TAG + reg2, lambda state: 
-                                   any(
-                                       ooa_can_dive(state, player, True),
-                                       all(
-                                           not(warp_is_underwater(reg1)),
-                                           not(warp_is_underwater(reg2))
-                                       )
-                                    ), None])
         
-    # Not shuffled warp
+    # Crutch so generation still happen for full ER
     for warp_name, warp_data in WARPS_DATA.items():
-        randomized_entrances_logic.append([OUTSIDE_TAG + warp_name, INSIDE_TAG + warp_name, True, None])
+        if world.options.entrance_randomizer == OracleOfAgesEntranceRandomizer.option_all_entrances:
+            randomized_entrances_logic.append([OUTSIDE_TAG + warp_name, INSIDE_TAG + warp_name, True, None])
 
     all_logic.append(randomized_entrances_logic)
 

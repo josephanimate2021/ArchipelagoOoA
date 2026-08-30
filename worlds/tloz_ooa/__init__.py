@@ -45,6 +45,8 @@ class OracleOfAgesWorld(World):
     randomized_entrances: Dict[str, str] = {}
     shop_prices: Dict[str, int]
 
+    entrance_group_lookup: Dict[int, List[int]] = {0:[0]}
+
     settings: ClassVar[OOASettings]
     settings_key = "tloz_ooa_options"
 
@@ -156,6 +158,15 @@ class OracleOfAgesWorld(World):
         #print(unreachable)
         #print(allstate.prog_items)
 
+    # ===================================================================================
+    #
+    # ===================================================================================
+    def connect_entrances(self):
+        from .generation.ConnectEntrances import ooa_create_entrances, ooa_setup_group_pairing, ooa_randomize_and_update_world_for_patch
+        ooa_create_entrances(self)
+        if self.options.entrance_randomizer != OracleOfAgesEntranceRandomizer.option_disabled:
+            ooa_setup_group_pairing(self)
+            ooa_randomize_and_update_world_for_patch(self)
         
 
     # ===================================================================================
@@ -193,10 +204,10 @@ class OracleOfAgesWorld(World):
     # -----------------------------------------------------------------------------------
     def write_spoiler(self, spoiler_handle):
         spoiler_handle.write(f"Apworld version : {self.version()}\n")
-        if self.options.shuffle_dungeons != "vanilla":
+        if self.options.entrance_randomizer != OracleOfAgesEntranceRandomizer.option_disabled:
             spoiler_handle.write(f"Shuffled Entrances ({self.multiworld.player_name[self.player]}):\n")
-            for entrance, dungeon in self.randomized_entrances.items():
-                spoiler_handle.write(f"\t- outside {entrance} --> inside {dungeon}\n")
+            for entrance, target in self.randomized_entrances.items():
+                spoiler_handle.write(f"\t- outside {entrance} --> inside {target}\n")
 
 
     # ===================================================================================
@@ -204,7 +215,6 @@ class OracleOfAgesWorld(World):
     # ===================================================================================
     def fill_slot_data(self) -> dict:
         # Put options that are useful to the tracker inside slot data
-        #print(self.randomized_entrances)
         slot_data = {
             "version": f"{self.version()}",
             "options": self.options.as_dict(

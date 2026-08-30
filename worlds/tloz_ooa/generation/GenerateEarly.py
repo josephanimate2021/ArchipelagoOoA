@@ -27,14 +27,6 @@ def restrict_non_local_items(world: OracleOfAgesWorld):
 # -----------------------------------------------------------------------------------
 #
 # -----------------------------------------------------------------------------------
-def shuffle_entrances(world: OracleOfAgesWorld):
-    shuffled = list(world.randomized_entrances.values())
-    world.random.shuffle(shuffled)
-    world.randomized_entrances = dict(zip(world.randomized_entrances, shuffled))
-
-# -----------------------------------------------------------------------------------
-#
-# -----------------------------------------------------------------------------------
 def randomize_shop_prices(world: OracleOfAgesWorld):
     prices_pool = get_prices_pool()
     world.random.shuffle(prices_pool)
@@ -58,17 +50,6 @@ def ooa_generate_early(world: OracleOfAgesWorld):
     conflicting_rings = world.options.required_rings.value & world.options.excluded_rings.value
     if len(conflicting_rings) > 0:
         raise OptionError("Required Rings and Excluded Rings contain the same element(s)", conflicting_rings)
-    
-    if world.options.shuffle_dungeons:
-        world.randomized_entrances = {}
-        for warpName, warpData in WARPS_DATA.items():
-        #    if "dungeon" not in warpData: # Not a dungeon, skip it
-        #        continue;
-            if "outside_warp" not in warpData or "inside_warp" not in warpData:
-                continue;
-            if "require_option" not in warpData or hasattr(world.options, warpData["require_option"]) and getattr(world.options, warpData["require_option"]):
-                world.randomized_entrances[warpName] = warpName
-        shuffle_entrances(world)
     
     restrict_non_local_items(world)
     randomize_shop_prices(world)
