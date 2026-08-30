@@ -147,6 +147,8 @@ def get_asm_files(patch_data):
         asm_files.append("asm/conditional/d11.yaml")
         if patch_data["options"]["linked_heros_cave"] == OracleOfAgesLinkedHerosCave.option_maku_tree_entrance_right_side:
             asm_files.append("asm/conditional/d11_in_maku_tree_entrance_right_side.yaml")
+    # TODO condition
+    asm_files.append("asm/conditional/shorten_nayru_saved_cinematic.yaml")
     return asm_files
 
 def define_location_constants(assembler: Z80Assembler, patch_data):
