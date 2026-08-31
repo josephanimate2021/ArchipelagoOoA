@@ -180,6 +180,7 @@ REGIONS = [
     "zora NW cave",
     "fairies' coast chest",
     "library island past",
+    "library island present",
     "open library",
     "library present old man",
     "library past old man",

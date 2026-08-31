@@ -235,7 +235,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         ["graveyard door", "graveyard poe trade", True, lambda state: ooa_has_bracelet(state, player)],
         ["graveyard poe trade", Outside("poe grave"), True, None],
         
-        ["graveyard door", Outside("d1"), False, None],
+        ["graveyard door", Outside("d1"), True, None],
 
         # FAIRIES' WOODS
         #######################################
@@ -289,7 +289,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         ["deku forest", "deku forest soldier", False, lambda state: all([
             ooa_can_use_mystery_seeds(state, player)
         ])],
-        ["deku forest", Outside("d2"), False, lambda state: any([
+        ["deku forest", Outside("d2"), True, lambda state: any([
             ooa_has_bombs(state, player),
             ooa_has_bombchus(state, player)
         ])],
@@ -385,14 +385,18 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ])
         ])],
 
-        ["crescent present west", Outside("d3"), False, None],
+        ["crescent present west", Outside("d3"), True, None],
+        ["crescent present west", Outside("southern fairy cave"), True, None],
 
-        ["lynna city", "under crescent island", True, lambda state: ooa_can_dive(state, player)],
+        ["lynna city", Outside("underwater maze cave"), True, lambda state: ooa_can_dive(state, player)],
+        [Inside("underwater maze cave"), "under crescent island", True, None],
         
         ["crescent past east", "crescent present east", True, lambda state: ooa_can_open_portal(state, player)],
         ["crescent past west", "crescent present east", False, lambda state: ooa_can_go_back_to_present(state, player)],
 
-        ["crescent present east", "tokay chef trade", False, lambda state: state.has("Stink Bag", player)],
+        ["crescent present east", Outside("tokay chef house"), False, None],
+        [Inside("tokay chef house"), "tokay chef trade", False, lambda state: state.has("Stink Bag", player)],
+
         ["crescent past west", "crescent island tree", False, lambda state: all([
             any([
                 ooa_has_bracelet(state, player),
@@ -410,6 +414,13 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
                 ])
             ]),
         ])],
+        
+        ["crescent present east", Outside("wild tokay museum"), True, None],
+        [Inside("wild tokay museum"), "wild tokay secret", False, lambda state: all([
+            ooa_has_bracelet(state, player),
+            options.secret_locations
+        ])],
+        ["crescent present east", Outside("present chicken hut"), True, None],
 
         # NUUN
         #######################################
@@ -517,7 +528,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ])
         ])],
         ["symmetry present", "symmetry city tree", False, lambda state: ooa_can_harvest_tree(state, player, False)],
-        ["symmetry present", Outside("d4"), False, lambda state: all([
+        ["symmetry present", Outside("d4"), True, lambda state: all([
             state.has("Tuni Nut", player),
             ooa_can_open_portal(state, player)
         ])],
@@ -727,7 +738,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         ["ridge base present", Outside("greedy old man bush"), False, lambda state: ooa_can_use_ember_seeds(state, player, False)], 
         [Outside("greedy old man bush"), "ridge base present", False, None], # Same question has the grave under a tree
 
-        [Inside("present mermaid cave front porch"), Outside("d6 present"), False, lambda state: state.has("Old Mermaid Key", player)],
+        [Inside("present mermaid cave front porch"), Outside("d6 present"), True, lambda state: state.has("Old Mermaid Key", player)],
         [Inside("present mermaid cave front porch"), "pool in d6 entrance", False, lambda state: ooa_can_dive(state, player)],
         #########
         ["ridge base present", "ridge base past west", False, lambda state: any([
@@ -749,7 +760,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ooa_has_bombchus(state, player)
         ])],
         ["ridge base past west", "ridge diamonds past", False, lambda state: ooa_has_switch_hook(state, player)],
-        ["ridge base past west", Outside("d6 past"), False, lambda state: all([
+        ["ridge base past west", Outside("d6 past"), True, lambda state: all([
             ooa_can_swim(state, player, False),
             state.has("Mermaid Key", player)
         ])],
@@ -865,8 +876,8 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ooa_has_explosives(state, player),
             ooa_can_dive(state, player)
         ])],
-        ["zora village present", Outside("present library"), True, lambda state: state.has("_library_open", player)],
-        ["zora village present", Outside("d7"), False, lambda state: state.has("_got_permission_from_king_zora", player)],
+        ["zora village present", "library island present", True, lambda state: ooa_can_dive(state, player)],
+        ["zora village present", Outside("d7"), True, lambda state: state.has("_got_permission_from_king_zora", player)],
         ["zora village present", "zora's reward", False, lambda state:  state.has("_finished_d7", player),],
 
         [Inside("present zora palace"), "zora palace chest", False, None],     
@@ -881,7 +892,11 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
 
         [Inside("present underwater zora duplex left"), Inside("present underwater zora duplex right"), True, None],
 
-        [Outside("present library"), "library present old man", False, None],
+        ["library island present", "library island past", False, lambda state: ooa_can_switch_past_and_present(state, player)],
+        ["library island past", "library island present", False, lambda state: ooa_can_go_back_to_present(state, player)],
+        
+        ["library island present", Outside("present library"), True, lambda state: state.has("_library_open", player)],
+        [Inside("present library"), "library present old man", False, None],
         #########
         ["zora village present", "zora village past", False, lambda state: ooa_can_switch_past_and_present(state, player)],
         ["zora village past", Outside("past zora palace"), True, None],
@@ -927,7 +942,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         [Outside("present underwater sea of storms cave"), "sea of storms spot", False, lambda state: ooa_has_shovel(state, player)],
         [Inside("present underwater sea of storms cave"), "sea of storms present", True, None],
 
-        ["crescent past waters", Outside("d8"), False, lambda state: all([
+        ["crescent past waters", Outside("d8"), True, lambda state: all([
             state.has("Tokay Eyeball", player),
             ooa_can_break_pot(state, player),
             ooa_can_dive(state, player),
@@ -1041,7 +1056,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
 
     if options.linked_heros_cave.value > 0:
         labrynna_logic.extend([
-            ["lynna city", Outside("d11"), False, None]
+            ["lynna city", Outside("d11"), True, None]
         ])
 
     if options.secret_locations:
@@ -1049,7 +1064,6 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ["goron shooting gallery", "elder secret", False, None],
             ["balloon guy's upgrade", "balloon guy's secret", False, None],
             ["fairies' woods", "fairies' woods secret", False, None],
-            ["crescent present east", "wild tokay secret", False, lambda state: ooa_has_bracelet(state, player)],
             ["symmetry past", "symmetry city secret", False, lambda state: state.has("Tuni Nut", player)],
             ["lynna city", "princess zelda rescue", False, lambda state: ooa_has_feather(state, player)],
         ])
