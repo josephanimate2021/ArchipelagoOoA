@@ -76,7 +76,7 @@ WARPS_DATA = {
 
 #room 2 5F for the single room connector, outside 5e 0e 2 2
 #room 2 7E for the shop
-    "hidden shop": {
+    "hidden entrance shop": {
         "outside_warp": 0x7710,
         "inside_warp": 0x78A0,   #room 2 5E
         "present": True,

@@ -29,7 +29,9 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             state.has("Touching Book", player)
         ])],
         ["forest of time", "starting item", False, None],
-        ["forest of time", "nayru's house", False, None],
+        
+        ["forest of time", Outside("nayru's house"), True, None],
+        [Inside("nayru's house"), "nayru's house harp spot", False, None],
 
         # LYNNA CITY
         #######################################
@@ -40,19 +42,38 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         ["lynna city", "south lynna tree", False, lambda state: ooa_can_harvest_tree(state, player, True)],
         ["lynna city", "lynna city chest", False, lambda state: ooa_can_use_ember_seeds(state, player, False)],
         ["lynna village", "lynna city chest", False, lambda state: ooa_can_go_back_to_present(state, player)],
-        ["lynna city", "lynna shop", False, lambda state: ooa_has_rupees(state, player, 400)],
-        ["lynna village", "hidden shop", False, lambda state: all([
-            ooa_can_go_back_to_present(state, player),
-            ooa_has_rupees(state, player, 400)
-        ])],
+
+        ["lynna city", Outside("lynna city shop"), True, None],
+        [Inside("lynna city shop"), "lynna shop", False, lambda state: ooa_has_rupees(state, player, 400)],
+
+        ["lynna village", Outside("hidden entrance shop"), False, lambda state: ooa_can_go_back_to_present(state, player)],
+        #[Outside("hidden entrance shop"), "lynna village", False, lambda state: ooa_can_open_portal(state, player)], # Might not be necessary, because you can always reach lynna village if you can open portals
+        [Inside("hidden entrance shop"), "hidden shop", False, lambda state: ooa_has_rupees(state, player, 400)],
         
-        ["lynna city", "mayor plen's house", False, lambda state: ooa_has_long_hook(state, player)],
-        ["lynna city", "lynna city comedian trade", False, lambda state: state.has("Cheesy Mustache", player)],
-        ["lynna city", "mamamu yan trade", False, lambda state: state.has("Doggie Mask", player)],
+        ["lynna city", Outside("mayor's house"), True, None],
+        [Inside("mayor's house"), "mayor plen's house", False, lambda state: ooa_has_long_hook(state, player)],
+        [Inside("mayor's house"), "mayor plen's secret", False, lambda state: options.secret_locations],
+
+        ["lynna city", Outside("mamamu yan house"), True, None],
+        [Inside("mamamu yan house"), "mamamu yan trade", False, lambda state: state.has("Doggie Mask", player)],
+        ["mamamu yan trade", "mamamu yan secret", False, lambda state: all([
+            ooa_has_bracelet(state, player),
+            options.secret_locations
+        ])],
 
         ["lynna city", Outside("vasu's shop"), True, None],
         [Inside("vasu's shop"), "vasu's gift", False, None],
         [Inside("vasu's shop"), "vasu's victory ring gift", False, None],
+        
+        ["lynna city", "lynna city comedian trade", False, lambda state: state.has("Cheesy Mustache", player)],
+        
+        ["lynna city", Outside("petrified kid's house"), True, None],
+        ["lynna city", Outside("know it all birds house"), True, None],
+        ["lynna city", Outside("troy's house"), True, None],
+        
+        ["lynna city", Outside("left bippin blossom door"), True, None],
+        ["lynna city", Outside("right bippin blossom door"), True, None],
+        [Inside("left bippin blossom door"), Inside("right bippin blossom door"), True, None],
 
         # LYNNA VILLAGE
         #######################################
@@ -159,15 +180,18 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ]),
         ])],
         ["shore present", "south shore dirt", False, lambda state: ooa_can_remove_dirt(state, player, True)],
-        ["shore present", "balloon guy's gift", False,  lambda state: all([
-            any([
-                ooa_has_seedshooter(state, player),
-                ooa_can_summon_ricky(state, player),
-                state.has("Ricky's Gloves", player),
-                ooa_can_go_back_to_present(state, player), #lynna city and lynna village are connected, so no need to create a different logic                    
-            ]),
-            ooa_can_break_tingle_balloon(state, player)
+
+        #Handling reaching Tingle
+        ["shore present", Outside("lower tingle cave"), True,  None],
+        [Inside("lower tingle cave"), Inside("upper tingle stairs"), False,  lambda state: ooa_has_seedshooter(state, player)],
+        ["shore present", Outside("upper tingle stairs"), False,  lambda state: any([
+            ooa_can_summon_ricky(state, player),
+            state.has("Ricky's Gloves", player),
+            ooa_can_go_back_to_present(state, player), #lynna city and lynna village are connected, so no need to create a different logic                    
         ])],
+        
+        [Outside("upper tingle stairs"), "shore present", False,  lambda state: ooa_can_jump_1_wide_pit(state, player, True)],
+        [Outside("upper tingle stairs"), "balloon guy's gift", False,  lambda state: ooa_can_break_tingle_balloon(state, player)],
         ["balloon guy's gift", "balloon guy's upgrade", False, lambda state: ooa_has_seed_kind_count(state, player, 3)],
         
         # YOLL GRAVEYARD
@@ -215,7 +239,8 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ooa_has_switch_hook(state, player)
         ])],
         ["deku forest", "fairies' woods chest", False, lambda state: ooa_can_go_back_to_present(state, player)],
-        ["fairies' woods", "happy mask salesman trade", False, lambda state: state.has("Tasty Meat", player)],
+        ["fairies' woods", Inside("happy mask shop"), True, None],
+        [Outside("happy mask shop"), "happy mask salesman trade", False, lambda state: state.has("Tasty Meat", player)],
         #["deku forest", "d2 present entrance", False, lambda state: ooa_can_go_back_to_present(state, player)],
 
         # DEKU FOREST
@@ -867,8 +892,6 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
 
     if options.secret_locations:
         labrynna_logic.extend([
-            ["lynna city", "mayor plen's secret", False, None],
-            ["mamamu yan trade", "mamamu yan secret", False, lambda state: ooa_has_bracelet(state, player)],
             ["zora's reward", "king zora's secret", False, lambda state: all([
                 state.has("King Zora's Potion", player),
                 state.has("Fairy Powder", player)

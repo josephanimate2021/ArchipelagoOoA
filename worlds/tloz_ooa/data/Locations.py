@@ -10,8 +10,8 @@ LOCATIONS_DATA = {
         "collect": COLLECT_TOUCH,
         "symbolic_name": "impaGift",
     },
-    "Forest of Time: Nayru's House": {
-        "region_id": "nayru's house",
+    "Forest of Time: Nayru's House Harp Spot": {
+        "region_id": "nayru's house harp spot",
         "vanilla_item": "Progressive Harp",
         "flag_byte": 0xc8ae, 
         "room": 0x03ae,

@@ -5,7 +5,7 @@ REGIONS = [
     #######
     "forest of time",
     "starting item",
-    "nayru's house",
+    "nayru's house harp spot",
     #######
     "lynna city",
     "south lynna tree",
