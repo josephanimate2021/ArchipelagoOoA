@@ -393,7 +393,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "chevalInvention",
     },
     "Yoll Graveyard: Grave Under The Tree": {
-        "region_id": "grave under tree",
+        "region_id": "drop under tree",
         "vanilla_item": "Graveyard Key",
         "flag_byte": 0xcaed,
         "room": 0x05ed,
@@ -828,7 +828,7 @@ LOCATIONS_DATA = {
     },
     ##########################################
     "Rolling Ridge (Present): West Stairs Cave Chest": {
-        "region_id": "ridge west cave",
+        "region_id": "ridge west cave chest",
         "vanilla_item": "Rupees (30)",
         "flag_byte": 0xcac0,
         "room": 0x05c0,
@@ -988,7 +988,7 @@ LOCATIONS_DATA = {
     },
     ##########################################
     "Zora Village (Present): Western Pool Chest": {
-        "region_id": "zora village present",
+        "region_id": "zora village chest",
         "vanilla_item": "Gasha Seed",
         "flag_byte": 0xc7c0,
         "room": 0x02c0,
@@ -1048,7 +1048,7 @@ LOCATIONS_DATA = {
     },
     ##########################################
     "Eyeglass Island Library (Present): Old Man": {
-        "region_id": "library present",
+        "region_id": "library present old man",
         "vanilla_item": "Book of Seals",
         "flag_byte": 0xcac8,
         "room": 0x05c8,
@@ -1057,7 +1057,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "libraryPresent",
     },
     "Eyeglass Island Library (Past): Old Man": {
-        "region_id": "library past",
+        "region_id": "library past old man",
         "vanilla_item": "Fairy Powder",
         "flag_byte": 0xcae4,
         "room": 0x05e4,

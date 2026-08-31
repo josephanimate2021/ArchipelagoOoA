@@ -143,7 +143,7 @@ WARPS_DATA = {
         "inside_warp": 0x7CC4,    #room 5 BE
         "present": True,
     },
-    "syrup shop": {
+    "syrup hut": {
         "outside_warp": 0x762C,   #room 0 5D
         "inside_warp": 0x7a7c,    #room 3 ED
         "present": True,
@@ -218,11 +218,11 @@ WARPS_DATA = {
     # cannot guarantee real entrance not be locked behind itself
     # through either chest or exit
     #first sewer room with falling fire, right exit 01 02 73
-    "moblin keep sewer stairs": {
-        "outside_warp": 0x76a8,   #room 0 09
-        "inside_warp": 0x7e60,    #room 7 01
-        "present": True,
-    },
+    #"moblin keep sewer stairs": {
+    #    "outside_warp": 0x76a8,   #room 0 09
+    #    "inside_warp": 0x7e60,    #room 7 01
+    #    "present": True,
+    #},
 #moblin keep sewer chest room, room 2 BE
 #staircase back down to side scroller bf 06 72
     "moblin keep sewer exit": {
@@ -242,15 +242,15 @@ WARPS_DATA = {
         "inside_warp": 0x7d2c,    #room 5 DB
         "present": True,
     },
-    # the connector that takes you from crown dungeon ledge to east ridge
-    "west to east ridge cave front": {
+    # the connector that takes you from crown dungeon ledge to upper ridge
+    "crown ledge to upper ridge cave front": {
         "outside_warp": 0x76b8,   #room 0 0B
         "inside_warp": 0x7964,    #room 2 F9
         "present": True,
     },
-    # the connector that takes you from east ridge to crown dungeon ledge
+    # the connector that takes you from upper ridge to crown dungeon ledge
     # other staircase in room is fb 44 22
-    "west to east ridge cave back": {
+    "crown ledge to upper ridge cave back": {
         "outside_warp": 0x76d0,   #room 0 1B
         "inside_warp": 0x7970,    #room 2 FB
         "present": True,
@@ -264,26 +264,26 @@ WARPS_DATA = {
         "present": True,
     },
     # the connector that takes you to the base of east ridge from the top
-    "present east ridge upper to lower cave front": {
+    "present east ridge upper to lower cave top": {
         #   "outside_warp": 0x,   #room 0 0C
         #   "inside_warp": 0x,    #room 3 2E
         "present": True,
     },
     # the connector that takes you to the top of east ridge from the base
-    "present east ridge upper to lower cave back": {
+    "present east ridge upper to lower cave base": {
         #   "outside_warp": ,   #room 0 2B
         #   "inside_warp": ,    #room 5 E2
         "present": True,
     },
     #where the dance hall ends up at the very top
-    "northeast cave left": {
+    "upper ridge present northeast cave left": {
         #   "outside_warp": ,   #room 0 0D
         #   "inside_warp": ,    #room 5 EE
         "present": True,
     },
 
     # needs tune of currents to access, it's inside warp is a one way
-    "northeast cave right entrance": {
+    "upper ridge present northeast cave right": {
         #   "outside_warp": ,   #room 0 0D
         #   "inside_warp": ,    #room 5 EE
         "present": True,
