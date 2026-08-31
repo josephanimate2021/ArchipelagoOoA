@@ -17,10 +17,9 @@ from .. import LOCATIONS_DATA, GiftsOfKinomiMasterKeys
 
 def get_treasure_addr(rom: RomData, item_name: str):
     item_id, item_subid = get_item_id_and_subid(item_name)
-    base_addr = GameboyAddress(0x16, 0x4abf).address_in_rom()
-    addr = base_addr + (item_id * 4)
+    addr = 0x58abf + (item_id * 4)
     if rom.read_byte(addr) & 0x80 != 0:
-        addr = GameboyAddress(0x16, rom.read_word(base_addr + rom.read_word(addr + 1))).address_in_rom() + 20744
+        addr = 0x57dc3 + rom.read_word(addr + 1)
     return addr + (item_subid * 4)
 
 

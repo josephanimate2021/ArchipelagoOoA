@@ -66,7 +66,7 @@
     cp TREASURE_MAKU_SEED
     ret z
     jp $4000    ; interactionCode60
-09/49a6/: jp treasureCollideImmediately
+09/78ec/: jp treasureCollideImmediately
 
 # if var 71 is already nonzero, use that as the collect mode instead of
 # whatever this is.
@@ -82,4 +82,4 @@
     and $07
     ld (de),a
     ret
-16/453e/: call keepNonzeroCollectMode
+16/7FE7/: call keepNonzeroCollectMode

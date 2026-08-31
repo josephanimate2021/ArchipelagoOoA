@@ -41,11 +41,13 @@ ITEMS_DATA = {
     },
     "Biggoron's Sword": {
         'classification': ItemClassification.progression,
-        'id': 0x0c
+        'id': 0x0c,
+        'subid': 0x01
     },
     "Bombchus (10)": {
         'classification': ItemClassification.progression,
-        'id': 0x0d
+        'id': 0x0d,
+        'subid': 0x01
     },
     "Progressive Slingshot": {
         'classification': ItemClassification.progression,

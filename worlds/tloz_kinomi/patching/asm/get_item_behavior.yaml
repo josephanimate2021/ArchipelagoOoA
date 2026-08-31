@@ -29,34 +29,4 @@
     
     @done:
     jp $458e    ; mode4
-3f/45bc/: call extendedModeD
-
-# Put a fixed limit on @modea to prevent max health to go past the point where
-# HUD starts looking buggy. Heart Containers being the only ones to use that mode,
-# we can do a pretty hacky fix without worrying too much
-3f//incrementAndCapMaxHealth: |
-    ld a,(de)
-    add a,c
-    cp $40
-    jr c,@belowMax
-    ld a,$40
-    @belowMax:
-    ld (de),a
-    ret
-#3f/45aa/: jp incrementAndCapMaxHealth
-
-# Put a limit on Satchel level to prevent HUD from going bonkers by having
-# a wrong max seed count. This edits @mode2 and checks satchel level for
-# all few items sharing this mode (for simplicity's sake).
-3f//incrementAndCapSatchelLevel: |
-    ld a,(de)
-    inc a
-    ld (de),a
-    
-    ld a,(wSeedSatchelLevel)
-    cp $03
-    jr c,@belowMax
-    ld a,$03
-    @belowMax:
-    ret
-#3f/458e/: jp incrementAndCapSatchelLevel
+3f/45d1/: call extendedModeD
