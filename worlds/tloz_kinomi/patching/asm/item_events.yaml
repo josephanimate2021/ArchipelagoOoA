@@ -35,16 +35,3 @@
     pop de
     pop bc
     ret
-
-0b//mapleTradeHandle: |
-    ld a,GLOBALFLAG_TRADE_MAPLE
-    call setGlobalFlag
-    ld bc,locations.mapleTrade
-    call createTreasure
-    ret
-
-0b/4b6f/: |
-    nop
-    nop
-    nop
-    call mapleTradeHandle

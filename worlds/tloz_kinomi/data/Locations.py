@@ -638,7 +638,8 @@ LOCATIONS_DATA = {
         "flag_byte": 0xcab6,
         "room": 0x05b6,
         "collect": COLLECT_POOF,
-        "dungeon": 0
+        "dungeon": 0,
+        "symbolic_name": "d0Boss"
     },
     "Summer Villa (B1F): Sword Chest": {
         "region_id": "d0 sword chest",
@@ -800,6 +801,7 @@ LOCATIONS_DATA = {
         "room": 0x0413,
         "dungeon": 1,
         "collect": COLLECT_POOF,
+        "symbolic_name": "d1Boss"
     },
     "Spirit's Grotto: Final Gift": {
         "region_id": "d1 final gift",
@@ -1034,6 +1036,7 @@ LOCATIONS_DATA = {
         "room": 0x0564,
         "dungeon": 3,
         "collect": COLLECT_POOF,
+        "symbolic_name": "d3Boss"
     },
     "Four Corners Cave: Final Gift": {
         "region_id": "d3 final gift",
@@ -1170,7 +1173,8 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca3a, 
         "room": 0x053a,
         "dungeon": 4,
-        "collect": COLLECT_POOF
+        "collect": COLLECT_POOF,
+        "symbolic_name": "d4Boss"
     },
     "Seasons Shrine: Din's Gift": {
         "region_id": "din's gift",
@@ -1284,6 +1288,7 @@ LOCATIONS_DATA = {
         "room": 0x04bf,
         "dungeon": 5,
         "collect": COLLECT_POOF,
+        "symbolic_name": "d5Boss"
     },
     "Temple of the Tokay (1F): Nayru's Gift": {
         "region_id": "nayru's gift",

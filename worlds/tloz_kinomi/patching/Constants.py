@@ -403,29 +403,14 @@ DEFINES = {
 
 ASM_FILES = [
     "asm/util.yaml",
-    #"asm/new_game.yaml",
-    #"asm/collect.yaml",
     #"asm/location.yaml",
-    # "asm/map_menu.yaml",
-    #"asm/progressives.yaml",
     #"asm/static_items.yaml",
-    #"asm/multi.yaml",
-    #"asm/rings.yaml",
-    #"asm/misc.yaml",
-    #"asm/new_treasures.yaml",
-    #"asm/item_events.yaml",
-    #"asm/boss_items.yaml",
-    #"asm/keysanity.yaml",
-    #"asm/shops_handling.yaml",
+    "asm/shops_handling.yaml",
+    "asm/boss_items.yaml",
     #"asm/gfx.yaml",
-    "asm/get_item_behavior.yaml",
     #"asm/vars.yaml",
-    #"asm/remove_item_on_use.yaml",
-    #"asm/dungeon_shuffle.yaml",
     "asm/file_select_custom_string.yaml",
-    #"asm/impa_refill.yaml",
     #"asm/combat_difficulty.yaml",
-    #"asm/compass_chimes.yaml",
 ]
 
 RUPEE_VALUES = {
