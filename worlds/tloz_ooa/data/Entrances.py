@@ -260,81 +260,82 @@ WARPS_DATA = {
     # the cave that becomes treasure hunting goron in the past
     "empty cave by echo portal under rock": {
         "outside_warp": 0x76b4,   #room 0 0B
-        #   "inside_warp": 0x,    #room 2 F6
+        "inside_warp": 0x7958,    #room 2 F6
         "present": True,
     },
     # the connector that takes you to the base of east ridge from the top
+    # other warp is at 2e 4f 52
     "present east ridge upper to lower cave top": {
-        #   "outside_warp": 0x,   #room 0 0C
-        #   "inside_warp": 0x,    #room 3 2E
+        "outside_warp": 0x75f0,   #room 0 0C
+        "inside_warp": 0x79d0,    #room 3 2E
         "present": True,
     },
     # the connector that takes you to the top of east ridge from the base
     "present east ridge upper to lower cave base": {
-        #   "outside_warp": ,   #room 0 2B
-        #   "inside_warp": ,    #room 5 E2
+        "outside_warp": 0x7684,   #room 0 2B
+        "inside_warp": 0x7d48,    #room 5 E2
         "present": True,
     },
     #where the dance hall ends up at the very top
+    #stairs that leads to chest at 0x7D7C
     "upper ridge present northeast cave left": {
-        #   "outside_warp": ,   #room 0 0D
-        #   "inside_warp": ,    #room 5 EE
+        "outside_warp": 0x76c0,   #room 0 0D
+        "inside_warp": 0x77d80,    #room 5 EE
         "present": True,
     },
 
     # needs tune of currents to access, it's inside warp is a one way
     "upper ridge present northeast cave right": {
-        #   "outside_warp": ,   #room 0 0D
-        #   "inside_warp": ,    #room 5 EE
+        "outside_warp": 0x76c4,   #room 0 0D
+        "inside_warp": 0x7d84,    #room 5 EE
         "present": True,
     },
 
 #room 2 ED present graceful goron room
+# upstairs id at 0x797c
     "present goron dance hall lower": {
-        #   "outside_warp": ,   #room 0 3D
-        #   "inside_warp": ,    #room 2 FD
+        "outside_warp": 0x76f8,   #room 0 3D
+        "inside_warp": 0x7978,    #room 2 FD
         "present": True,
     },
-
-
 
 #room 3 4E, room outside big bang game; room 3 3E, big bang game
     "present goron dance hall middle": {
-        #   "outside_warp": ,   #room 0 1C
-        #   "inside_warp": ,    #room 3 1E
+        "outside_warp": 0x76d8,   #room 0 1C
+        "inside_warp": 0x79c0,    #room 3 1E
         "present": True,
     },
     "present east ridge base fairy cave": {
-        #   "outside_warp": ,   #room 0 3D
-        #   "inside_warp": ,    #room 3 4F
+        "outside_warp": 0x76fc,   #room 0 3D
+        "inside_warp": 0x79e8,    #room 3 4F
         "present": True,
     },
     "present mermaid cave front porch": {
-        #   "outside_warp": ,   #room 0 3C
-        #   "inside_warp": ,    #room 1 0E
+        "outside_warp": 0x7688,   #room 0 3C
+        "inside_warp": 0x774c,    #room 1 0E
         "present": True,
     },
 #room 3 0E, door mat chest
 
 
     "greedy old man bush": {
-        #   "outside_warp": ,   #room 0 4D
-        #   "inside_warp": ,    #room 2 4E
+        "outside_warp": 0x7614,   #room 0 4D
+        "inside_warp": 0x7898,    #room 2 4E
         "present": True,
     },
     "empty cave left of target carts": {
-        #   "outside_warp": ,   #room 0 1C
-        #   "inside_warp": ,    #room 3 5F
+        "outside_warp": 0x76dc,   #room 0 1C
+        "inside_warp": 0x79f0,    #room 3 5F
         "present": True,
     },
     "empty cave right of target carts": {
-        #   "outside_warp": ,   #room 0 1D
-        #   "inside_warp": ,    #room 3 5E
+        "outside_warp": 0x76e4,   #room 0 1D
+        "inside_warp": 0x79ec,    #room 3 5E
         "present": True,
     },
     "target carts": {
-        #   "outside_warp": ,   #room 0 1D
-        #   "inside_warp": ,    #room 5 D8
+        "outside_warp": 0x76e0,   #room 0 1D
+        "inside_warp": 0x7d24,    #room 5 D8
         "present": True,
     },
 #PRESENT LYNNA SEAS
