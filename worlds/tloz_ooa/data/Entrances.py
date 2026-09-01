@@ -516,44 +516,49 @@ WARPS_DATA = {
     },
 #PAST TALUS + SYMMETRY
     "past top left symmetry house": {
-        #   "outside_warp": 0x7,   #room 1 02
-        #   "inside_warp": 0x7,    #room 3 6E
+        "outside_warp": 0x7750,   #room 1 02
+        "inside_warp": 0x79f4,    #room 3 6E
         "present": False,
     },
     "past top right symmetry house": {
-        #   "outside_warp": 0x7,   #room 1 04
-        #   "inside_warp": 0x7,    #room 3 6F
+        "outside_warp": 0x7770,   #room 1 04
+        "inside_warp": 0x79f8,    #room 3 6F
         "present": False,
     },
     "past bottom left symmetry house": {
-        #   "outside_warp": 0x7,   #room 1 12
-        #   "inside_warp": 0x7,    #room 3 7E
+        "outside_warp": 0x7774,   #room 1 12
+        "inside_warp": 0x79fc,    #room 3 7E
         "present": False,
     },
     "past bottom right symmetry house": {
-        #   "outside_warp": 0x7,   #room 1 14
-        #   "inside_warp": 0x7,    #room 3 7F
+        "outside_warp": 0x777c,   #room 1 14
+        "inside_warp": 0x7a00,    #room 3 7F
         "present": False,
     },
+
+    #stairs to basement, left = 93 34 22 and right = 9b 35 22
     "symmetry town hall": {
-        #   "outside_warp": 0x7,   #room 1 13
-        #   "inside_warp": 0x7,    #room 5 F6
+        "outside_warp": 0x7778,   #room 1 13
+        "inside_warp": 0x7da4,    #room 5 F6
         "present": False,
         #basement room 2 e8
     },
-    "tokkey dive spot": {
-        #   "outside_warp": 0x7,   #room 1 01
-        #   "inside_warp": 0x7,    #room 7 09
-        "present": False,
-    },
+#no warp data associated with it on 01
+#    "tokkey dive spot": {
+#        #   "outside_warp": 0x7,   #room 1 01
+#        #   "inside_warp": 0x7,    #room 7 09
+#        "present": False,
+#    },
+
+    #stairs to restoration ceremony - 0x7a28
     "patch cave": {
-        #   "outside_warp": 0x7,   #room 1 23
-        #   "inside_warp": 0x7,    #room 3 BE
+        "outside_warp": 0x778c,   #room 1 23
+        "inside_warp": 0x7a2c,    #room 3 BE
         "present": False,
     },
     "restoration wall base cave": {
-        #   "outside_warp": 0x7,   #room 1 43
-        #   "inside_warp": 0x7,    #room 3 BF
+        "outside_warp": 0x77a8,   #room 1 43
+        "inside_warp": 0x7a30,    #room 3 BF
         "present": False,
     },
 #AMBI'S PALACE
