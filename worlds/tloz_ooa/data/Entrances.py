@@ -340,81 +340,83 @@ WARPS_DATA = {
     },
 #PRESENT LYNNA SEAS
     "present underwater sea of storms cave": {
-        #   "outside_warp": ,   #room 2 B7
-        #   "inside_warp": ,    #room 3 E8
+        "outside_warp": 0x78ec,   #room 2 B7
+        "inside_warp": 0x7a68,    #room 3 E8
         "present": True,
         "is_underwater": True,
         "require_option": "Secret Locations"
     },
     "present drifting island house": {
-        #   "outside_warp": ,   #room 0 C5
-        #   "inside_warp": ,    #room 3 CE
+        "outside_warp": 0x7650,   #room 0 C5
+        "inside_warp": 0x7a40,    #room 3 CE
         "present": True,
     },
     "present underwater zora duplex left": {
-        #   "outside_warp": ,   #room 2 D0
-        #   "inside_warp": ,    #room 3 E3
+        "outside_warp": 0x79a4,   #room 2 D0
+        "inside_warp": 0xa54,    #room 3 E3
         "present": True,
         "is_underwater": True,
     },
     "present underwater zora duplex right": {
-        #   "outside_warp": ,   #room 2 D0
-        #   "inside_warp": ,    #room 3 E4
+        "outside_warp": 0x79a8,   #room 2 D0
+        "inside_warp": 0x7a58,    #room 3 E4
         "present": True,
         "is_underwater": True,
     },
     "present underwater zora house": {
-        #   "outside_warp": ,   #room 2 C1
-        #   "inside_warp": ,    #room 3 DE
+        "outside_warp": 0x7904,   #room 2 C1
+        "inside_warp": 0x7a4c,    #room 3 DE
         "present": True,
         "is_underwater": True,
     },
+
+    #throne room stairs 0x7d94
     "present zora palace": {
-        #   "outside_warp": ,   #room 2 A1
-        #   "inside_warp": ,    #room 5 AC
+        "outside_warp": 0x78e0,   #room 2 A1
+        "inside_warp": 0x7d90,    #room 5 AC
         "present": True,
         "is_underwater": True,
     },
     #bombable cave in the top left of zora village above water
     "zora crypt cave": {
-        #   "outside_warp": ,   #room 0 A0
-        #   "inside_warp": ,    #room 5 C7
+        "outside_warp": 0x7690,   #room 0 A0
+        "inside_warp": 0x7ce8,    #room 5 C7
         "present": True,
     },
     "present fairy queen cave": {
-        #   "outside_warp": ,   #room 0 A3
-        #   "inside_warp": ,    #room 3 EE
+        "outside_warp": 0x7648,   #room 0 A3
+        "inside_warp": 0x7a80,    #room 3 EE
         "present": True,
     },
     "present library": {
-        #   "outside_warp": ,   #room 0 A5
-        #   "inside_warp": ,    #room 5 D0
+        "outside_warp": 0x7694,   #room 0 A5
+        "inside_warp": 0x7d08,    #room 5 D0
         "present": True,
     },
 #PRESENT CRESCENT
     "southern fairy cave": {
-        #   "outside_warp": ,   #room 0 DA
-        #   "inside_warp": ,    #room 3 F6
+        "outside_warp": 0x7658,   #room 0 DA
+        "inside_warp": 0x7a88,    #room 3 F6
         "present": True,
     },
     "wild tokay museum": {
-        #   "outside_warp": ,   #room 0 BD
-        #   "inside_warp": ,    #room 2 E5
+        "outside_warp": 0x764c,   #room 0 BD
+        "inside_warp": 0x7928,    #room 2 E5
         "present": True,
     },
     "present chicken hut": {
-        #   "outside_warp": ,   #room 0 CD
-        #   "inside_warp": ,    #room 2 CF
+        "outside_warp": 0x7654,   #room 0 CD
+        "inside_warp": 0x790c,    #room 2 CF
         "present": True,
     },
     "tokay chef house": {
-        #   "outside_warp": ,   #room 0 DD
-        #   "inside_warp": ,    #room 2 3F
+        "outside_warp": 0x765c,   #room 0 DD
+        "inside_warp": 0x7894,    #room 2 3F
         "present": True,
     },
     "underwater maze cave": {
-        #   "outside_warp": ,   #room 2 BA
-        #   "inside_warp": ,    #room 3 FD
+        "outside_warp": 0x78f0,   #room 2 BA
+        "inside_warp": 0x7aa0,    #room 3 FD
         "present": True,
         "is_underwater": True,
     },
