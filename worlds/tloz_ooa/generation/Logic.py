@@ -36,9 +36,9 @@ def create_connections(world: OracleOfAgesWorld):
     randomized_entrances_logic = []
         
     # Crutch so generation still happen for full ER
-    for warp_name, warp_data in WARPS_DATA.items():
-        if world.options.entrance_randomizer == OracleOfAgesEntranceRandomizer.option_all_entrances:
-            randomized_entrances_logic.append([OUTSIDE_TAG + warp_name, INSIDE_TAG + warp_name, True, None])
+    #for warp_name, warp_data in WARPS_DATA.items():
+    #    if world.options.entrance_randomizer == OracleOfAgesEntranceRandomizer.option_all_entrances:
+    #        randomized_entrances_logic.append([OUTSIDE_TAG + warp_name, INSIDE_TAG + warp_name, True, None])
 
     all_logic.append(randomized_entrances_logic)
 
