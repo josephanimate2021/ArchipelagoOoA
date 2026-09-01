@@ -36,7 +36,8 @@ LOCATIONS_DATA = {
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc808,
         "room": 0x0308,
-        "collect": COLLECT_TOUCH
+        "collect": COLLECT_TOUCH,
+        "static_item": True
     },
     # -----
     "Kinomi Town: Shop #1": {
@@ -115,7 +116,8 @@ LOCATIONS_DATA = {
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc711,
         "room": 0x0011,
-        "collect": COLLECT_DROP
+        "collect": COLLECT_DROP,
+        "static_item": True
     },
     "Forever Falls: Kill Enemies inside Cave": {
         "region_id": "forever falls cave",
@@ -630,7 +632,8 @@ LOCATIONS_DATA = {
         "flag_byte": 0xcab8,
         "room": 0x05b8,
         "collect": COLLECT_TOUCH,
-        "dungeon": 0
+        "dungeon": 0,
+        "static_item": True
     },
     "Summer Villa (B1F): Boss": {
         "region_id": "d0 boss",

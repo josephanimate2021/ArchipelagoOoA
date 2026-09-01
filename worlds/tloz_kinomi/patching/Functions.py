@@ -48,14 +48,9 @@ def alter_treasures(rom: RomData):
     # not drops (see asm/seasons/bomb_bag_behavior)
     set_treasure_data(rom, "Bombs (10)", None, None, 0x90)
 
-
-def get_asm_files(patch_data):
-    asm_files = ASM_FILES.copy()
-    if get_settings()["tloz_kinomi_options"]["qol_quick_flute"]:
-        asm_files.append("asm/conditional/quick_flute.yaml")
-    return asm_files
-
 def define_location_constants(assembler: Z80Assembler, patch_data):
+    staticItemsReplacementsTable = []
+    
     for location_name, location_data in LOCATIONS_DATA.items():
         if "symbolic_name" not in location_data:
             continue
@@ -66,13 +61,22 @@ def define_location_constants(assembler: Z80Assembler, patch_data):
         else:
             item_name = location_data["vanilla_item"]
 
-        if item_name == "Flute":
-            item_name = COMPANIONS[patch_data["options"]["animal_companion"]] + "'s Flute"
-
         item_id, item_subid = get_item_id_and_subid(item_name)
+        item_wholeid = (item_id << 8) + item_subid
         assembler.define_byte(f"locations.{symbolic_name}.id", item_id)
         assembler.define_byte(f"locations.{symbolic_name}.subid", item_subid)
-        assembler.define_word(f"locations.{symbolic_name}", (item_id << 8) + item_subid)
+        assembler.define_word(f"locations.{symbolic_name}", item_wholeid)
+
+        if "static_item" in location_data:
+            rooms = location_data["room"]
+            if not isinstance(rooms, list):
+                rooms = [rooms]
+            for room in rooms:
+                room_id = room & 0xFF
+                group = room >> 8
+                staticItemsReplacementsTable.extend([group, room_id, 0x05])
+
+    assembler.add_floating_chunk("staticItemsReplacementsTable", staticItemsReplacementsTable)
 
         
 def define_option_constants(assembler: Z80Assembler, patch_data):
@@ -140,10 +144,8 @@ def write_chest_contents(rom: RomData, patch_data):
     This puts the item described in the patch data inside each chest in the game.
     """
     for location_name, location_data in LOCATIONS_DATA.items():
-        if ('collect' not in location_data or 'room' not in location_data or location_data['collect'] != COLLECT_CHEST) and location_name != "Ridge Bush Cave":
+        if ('collect' not in location_data or 'room' not in location_data or location_data['collect'] != COLLECT_CHEST):
             continue
-        if location_name == "Nuun Highlands Cave":
-            chest_addr = rom.get_chest_addr(location_data['room'][patch_data["options"]["animal_companion"]])
         else:
             chest_addr = rom.get_chest_addr(location_data['room'])
         item_name = patch_data["locations"][location_name]
@@ -341,14 +343,8 @@ def set_file_select_text(assembler: Z80Assembler, slot_name: str):
         else:
             return 0xfc  # All other chars are blank spaces
 
-    row_1 = [char_to_tile(c) for c in f"ARCHIP. {VERSION}"]
-    row_1_left_padding = int((16 - len(row_1)) / 2)
-    row_1_right_padding = int(16 - row_1_left_padding - len(row_1))
-    row_1 = ([0x00] * row_1_left_padding) + row_1 + ([0x00] * row_1_right_padding)
-    row_2 = [char_to_tile(c) for c in slot_name.replace("-", " ").upper()]
-    row_2_left_padding = int((16 - len(row_2)) / 2)
-    row_2_right_padding = int(16 - row_2_left_padding - len(row_2))
-    row_2 = ([0x00] * row_2_left_padding) + row_2 + ([0x00] * row_2_right_padding)
+    row_1 = [char_to_tile(c) for c in f"ARCHIP. {VERSION}".center(16, " ")]
+    row_2 = [char_to_tile(c) for c in slot_name.replace("-", " ").upper().center(16, " ")]
 
     text_tiles = [0x74, 0x31]
     text_tiles.extend(row_1)

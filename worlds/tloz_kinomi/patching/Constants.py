@@ -5,8 +5,8 @@ EOB_ADDR = [
   0x7e7e, # 03 - garbage data here
   0x7ea9, # 04
   0x7fd1, # 05
-  0x7a73, # 06 - garbage data here - 128 bytes reserved for sprite expansion w/ web patcher
-  0x7caa, # 07 - garbage data here
+  0x7fc5, # 06 - garbage data here
+  0x7e5a, # 07 - garbage data here
   0x7f5c, # 08
   0x7def, # 09
   0x7e08, # 0a
@@ -373,6 +373,9 @@ DEFINES = {
     # rom 09
     "interactionCode60":"$4973",
 
+    # rom 10
+    "searchDoubleKey": "$727a",
+
     # rom 16
     "treasureObjectData":"$5332",
 
@@ -404,7 +407,7 @@ DEFINES = {
 ASM_FILES = [
     "asm/util.yaml",
     #"asm/location.yaml",
-    #"asm/static_items.yaml",
+    "asm/static_items.yaml",
     "asm/shops_handling.yaml",
     "asm/boss_items.yaml",
     #"asm/gfx.yaml",

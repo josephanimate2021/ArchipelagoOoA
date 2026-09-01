@@ -25,7 +25,11 @@ def get_item_id_and_subid(item_name: str):
 
 def world_path(file: str = ""):
     apworld_name = "tloz_kinomi"
-    return os.path.join(home_path(f"worlds/{apworld_name}" if os.path.exists(home_path(f"worlds/{apworld_name}")) else f"custom_worlds/{apworld_name}.apworld"), file)
+    return os.path.join(home_path(
+        f"worlds/{apworld_name}" if os.path.exists(home_path(f"worlds/{apworld_name}")) 
+        else f"lib/worlds/{apworld_name}" if os.path.exists(home_path(f"lib/worlds/{apworld_name}")) 
+        else f"custom_worlds/{apworld_name}.apworld"
+    ), file)
 
 
 def hex_str(value, size=1):

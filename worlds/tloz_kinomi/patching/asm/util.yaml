@@ -7,28 +7,6 @@
     cp b
     ret
 
-# searches for a value in a table starting at hl, with an entry matching
-# keys b and subkey c, and values e bytes long. sets c if found. a key of
-# ff ends the table.
-00//searchDoubleKey: |
-    @loop:
-    ldi a,(hl)
-    cp $ff
-    ret z
-    cp b
-    jr nz,@next
-    ldi a,(hl)
-    cp c
-    jr nz,@done
-    scf
-    ret
-    @next:
-    inc hl
-    @done:
-    ld a,e
-    rst 10
-    jr @loop
-
 # increment hl until (hl) equals either register a or ff. returns z if
 # a match was found.
 00//searchValue: |

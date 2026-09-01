@@ -58,7 +58,7 @@ class OoAPatchExtensions(APPatchExtension):
 
         # Parse assembler files, compile them and write the result in the ROM
         print(f"Compiling ASM files...")
-        for file_path in get_asm_files(patch_data):
+        for file_path in ASM_FILES:
             data_loaded = yaml.safe_load(pkgutil.get_data(__name__, file_path))
             for metalabel, contents in data_loaded.items():
                 assembler.add_block(Z80Block(metalabel, contents))
