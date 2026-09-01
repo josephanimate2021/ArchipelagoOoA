@@ -424,46 +424,46 @@ WARPS_DATA = {
 #LYNNA VILLAGE
 
     "town shooting gallery": {
-        #   "outside_warp": ,   #room 1 58, t30
-        #   "inside_warp": ,    #room 2 E9
+        "outside_warp": 0x7854,   #room 1 58
+        "inside_warp": 0x7938,    #room 2 E9
         "present": False,
     },
     "advance shop": {
-        #   "outside_warp": ,   #room 1 58, t33
-        #   "inside_warp": ,    #room 3 FE
+        "outside_warp": 0x7858,   #room 1 58
+        "inside_warp": 0x7aa4,    #room 3 FE
         "present": False,
         "require_option": "Open Advance Shop"
     },
     "postman house": {
-        #   "outside_warp": ,   #room 1 57
-        #   "inside_warp": ,    #room 2 2F
+        "outside_warp": 0x77c0,   #room 1 57
+        "inside_warp": 0x788c,    #room 2 2F
         "present": False,
     },
     "sad boi house": {
-        #   "outside_warp": ,   #room 1 56
-        #   "inside_warp": ,    #room 2 F3
+        "outside_warp": 0x77bc,   #room 1 56
+        "inside_warp": 0x794c,    #room 2 F3
         "present": False,
     },
     "gasha farmer house": {
-        #   "outside_warp": ,   #room 1 45
-        #   "inside_warp": ,    #room 3 FC
+        "outside_warp": 0x77ac,   #room 1 45
+        "inside_warp": 0x7974,    #room 3 FC
         "present": False,
     },
     "toilet hand house": {
-        #   "outside_warp": ,   #room 1 55
-        #   "inside_warp": ,    #room 2 3E
+        "outside_warp": 0x77b8,   #room 1 55
+        "inside_warp": 0x7890,    #room 2 3E
         "present": False,
     },
     #mamamu yan house in the past
     "advisor house": {
-        #   "outside_warp": ,   #room 1 66
-        #   "inside_warp": ,    #room 3 FA
+        "outside_warp": 0x77cc,   #room 1 66
+        "inside_warp": 0x7968,    #room 3 FA
         "present": False,
     },
 
     "cheval house": {
-        #   "outside_warp": ,   #room 1 79
-        #   "inside_warp": ,    #room 2 0F
+        "outside_warp": 0x77e0,   #room 1 79
+        "inside_warp": 0x787c,    #room 2 0F
         "present": False,
     },
     "rafton house left": {
@@ -480,107 +480,107 @@ WARPS_DATA = {
     #the cave with the heart piece on a ledge,
     # the stairs at the beginning of the forest
     "deku forest heart cave stairs": {
-        #   "outside_warp": ,   #room 1 74
-        #   "inside_warp": ,    #room 5 B2
+        "outside_warp": 0x77dc,   #room 1 74
+        "inside_warp": 0x7ca4,    #room 5 B2
         "present": False,
     },
     #the cave with 3 push blocks in front of a chest
     "deku forest push block cave stairs": {
-        #   "outside_warp": ,   #room 1 72
-        #   "inside_warp": ,    #room 5 B3
+        "outside_warp": 0x77d8,   #room 1 72
+        "inside_warp": 0x7ca8,    #room 5 B3
         "present": False,
     },
     #the burnable tree that grants access to the HP
     "deku forest heart cave bush stairs": {
-        #   "outside_warp": ,   #room 1 91
-        #   "inside_warp": ,    #room 5 B0
+        "outside_warp": 0x77e4,   #room 1 91
+        "inside_warp": 0x7ca0,    #room 5 B0
         "present": False,
     },
     #stairs that lead to the mystery seed tree
     "mystery seed cave front stairs": {
-        #   "outside_warp": ,   #room 1 71
-        #   "inside_warp": ,    #room 5 b5
+        "outside_warp": 0x77d4,   #room 1 71
+        "inside_warp": 0x7cb0,    #room 5 b5
         "present": False,
     },
     #stairs that lead to the cheap shield deku scrub
     "mystery seed cave back left stairs": {
-        #   "outside_warp": ,   #room 1 70, t21
-        #   "inside_warp": ,    #room 5 B4, t21
+        "outside_warp": 0x7864,   #room 1 70
+        "inside_warp": 0x7dbc,    #room 5 B4, t21
         "present": False,
     },
     #stairs that lead to the mystery seed tree
     "mystery seed cave back right stairs": {
-        #   "outside_warp": ,   #room 1 70, t34
-        #   "inside_warp": ,    #room 5 B4, t-alot
+        "outside_warp": 0x7868,   #room 1 70
+        "inside_warp": 0x7dc0,    #room 5 B4, t-alot
         "present": False,
     },
 #PAST TALUS + SYMMETRY
     "past top left symmetry house": {
-        #   "outside_warp": ,   #room 1 02
-        #   "inside_warp": ,    #room 3 6E
+        #   "outside_warp": 0x7,   #room 1 02
+        #   "inside_warp": 0x7,    #room 3 6E
         "present": False,
     },
     "past top right symmetry house": {
-        #   "outside_warp": ,   #room 1 04
-        #   "inside_warp": ,    #room 3 6F
+        #   "outside_warp": 0x7,   #room 1 04
+        #   "inside_warp": 0x7,    #room 3 6F
         "present": False,
     },
     "past bottom left symmetry house": {
-        #   "outside_warp": ,   #room 1 12
-        #   "inside_warp": ,    #room 3 7E
+        #   "outside_warp": 0x7,   #room 1 12
+        #   "inside_warp": 0x7,    #room 3 7E
         "present": False,
     },
     "past bottom right symmetry house": {
-        #   "outside_warp": ,   #room 1 14
-        #   "inside_warp": ,    #room 3 7F
+        #   "outside_warp": 0x7,   #room 1 14
+        #   "inside_warp": 0x7,    #room 3 7F
         "present": False,
     },
     "symmetry town hall": {
-        #   "outside_warp": ,   #room 1 13
-        #   "inside_warp": ,    #room 5 F6
+        #   "outside_warp": 0x7,   #room 1 13
+        #   "inside_warp": 0x7,    #room 5 F6
         "present": False,
         #basement room 2 e8
     },
     "tokkey dive spot": {
-        #   "outside_warp": ,   #room 1 01
-        #   "inside_warp": ,    #room 7 09
+        #   "outside_warp": 0x7,   #room 1 01
+        #   "inside_warp": 0x7,    #room 7 09
         "present": False,
     },
     "patch cave": {
-        #   "outside_warp": ,   #room 1 23
-        #   "inside_warp": ,    #room 3 BE
+        #   "outside_warp": 0x7,   #room 1 23
+        #   "inside_warp": 0x7,    #room 3 BE
         "present": False,
     },
     "restoration wall base cave": {
-        #   "outside_warp": ,   #room 1 43
-        #   "inside_warp": ,    #room 3 BF
+        #   "outside_warp": 0x7,   #room 1 43
+        #   "inside_warp": 0x7,    #room 3 BF
         "present": False,
     },
 #AMBI'S PALACE
     "palace front door": {
-        #   "outside_warp": ,   #room 1 06
-        #   "inside_warp": ,    #room 5 D2
+        #   "outside_warp": 0x7,   #room 1 06
+        #   "inside_warp": 0x7,    #room 5 D2
         "present": False,
     },
     "palace left door": {
-        #   "outside_warp": ,   #room 1 05
-        #   "inside_warp": ,    #room 5 D1
+        #   "outside_warp": 0x7,   #room 1 05
+        #   "inside_warp": 0x7,    #room 5 D1
         "present": False,
     },
     "palace right door": {
-        #   "outside_warp": ,   #room 1 07
-        #   "inside_warp": ,    #room 5 D3
+        #   "outside_warp": 0x7,   #room 1 07
+        #   "inside_warp": 0x7,    #room 5 D3
         "present": False,
     },
     "palace secret entrance": {
-        #   "outside_warp": ,   #room 1 27
-        #   "inside_warp": ,    #room 1 E2
+        #   "outside_warp": 0x7,   #room 1 27
+        #   "inside_warp": 0x7,    #room 1 E2
         "present": False,
     },
 #PAST WEST RIDGE
     "old zora cave": {
-        #   "outside_warp": ,   #room 1 5A
-        #   "inside_warp": ,    #room 2 F5
+        #   "outside_warp": 0x7,   #room 1 5A
+        #   "inside_warp": 0x7,    #room 2 F5
         "present": False,
     },
     "past goron city lower": {
@@ -597,192 +597,190 @@ WARPS_DATA = {
     },
     #cave with two different sized square holes
     "past behind moblin keep cave": {
-        #   "outside_warp": ,   #room 1 09
-        #   "inside_warp": ,    #room 5 E5
+        #   "outside_warp": 0x7,   #room 1 09
+        #   "inside_warp": 0x7,    #room 5 E5
         "present": False,
     },
     "treasure hunting goron cave": {
-        #   "outside_warp": ,   #room 1 0b, t34
-        #   "inside_warp": ,    #room 2 f7
+        #   "outside_warp": 0x7,   #room 1 0b, t34
+        #   "inside_warp": 0x7,    #room 2 f7
         "present": False,
     },
     #theres just a lot of seemingly random holes
     "cave left of treasure hunting goron": {
-        #   "outside_warp": ,   #room 1 0b, t47
-        #   "inside_warp": ,    #room 5 E6
+        #   "outside_warp": 0x7,   #room 1 0b, t47
+        #   "inside_warp": 0x7,    #room 5 E6
         "present": False,
     },
 #PAST EAST RIDGE
     "goron face bomb cave": {
-        #   "outside_warp": ,   #room 1 0d
-        #   "inside_warp": ,    #room 2 FC
+        #   "outside_warp": 0x7,   #room 1 0d
+        #   "inside_warp": 0x7,    #room 2 FC
         "present": False,
     },
     #since you're intended to come from the
     #bottom to reach the top, that's how im labeling this cave
     #cave from past east ridge base to past east ridge upper
     "east ridge lower to upper cave front": {
-        #   "outside_warp": ,   #room 1 2b
-        #   "inside_warp": ,    #room 5 E0
+        #   "outside_warp": 0x7,   #room 1 2b
+        #   "inside_warp": 0x7,    #room 5 E0
         "present": False,
     },
     #cave from past east ridge upper to east ridge base
     "east ridge lower to upper cave back": {
-        #   "outside_warp": ,   #room 1 0c
-        #   "inside_warp": ,    #room 3 2F
+        #   "outside_warp": 0x7,   #room 1 0c
+        #   "inside_warp": 0x7,    #room 3 2F
         "present": False,
     },
     "past mermaid cave front porch": {
-        #   "outside_warp": ,   #room 1 3c
-        #   "inside_warp": ,    #room 3 0F
+        #   "outside_warp": 0x7,   #room 1 3c
+        #   "inside_warp": 0x7,    #room 3 0F
         "present": False,
     },
-
-
 
 #room 2 EF, graceful goron past
     "past goron dance hall lower": {
-        #   "outside_warp": ,   #room 1 3D
-        #   "inside_warp": ,    #room 2 FF
+        #   "outside_warp": 0x7,   #room 1 3D
+        #   "inside_warp": 0x7,    #room 2 FF
         "present": False,
     },
     "past goron dance hall middle": {
-        #   "outside_warp": ,   #room 1 1C
-        #   "inside_warp": ,    #room 3 1F
+        #   "outside_warp": 0x7,   #room 1 1C
+        #   "inside_warp": 0x7,    #room 3 1F
         "present": False,
     },
     "goron shooting gallery": {
-        #   "outside_warp": ,   #room 1 1D
-        #   "inside_warp": ,    #room 3 E7
+        #   "outside_warp": 0x7,   #room 1 1D
+        #   "inside_warp": 0x7,    #room 3 E7
         "present": False,
     },
     "past east ridge fairy cave": {
-        #   "outside_warp": ,   #room 1 2D
-        #   "inside_warp": ,    #room 2 F8
+        #   "outside_warp": 0x7,   #room 1 2D
+        #   "inside_warp": 0x7,    #room 2 F8
         "present": False,
     },
     "generous old man bush": {
-        #   "outside_warp": ,   #room 1 4D
-        #   "inside_warp": ,    #room 3 E9
+        #   "outside_warp": 0x7,   #room 1 4D
+        #   "inside_warp": 0x7,    #room 3 E9
         "present": False,
     },
 #PAST LYNNA SEAS
     "past underwater sea of storms cave": {
-        #   "outside_warp": ,   #room 3 C7
-        #   "inside_warp": ,    #room 3 FF
+        #   "outside_warp": 0x7,   #room 3 C7
+        #   "inside_warp": 0x7,    #room 3 FF
         "present": False,
         "is_underwater": True,
     },
     "past underwater drifting island cave": {
-        #   "outside_warp": ,   #room 3 C5
-        #   "inside_warp": ,    #room 2 4F
+        #   "outside_warp": 0x7,   #room 3 C5
+        #   "inside_warp": 0x7,    #room 2 4F
         "present": False,
         "is_underwater": True,
     },
     "past drifting island house": {
-        #   "outside_warp": ,   #room 1 C5
-        #   "inside_warp": ,    #room 3 CF
+        #   "outside_warp": 0x7,   #room 1 C5
+        #   "inside_warp": 0x7,    #room 3 CF
         "present": False,
     },
     "past underwater zora duplex left": {
-        #   "outside_warp": ,   #room 3 D0, t21
-        #   "inside_warp": ,    #room 3 E5
+        #   "outside_warp": 0x7,   #room 3 D0, t21
+        #   "inside_warp": 0x7,    #room 3 E5
         "present": False,
         "is_underwater": True,
     },
     "past underwater zora duplex right": {
-        #   "outside_warp": ,   #room 3 D0, t23
-        #   "inside_warp": ,    #room 3 E6
+        #   "outside_warp": 0x7,   #room 3 D0, t23
+        #   "inside_warp": 0x7,    #room 3 E6
         "present": False,
         "is_underwater": True,
     },
     "past underwater zora house": {
-        #   "outside_warp": ,   #room 3 C1
-        #   "inside_warp": ,    #room 3 DF
+        #   "outside_warp": 0x7,   #room 3 C1
+        #   "inside_warp": 0x7,    #room 3 DF
         "present": False,
         "is_underwater": True,
     },
     "past zora palace": {
-        #   "outside_warp": ,   #room 3 A1
-        #   "inside_warp": ,    #room 5 AE
+        #   "outside_warp": 0x7,   #room 3 A1
+        #   "inside_warp": 0x7,    #room 5 AE
         "present": False,
         "is_underwater": True,
     },
 
     "past fairy queen cave": {
-        #   "outside_warp": ,   #room 1 A3
-        #   "inside_warp": ,    #room 3 EF
+        #   "outside_warp": 0x7,   #room 1 A3
+        #   "inside_warp": 0x7,    #room 3 EF
         "present": False,
     },
     "past library": {
-        #   "outside_warp": ,   #room 1 A5
-        #   "inside_warp": ,    #room 5 EC
+        #   "outside_warp": 0x7,   #room 1 A5
+        #   "inside_warp": 0x7,    #room 5 EC
         "present": False,
     },
 #PAST CRESCENT
     "lost shield tokay cave": {
-        #   "outside_warp": ,   #room 1 D9
-        #   "inside_warp": ,    #room 5 E9
+        #   "outside_warp": 0x7,   #room 1 D9
+        #   "inside_warp": 0x7,    #room 5 E9
         "present": False,
     },
     "hero trials cave": {
-        #   "outside_warp": ,   #room 1 BA
-        #   "inside_warp": ,    #room 5 F9
+        #   "outside_warp": 0x7,   #room 1 BA
+        #   "inside_warp": 0x7,    #room 5 F9
         "present": False,
     },
     "sword tokay cave": {
-        #   "outside_warp": ,   #room 1 BB
-        #   "inside_warp": ,    #room 5 CA
+        #   "outside_warp": 0x7,   #room 1 BB
+        #   "inside_warp": 0x7,    #room 5 CA
         "present": False,
     },
     "flipper tokay cave stairs": {
-        #   "outside_warp": ,   #room 1 BC
-        #   "inside_warp": ,    #room 5 CC
+        #   "outside_warp": 0x7,   #room 1 BC
+        #   "inside_warp": 0x7,    #room 5 CC
         "present": False,
     },
     "flipper tokay bomb cave": {
-        #   "outside_warp": ,   #room 1 CB
-        #   "inside_warp": ,    #room 5 CC
+        #   "outside_warp": 0x7,   #room 1 CB
+        #   "inside_warp": 0x7,    #room 5 CC
         "present": False,
     },
     "crescent pot grotto right": {
-        #   "outside_warp": ,   #room 1 DB
-        #   "inside_warp": ,    #room 5 CD
+        #   "outside_warp": 0x7,   #room 1 DB
+        #   "inside_warp": 0x7,    #room 5 CD
         "present": False,
     },
     "crescent pot grotto left": {
-        #   "outside_warp": ,   #room 1 DA
-        #   "inside_warp": ,    #room 5 CD
+        #   "outside_warp": 0x7,   #room 1 DA
+        #   "inside_warp": 0x7,    #room 5 CD
         "present": False,
     },
     "long hook pot cave": {
-        #   "outside_warp": ,   #room 1 DD
-        #   "inside_warp": ,    #room 5 F7
+        #   "outside_warp": 0x7,   #room 1 DD
+        #   "inside_warp": 0x7,    #room 5 F7
         "present": False,
     },
     "past chicken hut stairs": {
-        #   "outside_warp": ,   #room 1 CD, t11
-        #   "inside_warp": ,    #room 2 CE
+        #   "outside_warp": 0x7,   #room 1 CD, t11
+        #   "inside_warp": 0x7,    #room 2 CE
         "present": False,
     },
     "past chicken hut front": {
-        #   "outside_warp": ,   #room 1 CD, t32
-        #   "inside_warp": ,    #room 2 E3
+        #   "outside_warp": 0x7,   #room 1 CD, t32
+        #   "inside_warp": 0x7,    #room 2 E3
         "present": False,
     },
     "wild tokay game": {
-        #   "outside_warp": ,   #room 1 BD
-        #   "inside_warp": ,    #room 2 DE
+        #   "outside_warp": 0x7,   #room 1 BD
+        #   "inside_warp": 0x7,    #room 2 DE
         "present": False,
     },
     "tokay shop": {
-        #   "outside_warp": ,   #room 1 AD
-        #   "inside_warp": ,    #room 2 E4
+        #   "outside_warp": 0x7,   #room 1 AD
+        #   "inside_warp": 0x7,    #room 2 E4
         "present": False,
     },
     "underwater hero trials cave": {
-        #   "outside_warp": ,   #room 3 8C
-        #   "inside_warp": ,    #room 7 08 because sidescroller
+        #   "outside_warp": 0x7,   #room 3 8C
+        #   "inside_warp": 0x7,    #room 7 08 because sidescroller
         "present": False,
         "is_underwater": True,
     },
