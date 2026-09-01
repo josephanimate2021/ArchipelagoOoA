@@ -31,6 +31,7 @@ REGIONS = [
     "rescue nayru",
     "rafton's raft",
     "d0 entrance",
+    "build raft",
     #######
     "maku tree",
     "maku seed",
@@ -104,6 +105,7 @@ REGIONS = [
     "symmetry city tree",
     #######
     "symmetry past",
+    "place tuni nut",
     "symmetry city secret",
     "symmetry city brother",
     "tokkey's composition",

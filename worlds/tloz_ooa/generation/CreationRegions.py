@@ -66,6 +66,10 @@ def create_events(world: OracleOfAgesWorld):
 
     create_event(world,"ridge move vine seed", "_access_cart")
     
+    create_event(world,"build raft", "_raft_built")
+    
+    create_event(world,"place tuni nut", "_tuni_nut_placed")
+    
     create_event(world,"sea cleaned", "_sea_cleaned")
     create_event(world,"king zora's saved", "_saved_king_zora")
     create_event(world,"king zora's permission", "_got_permission_from_king_zora")

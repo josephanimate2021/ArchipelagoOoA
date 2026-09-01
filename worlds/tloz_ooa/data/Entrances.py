@@ -468,7 +468,7 @@ WARPS_DATA = {
         "inside_warp": 0x7880,
         "present": False,
     },
-    "rafton's house right": {
+    "rafton house right": {
         "outside_warp": 0x7860,
         "inside_warp": 0x7884,
         "present": False,
@@ -618,13 +618,13 @@ WARPS_DATA = {
     #since you're intended to come from the
     #bottom to reach the top, that's how im labeling this cave
     #cave from past east ridge base to past east ridge upper
-    "east ridge lower to upper cave front": {
+    "east ridge lower to upper cave top": {
         #   "outside_warp": ,   #room 1 2b
         #   "inside_warp": ,    #room 5 E0
         "present": False,
     },
     #cave from past east ridge upper to east ridge base
-    "east ridge lower to upper cave back": {
+    "east ridge lower to upper cave base": {
         #   "outside_warp": ,   #room 1 0c
         #   "inside_warp": ,    #room 3 2F
         "present": False,
@@ -727,7 +727,7 @@ WARPS_DATA = {
         #   "inside_warp": ,    #room 5 F9
         "present": False,
     },
-    "sword tokay cave": {
+    "crystal tokay cave": {
         #   "outside_warp": ,   #room 1 BB
         #   "inside_warp": ,    #room 5 CA
         "present": False,
