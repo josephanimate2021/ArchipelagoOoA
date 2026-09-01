@@ -149,7 +149,7 @@ WARPS_DATA = {
         "present": True,
     },
     "grave under the tree": {
-        "outside_warp": 0x7714,   #room 0 8D, t56
+        "outside_warp": 0x771C,   #room 0 8D, t56
         "inside_warp": 0x7d78,    #room 5 ED
         "present": True,
     },
@@ -183,7 +183,7 @@ WARPS_DATA = {
     },
     "present bottom right symmetry house": {
         "outside_warp": 0x75e0,   #room 0 14
-        "inside_warp": 0x7a77,    #room 3 EC
+        "inside_warp": 0x7a78,    #room 3 EC
         "present": True,
     },
 
@@ -280,14 +280,14 @@ WARPS_DATA = {
     #stairs that leads to chest at 0x7D7C
     "upper ridge present northeast cave left": {
         "outside_warp": 0x76c0,   #room 0 0D
-        "inside_warp": 0x77d80,    #room 5 EE
+        "inside_warp": 0x7d7c,    #room 5 EE
         "present": True,
     },
 
     # needs tune of currents to access, it's inside warp is a one way
     "upper ridge present northeast cave right": {
         "outside_warp": 0x76c4,   #room 0 0D
-        "inside_warp": 0x7d84,    #room 5 EE
+        "inside_warp": 0x7d80,    #room 5 EE
         "present": True,
     },
 
@@ -446,7 +446,7 @@ WARPS_DATA = {
     },
     "gasha farmer house": {
         "outside_warp": 0x77ac,   #room 1 45
-        "inside_warp": 0x7974,    #room 3 FC
+        "inside_warp": 0x7a9c,    #room 3 FC
         "present": False,
     },
     "toilet hand house": {
@@ -457,7 +457,7 @@ WARPS_DATA = {
     #mamamu yan house in the past
     "advisor house": {
         "outside_warp": 0x77cc,   #room 1 66
-        "inside_warp": 0x7968,    #room 3 FA
+        "inside_warp": 0x7a94,    #room 3 FA
         "present": False,
     },
 
@@ -559,7 +559,7 @@ WARPS_DATA = {
     },
     "restoration wall base cave": {
         "outside_warp": 0x77a8,   #room 1 43
-        "inside_warp": 0x7a30,    #room 3 BF
+        "inside_warp": 0x7a24,    #room 3 AF
         "present": False,
     },
 #AMBI'S PALACE

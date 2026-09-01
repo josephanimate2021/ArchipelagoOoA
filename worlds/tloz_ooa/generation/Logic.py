@@ -43,12 +43,13 @@ def create_connections(world: OracleOfAgesWorld):
     all_logic.append(randomized_entrances_logic)
 
     # Check unreachable regions
-    unused_region = REGIONS.copy()
-    unused_region.remove("Menu")
-    for logic_array in all_logic:
-        for entrance_desc in logic_array:
-            if entrance_desc[1] in unused_region:
-                unused_region.remove(entrance_desc[1])
+    # unused_region = REGIONS.copy()
+    # unused_region.remove("Menu")
+    # for logic_array in all_logic:
+    #     for entrance_desc in logic_array:
+    #         if entrance_desc[1] in unused_region:
+    #             unused_region.remove(entrance_desc[1])
+    # print(unused_region)
 
     # Create connections
     for logic_array in all_logic:
