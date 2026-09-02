@@ -660,8 +660,12 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
 
         ["symmetry past", "symmetry city heartpiece", False, lambda state: ooa_can_go_back_to_present(state, player)],
 
-        ["symmetry past", Outside("tokkey dive spot"), False, lambda state: ooa_can_swim(state, player, False)],
-        [Inside("tokkey dive spot"), "tokkey's composition", False, lambda state: all([
+        #["symmetry past", Outside("tokkey dive spot"), True, lambda state: ooa_can_swim(state, player, False)],
+        #[Inside("tokkey dive spot"), "tokkey's composition", False, lambda state: all([
+        #    ooa_can_swim(state, player, False),
+        #    ooa_can_open_portal(state, player)
+        #])],
+        ["symmetry past", "tokkey's composition", False, lambda state: all([
             ooa_can_swim(state, player, False),
             ooa_can_open_portal(state, player)
         ])],

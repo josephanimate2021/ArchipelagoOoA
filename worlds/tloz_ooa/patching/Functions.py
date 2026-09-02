@@ -414,8 +414,20 @@ def write_seed_tree_content(rom: RomData, patch_data):
 def define_underwater_warp_arraywarps(assembler: Z80Assembler, rom: RomData, patch_data):
     warp_matchings = patch_data["randomized_entrances"]
     # +2 because we only use the 2 last byte of the 4 warp bytes
-    outside_values = {name: rom.read_word(GameboyAddress(0x04, warp["outside_warp"]).address_in_rom()) for name, warp in WARPS_DATA.items() if "outside_warp" in warp}
-    inside_values = {name: rom.read_word(GameboyAddress(0x04, warp["inside_warp"]).address_in_rom()) for name, warp in WARPS_DATA.items() if "inside_warp" in warp}
+    outside_values = {}
+    inside_values = {}
+    for name, warp in WARPS_DATA.items():
+        if "outside_warp" in warp and "inside_warp" in warp:
+            
+            if type(warp["outside_warp"]) is int:
+                outside_values[name] = rom.read_word(GameboyAddress(0x04, warp["outside_warp"]).address_in_rom())
+            else:
+                outside_values[name] = rom.read_word(GameboyAddress(0x04, warp["outside_warp"][0]).address_in_rom())
+
+            if type(warp["inside_warp"]) is int:
+                inside_values[name] = rom.read_word(GameboyAddress(0x04, warp["inside_warp"]).address_in_rom())
+            else:
+                inside_values[name] = rom.read_word(GameboyAddress(0x04, warp["inside_warp"][0]).address_in_rom())
     
     underwater_warp_table = []
 
@@ -437,8 +449,19 @@ def define_underwater_warp_arraywarps(assembler: Z80Assembler, rom: RomData, pat
 def set_dungeon_warps(rom: RomData, patch_data):
     warp_matchings = patch_data["randomized_entrances"]
     # +2 because we only use the 2 last byte of the 4 warp bytes
-    outside_values = {name: rom.read_word(GameboyAddress(0x04, warp["outside_warp"]).address_in_rom()) for name, warp in WARPS_DATA.items() if "outside_warp" in warp}
-    inside_values = {name: rom.read_word(GameboyAddress(0x04, warp["inside_warp"]).address_in_rom()) for name, warp in WARPS_DATA.items() if "inside_warp" in warp}
+    outside_values = {}
+    inside_values = {}
+    for name, warp in WARPS_DATA.items():
+        if "outside_warp" in warp and "inside_warp" in warp:
+            if type(warp["outside_warp"]) is int:
+                outside_values[name] = rom.read_word(GameboyAddress(0x04, warp["outside_warp"]).address_in_rom())
+            else:
+                outside_values[name] = rom.read_word(GameboyAddress(0x04, warp["outside_warp"][0]).address_in_rom())
+
+            if type(warp["inside_warp"]) is int:
+                inside_values[name] = rom.read_word(GameboyAddress(0x04, warp["inside_warp"]).address_in_rom())
+            else:
+                inside_values[name] = rom.read_word(GameboyAddress(0x04, warp["inside_warp"][0]).address_in_rom())
 
     # Reading the warp desting table group addresses. Useful for essence warp back.
     warp_dest_table = []
@@ -447,13 +470,21 @@ def set_dungeon_warps(rom: RomData, patch_data):
     
     # Apply warp matchings expressed in the patch 
     for outside_name, inside_name in warp_matchings.items():
-        outside_warp_addr: int = WARPS_DATA[outside_name]["outside_warp"]
-        inside_warp_addr: int = WARPS_DATA[inside_name]["inside_warp"]
+        
+        outside_warp_addresses = [WARPS_DATA[outside_name]["outside_warp"]] if isinstance(WARPS_DATA[outside_name]["outside_warp"], int) else (WARPS_DATA[outside_name]["outside_warp"])
+        inside_warp_addresses = [WARPS_DATA[inside_name]["inside_warp"]] if isinstance(WARPS_DATA[inside_name]["inside_warp"], int) else WARPS_DATA[inside_name]["inside_warp"]
+        
+        print(WARPS_DATA[outside_name]["outside_warp"])
+        print(type(WARPS_DATA[outside_name]["outside_warp"]) is int)
+        print(outside_warp_addresses)
         # 2nd half byte of the high byte is source transition type, it should not be swapped
-        newOutsideValue = (outside_values[inside_name] & 0xF0FF) | (outside_values[outside_name] & 0x0F00)
-        newInsideValue = (inside_values[outside_name] & 0xF0FF) | (inside_values[inside_name] & 0x0F00)
-        rom.write_word(GameboyAddress(0x04, outside_warp_addr).address_in_rom(), newOutsideValue)
-        rom.write_word(GameboyAddress(0x04, inside_warp_addr).address_in_rom(), newInsideValue)
+        for outside_warp_addr in outside_warp_addresses:
+            newOutsideValue = (outside_values[inside_name] & 0xF0FF) | (outside_values[outside_name] & 0x0F00)
+            rom.write_word(GameboyAddress(0x04, outside_warp_addr).address_in_rom(), newOutsideValue)
+
+        for inside_warp_addr in inside_warp_addresses:
+            newInsideValue = (inside_values[outside_name] & 0xF0FF) | (inside_values[inside_name] & 0x0F00)
+            rom.write_word(GameboyAddress(0x04, inside_warp_addr).address_in_rom(), newInsideValue)
         
         if ("dungeon" in WARPS_DATA[inside_name]):
             dungeon_number = WARPS_DATA[inside_name]["dungeon"]
