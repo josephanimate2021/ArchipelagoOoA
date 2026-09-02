@@ -106,12 +106,13 @@ WARPS_DATA = {
         "present": True,
     },
 
-#    "black tower ruins": {
-#        "outside_warp": 0x7638,   #room 0 76
-#        "inside_warp": 0x7b54,    #room 4 E6
-#        "present": True,
-#        "require_option": "Secret Locations"
-#    },
+#stairs to vire 0x7B5C
+    "black tower ruins": {
+        "outside_warp": 0x7638,   #room 0 76
+        "inside_warp": [0x7B54, 0x7B58],    #room 4 E6
+        "present": True,
+        "require_option": "Secret Locations"
+    },
 
     "troy's house": {
         "outside_warp": 0x760C,   #room 0 45
@@ -643,148 +644,163 @@ WARPS_DATA = {
     },
 
 #room 2 EF, graceful goron past
+    #staircase upstairs 0x7984, ff 4b 52
     "past goron dance hall lower": {
         "outside_warp": 0x77a4,   #room 1 3D
-        #   "inside_warp": 0x7,    #room 2 FF
+        "inside_warp": 0x7980,    #room 2 FF
         "present": False,
     },
+
     "past goron dance hall middle": {
-        #   "outside_warp": 0x7,   #room 1 1C
-        #   "inside_warp": 0x7,    #room 3 1F
+        "outside_warp": 0x7784,   #room 1 1C
+        "inside_warp": 0x79CC,    #room 3 1F
         "present": False,
     },
     "goron shooting gallery": {
-        #   "outside_warp": 0x7,   #room 1 1D
-        #   "inside_warp": 0x7,    #room 3 E7
+        "outside_warp": 0x7788,   #room 1 1D
+        "inside_warp": 0x7A64,    #room 3 E7
         "present": False,
     },
+
     "past east ridge fairy cave": {
-        #   "outside_warp": 0x7,   #room 1 2D
-        #   "inside_warp": 0x7,    #room 2 F8
+        "outside_warp": 0x7798,   #room 1 2D
+        "inside_warp": 0x7960,    #room 2 F8
         "present": False,
     },
     "generous old man bush": {
-        #   "outside_warp": 0x7,   #room 1 4D
-        #   "inside_warp": 0x7,    #room 3 E9
+        "outside_warp": 0x77B0,   #room 1 4D
+        "inside_warp": 0x7A6C,    #room 3 E9
         "present": False,
     },
 #PAST LYNNA SEAS
     "past underwater sea of storms cave": {
-        #   "outside_warp": 0x7,   #room 3 C7
-        #   "inside_warp": 0x7,    #room 3 FF
+        "outside_warp": 0x7A3C,   #room 3 C7
+        "inside_warp": 0x7AA8,    #room 3 FF
         "present": False,
         "is_underwater": True,
     },
     "past underwater drifting island cave": {
-        #   "outside_warp": 0x7,   #room 3 C5
-        #   "inside_warp": 0x7,    #room 2 4F
+        "outside_warp": 0x7A38,   #room 3 C5
+        "inside_warp": 0x789C,    #room 2 4F
         "present": False,
         "is_underwater": True,
     },
     "past drifting island house": {
-        #   "outside_warp": 0x7,   #room 1 C5
-        #   "inside_warp": 0x7,    #room 3 CF
+        "outside_warp": 0x7808,   #room 1 C5
+        "inside_warp": 0x7A44,    #room 3 CF
         "present": False,
     },
     "past underwater zora duplex left": {
-        #   "outside_warp": 0x7,   #room 3 D0, t21
-        #   "inside_warp": 0x7,    #room 3 E5
+        "outside_warp": 0x7AC8,   #room 3 D0
+        "inside_warp": 0x7A5C,    #room 3 E5
         "present": False,
         "is_underwater": True,
     },
     "past underwater zora duplex right": {
-        #   "outside_warp": 0x7,   #room 3 D0, t23
-        #   "inside_warp": 0x7,    #room 3 E6
+        "outside_warp": 0x7ACC,   #room 3 D0
+        "inside_warp": 0x7A60,    #room 3 E6
         "present": False,
         "is_underwater": True,
     },
     "past underwater zora house": {
-        #   "outside_warp": 0x7,   #room 3 C1
-        #   "inside_warp": 0x7,    #room 3 DF
+        "outside_warp": 0x7A34,   #room 3 C1
+        "inside_warp": 0x7A50,    #room 3 DF
         "present": False,
         "is_underwater": True,
     },
+
+    #stairs to throne room 0x7DA0, ae 5f 52
     "past zora palace": {
-        #   "outside_warp": 0x7,   #room 3 A1
-        #   "inside_warp": 0x7,    #room 5 AE
+        "outside_warp": 0x7A1C,   #room 3 A1
+        "inside_warp": 0x7D9C,    #room 5 AE
         "present": False,
         "is_underwater": True,
     },
 
     "past fairy queen cave": {
-        #   "outside_warp": 0x7,   #room 1 A3
-        #   "inside_warp": 0x7,    #room 3 EF
+        "outside_warp": 0x77E8,   #room 1 A3
+        "inside_warp": 0x7A84,    #room 3 EF
         "present": False,
     },
     "past library": {
-        #   "outside_warp": 0x7,   #room 1 A5
-        #   "inside_warp": 0x7,    #room 5 EC
+        "outside_warp": 0x77EC,   #room 1 A5
+        "inside_warp": 0x7D74,    #room 5 EC
         "present": False,
     },
 #PAST CRESCENT
     "lost shield tokay cave": {
-        #   "outside_warp": 0x7,   #room 1 D9
-        #   "inside_warp": 0x7,    #room 5 E9
+        "outside_warp": 0x7814,   #room 1 D9
+        "inside_warp": 0x7D5C,    #room 5 E9
         "present": False,
     },
     "hero trials cave": {
-        #   "outside_warp": 0x7,   #room 1 BA
-        #   "inside_warp": 0x7,    #room 5 F9
+        "outside_warp": 0x77F8,   #room 1 BA
+        "inside_warp": 0x7DB0,    #room 5 F9
         "present": False,
     },
     "crystal tokay cave": {
-        #   "outside_warp": 0x7,   #room 1 BB
-        #   "inside_warp": 0x7,    #room 5 CA
+        "outside_warp": 0x77FC,   #room 1 BB
+        "inside_warp": 0x7D88,    #room 5 CA
         "present": False,
     },
+
+    #if we figure out dive spots, downward stairs at 0x7DF0
     "flipper tokay cave stairs": {
-        #   "outside_warp": 0x7,   #room 1 BC
-        #   "inside_warp": 0x7,    #room 5 CC
+        "outside_warp": 0x7800,   #room 1 BC
+        "inside_warp": 0x7DF4,    #room 5 CC
         "present": False,
     },
     "flipper tokay bomb cave": {
-        #   "outside_warp": 0x7,   #room 1 CB
-        #   "inside_warp": 0x7,    #room 5 CC
+        "outside_warp": 0x780C,   #room 1 CB
+        "inside_warp": 0x7CEC,    #room 5 CC
         "present": False,
     },
+
+    #$cd warpSource7df6 stairs, too lazy to do rn
     "crescent pot grotto right": {
-        #   "outside_warp": 0x7,   #room 1 DB
-        #   "inside_warp": 0x7,    #room 5 CD
+        "outside_warp": 0x781C,   #room 1 DB
+        "inside_warp": 0x7CF8,    #room 5 CD
         "present": False,
     },
     "crescent pot grotto left": {
-        #   "outside_warp": 0x7,   #room 1 DA
-        #   "inside_warp": 0x7,    #room 5 CD
+        "outside_warp": 0x7818,   #room 1 DA
+        "inside_warp": 0x7CF4,    #room 5 CD
         "present": False,
     },
     "long hook pot cave": {
-        #   "outside_warp": 0x7,   #room 1 DD
-        #   "inside_warp": 0x7,    #room 5 F7
+        "outside_warp": 0x7820,   #room 1 DD
+        "inside_warp": 0x7DAC,    #room 5 F7
         "present": False,
     },
+
+    #hut cave stairs to hut back at 0x79A0
     "past chicken hut stairs": {
-        #   "outside_warp": 0x7,   #room 1 CD, t11
-        #   "inside_warp": 0x7,    #room 2 CE
+        "outside_warp": 0x7870,   #room 1 CD
+        "inside_warp": 0x799C,    #room 2 CE
         "present": False,
     },
+
+    #hut back stairs to hut cave at 0x7920
     "past chicken hut front": {
-        #   "outside_warp": 0x7,   #room 1 CD, t32
-        #   "inside_warp": 0x7,    #room 2 E3
+        "outside_warp": 0x786C,   #room 1 CD
+        "inside_warp": 0x791C,    #room 2 E3
         "present": False,
     },
     "wild tokay game": {
-        #   "outside_warp": 0x7,   #room 1 BD
-        #   "inside_warp": 0x7,    #room 2 DE
+        "outside_warp": 0x7804,   #room 1 BD
+        "inside_warp": 0x7914,    #room 2 DE
         "present": False,
     },
     "tokay shop": {
-        #   "outside_warp": 0x7,   #room 1 AD
-        #   "inside_warp": 0x7,    #room 2 E4
+        "outside_warp": 0x77F4,   #room 1 AD
+        "inside_warp": 0x7924,    #room 2 E4
         "present": False,
     },
+
+    #ladder to invisible floor room 0x7 E7C
     "underwater hero trials cave": {
-        #   "outside_warp": 0x7,   #room 3 8C
-        #   "inside_warp": 0x7,    #room 7 08 because sidescroller
+        "outside_warp": 0x7A04,   #room 3 8C
+        "inside_warp": 0x7E80,    #room 7 08 because sidescroller
         "present": False,
         "is_underwater": True,
     },
