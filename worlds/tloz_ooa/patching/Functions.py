@@ -474,9 +474,6 @@ def set_dungeon_warps(rom: RomData, patch_data):
         outside_warp_addresses = [WARPS_DATA[outside_name]["outside_warp"]] if isinstance(WARPS_DATA[outside_name]["outside_warp"], int) else (WARPS_DATA[outside_name]["outside_warp"])
         inside_warp_addresses = [WARPS_DATA[inside_name]["inside_warp"]] if isinstance(WARPS_DATA[inside_name]["inside_warp"], int) else WARPS_DATA[inside_name]["inside_warp"]
         
-        print(WARPS_DATA[outside_name]["outside_warp"])
-        print(type(WARPS_DATA[outside_name]["outside_warp"]) is int)
-        print(outside_warp_addresses)
         # 2nd half byte of the high byte is source transition type, it should not be swapped
         for outside_warp_addr in outside_warp_addresses:
             newOutsideValue = (outside_values[inside_name] & 0xF0FF) | (outside_values[outside_name] & 0x0F00)
