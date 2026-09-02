@@ -353,7 +353,7 @@ WARPS_DATA = {
     },
     "present underwater zora duplex left": {
         "outside_warp": 0x79a4,   #room 2 D0
-        "inside_warp": 0xa54,    #room 3 E3
+        "inside_warp": 0x7a54,    #room 3 E3
         "present": True,
         "is_underwater": True,
     },
