@@ -579,7 +579,7 @@ WARPS_DATA = {
     },
     "palace secret entrance": {
         "outside_warp": 0x7828,   #room 1 27
-        "inside_warp": 0x7D48,    #room 1 E2
+        "inside_warp": 0x782c,    #room 1 E2
         "present": False,
     },
 #PAST WEST RIDGE
@@ -603,7 +603,7 @@ WARPS_DATA = {
     #cave with two different sized square holes
     "past behind moblin keep cave": {
         "outside_warp": 0x7760,   #room 1 09
-        "inside_warp": 0x7928,    #room 5 E5
+        "inside_warp": 0x7d50,    #room 5 E5
         "present": False,
     },
     "treasure hunting goron cave": {
@@ -627,19 +627,19 @@ WARPS_DATA = {
     #bottom to reach the top, that's how im labeling this cave
     #cave from past east ridge base to past east ridge upper
     "east ridge lower to upper cave top": {
-        "outside_warp": 0x7794,   #room 1 2b
-        "inside_warp": 0x7D40,    #room 5 E0
+        "outside_warp": 0x7768,   #room 1 0c
+        "inside_warp": 0x79d8,    #room 3 2F
         "present": False,
     },
     #cave from past east ridge upper to east ridge base
     "east ridge lower to upper cave base": {
-        "outside_warp": 0x7768,   #room 1 0c
-        "inside_warp": 0x788C,    #room 3 2F
+        "outside_warp": 0x7794,   #room 1 2b
+        "inside_warp": 0x7D40,    #room 5 E0
         "present": False,
     },
     "past mermaid cave front porch": {
         "outside_warp": [0x7840,0x7844,0x7848],   #room 1 3c
-        "inside_warp": 0x787C,    #room 3 0F
+        "inside_warp": [0x79b8, 0x79bc],    #room 3 0F
         "present": False,
     },
 
