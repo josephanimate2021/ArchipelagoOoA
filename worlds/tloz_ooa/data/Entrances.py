@@ -543,13 +543,7 @@ WARPS_DATA = {
         "present": False,
         #basement room 2 e8
     },
-    # no warp data associated with it on 01
-    # so it won't be randomized
-    "tokkey dive spot": {
-        #   "outside_warp": 0x7,   #room 1 01
-        #   "inside_warp": 0x7,    #room 7 09
-        "present": False,
-    },
+
 
     #stairs to restoration ceremony - 0x7a28
     "patch cave": {
@@ -563,30 +557,34 @@ WARPS_DATA = {
         "present": False,
     },
 #AMBI'S PALACE
+
+#secret entrance stairs at 7D14, d2 47 12
     "palace front door": {
-        #   "outside_warp": 0x7,   #room 1 06
-        #   "inside_warp": 0x7,    #room 5 D2
+        "outside_warp": 0x7758,   #room 1 06
+        "inside_warp": 0x7D18,    #room 5 D2
         "present": False,
     },
+
+#upstairs stairs at 7D10, D1 0a 13
     "palace left door": {
-        #   "outside_warp": 0x7,   #room 1 05
-        #   "inside_warp": 0x7,    #room 5 D1
+        "outside_warp": 0x7754,   #room 1 05
+        "inside_warp": 0x7D0C,    #room 5 D1
         "present": False,
     },
     "palace right door": {
-        #   "outside_warp": 0x7,   #room 1 07
-        #   "inside_warp": 0x7,    #room 5 D3
+        "outside_warp": 0x775C,   #room 1 07
+        "inside_warp": 0x7D1C,    #room 5 D3
         "present": False,
     },
     "palace secret entrance": {
-        #   "outside_warp": 0x7,   #room 1 27
-        #   "inside_warp": 0x7,    #room 1 E2
+        "outside_warp": 0x7828,   #room 1 27
+        "inside_warp": 0x7D48,    #room 1 E2
         "present": False,
     },
 #PAST WEST RIDGE
     "old zora cave": {
-        #   "outside_warp": 0x7,   #room 1 5A
-        #   "inside_warp": 0x7,    #room 2 F5
+        "outside_warp": 0x77c8,   #room 1 5A
+        "inside_warp": 0x7954,    #room 2 F5
         "present": False,
     },
     "past goron city lower": {
@@ -603,50 +601,50 @@ WARPS_DATA = {
     },
     #cave with two different sized square holes
     "past behind moblin keep cave": {
-        #   "outside_warp": 0x7,   #room 1 09
-        #   "inside_warp": 0x7,    #room 5 E5
+        "outside_warp": 0x7760,   #room 1 09
+        "inside_warp": 0x7928,    #room 5 E5
         "present": False,
     },
     "treasure hunting goron cave": {
-        #   "outside_warp": 0x7,   #room 1 0b, t34
-        #   "inside_warp": 0x7,    #room 2 f7
+        "outside_warp": 0x783c,   #room 1 0b
+        "inside_warp": 0x795c,    #room 2 f7
         "present": False,
     },
     #theres just a lot of seemingly random holes
     "cave left of treasure hunting goron": {
-        #   "outside_warp": 0x7,   #room 1 0b, t47
-        #   "inside_warp": 0x7,    #room 5 E6
+        "outside_warp": 0x7838,   #room 1 0b, t47
+        "inside_warp": 0x7D54,    #room 5 E6
         "present": False,
     },
 #PAST EAST RIDGE
     "goron face bomb cave": {
-        #   "outside_warp": 0x7,   #room 1 0d
-        #   "inside_warp": 0x7,    #room 2 FC
+        "outside_warp": 0x776C,   #room 1 0d
+        "inside_warp": 0x7974,    #room 2 FC
         "present": False,
     },
     #since you're intended to come from the
     #bottom to reach the top, that's how im labeling this cave
     #cave from past east ridge base to past east ridge upper
     "east ridge lower to upper cave top": {
-        #   "outside_warp": 0x7,   #room 1 2b
-        #   "inside_warp": 0x7,    #room 5 E0
+        "outside_warp": 0x7794,   #room 1 2b
+        "inside_warp": 0x7D40,    #room 5 E0
         "present": False,
     },
     #cave from past east ridge upper to east ridge base
     "east ridge lower to upper cave base": {
-        #   "outside_warp": 0x7,   #room 1 0c
-        #   "inside_warp": 0x7,    #room 3 2F
+        "outside_warp": 0x7768,   #room 1 0c
+        "inside_warp": 0x788C,    #room 3 2F
         "present": False,
     },
     "past mermaid cave front porch": {
-        #   "outside_warp": 0x7,   #room 1 3c
-        #   "inside_warp": 0x7,    #room 3 0F
+        "outside_warp": [0x7840,0x7844,0x7848],   #room 1 3c
+        "inside_warp": 0x787C,    #room 3 0F
         "present": False,
     },
 
 #room 2 EF, graceful goron past
     "past goron dance hall lower": {
-        #   "outside_warp": 0x7,   #room 1 3D
+        "outside_warp": 0x77a4,   #room 1 3D
         #   "inside_warp": 0x7,    #room 2 FF
         "present": False,
     },
@@ -926,5 +924,13 @@ WARPS_DATA = {
 #    "black tower": {
 #        #   "outside_warp": ,   #room 1 76
 #        #   "inside_warp": ,    #room 4 E7
+#        "present": False,
+#    },
+
+#    # no warp data associated with it on 01
+#    # so it won't be randomized
+#    "tokkey dive spot": {
+#        #   "outside_warp": 0x7,   #room 1 01
+#        #   "inside_warp": 0x7,    #room 7 09
 #        "present": False,
 #    },
