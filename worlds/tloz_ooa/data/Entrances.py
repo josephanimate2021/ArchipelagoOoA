@@ -653,7 +653,7 @@ WARPS_DATA = {
 
     "past goron dance hall middle": {
         "outside_warp": 0x7784,   #room 1 1C
-        "inside_warp": 0x79CC,    #room 3 1F
+        "inside_warp": 0x79C8,    #room 3 1F
         "present": False,
     },
     "goron shooting gallery": {
