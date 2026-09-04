@@ -22,6 +22,18 @@ def get_treasure_addr(rom: RomData, item_name: str):
         addr = 0x57dc3 + rom.read_word(addr + 1)
     return addr + (item_subid * 4)
 
+def set_static_items(rom: RomData, patch_data):
+    for location_name, location_data in LOCATIONS_DATA.items():
+        if location_name in patch_data["locations"]:
+            item_name = patch_data["locations"][location_name]
+        else:
+            item_name = location_data["vanilla_item"]
+
+        for i in range(len(STATIC_ITEM_ROOM_ORDER)):
+            if location_data["room"] == STATIC_ITEM_ROOM_ORDER[i]:
+                item_id, item_subid = get_item_id_and_subid(item_name)
+                rom.write_byte(GameboyAddress(0x10, (0x7269 + i)).address_in_rom(), item_id)
+
 
 def set_treasure_data(rom: RomData,
                       item_name: str, text_id: int | None,
@@ -66,17 +78,6 @@ def define_location_constants(assembler: Z80Assembler, patch_data):
         assembler.define_byte(f"locations.{symbolic_name}.id", item_id)
         assembler.define_byte(f"locations.{symbolic_name}.subid", item_subid)
         assembler.define_word(f"locations.{symbolic_name}", item_wholeid)
-
-        if "static_item" in location_data:
-            rooms = location_data["room"]
-            if not isinstance(rooms, list):
-                rooms = [rooms]
-            for room in rooms:
-                room_id = room & 0xFF
-                group = room >> 8
-                staticItemsReplacementsTable.extend([group, room_id, 0x05])
-
-    assembler.add_floating_chunk("staticItemsReplacementsTable", staticItemsReplacementsTable)
 
         
 def define_option_constants(assembler: Z80Assembler, patch_data):

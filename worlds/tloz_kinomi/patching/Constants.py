@@ -1,3 +1,5 @@
+from ..common.patching.z80asm.Assembler import GameboyAddress
+
 EOB_ADDR = [
   0x3f79, # 00
   0x6a39, # 01 - garbage data here
@@ -63,6 +65,53 @@ EOB_ADDR = [
   0x8000, # 3d
   0x8000, # 3e
   0x7e0b  # 3f 
+]
+
+STATIC_ITEM_ROOM_ORDER = [ # This is the list of rooms I put in order inside my itemsTable function of the game.
+	0x0005,
+	0x0007,
+	0x000d,
+	0x0032,
+	0x0172,
+	0x0133,
+	0x050a,
+	0x0501,
+	0x0506,
+	0x0504,
+	0x0038,
+	0x050b,
+	0x025e,
+	0x0453,
+	0x0429,
+	0x042a,
+	0x0044,
+	0x041e,
+	0x0509,
+	0x0113,
+	0x0239,
+	0x050d,
+	0x032a,
+	0x0308,
+	0x0507,
+	0x0505,
+	0x05b2,
+	0x05c1,
+	0x05c0,
+	0x05b8,
+	0x0572,
+	0x054c,
+	0x0548,
+	0x0534,
+	0x0406,
+	0x03af,
+	0x0186,
+	0x0153,
+	0x0138,
+	0x0122,
+	0x0057,
+	0x0011,
+	0x0427,
+	0x0160
 ]
 
 DEFINES = {
@@ -407,7 +456,6 @@ DEFINES = {
 ASM_FILES = [
     "asm/util.yaml",
     #"asm/location.yaml",
-    "asm/static_items.yaml",
     "asm/shops_handling.yaml",
     "asm/boss_items.yaml",
     #"asm/gfx.yaml",

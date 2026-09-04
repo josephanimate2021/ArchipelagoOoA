@@ -485,6 +485,13 @@ LOCATIONS_DATA = {
         "room": 0x0133,
         "collect": COLLECT_POOF,
     },
+    "Jiku Clifs (Past): Fill Hole Close To Main Entrance": {
+        "region_id": "jiku clifs past fill hole close to main entrance",
+        "vanilla_item": "Rupees (200)",
+        "flag_byte": 0xc833,
+        "room": 0x0172,
+        "collect": COLLECT_POOF,
+    },
     "Jiku Clifs (Past): Bomb Fairy": {
         "region_id": "bomb fairy",
         "vanilla_item": "Bombs (10)",
