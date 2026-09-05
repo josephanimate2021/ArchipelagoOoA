@@ -1,4 +1,8 @@
 # setting up a new file - this is done when link is dropped into the world, not
 # at actual file creation.
 
-01/7fbd/startingBomb: db $00
+
+01/7fc1/startingBomb: db $00
+
+# Skip the screen to select link, secret or new game and skip to new game
+02/420f/: db $02

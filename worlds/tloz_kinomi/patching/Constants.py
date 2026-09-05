@@ -459,6 +459,7 @@ ASM_FILES = [
     #"asm/location.yaml",
     "asm/shops_handling.yaml",
     "asm/boss_items.yaml",
+    "asm/new_game.yaml",
     #"asm/gfx.yaml",
     #"asm/vars.yaml",
     "asm/file_select_custom_string.yaml",
