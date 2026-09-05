@@ -87,8 +87,8 @@ def apply_bps_patch(patch, sourceData: bytes) -> bytes:
 
 	if header.sourceSize != len(sourceData):
 		raise CorruptFile("Source file must be {sourceSize} bytes, but "
-				"{source!r} is {sourceDataLen} bytes.".format(
-					sourceSize=header.sourceSize, source=source,
+				"it's actual size is {sourceDataLen} bytes.".format(
+					sourceSize=header.sourceSize, 
 					sourceDataLen=len(sourceData)))
 
 	targetData = bytearray(header.targetSize)
