@@ -394,6 +394,7 @@ DEFINES = {
     "getThisRoomFlags":"$197d",
     "openMenu":"$1ab0",
     "linkInteractWithAButtonSensitiveObjects":"$1b5d",
+    "spawnTreasureOnLink": "$1bbd",
     "lookupKey":"$1e06",
     "lookupCollisionTable":"$1e1f",
     "objectSetVisiblec2":"$1e45",
