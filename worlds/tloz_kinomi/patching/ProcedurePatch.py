@@ -41,8 +41,9 @@ class OoAPatchExtensions(APPatchExtension):
 
         for i in range(0x3f): # Made it like this so that I can specify the bank ends very easily without doing all of them at once.
             assembler.end_of_banks[i] = (
-                0x7c99 if i == 0x14
-                else 0x8000
+                0x7dca if i == 0x0a # Lots of space here.
+                else 0x7c99 if i == 0x14 # Just enough for the file select text
+                else 0x8000 # All other banks.
             )
         for symbolic_name, price in patch_data["shop_prices"].items():
             assembler.define_byte(f"shopPrices.{symbolic_name}", RUPEE_VALUES[price])
