@@ -4,7 +4,7 @@ import os
 import random
 import Utils
 from settings import get_settings
-from . import RomData
+from ..common.patching.RomData import RomData
 from .Util import *
 from .z80asm.Assembler import Z80Assembler
 from ..common.patching.z80asm.Assembler import GameboyAddress
@@ -32,8 +32,26 @@ def set_static_items(rom: RomData, patch_data):
         for i in range(len(STATIC_ITEM_ROOM_ORDER)):
             if location_data["room"] == STATIC_ITEM_ROOM_ORDER[i]:
                 item_id, item_subid = get_item_id_and_subid(item_name)
-                rom.write_byte(GameboyAddress(0x10, (0x7269 + i)).address_in_rom(), item_id)
+                rom.write_bytes(GameboyAddress(0x10, (0x7269 + i)).address_in_rom(), [item_id, item_subid])
 
+def set_boss_items(rom: RomData, patch_data, i=0):
+    no_boss_dungeons = [2, 6]
+    for location_name, location_data in LOCATIONS_DATA.items():
+        if i == 7: # base case for the recursive function
+            break
+        elif i in no_boss_dungeons: # continue on if there are no bosses for that dungeon.
+            set_boss_items(rom, patch_data,i+1)
+            break
+        elif "dungeon" in location_data and location_data["dungeon"] == i: # write down the boss checks if there is a dungeon with a boss in it.
+            if location_name.endswith(" Boss") and location_name in patch_data["locations"]:
+                print(location_name)
+                item_id, item_subid = get_item_id_and_subid(patch_data["locations"][location_name])
+                rom.write_bytes(GameboyAddress(0x15, 0x4010 + (
+                    0x0c if i == 5
+                    else i
+                )).address_in_rom(), [item_id, item_subid])
+                set_boss_items(rom, patch_data, i+1)
+                break
 
 def set_treasure_data(rom: RomData,
                       item_name: str, text_id: int | None,
@@ -148,7 +166,7 @@ def write_chest_contents(rom: RomData, patch_data):
         if ('collect' not in location_data or 'room' not in location_data or location_data['collect'] != COLLECT_CHEST):
             continue
         else:
-            chest_addr = rom.get_chest_addr(location_data['room'])
+            chest_addr = rom.get_chest_addr(location_data['room'], 0x16, 0x55ed)
         item_name = patch_data["locations"][location_name]
         item_id, item_subid = get_item_id_and_subid(item_name)
         rom.write_byte(chest_addr, item_id)
@@ -213,6 +231,10 @@ def inject_slot_name(rom: RomData, slot_name: str):
     slot_name_as_bytes += [0x00] * (0x40 - len(slot_name_as_bytes))
     rom.write_bytes(0xfffc0, slot_name_as_bytes)
 
+def set_newGame_stuff(rom: RomData):
+    rom.write_byte(GameboyAddress(0x02, 0x420f).address_in_rom(), 0x02) # Skip the screen to select link, secret or new game and skip to new game
+    rom.write_byte(GameboyAddress(0x01, 0x7fc1).address_in_rom(), 0x00) # Set starting bomb to 0.
+    rom.write_byte(GameboyAddress(0x02, 0x78e4).address_in_rom(), 0x14) # Sets the bank to 14 for the file select text.
     
 def write_seed_tree_content(rom: RomData, patch_data):
     for _, tree_data in SEED_TREE_DATA.items():

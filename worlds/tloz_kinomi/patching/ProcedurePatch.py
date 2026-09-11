@@ -9,7 +9,7 @@ from worlds.Files import APProcedurePatch, APTokenMixin, APPatchExtension
 
 from .Functions import *
 from .Constants import *
-from .RomData import RomData
+from ..common.patching.RomData import RomData
 from .z80asm.Assembler import Z80Assembler, Z80Block
 from .bps import apply_bps_patch
 
@@ -39,15 +39,16 @@ class OoAPatchExtensions(APPatchExtension):
 
         assembler = Z80Assembler()
 
-        # Define static values & data blocks
-        for i, offset in enumerate(EOB_ADDR):
-            assembler.end_of_banks[i] = offset
-        for key, value in DEFINES.items():
-            assembler.define(key, value)
+        for i in range(0x3f): # Made it like this so that I can specify the bank ends very easily without doing all of them at once.
+            assembler.end_of_banks[i] = (
+                0x7c99 if i == 0x14
+                else 0x8000
+            )
         for symbolic_name, price in patch_data["shop_prices"].items():
             assembler.define_byte(f"shopPrices.{symbolic_name}", RUPEE_VALUES[price])
         define_location_constants(assembler, patch_data)
         set_static_items(rom_data, patch_data)
+        set_boss_items(rom_data, patch_data)
         define_option_constants(assembler, patch_data)
         define_text_constants(assembler, patch_data)
         define_dungeon_items_text_constants(assembler, patch_data)
@@ -56,6 +57,7 @@ class OoAPatchExtensions(APPatchExtension):
         define_compass_rooms_table(assembler, patch_data)
         define_collect_properties_table(assembler, patch_data)
         set_file_select_text(assembler, caller.player_name)
+        set_newGame_stuff(rom_data)
 
         # Parse assembler files, compile them and write the result in the ROM
         print(f"Compiling ASM files...")

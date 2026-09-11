@@ -147,6 +147,7 @@ def make_overworld_logic(player: int):
             kinomi_can_jump_pit(state, player),
         ])],
         ["jiku clifs", "lost labyrinth entrance", False, lambda state: state.has("Old Labyrinth Key", player)],
+        ["d2 past bomb chest", "jiku clifs past fill hole close to main entrance", False, lambda state: kinomi_has_cane(state, player)],
         ["d2 past small key drop 2", "jiku clifs past springwater region", False, lambda state: all([
             kinomi_has_small_keys(state, player, 2, 1),
             any([

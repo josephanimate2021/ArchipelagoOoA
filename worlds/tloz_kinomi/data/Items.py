@@ -1,5 +1,4 @@
 from BaseClasses import ItemClassification
-from ..patching.Constants import DEFINES
 
 ITEMS_DATA = {
     #   "No Item": {

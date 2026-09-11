@@ -8,6 +8,7 @@ LOCATIONS_DATA = {
         "room": 0x0300,
         "bit_mask": 0x80,
         "collect": COLLECT_TOUCH,
+        "randomized": False,
         "symbolic_name": "mapleTrade",
     },
     "Kinomi Town: Ghost's House": {
@@ -22,7 +23,8 @@ LOCATIONS_DATA = {
         "vanilla_item": "Old Labyrinth Key",
         "flag_byte": 0xc718,
         "room": 0x0218,
-        "collect": COLLECT_TOUCH
+        "collect": COLLECT_TOUCH,
+        "randomized": False,
     },
     "Kinomi Town: Library Employee": {
         "region_id": "library employee",
@@ -387,6 +389,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Sparring Book",
         "flag_byte": 0xc80a,
         "room": 0x030a,
+        "randomized": False,
         "collect": COLLECT_TOUCH
     },
     ##########################################
@@ -409,6 +412,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Wood Clock",
         "flag_byte": 0xc728,
         "room": 0x0228,
+        "randomized": False,
         "collect": COLLECT_TOUCH,
     },
     "Jiku Clifs (Present): Rupee Chest Outside Lost Labyrinth": {
@@ -488,7 +492,7 @@ LOCATIONS_DATA = {
     "Jiku Clifs (Past): Fill Hole Close To Main Entrance": {
         "region_id": "jiku clifs past fill hole close to main entrance",
         "vanilla_item": "Rupees (200)",
-        "flag_byte": 0xc833,
+        "flag_byte": 0xc872,
         "room": 0x0172,
         "collect": COLLECT_POOF,
     },
@@ -615,7 +619,7 @@ LOCATIONS_DATA = {
         "room": 0x05b0,
         "bit_mask": 0x40,
         "collect": COLLECT_TOUCH,
-        "dungeon": 0
+        "randomized": False,
     },
     "Summer Villa (1F): Small Key Chest": {
         "region_id": "d0 small key chest 1f",
@@ -891,7 +895,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Mushroom",
         "flag_byte": 0xc94b,
         "room": 0x044b,
-        "dungeon": 2,
+        "randomized": False,
         "collect": COLLECT_TOUCH,
     },
     "Lost Labyrinth (Past): Kill Enemies": {
