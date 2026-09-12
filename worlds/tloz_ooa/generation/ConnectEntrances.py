@@ -133,5 +133,21 @@ def ooa_randomize_and_update_world_for_patch(world: OracleOfAgesWorld):
         outside_entrance = world.get_entrance(inside_entrance).connected_region.name
         if inside_entrance.startswith(INSIDE_TAG):
             world.randomized_entrances[warp_name] = inside_entrance[len(INSIDE_TAG):]
+    
+# -----------------------------------------------------------------------------------
+#
+# -----------------------------------------------------------------------------------
+def ooa_connect_entrance_according_to_slot_data(world: OracleOfAgesWorld):
+    for warp_name, warp_destination in world.randomized_entrances.items():
+        outside_entrance = world.get_region(OUTSIDE_TAG + warp_name)
+        inside_entrance = world.get_region(INSIDE_TAG + warp_destination)
+        
+        outside_entrance.connect(inside_entrance)
+        inside_entrance.connect(outside_entrance)
+
+        print(f"{warp_name} -> {warp_destination}")
+
+        
+
 
     

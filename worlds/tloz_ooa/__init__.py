@@ -162,11 +162,14 @@ class OracleOfAgesWorld(World):
     #
     # ===================================================================================
     def connect_entrances(self):
-        from .generation.ConnectEntrances import ooa_create_entrances, ooa_setup_group_pairing, ooa_randomize_and_update_world_for_patch
+        from .generation.ConnectEntrances import ooa_create_entrances, ooa_setup_group_pairing, ooa_randomize_and_update_world_for_patch, ooa_connect_entrance_according_to_slot_data
         ooa_create_entrances(self)
         if self.options.entrance_randomizer != OracleOfAgesEntranceRandomizer.option_disabled:
             ooa_setup_group_pairing(self)
-            ooa_randomize_and_update_world_for_patch(self)
+            if self.interpret_slot_data(None):
+                ooa_connect_entrance_according_to_slot_data(self)
+            else:
+                ooa_randomize_and_update_world_for_patch(self)
         
 
     # ===================================================================================
