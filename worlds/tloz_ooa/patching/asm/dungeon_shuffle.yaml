@@ -180,17 +180,17 @@
 01/61cf/ : jp checkDungeonWarp_neck
 
 01//resetWarpCheck : |
-  ld a,(wFailedToWarpLastFrame)
-  ld b,a
   ld a,(wWarpCheck)
-  ld (wFailedToWarpLastFrame),a
   cp $0
   ld a,$0
   ld (wWarpCheck),a
-  jr nz,@end
-  ld a,b
+  jr nz,@failedToWarp
+  ld a,(wFailedToWarpLastFrame)
   cp $0
   jr z,@end
+  sub $1
+  ld (wFailedToWarpLastFrame),a
+  jr nz,@end
   ld a,(wWarpTextLow)
   cp $ff
   jr z,@end
@@ -201,6 +201,11 @@
   @end:
   ld a,($cc5c) # removed line
   ret
+  @failedToWarp:
+  ld a,$3
+  ld (wFailedToWarpLastFrame),a
+  jr @end
+
 
 01/4105/: call resetWarpCheck
 
