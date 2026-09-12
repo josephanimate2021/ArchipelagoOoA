@@ -19,14 +19,15 @@ class GiftsOfKinomiLogicDifficulty(Choice):
     default = 0
 
 
-class GiftsOfKinomiRequiredGifts(Range):
+class GiftsOfKinomiGameplayMode(Choice):
     """
-    The amount of gifts that need to be obtained in order to beat ganon.
+    The mode that you will be playing in while using the randomizer.
     """
-    display_name = "Required Gifts"
-    range_start = 0
-    range_end = 2
-    default = 2
+    display_name = "Gameplay Mode"
+    option_vanila = 0
+    option_randomizer = 1
+    default = 1
+
 
 class GiftsOfKinomiRequiredSlates(Range):
     """
@@ -36,6 +37,7 @@ class GiftsOfKinomiRequiredSlates(Range):
     range_start = 0
     range_end = 8
     default = 8
+
 
 class GiftsOfKinomiRemoveExtraStairsFromLostLabyrinth(Toggle):
     """
@@ -99,9 +101,9 @@ class GiftsOfKinomiMapCompassShuffle(Toggle):
 
 class GiftsOfKinomiSlateShuffle(Toggle):
     """
-    If enabled, Slates can be found anywhere instead of being confined in Dungeon 8.
+    If enabled, Slates can be found anywhere instead of being confined in the Temple of The Tokay
     """
-    display_name = "Slates Outside Dungeon 8"
+    display_name = "Slates Outside Temple Of The Tokay"
 
 
 class GiftsOfKinomiPricesFactor(Range):
@@ -120,8 +122,8 @@ class GiftsOfKinomiPricesFactor(Range):
 @dataclass
 class GiftsOfKinomiOptions(PerGameCommonOptions):
     start_inventory_from_pool: StartInventoryPool
+    gameplay_mode: GiftsOfKinomiGameplayMode
     logic_difficulty: GiftsOfKinomiLogicDifficulty
-    required_gifts: GiftsOfKinomiRequiredGifts
     required_slates: GiftsOfKinomiRequiredSlates
     remove_extra_stairs_from_lost_labyrinth_past: GiftsOfKinomiRemoveExtraStairsFromLostLabyrinth
     shuffle_dungeons: GiftsOfKinomiDungeonShuffle

@@ -53,6 +53,13 @@ def set_boss_items(rom: RomData, patch_data, i=0):
                 set_boss_items(rom, patch_data, i+1)
                 break
 
+def set_refill_npc(rom: RomData):
+    if get_settings().tloz_kinomi_options.refill_npc in REFILL_NPCS:
+        refill_npc_addr = REFILL_NPCS[get_settings().tloz_kinomi_options.refill_npc]
+        rom.write_byte(refill_npc_addr, 0x01)
+    elif get_settings().tloz_kinomi_options.refill_npc != "disabled":
+        raise Exception(get_settings().tloz_kinomi_options.refill_npc + " is not a valid option for the refill npc.")
+
 def set_treasure_data(rom: RomData,
                       item_name: str, text_id: int | None,
                       sprite_id: int | None = None,

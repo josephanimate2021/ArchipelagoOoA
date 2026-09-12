@@ -3,43 +3,23 @@ import os
 import yaml
 import settings
 
-from BaseClasses import Tutorial, Region, Location, LocationProgressType
+from BaseClasses import Region, Location, LocationProgressType
 from Fill import fill_restrictive, FillError
 from Options import Accessibility, OptionError
-from worlds.AutoWorld import WebWorld, World
+from worlds.AutoWorld import World
 import Utils
 from typing import Any, Set, List, Dict, Optional, Tuple, ClassVar, TextIO, Union
-from .Data import *
+from .generation.Data import *
 from .data.Items import *
-from .Logic import create_connections, apply_self_locking_rules
+from .generation.Logic import create_connections, apply_self_locking_rules
 from .Options import *
-from .PatchWriter import ooa_create_appp_patch
+from .generation.PatchWriter import kinomi_create_appp_patch
 from .data import LOCATIONS_DATA, ITEMS_DATA
 from .data.Constants import *
 from .data.Regions import REGIONS
 from .Client import GiftsOfKinomiClient  # Unused, but required to register with BizHawkClient
-from .patching.ProcedurePatch import ROM_HASH
-# TODO: Implement settings for Gifts of Kinomi. Right now in testing phase with the OG ages rom before doing anything major.
-class OOASettings(settings.Group):
-    class OOARomFile(settings.UserFilePath):
-        """File path of the OOA US rom"""
-        description = "Oracle of Ages (USA) ROM File"
-        copy_to = "Legend of Zelda, The - Oracle of Ages (USA).gbc"
-        md5s = [ROM_HASH]
-
-
-    rom_file: OOARomFile = OOARomFile(OOARomFile.copy_to)
-
-class GiftsOfKinomiWeb(WebWorld):
-    theme = "grass"
-    tutorials = [Tutorial(
-        "Multiworld Setup Guide",
-        "A guide to setting up Gifts of Kinomi for Archipelago on your computer.",
-        "English",
-        "ooa_setup_en.md",
-        "ooa_setup/en",
-        ["Dinopony"]
-    )]
+from .Settings import KinomiSettings
+from .WebWorld import GiftsOfKinomiWeb
 
 class GiftsOfKinomiWorld(World):
     """
@@ -64,7 +44,7 @@ class GiftsOfKinomiWorld(World):
     dungeon_entrances: Dict[str, str]
     shop_prices: Dict[str, int]
 
-    settings: ClassVar[OOASettings]
+    settings: ClassVar[KinomiSettings]
     settings_key = "tloz_kinomi_options"
 
     def __init__(self, multiworld, player):
@@ -83,7 +63,8 @@ class GiftsOfKinomiWorld(World):
                    "logic_difficulty",
                    "shuffle_dungeons",
                    # Requirements
-                   "required_gifts", "required_slates",
+                   #"required_gifts", 
+                   "required_slates",
                    # keysanity
                    "keysanity_small_keys", "keysanity_boss_keys", "keysanity_slates"
                    ]
@@ -95,12 +76,16 @@ class GiftsOfKinomiWorld(World):
         return slot_data
 
     def generate_early(self):
-        self.restrict_non_local_items()
-
-        if self.options.shuffle_dungeons == "shuffle":
-            self.shuffle_dungeons()
-
-        self.randomize_shop_prices()
+        if self.options.gameplay_mode != "vanila":
+            self.restrict_non_local_items()
+            
+            if self.options.shuffle_dungeons == "shuffle":
+                self.shuffle_dungeons()
+            
+            self.randomize_shop_prices()
+        else:
+            for location_data in LOCATIONS_DATA.values():
+                location_data["randomized"] = False
 
     def restrict_non_local_items(self):
         # Restrict non_local_items option in cases where it's incompatible with other options that enforce items
@@ -331,32 +316,34 @@ class GiftsOfKinomiWorld(World):
         # before anything else.
         collection_state = self.multiworld.get_all_state(False)
 
-        for i in range(0, 8):
-            # Build a list of locations in this dungeon
-            dungeon_location_names = [name for name, loc in LOCATIONS_DATA.items()
-                                      if "dungeon" in loc and loc["dungeon"] == i]
-            dungeon_locations = [loc for loc in self.multiworld.get_locations(self.player)
-                                 if loc.name in dungeon_location_names]
+        if self.options.gameplay_mode == "randomizer":
+            for i in range(0, 8):
+                # Build a list of locations in this dungeon
+                dungeon_location_names = [name for name, loc in LOCATIONS_DATA.items()
+                                        if "dungeon" in loc and loc["dungeon"] == i]
+                dungeon_locations = [loc for loc in self.multiworld.get_locations(self.player)
+                                    if loc.name in dungeon_location_names]
 
-            # Build a list of dungeon items that are "confined" (i.e. must be placed inside this dungeon)
-            # See `create_items` to see how `self.dungeon_items` is populated depending on current options.
-            confined_dungeon_items = [item for item in self.dungeon_items if item.name.endswith(f"({DUNGEON_NAMES[i]})") or (i == 5 and "Slate" in item.name)]
-            if len(confined_dungeon_items) == 0:
-                continue  # This list might be empty with some keysanity options
-            for item in confined_dungeon_items:
-                collection_state.remove(item)
+                # Build a list of dungeon items that are "confined" (i.e. must be placed inside this dungeon)
+                # See `create_items` to see how `self.dungeon_items` is populated depending on current options.
+                confined_dungeon_items = [item for item in self.dungeon_items if item.name.endswith(f"({DUNGEON_NAMES[i]})") or (i == 5 and "Slate" in item.name)]
+                if len(confined_dungeon_items) == 0:
+                    continue  # This list might be empty with some keysanity options
+                for item in confined_dungeon_items:
+                    collection_state.remove(item)
 
-            # Perform a prefill to place confined items inside locations of this dungeon
-            for attempts_remaining in range(2, -1, -1):
-                self.random.shuffle(dungeon_locations)
-                try:
-                    fill_restrictive(self.multiworld, collection_state, dungeon_locations, confined_dungeon_items,
-                                     single_player_placement=True, lock=True, allow_excluded=True)
-                    break
-                except FillError as exc:
-                    if attempts_remaining == 0:
-                        raise exc
-                    logging.debug(f"Failed to shuffle dungeon items for player {self.player}. Retrying...")
+                # Perform a prefill to place confined items inside locations of this dungeon
+                for attempts_remaining in range(2, -1, -1):
+                    self.random.shuffle(dungeon_locations)
+                    try:
+                        fill_restrictive(self.multiworld, collection_state, dungeon_locations, confined_dungeon_items,
+                                        single_player_placement=True, lock=True, allow_excluded=True)
+                        break
+                    except FillError as exc:
+                        if attempts_remaining == 0:
+                            raise exc
+                        logging.debug(f"Failed to shuffle dungeon items for player {self.player}. Retrying...")
+
         if __debug__:
             filename = "my_world.puml"
             logging.debug("Visualizing Regions...")
@@ -374,7 +361,7 @@ class GiftsOfKinomiWorld(World):
         return item_name
     
     def generate_output(self, output_directory: str):
-        patch = ooa_create_appp_patch(self)
+        patch = kinomi_create_appp_patch(self)
         rom_path = os.path.join(output_directory, f"{self.multiworld.get_out_file_name_base(self.player)}"
                                                   f"{patch.patch_file_ending}")
         patch.write(rom_path)

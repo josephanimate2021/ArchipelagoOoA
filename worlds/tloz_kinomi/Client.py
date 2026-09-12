@@ -5,7 +5,8 @@ from NetUtils import ClientStatus
 import worlds._bizhawk as bizhawk
 from worlds._bizhawk.client import BizHawkClient
 from . import LOCATIONS_DATA, ITEMS_DATA
-from .Data import build_item_id_to_name_dict, build_location_name_to_id_dict
+from .generation.Data import build_item_id_to_name_dict, build_location_name_to_id_dict
+from settings import get_settings
 
 if TYPE_CHECKING:
     from worlds._bizhawk.context import BizHawkClientContext
@@ -210,6 +211,9 @@ class GiftsOfKinomiClient(BizHawkClient):
                 "cmd": "StatusUpdate",
                 "status": ClientStatus.CLIENT_GOAL
             }])
+            if not hasattr(get_settings().tloz_oos_options, "beat_tutorial"):
+                get_settings().tloz_oos_options.beat_tutorial = True
+                get_settings()._changed = True
 
     async def process_deathlink(self, ctx: "BizHawkClientContext", is_dead):
         if ctx.last_death_link > self.last_deathlink and not is_dead:

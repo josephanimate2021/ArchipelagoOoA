@@ -1,5 +1,5 @@
 def make_regions():
-    from ..Logic import make_logic_array
+    from ..generation.Logic import make_logic_array
     regions = []
     for logic_array in make_logic_array(0):
         for region_desc in logic_array:

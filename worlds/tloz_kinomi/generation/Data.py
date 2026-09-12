@@ -1,6 +1,6 @@
 from typing import Dict, List
 from BaseClasses import Item
-from .data import LOCATIONS_DATA, ITEMS_DATA
+from ..data import LOCATIONS_DATA, ITEMS_DATA
 
 
 from typing import Any

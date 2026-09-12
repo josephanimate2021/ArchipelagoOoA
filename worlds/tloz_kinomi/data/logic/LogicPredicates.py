@@ -102,7 +102,8 @@ def kinomi_has_gifts(state: CollectionState, player: int, target_count: int):
 
 
 def kinomi_has_gifts_for_zelda_kidnapped_cutscene(state: CollectionState, player: int):
-    return kinomi_has_gifts(state, player, state.multiworld.worlds[player].options.required_gifts.value)
+    #return kinomi_has_gifts(state, player, state.multiworld.worlds[player].options.required_gifts.value)
+    return kinomi_has_gifts(state, player, 2)
 
 def kinomi_has_slates(state: CollectionState, player: int, target_count):
     return state.has("Slate", player, target_count)

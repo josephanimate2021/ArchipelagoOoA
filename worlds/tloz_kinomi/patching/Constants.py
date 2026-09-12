@@ -46,6 +46,12 @@ STATIC_ITEM_ROOM_ORDER = [ # This is the list of rooms I put in order inside my 
 	0x0427,
 	0x0160
 ]
+
+REFILL_NPCS = {
+    "impa": GameboyAddress(0x09, 0x53ac).address_in_rom(),
+    "rosa": GameboyAddress(0x09, 0x4234).address_in_rom()
+}
+
 ASM_FILES = [
     "asm/collect.yaml",
     "asm/file_select_custom_string.yaml"

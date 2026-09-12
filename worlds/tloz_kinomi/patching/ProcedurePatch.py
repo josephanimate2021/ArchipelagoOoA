@@ -18,7 +18,7 @@ from tkinter.filedialog import askopenfilename
 ROM_HASH = "c4639cc61c049e5a085526bb6cac03bb"
 
 
-class OoAPatchExtensions(APPatchExtension):
+class KinomiPatchExtensions(APPatchExtension):
     game = "The Legend of Zelda - Gifts of Kinomi"
 
     @staticmethod
@@ -58,7 +58,10 @@ class OoAPatchExtensions(APPatchExtension):
         define_compass_rooms_table(assembler, patch_data)
         define_collect_properties_table(assembler, patch_data)
         set_file_select_text(assembler, caller.player_name)
+        if not hasattr(get_settings().tloz_kinomi_options, "beat_tutorial"):
+            rom_data.write_byte(GameboyAddress(0x09, 0x5ad1).address_in_rom(), 0x01) # Turn on the hardhat worker guy who's in charge of the FAQ
         set_newGame_stuff(rom_data)
+        set_refill_npc(rom_data)
 
         # Parse assembler files, compile them and write the result in the ROM
         print(f"Compiling ASM files...")
@@ -84,7 +87,7 @@ class OoAPatchExtensions(APPatchExtension):
         rom_data.update_checksum(0x14e)
         return rom_data.output()
 
-class OoAProcedurePatch(APProcedurePatch, APTokenMixin):
+class KinomiProcedurePatch(APProcedurePatch, APTokenMixin):
     hash = [ROM_HASH]
     patch_file_ending: str = ".apookmi"
     result_file_ending: str = ".gbc"

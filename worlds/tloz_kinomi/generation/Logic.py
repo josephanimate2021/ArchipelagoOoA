@@ -1,7 +1,7 @@
 from BaseClasses import MultiWorld
-from . import LOCATIONS_DATA
-from .data.logic.DungeonsLogic import *
-from .data.logic.OverworldLogic import make_overworld_logic
+from .. import LOCATIONS_DATA
+from ..data.logic.DungeonsLogic import *
+from ..data.logic.OverworldLogic import make_overworld_logic
 
 # TODO: Implement logic map (and check for possible softlocks).
 def make_logic_array(player: int):
