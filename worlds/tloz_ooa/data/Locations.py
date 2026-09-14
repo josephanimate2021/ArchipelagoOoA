@@ -548,7 +548,7 @@ LOCATIONS_DATA = {
     },
     "Crescent Island (Past): Tokay's Stolen Sword": {
         "region_id": "tokay stolen sword",
-        "vanilla_item": "Filler Item", # Originally the sword
+        "vanilla_item": "Biggoron's Sword", # Originally the sword, putting the biggoron Sword so it's in the pool
         "flag_byte": 0xcaca,
         "bit_mask": 0x40,
         "room": 0x05ca,
