@@ -6,7 +6,7 @@ import Utils
 from settings import get_settings
 from ..common.patching.RomData import RomData
 from .Util import *
-from .z80asm.Assembler import Z80Assembler
+from ..common.patching.z80asm.Assembler import Z80Assembler
 from ..common.patching.z80asm.Assembler import GameboyAddress
 from ..data.Constants import *
 from .Constants import *

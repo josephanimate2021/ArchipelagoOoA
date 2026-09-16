@@ -10,7 +10,7 @@ from worlds.Files import APProcedurePatch, APTokenMixin, APPatchExtension
 from .Functions import *
 from .Constants import *
 from ..common.patching.RomData import RomData
-from .z80asm.Assembler import Z80Assembler, Z80Block
+from ..common.patching.z80asm.Assembler import Z80Assembler, Z80Block
 from .bps import apply_bps_patch
 
 from tkinter.filedialog import askopenfilename
@@ -36,15 +36,15 @@ class KinomiPatchExtensions(APPatchExtension):
 
         #if patch_data["options"]["enforce_potion_in_shop"]:
         #    patch_data["locations"]["Horon Village: Shop #3"] = "Potion"
-
-        assembler = Z80Assembler()
-
-        for i in range(0x3f): # Made it like this so that I can specify the bank ends very easily without doing all of them at once.
-            assembler.end_of_banks[i] = (
-                0x7dca if i == 0x0a # Lots of space here.
-                else 0x7c99 if i == 0x14 # Just enough for the file select text
-                else 0x8000 # All other banks.
+        bank_caves: list[int | list[int | list[int]]] = []
+        for i in range(0x40): # Made it like this so that I can specify the bank ends very easily without doing all of them at once.
+            bank_caves.append(
+                0x3dca if i == 0x0a # If we have enough space that would be a luxury.
+                else 0x3c99 if i == 0x14 # Just enough for the file select text
+                else 0x4000 # All other banks.
             )
+        assembler = Z80Assembler(bank_caves, {}, rom)
+
         for symbolic_name, price in patch_data["shop_prices"].items():
             assembler.define_byte(f"shopPrices.{symbolic_name}", RUPEE_VALUES[price])
         define_location_constants(assembler, patch_data)
@@ -71,7 +71,7 @@ class KinomiPatchExtensions(APPatchExtension):
                 assembler.add_block(Z80Block(metalabel, contents))
         assembler.compile_all()
         for block in assembler.blocks:
-            rom_data.write_bytes(block.addr.full_address(), block.byte_array)
+            rom_data.write_bytes(block.addr.address_in_rom(), block.byte_array)
 
         alter_treasures(rom_data)
         write_chest_contents(rom_data, patch_data)
