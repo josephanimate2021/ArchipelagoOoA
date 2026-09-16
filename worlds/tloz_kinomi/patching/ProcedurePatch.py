@@ -62,7 +62,6 @@ class KinomiPatchExtensions(APPatchExtension):
 
         # Define dynamic data blocks
         define_compass_rooms_table(assembler, patch_data)
-        define_tiles_table(assembler, patch_data)
         set_file_select_text(assembler, caller.player_name)
 
         # Parse assembler files, compile them and write the result in the ROM

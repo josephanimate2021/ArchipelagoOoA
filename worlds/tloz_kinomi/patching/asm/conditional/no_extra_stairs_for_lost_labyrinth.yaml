@@ -1,1 +1,8 @@
 12/4ec4/: db $03 ; set subid of ths stair spawner to 03 (to keep tracking intact)
+
+# change warp dest and source inside labyrinth on two stairs away from jiku clifs past (and slso to make the dungeon easier to navigate).
+04/42e0/: db $1e,$07 ; warp dest (first stair, group 2)
+04/5187/: db $05,$22 ; warp source (first stair, group 4)
+04/4082/: db $21,$67 ; warp source (group 0)
+04/5113/: db $05,$22 ; warp source (second stair, group 4)
+04/42e6/: db $1f,$03 ; warp dest (second stair, group 2)
