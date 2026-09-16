@@ -63,7 +63,7 @@ class GiftsOfKinomiWorld(World):
                    "logic_difficulty",
                    "shuffle_dungeons",
                    # Requirements
-                   #"required_gifts", 
+                   "required_gifts", 
                    "required_slates",
                    # keysanity
                    "keysanity_small_keys", "keysanity_boss_keys", "keysanity_slates"

@@ -53,7 +53,6 @@ REFILL_NPCS = {
 }
 
 ASM_FILES = [
-    "asm/collect.yaml",
     "asm/file_select_custom_string.yaml"
 ]
 

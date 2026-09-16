@@ -29,6 +29,15 @@ class GiftsOfKinomiGameplayMode(Choice):
     default = 1
 
 
+class GiftsOfKinomiRequiredGifts(Range):
+    """
+    The amount of gifts that need to be obtained in order to beat ganon and start the party.
+    """
+    display_name = "Required Gifts"
+    range_start = 0
+    range_end = 2
+    default = 2
+
 class GiftsOfKinomiRequiredSlates(Range):
     """
     The amount of slates that need to be obtained in order to get to the boss for the Temple of The Tokay.
@@ -124,6 +133,7 @@ class GiftsOfKinomiOptions(PerGameCommonOptions):
     start_inventory_from_pool: StartInventoryPool
     gameplay_mode: GiftsOfKinomiGameplayMode
     logic_difficulty: GiftsOfKinomiLogicDifficulty
+    required_gifts: GiftsOfKinomiRequiredGifts
     required_slates: GiftsOfKinomiRequiredSlates
     remove_extra_stairs_from_lost_labyrinth_past: GiftsOfKinomiRemoveExtraStairsFromLostLabyrinth
     shuffle_dungeons: GiftsOfKinomiDungeonShuffle

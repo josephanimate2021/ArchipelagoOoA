@@ -60,6 +60,28 @@ def set_refill_npc(rom: RomData):
     elif get_settings().tloz_kinomi_options.refill_npc != "disabled":
         raise Exception(get_settings().tloz_kinomi_options.refill_npc + " is not a valid option for the refill npc.")
 
+def modify_required_gifts_and_slates_count(rom: RomData, patch_data):
+
+    # Firstly, modify the sign outside link's house that says the required gifts and slates count.
+    rom.write_byte(GameboyAddress(0x22, 0x602c).address_in_rom(), 0x30 + patch_data["options"]["required_gifts"])
+    if patch_data["options"]["required_gifts"] == 1:
+        rom.write_byte(GameboyAddress(0x22, 0x6032).address_in_rom(), 0x20)
+    rom.write_byte(GameboyAddress(0x22, 0x6051).address_in_rom(), 0x30 + patch_data["options"]["required_slates"])
+    if patch_data["options"]["required_slates"] == 1:
+        rom.write_byte(GameboyAddress(0x22, 0x6058).address_in_rom(), 0x20)
+
+    # Then, we modify the amount of slates neeeded to open the stairs to the temple of the tokay boss room.
+    rom.write_byte(GameboyAddress(0x0a, 0x6505).address_in_rom(), patch_data["options"]["required_slates"])
+
+    # And the gifts required to beat ganon.
+    rom.write_byte(GameboyAddress(0x04, 0x6477).address_in_rom(), patch_data["options"]["required_gifts"]) # For summoning a tree in forever falls.
+    rom.write_byte(GameboyAddress(0x0b, 0x4e02).address_in_rom(), patch_data["options"]["required_gifts"]) # For getting a din interaction responsible for the zelda getting kidnapped cutscene, which we'll use for the indication that a user got the exact gifts neexed.
+
+def get_asm_files(patch_data):
+    if patch_data["options"]["remove_extra_stairs_from_lost_labyrinth_past"]:
+        ASM_FILES.append("asm/conditional/no_extra_stairs_for_lost_labyrinth.yaml")
+    return ASM_FILES
+
 def set_treasure_data(rom: RomData,
                       item_name: str, text_id: int | None,
                       sprite_id: int | None = None,
@@ -202,35 +224,6 @@ def define_compass_rooms_table(assembler: Z80Assembler, patch_data):
                 table.extend([group_id, room_id, dungeon])
     table.append(0xff)  # End of table
     assembler.add_floating_chunk("compassRoomsTable", table)
-       
-
-def define_collect_properties_table(assembler: Z80Assembler, patch_data):
-    """
-    Defines a table of (group, room, collect mode) entries for randomized items
-    to determine how they spawn, how they are grabbed and whether they set
-    a room flag when obtained.
-    """
-    table = []
-    for location_name, item_name in patch_data["locations"].items():
-        location_data = LOCATIONS_DATA[location_name]
-        if "collect" not in location_data or "room" not in location_data:
-            continue
-        mode = location_data["collect"]
-
-        # Use no pickup animation for falling small keys
-        if mode == COLLECT_DROP and item_name.startswith("Small Key"):
-            mode &= 0xf8  # Set grab mode to TREASURE_GRAB_INSTANT
-
-        rooms = location_data["room"]
-        if not isinstance(rooms, list):
-            rooms = [rooms]
-        for room in rooms:
-            room_id = room & 0xff
-            group_id = room >> 8
-            table.extend([group_id, room_id, mode])
-
-    table.append(0xff)
-    assembler.add_floating_chunk("collectPropertiesTable", table)
 
     
 def inject_slot_name(rom: RomData, slot_name: str):

@@ -36,13 +36,14 @@ class KinomiPatchExtensions(APPatchExtension):
 
         #if patch_data["options"]["enforce_potion_in_shop"]:
         #    patch_data["locations"]["Horon Village: Shop #3"] = "Potion"
+
         bank_caves: list[int | list[int | list[int]]] = []
         for i in range(0x40): # Made it like this so that I can specify the bank ends very easily without doing all of them at once.
-            bank_caves.append(
+            bank_caves.extend([
                 0x3dca if i == 0x0a # If we have enough space that would be a luxury.
                 else 0x3c99 if i == 0x14 # Just enough for the file select text
                 else 0x4000 # All other banks.
-            )
+            ])
         assembler = Z80Assembler(bank_caves, {}, rom)
 
         for symbolic_name, price in patch_data["shop_prices"].items():
@@ -53,19 +54,20 @@ class KinomiPatchExtensions(APPatchExtension):
         define_option_constants(assembler, patch_data)
         define_text_constants(assembler, patch_data)
         define_dungeon_items_text_constants(assembler, patch_data)
-
-        # Define dynamic data blocks
-        define_compass_rooms_table(assembler, patch_data)
-        define_collect_properties_table(assembler, patch_data)
-        set_file_select_text(assembler, caller.player_name)
+        modify_required_gifts_and_slates_count(rom_data, patch_data)
         if not hasattr(get_settings().tloz_kinomi_options, "beat_tutorial"):
             rom_data.write_byte(GameboyAddress(0x09, 0x5ad1).address_in_rom(), 0x01) # Turn on the hardhat worker guy who's in charge of the FAQ
         set_newGame_stuff(rom_data)
         set_refill_npc(rom_data)
 
+        # Define dynamic data blocks
+        define_compass_rooms_table(assembler, patch_data)
+        define_tiles_table(assembler, patch_data)
+        set_file_select_text(assembler, caller.player_name)
+
         # Parse assembler files, compile them and write the result in the ROM
         print(f"Compiling ASM files...")
-        for file_path in ASM_FILES:
+        for file_path in get_asm_files(patch_data):
             data_loaded = yaml.safe_load(pkgutil.get_data(__name__, file_path))
             for metalabel, contents in data_loaded.items():
                 assembler.add_block(Z80Block(metalabel, contents))
