@@ -58,10 +58,12 @@ class GiftsOfKinomiWorld(World):
     def fill_slot_data(self) -> dict:
         # Put options that are useful to the tracker inside slot data
         # TODO MOAR DATA ?
-        options = ["remove_extra_stairs_from_lost_labyrinth_past", "death_link",
+        options = ["death_link",
                    # Logic-impacting options
                    "logic_difficulty",
                    "shuffle_dungeons",
+                   "open_staircase_to_ancient_ages_locations",
+                   "remove_extra_stairs_from_lost_labyrinth_past",
                    # Requirements
                    "required_gifts", 
                    "required_slates",

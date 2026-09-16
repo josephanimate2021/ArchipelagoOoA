@@ -80,6 +80,8 @@ def modify_required_gifts_and_slates_count(rom: RomData, patch_data):
 def get_asm_files(patch_data):
     if patch_data["options"]["remove_extra_stairs_from_lost_labyrinth_past"]:
         ASM_FILES.append("asm/conditional/no_extra_stairs_for_lost_labyrinth.yaml")
+    if patch_data["options"]["open_staircase_to_ancient_ages_locations"]:
+        ASM_FILES.append("asm/conditional/add_some_ages_old_locations.yaml")
     return ASM_FILES
 
 def set_treasure_data(rom: RomData,

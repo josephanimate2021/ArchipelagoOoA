@@ -114,6 +114,12 @@ class GiftsOfKinomiSlateShuffle(Toggle):
     """
     display_name = "Slates Outside Temple Of The Tokay"
 
+class GiftsOfKinomiRevealSomeAgesLocations(Toggle):
+    """
+    If enabled, A staircase will open up next to Kimoni Town where if you go inside, will take you to a room with two stairs going down to the old dungeons with their exits remaining untouched, allowing exploration of the remains of ages in kinomi.
+    """
+    display_name = "Open Staircase To Ancient Ages Locations"
+
 
 class GiftsOfKinomiPricesFactor(Range):
     """
@@ -136,6 +142,7 @@ class GiftsOfKinomiOptions(PerGameCommonOptions):
     required_gifts: GiftsOfKinomiRequiredGifts
     required_slates: GiftsOfKinomiRequiredSlates
     remove_extra_stairs_from_lost_labyrinth_past: GiftsOfKinomiRemoveExtraStairsFromLostLabyrinth
+    open_staircase_to_ancient_ages_locations: GiftsOfKinomiRevealSomeAgesLocations
     shuffle_dungeons: GiftsOfKinomiDungeonShuffle
     master_keys: GiftsOfKinomiMasterKeys
     keysanity_small_keys: GiftsOfKinomiSmallKeyShuffle
