@@ -569,6 +569,26 @@ WARPS_DATA = {
         #basement room 2 e8
     },
 
+    "tokkey dive spot": {
+        "outside_warp": 0x7E88,   #room 7 0A
+        "inside_warp": 0x7A0C,    #room 3 8F
+        "present": False,
+    },
+    "talus waterfall cave front": {
+        "outside_warp": 0x77B4,   #room 1 51
+        "inside_warp": 0x78C4,    #room 2 8F
+        "present": False,
+    },
+    "talus waterfall cave left": {
+        "outside_warp": 0x784C,   #room 1 41
+        "inside_warp": 0x7D64,    #room 5 EA
+        "present": False,
+    },
+    "talus waterfall cave right": {
+        "outside_warp": 0x7850,   #room 1 41
+        "inside_warp": 0x7D68,    #room 5 EA
+        "present": False,
+    },
 
     #stairs to restoration ceremony - 0x7a28
     "patch cave": {
@@ -1010,10 +1030,3 @@ WARPS_DATA = {
 #        "present": False,
 #    },
 
-#    # no warp data associated with it on 01
-#    # so it won't be randomized
-#    "tokkey dive spot": {
-#        #   "outside_warp": 0x7,   #room 1 01
-#        #   "inside_warp": 0x7,    #room 7 09
-#        "present": False,
-#    },
