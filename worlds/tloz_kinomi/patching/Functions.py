@@ -74,8 +74,8 @@ def modify_required_gifts_and_slates_count(rom: RomData, patch_data):
     rom.write_byte(GameboyAddress(0x0a, 0x6505).address_in_rom(), patch_data["options"]["required_slates"])
 
     # And the gifts required to beat ganon.
-    rom.write_byte(GameboyAddress(0x04, 0x6477).address_in_rom(), patch_data["options"]["required_gifts"]) # For summoning a tree in forever falls.
-    rom.write_byte(GameboyAddress(0x0b, 0x4e02).address_in_rom(), patch_data["options"]["required_gifts"]) # For getting a din interaction responsible for the zelda getting kidnapped cutscene, which we'll use for the indication that a user got the exact gifts neexed.
+    rom.write_byte(GameboyAddress(0x04, 0x648c).address_in_rom(), patch_data["options"]["required_gifts"]) # For summoning a tree in forever falls.
+    rom.write_byte(GameboyAddress(0x0b, 0x4eb2).address_in_rom(), patch_data["options"]["required_gifts"]) # For getting a din interaction responsible for the zelda getting kidnapped cutscene, which we'll use for the indication that a user got the exact gifts neexed.
 
 def get_asm_files(patch_data):
     if patch_data["options"]["remove_extra_stairs_from_lost_labyrinth_past"]:
