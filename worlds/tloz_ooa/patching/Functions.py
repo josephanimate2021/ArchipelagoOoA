@@ -329,15 +329,15 @@ def define_text_constants(assembler: Z80Assembler, patch_data):
     text_bytes = [0x31, 0x30, 0x20, 0x02, 0x12, 0x01, 0x02, 0x00, 0x00]
     assembler.add_floating_chunk(f"text.tokayMarket1Validation", text_bytes)
                                  ################
-    text_bytes = text_to_binary("Fallen rubbles "
-                                "block the way. "
+    text_bytes = text_to_binary("Fallen rubble  "
+                                "blocks the way. "
                                 "Explosives might "
-                                "clear a way out.")
+                                "clear the exit.")
     text_bytes.extend([0x00])
     assembler.add_floating_chunk(f"text.blockedByRock", text_bytes)
                                  ################
     text_bytes = text_to_binary("A thorny bush "
-                                "block the way. "
+                                "blocks the way. "
                                 "A big fire might "
                                 "take care of it.")
     text_bytes.extend([0x00])
@@ -351,35 +351,35 @@ def define_text_constants(assembler: Z80Assembler, patch_data):
     assembler.add_floating_chunk(f"text.blockedByBrickWall", text_bytes)
                                  ################
     text_bytes = text_to_binary("A closed door "
-                                "block the exit. "
+                                "blocks the exit. "
                                 "It has a rusty "
                                 "unusable padlock")
     text_bytes.extend([0x00])
     assembler.add_floating_chunk(f"text.blockedByLibraryPresent", text_bytes)
                                  ################
     text_bytes = text_to_binary("A closed door "
-                                "block the exit. "
+                                "blocks the exit. "
                                 "It has a book- "
                                 "like padlock.")
     text_bytes.extend([0x00])
     assembler.add_floating_chunk(f"text.blockedByLibraryPast", text_bytes)
                                  ################
     text_bytes = text_to_binary("A closed door "
-                                "block the exit. "
-                                "Its lock looks "
+                                "blocks the exit. "
+                                "The lock looks "
                                 "like a crown.")
     text_bytes.extend([0x00])
     assembler.add_floating_chunk(f"text.blockedByCrown", text_bytes)
                                  ################
     text_bytes = text_to_binary("A closed door "
-                                "block the exit. "
+                                "blocks the exit. "
                                 "It has a rusty "
                                 "fish engraving.")
     text_bytes.extend([0x00])
     assembler.add_floating_chunk(f"text.blockedByMermaidPresent", text_bytes)
                                  ################
     text_bytes = text_to_binary("A closed door "
-                                "block the exit. "
+                                "blocks the exit. "
                                 "It has a clean "
                                 "fish engraving.")
     text_bytes.extend([0x00])
@@ -393,7 +393,7 @@ def define_text_constants(assembler: Z80Assembler, patch_data):
     assembler.add_floating_chunk(f"text.blockedByTeeth", text_bytes)
                                  ################
     text_bytes = text_to_binary("A closed door "
-                                "block the exit. "
+                                "blocks the exit. "
                                 "It has a tokay "
                                 "missing an eye.")
     text_bytes.extend([0x00])
