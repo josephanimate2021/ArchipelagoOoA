@@ -42,7 +42,7 @@ def make_overworld_logic(player: int):
             kinomi_can_jump_pit(state, player)
         ])],
         ["kinomi town", "daichi plain", False, lambda state: state.has("Rod of Seasons", player)], # NOTE: The Rod Of Seasons comes with all seasons by default, so there's no need to consider certain seasons in logic.
-        ["daichi plain", "daichi plain summer old man", False, lambda state: kinomi_has_bracelet(state, player)],
+        ["daichi plain", "daichi plain summer old man", False, lambda state: kinomi_has_glove(state, player)],
         ["daichi plain", "daichi plain gift under mushroom", False, lambda state: kinomi_can_break_mushroom(state, player)],
         ["daichi plain", "winter cave crystal chest", False, lambda state: kinomi_can_break_crystal(state, player)],
         ["daichi plain", "winter cave heartpiece drop", False, None],
@@ -54,7 +54,7 @@ def make_overworld_logic(player: int):
         ["daichi plain", "daichi plain underwater heartpiece", False, lambda state: kinomi_can_swim(state, player)],
         ["daichi plain underwater heartpiece", "fall stone reward", False, None],
         ["daichi plain summer old man", "daichi plain summer old man's rupee", False, None],
-        ["daichi plain", "daichi plain chest", False, lambda state: kinomi_has_bracelet(state, player)],
+        ["daichi plain", "daichi plain chest", False, lambda state: kinomi_has_glove(state, player)],
         ["kinomi town", "four corners cave entrance", False, lambda state: kinomi_has_bombs(state, player)],
 
         # LAKE OF MEMORIES
@@ -88,7 +88,7 @@ def make_overworld_logic(player: int):
             # on basic logic, a player should keep a shield on them so that they can talk to the deku scrub in jiku clifs to get season directions. Those on medium logic don't have to do that.
             all([
                 kinomi_has_shield(state, player),
-                kinomi_has_bracelet(state, player)
+                kinomi_has_glove(state, player)
             ]),
             kinomi_option_medium_logic(state, player)
         ])],
@@ -110,7 +110,7 @@ def make_overworld_logic(player: int):
         ["deeper woods old man 2", "deeper woods underground heartpiece", False, lambda state: kinomi_can_swim(state, player)],
         ["deeper woods underground heartpiece", "familar swamp gift", False, lambda state: all([
             kinomi_can_jump_pit(state, player),
-            kinomi_has_bracelet(state, player),
+            kinomi_has_glove(state, player),
             kinomi_can_break_bush(state, player),
             kinomi_can_kill_normal_enemy(state, player)
         ])],
@@ -126,14 +126,14 @@ def make_overworld_logic(player: int):
 
         # JIKU CLIFS
         #######################################
-        ["kinomi town", "jiku clifs", False, lambda state: kinomi_has_bracelet(state, player)],
+        ["kinomi town", "jiku clifs", False, lambda state: kinomi_has_glove(state, player)],
         ["jiku clifs", "jiku clifs heartpiece hidding in hole", False, lambda state: kinomi_has_cane(state, player)],
         ["jiku clifs", "heartpiece under rock", False, None], # You can lift up the bushes with a bracelet.
         ["jiku clifs", "old lady trade", False, lambda state: state.has("Life Potion", player)],
         ["jiku clifs", "jiku clifs shop", False, lambda state: all([
             any([
                 kinomi_can_jump_pit(state, player),
-                kinomi_has_bracelet(state, player) # Already in jiku clifs entry logic but defined anyway to not incorrect the logic.
+                kinomi_has_glove(state, player) # Already in jiku clifs entry logic but defined anyway to not incorrect the logic.
             ]),
             kinomi_can_swim(state, player)
         ])],
@@ -190,17 +190,16 @@ def make_overworld_logic(player: int):
             state.has("_has_access_to_syrups_shop", player),
             state.has("Mushroom", player)
         ])],
-        ["tokay desert", "tokay desert outdoor chests", False, lambda state: kinomi_has_glove(state, player)],
-        ["tokay desert outdoor chests", "tokay desert chest", False, None],
-        ["tokay desert outdoor chests", "tokay desert second chest", False, lambda state: any([
+        ["tokay desert", "tokay desert chest", False, None],
+        ["tokay desert", "tokay desert second chest", False, lambda state: any([
             kinomi_can_jump_4_wide_pit(state, player),
             kinomi_has_cane(state, player)
         ])],
-        ["tokay desert outdoor chests", "tokay desert third chest", False, lambda state: any([
+        ["tokay desert", "tokay desert third chest", False, lambda state: any([
             kinomi_can_jump_pit(state, player),
             kinomi_has_cane(state, player)
         ])],
-        ["tokay desert outdoor chests", "tokay desert fourth chest", False, None],
+        ["tokay desert", "tokay desert fourth chest", False, None],
         ["tokay desert", "chest inside first tokay house", False, None],
         ["d5 chest near slate slots", "chest in bottom screen of graveyard", False, None],
     ]

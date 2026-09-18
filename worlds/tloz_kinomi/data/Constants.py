@@ -83,7 +83,6 @@ SHOP_PRICES_DIVIDERS = {
     "kinomiShop2": 1,
     "kinomiShop3": 1,
     "hiddenShop1": 1,
-    "hiddenShop2": 1,
     "hiddenShop3": 1,
     "seaShop1": 1,
     "seaShop2": 1,

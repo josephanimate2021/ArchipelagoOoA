@@ -124,6 +124,8 @@ class GiftsOfKinomiWorld(World):
                     break
 
     def location_is_active(self, location_name, location_data):
+        if "dungeon" in location_data and location_data["dungeon"] == 7 and not self.options.open_staircase_to_ancient_ages_locations:
+            return False
         if "conditional" not in location_data or location_data["conditional"] is False:
             return True
 

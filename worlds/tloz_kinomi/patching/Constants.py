@@ -44,7 +44,8 @@ STATIC_ITEM_ROOM_ORDER = [ # This is the list of rooms I put in order inside my 
 	0x0057,
 	0x0011,
 	0x0427,
-	0x0160
+	0x0160,
+    0x020a
 ]
 
 REFILL_NPCS = {

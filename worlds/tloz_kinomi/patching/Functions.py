@@ -176,7 +176,9 @@ def define_text_constants(assembler: Z80Assembler, patch_data):
     ]
 
     for shop_name in overworld_shops:
-        for i in range(1, 4):
+        for i in range(1, 4 if shop_name == "Jiku Clifs (Present): Shop" else 3):
+            if shop_name == "Kinomi Town: Hidden Shop" and i == 2:
+                continue
             location_name = f"{shop_name} #{i}"
             symbolic_name = LOCATIONS_DATA[location_name]["symbolic_name"]
             text_bytes = []
@@ -194,7 +196,12 @@ def write_chest_contents(rom: RomData, patch_data):
     This puts the item described in the patch data inside each chest in the game.
     """
     for location_name, location_data in LOCATIONS_DATA.items():
-        if ('collect' not in location_data or 'room' not in location_data or location_data['collect'] != COLLECT_CHEST):
+        if (
+            'collect' not in location_data 
+            or 'room' not in location_data 
+            or location_data['collect'] != COLLECT_CHEST
+            or location_name not in patch_data["locations"]
+        ):
             continue
         else:
             chest_addr = rom.get_chest_addr(location_data['room'], 0x16, 0x55ed)
@@ -202,6 +209,23 @@ def write_chest_contents(rom: RomData, patch_data):
         item_id, item_subid = get_item_id_and_subid(item_name)
         rom.write_byte(chest_addr, item_id)
         rom.write_byte(chest_addr + 1, item_subid)
+
+def write_rando_npcItem_contents(rom: RomData, patch_data):
+    """
+    Items given by NPCs work differently than freestanding items, which is why they are much easier to work with
+    """
+    for location_name, location_data in LOCATIONS_DATA.items():
+        if (
+            'room' not in location_data
+            or location_name not in patch_data["locations"]
+            or "npc_item" not in location_data
+        ):
+            continue
+
+        item_name = patch_data["locations"][location_name]
+        item_id, item_subid = get_item_id_and_subid(item_name)
+        if "addr" in location_data:
+            rom.write_bytes(location_data["addr"], [item_id, item_subid])
 
 
 def define_compass_rooms_table(assembler: Z80Assembler, patch_data):
@@ -236,7 +260,7 @@ def inject_slot_name(rom: RomData, slot_name: str):
 def set_newGame_stuff(rom: RomData):
     rom.write_byte(GameboyAddress(0x02, 0x420f).address_in_rom(), 0x02) # Skip the screen to select link, secret or new game and skip to new game
     rom.write_byte(GameboyAddress(0x01, 0x7fc1).address_in_rom(), 0x00) # Set starting bomb to 0.
-    rom.write_byte(GameboyAddress(0x02, 0x78e4).address_in_rom(), 0x14) # Sets the bank to 14 for the file select text.
+    rom.write_byte(GameboyAddress(0x02, 0x792f).address_in_rom(), 0x14) # Sets the bank to 14 for the file select text.
     
 def write_seed_tree_content(rom: RomData, patch_data):
     for _, tree_data in SEED_TREE_DATA.items():

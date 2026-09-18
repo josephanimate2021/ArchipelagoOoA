@@ -76,6 +76,7 @@ class KinomiPatchExtensions(APPatchExtension):
 
         alter_treasures(rom_data)
         write_chest_contents(rom_data, patch_data)
+        write_rando_npcItem_contents(rom_data, patch_data)
         #write_seed_tree_content(rom_data, patch_data)
         #set_dungeon_warps(rom_data, patch_data)
         #apply_miscellaneous_options(rom_data, patch_data)

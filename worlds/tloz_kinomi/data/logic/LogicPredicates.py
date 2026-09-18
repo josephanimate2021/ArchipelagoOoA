@@ -19,9 +19,6 @@ def kinomi_has_shield(state: CollectionState, player: int):
 def kinomi_has_satchel(state: CollectionState, player: int, level: int = 1):
     return state.has("Seed Satchel", player, level)
 
-def kinomi_has_slingshot(state: CollectionState, player: int, level: int = 1):
-    return state.has("Progressive Slingshot", player, level)
-
 def kinomi_has_boomerang(state: CollectionState, player: int):
     return state.has("Boomerang", player)
 
@@ -29,11 +26,8 @@ def kinomi_has_boomerang(state: CollectionState, player: int):
 def kinomi_has_cane(state: CollectionState, player: int):
     return state.has("Cane of Somaria", player)
 
-def kinomi_has_bracelet(state: CollectionState, player: int):
-    return state.has("Progressive Bracelet", player)
-
 def kinomi_has_glove(state: CollectionState, player: int):
-    return state.has("Progressive Bracelet", player, 2)
+    return state.has("Power Glove", player)
 
 def kinomi_has_shovel(state: CollectionState, player: int):
     return state.has("Shovel", player)
@@ -156,7 +150,7 @@ def kinomi_can_press_nonhold_presure_plate_without_blocks(state: CollectionState
         all([
             pots_around,
             any([
-                kinomi_has_bracelet(state, player),
+                kinomi_has_glove(state, player),
                 all([
                     kinomi_can_break_pot(state, player),
                     kinomi_has_cane(state, player)
@@ -172,7 +166,6 @@ def kinomi_can_trigger_switch(state: CollectionState, player: int):
     return any([
         kinomi_has_boomerang(state, player),
         kinomi_has_bombs(state, player),
-        kinomi_has_slingshot(state, player),
         all([
             kinomi_has_satchel(state, player),
             any([
@@ -185,16 +178,12 @@ def kinomi_can_trigger_switch(state: CollectionState, player: int):
         kinomi_can_punch(state, player),
     ])
 
-def kinomi_can_trigger_far_switch(state: CollectionState, player: int, sword_allowed: bool = True, bombs_allowed: bool = True, slingshot_allowed: bool = True):
+def kinomi_can_trigger_far_switch(state: CollectionState, player: int, sword_allowed: bool = True, bombs_allowed: bool = True):
     return any([
         kinomi_has_boomerang(state, player),
         all([
             bombs_allowed,
             kinomi_has_bombs(state, player)
-        ]),
-        all([
-            slingshot_allowed,
-            kinomi_has_slingshot(state, player)
         ]),
         all([
             sword_allowed,
@@ -243,7 +232,7 @@ def kinomi_can_jump_5_wide_pit(state: CollectionState, player: int):
 # Seed-related predicates ###########################################
 
 def kinomi_can_use_seeds(state: CollectionState, player: int):
-    return kinomi_has_satchel(state, player) or kinomi_has_slingshot(state, player)
+    return kinomi_has_satchel(state, player)
 
 def kinomi_has_seed_kind_count(state: CollectionState, player: int, count: int):
     seedCount = 0
@@ -273,7 +262,6 @@ def kinomi_can_use_ember_seeds(state: CollectionState, player: int, accept_myste
 def kinomi_can_use_scent_seeds_offensively(state: CollectionState, player: int):
     return all([
         any([
-            kinomi_has_slingshot(state, player),
             all([
                 kinomi_option_hard_logic(state, player),
                 kinomi_has_satchel(state, player)
@@ -296,7 +284,7 @@ def kinomi_can_use_pegasus_seeds(state: CollectionState, player: int):
     ])
 
 def kinomi_can_use_pegasus_seeds_for_stun(state: CollectionState, player: int):
-    return kinomi_has_pegasus_seeds(state, player) and kinomi_has_slingshot(state, player)
+    return kinomi_has_pegasus_seeds(state, player)
 
 def kinomi_can_warp_using_gale_seeds(state: CollectionState, player: int):
     return all([
@@ -305,21 +293,17 @@ def kinomi_can_warp_using_gale_seeds(state: CollectionState, player: int):
     ])
 
 
-def kinomi_can_use_gale_seeds_offensively(state: CollectionState, player: int, ranged: bool = False):
+def kinomi_can_use_gale_seeds_offensively(state: CollectionState, player: int):
     # If we don't have gale seeds or aren't at least in medium logic, don't even try
     if not kinomi_has_gale_seeds(state, player) or not kinomi_option_medium_logic(state, player):
         return False
 
-    return any([
-        kinomi_has_slingshot(state, player),
-        all([
-            not ranged,
-            kinomi_has_satchel(state, player),
-            any([
-                kinomi_option_hard_logic(state, player),
-                kinomi_can_jump_pit(state, player)
-            ]),
-        ])
+    return all([
+        kinomi_has_satchel(state, player),
+        any([
+            kinomi_option_hard_logic(state, player),
+            kinomi_can_jump_pit(state, player)
+        ]),
     ])
 
 
@@ -335,12 +319,12 @@ def kinomi_can_use_mystery_seeds(state: CollectionState, player: int):
 def kinomi_can_break_bush(state: CollectionState, player: int):
     return any([
         kinomi_can_break_flower(state, player),
-        kinomi_has_bracelet(state, player),
+        kinomi_has_glove(state, player),
     ])
 
 def kinomi_can_break_mushroom(state: CollectionState, player: int):
     return any([
-        kinomi_has_bracelet(state, player),
+        kinomi_has_glove(state, player),
         all([
             kinomi_option_medium_logic(state, player),
             kinomi_has_boomerang(state, player)
@@ -357,7 +341,7 @@ def kinomi_can_break_flower(state: CollectionState, player: int):
             any([
                 kinomi_has_bombs(state, player, 2),
                 kinomi_can_use_ember_seeds(state, player, False),
-                (kinomi_has_slingshot(state, player) and kinomi_has_gale_seeds(state, player)),
+                (kinomi_has_gale_seeds(state, player)),
             ])
         ]),
     ])
@@ -372,7 +356,7 @@ def kinomi_can_harvest_regrowing_bush(state: CollectionState, player: int, allow
 
 def kinomi_can_break_pot(state: CollectionState, player: int):
     return any([
-        kinomi_has_bracelet(state, player),
+        kinomi_has_glove(state, player),
         all([
             kinomi_option_medium_logic(state, player), # When you get the L-2 sword from the item drop, you can break pots. For basic logic, i only added the bracelet to basic logic to prevent softlocks.
             kinomi_has_sword(state, player, False)
@@ -391,7 +375,7 @@ def kinomi_can_break_flowers(state: CollectionState, player: int):
             any([
                 kinomi_has_bombs(state, player, 2),
                 kinomi_can_use_ember_seeds(state, player, False),
-                (kinomi_has_slingshot(state, player) and kinomi_has_gale_seeds(state, player)),
+                (kinomi_has_gale_seeds(state, player)),
             ])
         ]),
     ])
@@ -401,7 +385,7 @@ def kinomi_can_break_crystal(state: CollectionState, player: int):
     return any([
         kinomi_has_sword(state, player),
         kinomi_has_bombs(state, player),
-        kinomi_has_bracelet(state, player),
+        kinomi_has_glove(state, player),
         all([
             kinomi_option_medium_logic(state, player),
             state.has("Expert's Ring", player)
@@ -420,7 +404,7 @@ def kinomi_can_break_sign(state: CollectionState, player: int):
     return any([
         kinomi_has_sword(state, player), # As long as you get the L-2 sword item drop.
         state.has("Biggoron's Sword", player),
-        kinomi_has_bracelet(state, player),
+        kinomi_has_glove(state, player),
         kinomi_can_use_ember_seeds(state, player, False),
     ])
 
@@ -524,7 +508,6 @@ def kinomi_can_kill_normal_using_seedshooter(state: CollectionState, player: int
         return False
 
     return all([
-        kinomi_has_slingshot(state, player),
         any([
             kinomi_has_ember_seeds(state, player),
             kinomi_has_scent_seeds(state, player),
@@ -545,10 +528,6 @@ def kinomi_can_kill_armored_enemy(state: CollectionState, player: int):
         all([
             kinomi_has_satchel(state, player, 2),  # Expect a 50+ seeds satchel to be able to chain rooms in dungeons
             kinomi_has_scent_seeds(state, player),
-            any([
-                kinomi_has_slingshot(state, player),
-                kinomi_option_medium_logic(state, player)
-            ])
         ]),
         (kinomi_option_medium_logic(state, player) and kinomi_has_cane(state, player)),
         kinomi_can_punch(state, player)
@@ -596,8 +575,7 @@ def kinomi_can_trigger_lever_from_minecart(state: CollectionState, player: int):
 
         # TODO: Test that to ensure our understanding is right
         kinomi_can_use_scent_seeds_offensively(state, player),
-        kinomi_can_use_mystery_seeds(state, player),
-        kinomi_has_slingshot(state, player)
+        kinomi_can_use_mystery_seeds(state, player)
     ])
 
 
@@ -640,7 +618,7 @@ def kinomi_can_remove_dirt(state: CollectionState, player: int, can_summon_compa
 def kinomi_can_toss_ring(state: CollectionState, player: int):
     return all([
         kinomi_option_medium_logic(state, player),
-        kinomi_has_bracelet(state, player),
+        kinomi_has_glove(state, player),
         state.has("Toss Ring", player)
     ])
 

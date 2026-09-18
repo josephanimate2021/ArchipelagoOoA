@@ -1,1 +1,2 @@
-24/748b/: db $dc
+24/748b/: db $dc ; add stair tile close to kinomi town
+04/4025/: db $8d,$26 ; change warp dest to spirit's grave entrance 

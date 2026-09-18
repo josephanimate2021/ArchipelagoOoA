@@ -1,4 +1,5 @@
 from .Constants import *
+from ..common.patching.z80asm.Assembler import GameboyAddress
 
 LOCATIONS_DATA = {
     "Maple Trade": {
@@ -7,23 +8,23 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc6d2,
         "room": 0x0300,
         "bit_mask": 0x80,
-        "collect": COLLECT_TOUCH,
+        "npc_item": True,
         "randomized": False,
-        "symbolic_name": "mapleTrade",
+        "addr": GameboyAddress(0x0b, 0x4b70).address_in_rom(),
     },
     "Kinomi Town: Ghost's House": {
         "region_id": "ghost's house",
         "vanilla_item": "Falls Key",
         "flag_byte": 0xc70e,
         "room": 0x020e,
-        "collect": COLLECT_TOUCH
+        "npc_item": True,
     },
     "Kinomi Town: Librarian": {
         "region_id": "old man's library",
         "vanilla_item": "Old Labyrinth Key",
         "flag_byte": 0xc718,
         "room": 0x0218,
-        "collect": COLLECT_TOUCH,
+        "npc_item": True,
         "randomized": False,
     },
     "Kinomi Town: Library Employee": {
@@ -31,15 +32,13 @@ LOCATIONS_DATA = {
         "vanilla_item": "Potion",
         "flag_byte": 0xc72e,
         "room": 0x022e,
-        "collect": COLLECT_TOUCH
+        "npc_item": True,
     },
     "Kinomi Town: Heart Piece at Link's House": {
         "region_id": "link's house heartpiece",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc808,
         "room": 0x0308,
-        "collect": COLLECT_TOUCH,
-        "static_item": True
     },
     # -----
     "Kinomi Town: Shop #1": {
@@ -51,7 +50,6 @@ LOCATIONS_DATA = {
         "bit_mask": 0x20,
         "scouting_byte": 0xc75e,
         "scouting_mask": 0x10,
-        "collect": COLLECT_TOUCH,
         "symbolic_name": "kinomiShop1",
     },
     "Kinomi Town: Shop #2": {
@@ -63,7 +61,6 @@ LOCATIONS_DATA = {
         "bit_mask": 0x40,
         "scouting_byte": 0xc75e,
         "scouting_mask": 0x10,
-        "collect": COLLECT_TOUCH,
         "symbolic_name": "kinomiShop2",
     },
     "Kinomi Town: Shop #3": {
@@ -75,7 +72,6 @@ LOCATIONS_DATA = {
         "bit_mask": 0x80,
         "scouting_byte": 0xc75e,
         "scouting_mask": 0x10,
-        "collect": COLLECT_TOUCH,
         "symbolic_name": "kinomiShop3",
     },
     # -----
@@ -87,19 +83,7 @@ LOCATIONS_DATA = {
         "bit_mask": 0x01,
         "scouting_byte": 0xc77e,
         "scouting_mask": 0x10,
-        "collect": COLLECT_TOUCH,
         "symbolic_name": "hiddenShop1",
-    },
-    "Kinomi Town: Hidden Shop #2": {
-        "region_id": "hidden shop",
-        "vanilla_item": "Progressive Slingshot",
-        "flag_byte": 0xc642,
-        "room": 0x027e,
-        "bit_mask": 0x02,
-        "scouting_byte": 0xc77e,
-        "scouting_mask": 0x10,
-        "collect": COLLECT_TOUCH,
-        "symbolic_name": "hiddenShop2",
     },
     "Kinomi Town: Hidden Shop #3": {
         "region_id": "hidden shop",
@@ -109,7 +93,6 @@ LOCATIONS_DATA = {
         "bit_mask": 0x04,
         "scouting_byte": 0xc77e,
         "scouting_mask": 0x10,
-        "collect": COLLECT_TOUCH,
         "symbolic_name": "hiddenShop3",
     },
     ##########################################
@@ -133,7 +116,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Seed Satchel",
         "flag_byte": 0xc74e,
         "room": 0x024e,
-        "collect": COLLECT_TOUCH
+        "npc_item": True
     },
     ##########################################
     "Daichi Plain: Bomb Storehouse": {
@@ -141,14 +124,12 @@ LOCATIONS_DATA = {
         "vanilla_item": "Bombs (10)",
         "flag_byte": 0xc818,
         "room": 0x0318,
-        "collect": COLLECT_TOUCH
     },
     "Daichi Plain: Gravesite Basement": {
         "region_id": "daichi plain gravesite basement",
         "vanilla_item": "Shovel",
         "flag_byte": 0xc80d,
         "room": 0x030d,
-        "collect": COLLECT_CHEST
     },
     "Daichi Plain: Old Man": {
         "region_id": "daichi plain old man",
@@ -156,14 +137,13 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca06,
         "room": 0x0506,
         "bit_mask": 0x40,
-        "collect": COLLECT_TOUCH
+        "npc_item": True
     },
     "Daichi Plain: Old Man's Rupee": {
         "region_id": "daichi plain old man's rupee",
         "vanilla_item": "Rupees (40)",
         "flag_byte": 0xca06,
         "room": 0x0506,
-        "collect": COLLECT_TOUCH
     },
     "Daichi Plain: Old Man (Summer)": {
         "region_id": "daichi plain summer old man",
@@ -171,42 +151,38 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca09,
         "room": 0x0509,
         "bit_mask": 0x40,
-        "collect": COLLECT_TOUCH
+        "npc_item": True
     },
     "Daichi Plain: Old Man (Summer)'s Rupee": {
         "region_id": "daichi plain summer old man's rupee",
         "vanilla_item": "Rupees (500)",
         "flag_byte": 0xca09,
         "room": 0x0509,
-        "collect": COLLECT_TOUCH
     },
     "Daichi Plain: Gravesite Heart Piece": {
         "region_id": "daichi plain gravesite heartpiece",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc705,
         "room": 0x0005,
-        "collect": COLLECT_TOUCH
     },
     "Daichi Plain: Gift Under Mushroom": {
         "region_id": "daichi plain gift under mushroom",
         "vanilla_item": "Rupees (200)",
         "flag_byte": 0xc707,
         "room": 0x0007,
-        "collect": COLLECT_TOUCH
     },
     "Daichi Plain: Chest": {
         "region_id": "daichi plain chest",
         "vanilla_item": "Rupees (20)",
         "flag_byte": 0xc727,
         "room": 0x0027,
-        "collect": COLLECT_TOUCH
+        "collect": COLLECT_CHEST
     },
     "Daichi Plain: Fall Stone Reward": {
         "region_id": "fall stone reward",
         "vanilla_item": "Autumn Stone",
         "flag_byte": 0xca0c,
         "room": 0x070c,
-        "collect": COLLECT_TOUCH
     },
     "Daichi Plain: Winter Cave Crystal Chest": {
         "region_id": "winter cave crystal chest",
@@ -220,7 +196,6 @@ LOCATIONS_DATA = {
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc82a,
         "room": 0x032a,
-        "collect": COLLECT_DROP
     },
     "Daichi Plain: Winter Cave Stone Chest": {
         "region_id": "winter stone reward",
@@ -234,7 +209,6 @@ LOCATIONS_DATA = {
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xca0d,
         "room": 0x070d,
-        "collect": COLLECT_TOUCH
     },
     ##########################################
     "Lake of Memories: Old Man": {
@@ -243,7 +217,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xcafe,
         "room": 0x05fe,
         "bit_mask": 0x40,
-        "collect": COLLECT_TOUCH
+        "npc_item": True
     },
     "Lake of Memories: Old Man's Chest": {
         "region_id": "lake of memories old man's chest",
@@ -257,7 +231,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Gasha Seed",
         "flag_byte": 0xc7e9,
         "room": 0x02e9,
-        "collect": COLLECT_TOUCH,
+        "npc_item": True,
     },
     "Lake of Memories: Scrapped Chest": {
         "region_id": "lake of memories scrapped chest",
@@ -278,7 +252,6 @@ LOCATIONS_DATA = {
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc744,
         "room": 0x0044,
-        "collect": COLLECT_TOUCH
     },
     ##########################################
     "Hedge Maze: Old Man 2": {
@@ -287,14 +260,13 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca0a,
         "room": 0x050a,
         "bit_mask": 0x40,
-        "collect": COLLECT_TOUCH
+        "npc_item": True
     },
     "Hedge Maze: Old Man 2's Rupee Under Pot": {
         "region_id": "hedge maze old man 2's rupee",
         "vanilla_item": "Rupees (20)",
         "flag_byte": 0xca0a,
         "room": 0x050a,
-        "collect": COLLECT_TOUCH
     },
     "Hedge Maze: Old Man 1": {
         "region_id": "hedge maze old man 1",
@@ -302,7 +274,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca08,
         "room": 0x0508,
         "bit_mask": 0x40,
-        "collect": COLLECT_TOUCH
+        "npc_item": True
     },
     "Hedge Maze: Old Man 1's Chest": {
         "region_id": "hedge maze old man 1's chest",
@@ -325,14 +297,13 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca07,
         "room": 0x0507,
         "bit_mask": 0x40,
-        "collect": COLLECT_TOUCH
+        "npc_item": True
     },
     "Deeper Woods: Old Man 1's Heart Piece Under Pot": {
         "region_id": "deeper woods old man 1's heartpiece",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xca07,
         "room": 0x0507,
-        "collect": COLLECT_TOUCH
     },
     "Deeper Woods: Old Man 2": {
         "region_id": "deeper woods old man 2",
@@ -340,34 +311,31 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca0b,
         "room": 0x050b,
         "bit_mask": 0x40,
-        "collect": COLLECT_TOUCH
+        "npc_item": True
     },
     "Deeper Woods: Old Man 2's Rupee Under Pot": {
         "region_id": "deeper woods old man 2's rupee",
         "vanilla_item": "Rupees (50)",
         "flag_byte": 0xca0b,
         "room": 0x050b,
-        "collect": COLLECT_TOUCH
     },
     "Deeper Woods: Underground Heart Piece": {
         "region_id": "deeper woods underground heartpiece",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xca05,
         "room": 0x0705,
-        "collect": COLLECT_TOUCH
     },
     "Deeper Woods: Heart Piece Under Tree": {
         "region_id": "deeper woods heartpiece under tree",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc757,
         "room": 0x0057,
-        "collect": COLLECT_TOUCH
     },
     "Deeper Woods: Cave Heart Piece": {
         "region_id": "deeper woods chest",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xcafc,
-        "room": 0x07fc,
+        "room": 0x05fc,
         "collect": COLLECT_CHEST
     },
     "Spool Swamp Remains: Kill Blue Lynel": {
@@ -382,7 +350,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Red Pearl",
         "flag_byte": 0xc88a,
         "room": 0x038a,
-        "collect": COLLECT_TOUCH
+        "npc_item": True
     },
     "Deeper Woods: Happy Mask Salesman Trade": {
         "region_id": "deeper woods swordsman trade",
@@ -390,7 +358,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc80a,
         "room": 0x030a,
         "randomized": False,
-        "collect": COLLECT_TOUCH
+        "npc_item": True
     },
     ##########################################
     "Jiku Clifs (Present): Heart Piece Under Rock": {
@@ -398,14 +366,12 @@ LOCATIONS_DATA = {
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc732,
         "room": 0x0032,
-        "collect": COLLECT_TOUCH,
     },
     "Jiku Clifs (Present): Fill Hole for Heart Piece": {
         "region_id": "jiku clifs heartpiece hidding in hole",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc773,
         "room": 0x0073,
-        "collect": COLLECT_POOF,
     },
     "Jiku Clifs (Present): Life Potion Trade": {
         "region_id": "old lady trade",
@@ -413,7 +379,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc728,
         "room": 0x0228,
         "randomized": False,
-        "collect": COLLECT_TOUCH,
+        "npc_item": True
     },
     "Jiku Clifs (Present): Rupee Chest Outside Lost Labyrinth": {
         "region_id": "chest inside cave outside lost labyrinth present entrance",
@@ -427,7 +393,6 @@ LOCATIONS_DATA = {
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xca04,
         "room": 0x0704,
-        "collect": COLLECT_TOUCH,
     },
     # -----
     "Jiku Clifs (Present): Shop #1": {
@@ -438,7 +403,6 @@ LOCATIONS_DATA = {
         "bit_mask": 0x10,
         "scouting_byte": 0xc8fe,
         "scouting_mask": 0x10,
-        "collect": COLLECT_TOUCH,
         "symbolic_name": "seaShop1",
     },
     "Jiku Clifs (Present): Shop #2": {
@@ -449,7 +413,6 @@ LOCATIONS_DATA = {
         "bit_mask": 0x20,
         "scouting_byte": 0xc8fe,
         "scouting_mask": 0x10,
-        "collect": COLLECT_TOUCH,
         "symbolic_name": "seaShop2",
     },
     "Jiku Clifs (Present): Shop #3": {
@@ -460,7 +423,6 @@ LOCATIONS_DATA = {
         "bit_mask": 0x40,
         "scouting_byte": 0xc8fe,
         "scouting_mask": 0x10,
-        "collect": COLLECT_TOUCH,
         "symbolic_name": "seaShop3",
     },
     "Jiku Clifs (Present): Shop #4": {
@@ -471,7 +433,6 @@ LOCATIONS_DATA = {
         "bit_mask": 0x60,
         "scouting_byte": 0xc8fe,
         "scouting_mask": 0x10,
-        "collect": COLLECT_TOUCH,
         "symbolic_name": "seaShop4",
     },
     ##########################################
@@ -501,14 +462,14 @@ LOCATIONS_DATA = {
         "vanilla_item": "Bombs (10)",
         "flag_byte": 0xc811,
         "room": 0x0111,
-        "collect": COLLECT_TOUCH,
+        "npc_item": True
     },
     "Jiku Clifs (Past): Goron Dance": {
         "region_id": "goron dance",
         "vanilla_item": "Blue Pearl",
         "flag_byte": 0xc72d,
         "room": 0x022d,
-        "collect": COLLECT_TOUCH,
+        "npc_item": True
     },
     "Jiku Clifs (Past): Underwater Heart Piece": {
         "region_id": "jiku clifs past underwater heartpiece",
@@ -536,7 +497,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Zora Scale",
         "flag_byte": 0xc87b,
         "room": 0x017b,
-        "collect": COLLECT_TOUCH,
+        "npc_item": True
     },
     ##########################################
     "Tokay Desert: First Chest": {
@@ -642,7 +603,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xcab8,
         "room": 0x05b8,
-        "collect": COLLECT_TOUCH,
+        "npc_item": True,
         "dungeon": 0,
         "static_item": True
     },
@@ -726,7 +687,6 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca27,
         "room": 0x0627,
         "dungeon": 1,
-        "collect": COLLECT_TOUCH,
     },
     "Spirit's Grotto: Compass Chest": {
         "region_id": "d1 compass chest",
@@ -762,11 +722,12 @@ LOCATIONS_DATA = {
     },
     "Spirit's Grotto: Bracelet": {
         "region_id": "d1 bracelet",
-        "vanilla_item": "Progressive Bracelet",
+        "vanilla_item": "Gasha Seed",
         "flag_byte": 0xca10,
         "room": 0x0610,
         "dungeon": 1,
-        "collect": COLLECT_TOUCH,
+        "npc_item": True,
+        "addr": GameboyAddress(0x0c, 0x4bcd).address_in_rom()
     },
     "Spirit's Grotto: Hit Color Block": {
         "region_id": "d1 hit color block",
@@ -790,7 +751,6 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc91e,
         "room": 0x041e,
         "dungeon": 1,
-        "collect": COLLECT_TOUCH,
     },
     "Spirit's Grotto: Boss Key Chest": {
         "region_id": "d1 boss key chest",
@@ -806,7 +766,6 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc929,
         "room": 0x0429,
         "dungeon": 1,
-        "collect": COLLECT_TOUCH,
     },
     "Spirit's Grotto: Boss": {
         "region_id": "d1 boss",
@@ -840,7 +799,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc953,
         "room": 0x0453,
         "dungeon": 2,
-        "collect": COLLECT_TOUCH,
+        
     },
     "Lost Labyrinth (Past): Patch Up Holes at Entrance": {
         "region_id": "d2 past fix holes at entrance",
@@ -848,7 +807,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc951,
         "room": 0x0451,
         "dungeon": 2,
-        "collect": COLLECT_TOUCH,
+        
     },
     "Lost Labyrinth (Past): Small Key Drop": {
         "region_id": "d2 past small key drop",
@@ -856,7 +815,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc952,
         "room": 0x0452,
         "dungeon": 2,
-        "collect": COLLECT_TOUCH,
+        
     },
     "Lost Labyrinth (Past): Second Keydrop": {
         "region_id": "d2 past small key drop 2",
@@ -864,7 +823,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc94e,
         "room": 0x044e,
         "dungeon": 2,
-        "collect": COLLECT_TOUCH,
+        
     },
     "Lost Labyrinth (Past): Color Tiles": {
         "region_id": "d2 past color tile puzzle",
@@ -879,7 +838,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Small Key (Lost Labyrinth (Past))",
         "flag_byte": 0xc958,
         "room": 0x0458,
-        "collect": COLLECT_TOUCH,
+        
         "dungeon": 2
     },
     "Lost Labyrinth (Past): Color Tiles Puzzle 2": {
@@ -888,7 +847,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc95c,
         "room": 0x045c,
         "dungeon": 2,
-        "collect": COLLECT_TOUCH,
+        
     },
     "Lost Labyrinth (Past): Witch's Chest": {
         "region_id": "d2 past witch's chest",
@@ -896,7 +855,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc94b,
         "room": 0x044b,
         "randomized": False,
-        "collect": COLLECT_TOUCH,
+        "collect": COLLECT_CHEST,
     },
     "Lost Labyrinth (Past): Kill Enemies": {
         "region_id": "d2 past kill enemies chest",
@@ -1058,7 +1017,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc858, 
         "room": 0x0358,
         "dungeon": 3,
-        "collect": COLLECT_TOUCH,
+        "npc_item": True
     },
     ##########################################
     "Seasons Shrine (Summer): Small Key Drop": {
@@ -1099,7 +1058,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca34, 
         "room": 0x0534,
         "dungeon": 4,
-        "collect": COLLECT_TOUCH,
+        
     },
     "Seasons Shrine (Autumn): Statue Block Puzzle": {
         "region_id": "d4 autumn to summer statue block puzzle",
@@ -1196,7 +1155,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc778, 
         "room": 0x0078,
         "randomized": False,
-        "collect": COLLECT_TOUCH,
+        
     },
     "North Horon Remains: Impa's House": {
         "region_id": "impa's seasons house chest",
@@ -1241,7 +1200,7 @@ LOCATIONS_DATA = {
     },
     "Temple of The Tokay (1F): Glove Near Fifth Hint Code Tiles": {
         "region_id": "d5 chest near fifth codepiece",
-        "vanilla_item": "Progressive Bracelet",
+        "vanilla_item": "Power Glove",
         "flag_byte": 0xc96e, 
         "room": 0x046e,
         "dungeon": 5,
@@ -1415,7 +1374,6 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc97e, 
         "room": 0x047e,
         "dungeon": 6,
-        "collect": COLLECT_TOUCH,
     },
     "Forest of Time (Present) Remains: Nayru's House": {
         "region_id": "nayru's house",

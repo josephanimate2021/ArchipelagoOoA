@@ -55,7 +55,7 @@ def make_spiritGrotto_logic(player: int):
         ])],
         ["enter spirit's grotto", "d1 pully puzzle", False, lambda state: all([
             kinomi_has_small_keys(state, player, 1, 1),
-            kinomi_has_bracelet(state, player)
+            kinomi_has_glove(state, player)
         ])],
         ["d1 pully puzzle", "d1 rupee under pot", False, None],
         ["d1 pully puzzle", "d1 boss key chest", False, None],
@@ -64,7 +64,7 @@ def make_spiritGrotto_logic(player: int):
             kinomi_has_bombs(state, player)
         ])],
         ["d1 rupee under crystal", "d1 boss", False, lambda state: all([
-            kinomi_has_bracelet(state, player),
+            kinomi_has_glove(state, player),
             kinomi_has_boss_key(state, player, 1),
             kinomi_generic_boss_and_miniboss_kill(state, player)
         ])],
@@ -185,10 +185,7 @@ def make_seasonsShrine_logic(player: int):
         ])],
         ["d4 spring fall", "d4 spring small key chest", False, lambda state: all([
             kinomi_can_use_ember_seeds(state, player, True),
-            any([
-                kinomi_can_jump_pit(state, player),
-                kinomi_has_slingshot(state, player, 2)
-            ]),
+            kinomi_can_jump_pit(state, player),
             kinomi_can_kill_normal_enemy(state, player),
         ])],
         ["d4 spring small key chest", "d4 third crystal", False, lambda state: kinomi_can_break_d4_crystal(state, player)],
@@ -243,7 +240,7 @@ def make_lostLabrinth_logic(player: int):
         ["d2 present dungeon map chest", "nayru's house", False, None],
         ["lost labyrinth past entrance 4", "d2 present fix holes", False, lambda state: any([
             kinomi_has_cane(state, player),
-            kinomi_has_bracelet(state, player)
+            kinomi_has_glove(state, player)
         ])],
         ["d2 present fix holes", "d2 present cross with cane", False, None],
         ["d2 present fix holes", "d2 present color tiles", False, lambda state: kinomi_has_sword(state, player)],
@@ -388,7 +385,7 @@ def make_crownDungeon_logic(player: int):
                 kinomi_can_trigger_switch(state, player),
                 all([
                     kinomi_option_hard_logic(state, player), # Not hard to reproduce but clearly not instinctive to find.
-                    kinomi_has_bracelet(state, player),
+                    kinomi_has_glove(state, player),
                 ])
             ])
         ])],
@@ -413,7 +410,7 @@ def make_crownDungeon_logic(player: int):
             kinomi_can_trigger_far_switch(state, player),
             all([
                 kinomi_option_hard_logic(state, player), # Not hard to reproduce but clearly not instinctive to find.
-                kinomi_has_bracelet(state, player),
+                kinomi_has_glove(state, player),
             ]),
             all([
                 kinomi_option_hard_logic(state, player),
@@ -425,22 +422,17 @@ def make_crownDungeon_logic(player: int):
                 ])
             ])
         ])],
-        ["crown dungeon switch A", "crown dungeon eyes chest", False, lambda state: any([
-            kinomi_has_slingshot(state, player),
-            all([
-                kinomi_option_medium_logic(state, player),
-                kinomi_can_use_pegasus_seeds(state, player),
-                kinomi_can_jump_pit(state, player),
-                kinomi_can_use_mystery_seeds(state, player),
-                kinomi_can_toss_ring(state, player)
-            ])
+        ["crown dungeon switch A", "crown dungeon eyes chest", False, lambda state: all([
+            kinomi_can_use_pegasus_seeds(state, player),
+            kinomi_can_jump_pit(state, player),
+            kinomi_can_use_mystery_seeds(state, player),
+            kinomi_can_toss_ring(state, player)
         ])],
         ["crown dungeon switch A", "crown dungeon two-statue puzzle", False, lambda state: all([
             kinomi_can_break_pot(state, player),
             kinomi_has_cane(state, player),
             kinomi_can_jump_pit(state, player),
             any([
-                kinomi_has_slingshot(state, player),
                 kinomi_has_boomerang(state, player),
                 all([
                     kinomi_option_medium_logic(state, player),
@@ -467,7 +459,7 @@ def make_crownDungeon_logic(player: int):
         # 2 keys
         ["crown dungeon switch A", "crown dungeon miniboss", False, lambda state: all([
             kinomi_can_jump_pit(state, player),
-            kinomi_has_bracelet(state, player),
+            kinomi_has_glove(state, player),
             kinomi_has_small_keys(state, player, 7, 2), # Require 2 keys to prevent softlock
         ])],
         ["crown dungeon miniboss", "crown dungeon crossroads", False, lambda state: all([
@@ -494,7 +486,6 @@ def make_crownDungeon_logic(player: int):
         ])],
         ["crown dungeon switch A", "crown dungeon six-statue puzzle", False, lambda state: all([
             kinomi_has_ember_seeds(state, player),
-            kinomi_has_slingshot(state, player),
             kinomi_has_small_keys(state, player, 7, 5),
             kinomi_can_jump_pit(state, player),
         ])],

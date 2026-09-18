@@ -48,17 +48,14 @@ ITEMS_DATA = {
         'id': 0x0d,
         'subid': 0x01
     },
-    "Progressive Slingshot": {
-        'classification': ItemClassification.progression,
-        'id': 0x13
-    },
     "Shovel": {
         'classification': ItemClassification.filler,
         'id': 0x15
     },
-    "Progressive Bracelet": {
+    "Power Glove": {
         'classification': ItemClassification.progression,
-        'id': 0x16
+        'id': 0x16,
+        'subid': 0x02
     },
     "Roc's Cape": {
         'classification': ItemClassification.progression,
