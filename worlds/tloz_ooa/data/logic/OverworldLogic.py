@@ -98,7 +98,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         [Inside("sad boi house"), "sad boi trade", False, lambda state: state.has("Funny Joke", player)],
 
         ["lynna village", Outside("gasha farmer house"), True, None],
-        [Outside("gasha farmer house"), "gasha farmer", False, None],
+        [Inside("gasha farmer house"), "gasha farmer", False, None],
 
         ["lynna village", Outside("toilet hand house"), True, None],
         [Inside("toilet hand house"), "toilet hand trade", False, lambda state: state.has("Stationery", player)],
@@ -721,7 +721,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ooa_can_swim(state, player, False),
             ooa_can_jump_3_wide_liquid(state, player)
         ])],
-        ["restoration wall", "talus peaks chest", False, None],
+        ["restoration wall", "talus peaks chest", False, lambda state: ooa_can_go_back_to_present(state, player)],
         ["fairies' woods", "restoration wall", True, lambda state: ooa_can_switch_past_and_present(state, player)],
         ["restoration wall", Outside("patch cave"), True, None],
 
@@ -1214,7 +1214,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         ])],
 
         [Outside("present underwater sea of storms cave"), "sea of storms spot", False, lambda state: ooa_has_shovel(state, player)],
-        [Inside("present underwater sea of storms cave"), "sea of storms present", True, lambda state: ooa_can_travel_underwater(state, player)],
+        [Inside("present underwater sea of storms cave"), "sea of storms present", False, lambda state: ooa_can_travel_underwater(state, player)],
 
         ["crescent past waters", Outside("hero trials cave"), False, lambda state: state.has("Tokay Eyeball", player)],
         [Outside("hero trials cave"), "crescent past waters", False, lambda state: all([
