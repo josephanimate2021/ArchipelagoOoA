@@ -681,7 +681,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
                 ooa_can_break_bush(state, player, False)
             ])
         ])],
-
+        ["symmetry past", "symmetry present", False, lambda state: ooa_can_go_back_to_present(state, player)],
         ["symmetry past", Outside("past top left symmetry house"), True, None],
         ["symmetry past", Outside("past top right symmetry house"), True, None],
         [Inside("past top left symmetry house"), "symmetry city brother", False, None],
@@ -694,36 +694,55 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
 
         ["symmetry past", "symmetry city heartpiece", False, lambda state: ooa_can_go_back_to_present(state, player)],
 
-        #["symmetry past", Outside("tokkey dive spot"), True, lambda state: ooa_can_swim(state, player, False)],
-        #[Inside("tokkey dive spot"), "tokkey's composition", False, lambda state: all([
-        #    ooa_can_swim(state, player, False),
-        #    ooa_can_open_portal(state, player)
-        #])],
-        ["symmetry past", "tokkey's composition", False, lambda state: all([
-            ooa_can_swim(state, player, False),
+        ["symmetry past", Outside("tokkey dive spot"), True, lambda state: ooa_can_swim(state, player, False)],
+        [Inside("tokkey dive spot"), "tokkey's composition", False, lambda state: all([
             ooa_can_open_portal(state, player)
         ])],
+        #["symmetry past", "tokkey's composition", False, lambda state: all([
+        #    ooa_can_swim(state, player, False),
+        #   ooa_can_open_portal(state, player)
+        #])],
 
-        ["symmetry past", "talus peaks", False, lambda state: all([
-            ooa_can_go_back_to_present(state, player),
-            ooa_has_bracelet(state, player)
-        ])],
-        
         ["symmetry past", Outside("past bottom left symmetry house"), True, None],
         ["symmetry past", Outside("past bottom right symmetry house"), True, None],
 
-        
+        ["symmetry past", "talus peaks", False, lambda state: all([
+            ooa_can_go_back_to_present(state, player),
+        ])],
+
         # TALUS PEAK & RESTORATION WALL
         #######################################
-        ["talus peaks", "bomb fairy", False, lambda state: ooa_has_bombs(state, player)],
 
-        ["talus peaks", "restoration wall", True, lambda state: any([
+        ["talus peaks", Outside("talus waterfall cave front"), False, lambda state: any([
+            ooa_can_switch_past_and_present(state, player),
+            all([
+                ooa_has_bracelet(state, player),
+                ooa_can_open_portal(state, player),
+            ])
+        ])],
+        [Outside("talus waterfall cave front"), "symmetry past", False, lambda state: ooa_can_switch_past_and_present(state, player)],
+        ["talus peaks", "bomb fairy", False, lambda state: all([
+            ooa_has_bombs(state, player),
+            state.has("can redirect waterfall")
+            ])],
+        [Outside("talus waterfall cave front"), "bomb fairy", False, lambda state: all([
+            ooa_has_bombs(state, player),
+            ooa_can_go_back_to_present(state, player)
+        ])],
+
+        [Inside("talus waterfall cave front"), Inside("talus waterfall cave right"), True, None],
+        [Inside("talus waterfall cave front"), Inside("talus waterfall cave left"), True, None],
+        [Outside("talus waterfall cave right"), "can redirect waterfall", False, None],
+
+        [Outside("talus waterfall cave front"), "restoration wall", True, lambda state: any([
             ooa_can_swim(state, player, False),
-            ooa_can_jump_3_wide_liquid(state, player)
+            ooa_can_jump_3_wide_liquid(state, player),
+            state.has("can redirect waterfall")
         ])],
         ["restoration wall", "talus peaks chest", False, lambda state: ooa_can_go_back_to_present(state, player)],
         ["fairies' woods", "restoration wall", True, lambda state: ooa_can_switch_past_and_present(state, player)],
         ["restoration wall", Outside("patch cave"), True, None],
+        [Outside("patch cave"), "symmetry past", False, None],
 
         [Inside("patch cave"), "patch", False, lambda state: any([
             ooa_has_sword(state, player),
