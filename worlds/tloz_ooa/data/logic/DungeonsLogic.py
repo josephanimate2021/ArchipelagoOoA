@@ -889,44 +889,76 @@ def make_d8_logic(player: int):
 def make_d11_logic(player: int):
     return [
         [Inside("d11"), "d11 pots puzzle 1", False, lambda state: all([
-            # Entracne Stuff
+            # Entrance Stuff
             ooa_has_bracelet(state, player),
             ooa_can_use_ember_seeds(state, player, True),
 
             # Actual Requirements
             ooa_has_cane(state, player)
         ])],
-        ["d11 pots puzzle 1", "d11 statue 1 puzzle", False, lambda state: all([
+        [Inside("d11"), "d11 statue 1 puzzle", False, lambda state: all([
             ooa_has_small_keys(state, player, 11, 1),
+            ooa_can_jump_2_wide_pit(state, player, False),
             any([
-                ooa_has_bombs(state, player),
-                ooa_has_bombchus(state, player)
-            ]),
-            ooa_can_jump_2_wide_pit(state, player, False)
+                ooa_has_bombchus(state, player),
+                all([
+                    ooa_has_bombs(state, player),
+                    ooa_can_break_pot(state, player),
+                ])
+            ])
         ])],
-        ["d11 statue 1 puzzle", "d11 bridge puzzle 1", False, lambda state: all([
+        [Inside("d11"), "d11 bridge puzzle 1", False, lambda state: all([
             ooa_has_small_keys(state, player, 11, 2),
+            ooa_can_jump_2_wide_pit(state, player, False),
             ooa_can_use_pegasus_seeds(state, player),
             ooa_has_seedshooter(state, player)
         ])],
-        ["d11 bridge puzzle 1", "d11 shoot eyes", False, lambda state: all([
+        [Inside("d11"), "d11 shoot eyes", False, lambda state: all([
             ooa_has_small_keys(state, player, 11, 3),
-            ooa_can_use_scent_seeds_for_smell(state, player)
+            ooa_can_jump_2_wide_pit(state, player, False),
+            ooa_has_seedshooter(state, player),
+            ooa_has_satchel(state, player),
+            any([
+                ooa_can_use_ember_seeds(state, player, False),
+                ooa_can_use_scent_seeds_for_smell(state, player)
+            ])
         ])],
-        ["d11 shoot eyes", "d11 statue 2 puzzle", False, None],
-        ["d11 shoot eyes", "d11 pots puzzle 2", False, lambda state: all([
+        ["d11 shoot eyes", "d11 statue 2 puzzle", False, lambda state: ooa_can_kill_normal_enemy(state, player)],
+        ["d11 statue 2 puzzle", "d11 pots puzzle 2", False, lambda state: all([
             ooa_has_switch_hook(state, player),
-            ooa_has_small_keys(state, player, 11, 4)
+            ooa_has_small_keys(state, player, 11, 4),
+            ooa_has_bracelet(state, player)
         ])],
-        ["d11 pots puzzle 2", "d11 statue 3 puzzle", False, None],
-        ["d11 pots puzzle 2", "d11 bridge puzzle 2", False, lambda state: ooa_has_small_keys(state, player, 11, 5)],
-        ["d11 bridge puzzle 2", "d11 color room", False, None],
-        ["d11 bridge puzzle 2", "d11 water puzzle 1f", False, lambda state: all([
+        ["d11 statue 2 puzzle", "d11 statue 3 puzzle", False, lambda state: ooa_has_switch_hook(state, player)],
+        ["d11 statue 2 puzzle", "d11 bridge puzzle 2", False, lambda state: all([
+            ooa_has_small_keys(state, player, 11, 5),
+            ooa_has_cane(state, player),
+            ooa_can_use_pegasus_seeds(state, player)
+        ])],
+        ["d11 statue 2 puzzle", "d11 color room", False, lambda state: ooa_has_cane(state, player)],
+        ["d11 statue 2 puzzle", "d11 water puzzle 1f", False, lambda state: all([
             ooa_has_small_keys(state, player, 11, 6),
-            ooa_can_dive(state, player)
+            ooa_can_dive(state, player),
+            ooa_can_trigger_switch(state, player),
         ])],
-        ["d11 water puzzle 1f", "d11 water puzzle b1f", False, lambda state: ooa_has_small_keys(state, player, 11, 7)],
-        ["d11 water puzzle b1f", "d11 basement", False, lambda state: ooa_has_small_keys(state, player, 11, 8)],
-        ["d11 basement", "d11 minecart room", False, None],
-        ["d11 basement", "d11 reward", False, lambda state: ooa_can_kill_normal_enemy(state, player)]
+        ["d11 water puzzle 1f", "d11 water puzzle b1f", False, lambda state: all([
+            ooa_has_small_keys(state, player, 11, 7),
+            ooa_has_switch_hook(state, player),
+        ])],
+        ["d11 water puzzle b1f", "d11 basement", False, lambda state: all([
+            ooa_has_small_keys(state, player, 11, 8),
+            ooa_has_bracelet(state, player),
+            ooa_has_bombs(state, player),
+            ooa_has_cane(state, player),
+        ])],
+        ["d11 water puzzle b1f", "d11 minecart room", False, lambda state: all([
+            ooa_has_small_keys(state, player, 11, 8),
+            ooa_has_bracelet(state, player),
+            ooa_has_bombs(state, player),
+        ])],
+        ["d11 minecart room", "d11 reward", False, lambda state: all([
+            ooa_can_kill_normal_enemy(state, player),
+            ooa_has_long_hook(state, player),
+            ooa_can_use_pegasus_seeds(state, player)
+        ])]
     ]
