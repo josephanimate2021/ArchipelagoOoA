@@ -741,9 +741,14 @@ def ooa_can_trigger_lever(state: CollectionState, player: int):
     return any([
         ooa_can_trigger_lever_from_minecart(state, player),
         all([
-            ooa_option_medium_logic(state, player),
-            ooa_has_shovel(state, player)
-        ])
+            ooa_has_satchel(state, player),
+                any([
+                    ooa_can_use_scent_seeds_for_smell(state, player),
+                    ooa_can_use_mystery_seeds(state, player),
+                    ooa_can_use_ember_seeds(state, player, False),
+                ])
+        ]),
+        ooa_has_switch_hook(state, player),
     ])
 
 
@@ -751,10 +756,6 @@ def ooa_can_trigger_lever_from_minecart(state: CollectionState, player: int):
     return any([
         ooa_has_sword(state, player),
         ooa_has_boomerang(state, player),
-
-        # TODO: Test that to ensure our understanding is right
-        ooa_can_use_scent_seeds_offensively(state, player),
-        ooa_can_use_mystery_seeds(state, player),
         ooa_has_seedshooter(state, player),  # any seed works using slingshot
     ])
 

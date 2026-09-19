@@ -2,7 +2,10 @@ from .LogicPredicates import *
 
 def make_d0_logic(player: int):
     return [
-        [Inside("d0"), "d0 key chest", False, lambda state: ooa_can_kill_normal_enemy(state, player)],
+        [Inside("d0"), "d0 key chest", False, lambda state: any([
+            ooa_can_kill_normal_enemy(state, player),
+            ooa_has_shovel(state, player),
+        ])],
         [Inside("d0"), "d0 behind the door", True, lambda state: ooa_has_small_keys(state, player, 0, 1)],
         ["d0 behind the door", "d0 basement", False, None],
         ["d0 behind the door", "maku path heartpiece", False, lambda state: ooa_can_kill_normal_enemy(state, player)],
@@ -370,7 +373,13 @@ def make_d4_logic(player: int):
                 ooa_has_boomerang(state, player)
             ])
         ])],
-        ["d4 minecart A", "d4 minecart chest", False, lambda state: ooa_can_trigger_lever(state, player)],
+        ["d4 minecart A", "d4 minecart chest", False, lambda state: any([
+            ooa_can_trigger_lever(state, player),
+            all([
+                ooa_option_hard_logic(state, player),
+                ooa_has_bracelet(state, player),
+            ])
+        ])],
 
         # 2 keys
         ["d4 minecart A", "d4 minecart B", False, lambda state: all([
