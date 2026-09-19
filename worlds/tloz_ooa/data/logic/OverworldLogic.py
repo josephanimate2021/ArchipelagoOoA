@@ -1106,6 +1106,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         ["zora village present", "zora village tree", False, lambda state: ooa_can_harvest_tree(state, player, False)],
         ["zora village present", "zora village chest", False, lambda state: ooa_can_dive(state, player)], # Unnecessary ooa_can_dive just in case we decide that link can go underwater without its dive suit
         ["zora village present", "fairies' coast chest", False, lambda state: ooa_can_dive(state, player)], # Unnecessary ooa_can_dive just in case we decide that link can go underwater without its dive suit
+        [Outside("zora crypt cave"), "fairies' coast chest", False, lambda state: ooa_can_swim(state, player)],
 
         ["zora village present", Outside("present underwater zora duplex left"), True, None],
         ["zora village present", Outside("present underwater zora duplex right"), True, None],
@@ -1358,7 +1359,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         labrynna_logic.extend([
             [Inside("vasu's shop"), "vasu's rupee ring gift", False, lambda state: ooa_has_rupees(state, player, options.vasu_ring_checks_requirement["rupee_requirement_for_rupee_ring_check"])],
             [Inside("vasu's shop"), "vasu's slayers ring gift", False, lambda state: all([
-                ooa_can_kill_normal_enemy(state, player),
+                ooa_can_kill_normal_enemy(state, player, True),
             ])
              ]
         ])

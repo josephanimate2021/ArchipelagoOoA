@@ -4,7 +4,10 @@ def make_d0_logic(player: int):
     return [
         [Inside("d0"), "d0 key chest", False, lambda state: any([
             ooa_can_kill_normal_enemy(state, player),
-            ooa_has_shovel(state, player),
+            all([
+                ooa_option_medium_logic(state, player),
+                ooa_has_shovel(state, player),
+            ])
         ])],
         [Inside("d0"), "d0 behind the door", True, lambda state: ooa_has_small_keys(state, player, 0, 1)],
         ["d0 behind the door", "d0 basement", False, None],
