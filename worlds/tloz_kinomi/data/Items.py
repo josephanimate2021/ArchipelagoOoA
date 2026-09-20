@@ -8,7 +8,7 @@ ITEMS_DATA = {
     #    'subid': 0x00
     #    },
     "Shield": {
-        'classification': ItemClassification.progression_deprioritized,
+        'classification': ItemClassification.progression,
         'id': 0x01,
         'subid': 0x03
     },
@@ -44,7 +44,7 @@ ITEMS_DATA = {
         'subid': 0x01
     },
     "Bombchus (10)": {
-        'classification': ItemClassification.progression,
+        'classification': ItemClassification.progression_deprioritized,
         'id': 0x0d,
         'subid': 0x01
     },

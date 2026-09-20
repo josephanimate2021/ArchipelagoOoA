@@ -9,6 +9,7 @@ from worlds.Files import APProcedurePatch, APTokenMixin, APPatchExtension
 
 from .Functions import *
 from .Constants import *
+from ..treasureObjectDataCodeToPython import *
 from ..common.patching.RomData import RomData
 from ..common.patching.z80asm.Assembler import Z80Assembler, Z80Block
 from .bps import apply_bps_patch
@@ -46,18 +47,28 @@ class KinomiPatchExtensions(APPatchExtension):
             ])
         assembler = Z80Assembler(bank_caves, {}, rom)
 
+        for label, val in sym().get_labels().items():
+            assembler.add_global_label(label, val)
+
+        for section in sym().get_sections():
+            bankAndAddress = section['bank_and_address']
+            assembler.add_global_label(section['label'], GameboyAddress(bankAndAddress[0], bankAndAddress[1]))
+
+        treasure_obj_addresses = treasureAddressMaker(assembler.global_labels).TREASURE_ADDRESSES
+        print(treasure_obj_addresses)
+
         for symbolic_name, price in patch_data["shop_prices"].items():
             assembler.define_byte(f"shopPrices.{symbolic_name}", RUPEE_VALUES[price])
         define_location_constants(assembler, patch_data)
-        set_static_items(rom_data, patch_data)
-        set_boss_items(rom_data, patch_data)
+        set_static_items(assembler, rom_data, patch_data)
+        set_boss_items(assembler, rom_data, patch_data)
         define_option_constants(assembler, patch_data)
         define_text_constants(assembler, patch_data)
         define_dungeon_items_text_constants(assembler, patch_data)
-        modify_required_gifts_and_slates_count(rom_data, patch_data)
+        modify_required_gifts_and_slates_count(assembler, rom_data, patch_data)
         if not hasattr(get_settings().tloz_kinomi_options, "beat_tutorial"):
             rom_data.write_byte(GameboyAddress(0x09, 0x5ad1).address_in_rom(), 0x01) # Turn on the hardhat worker guy who's in charge of the FAQ
-        set_newGame_stuff(rom_data)
+        set_newGame_stuff(assembler, rom_data)
         set_refill_npc(rom_data)
 
         # Define dynamic data blocks
@@ -74,9 +85,9 @@ class KinomiPatchExtensions(APPatchExtension):
         for block in assembler.blocks:
             rom_data.write_bytes(block.addr.address_in_rom(), block.byte_array)
 
-        alter_treasures(rom_data)
-        write_chest_contents(rom_data, patch_data)
-        write_rando_npcItem_contents(rom_data, patch_data)
+        alter_treasures(assembler, rom_data)
+        write_chest_contents(assembler, rom_data, patch_data)
+        write_rando_npcItem_contents(assembler, rom_data, patch_data)
         #write_seed_tree_content(rom_data, patch_data)
         #set_dungeon_warps(rom_data, patch_data)
         #apply_miscellaneous_options(rom_data, patch_data)

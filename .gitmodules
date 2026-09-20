@@ -5,3 +5,6 @@
 	path = worlds/tloz_kinomi/disasembly
 	url = https://github.com/josephanimate2021/oracles-disasm
 	branch = birthday-rebase
+[submodule "worlds/tloz_kinomi/disasm"]
+	path = worlds/tloz_kinomi/disasm
+	url = https://github.com/josephanimate2021/gifts-of-kinomi-ap-randomizer
