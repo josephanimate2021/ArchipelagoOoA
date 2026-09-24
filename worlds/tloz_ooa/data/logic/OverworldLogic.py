@@ -705,7 +705,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         [Outside("talus waterfall cave front"), "symmetry past", False, lambda state: ooa_can_switch_past_and_present(state, player)],
         ["talus peaks", "bomb fairy", False, lambda state: all([
             ooa_has_bombs(state, player),
-            state.has("_redirect_waterfall")
+            state.has("_redirect_waterfall", player)
         ])],
         [Outside("talus waterfall cave front"), "bomb fairy", False, lambda state: all([
             ooa_has_bombs(state, player),
@@ -717,7 +717,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         [Outside("talus waterfall cave right"), "redirect waterfall", False, None],
 
         [Outside("talus waterfall cave front"), "restoration wall", False, lambda state: all([
-            state.has("_redirect_waterfall"),
+            state.has("_redirect_waterfall", player),
             ooa_can_open_portal(state, player),
             any([
                 ooa_can_swim(state, player, False),
@@ -726,7 +726,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ])],
 
         ["restoration wall", "bomb fairy", False, lambda state: all([
-            state.has("_redirect_waterfall"),
+            state.has("_redirect_waterfall", player),
             ooa_has_bombs(state, player),
         all([
             ooa_can_open_portal(state, player),
