@@ -714,7 +714,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
 
         [Inside("talus waterfall cave front"), Inside("talus waterfall cave right"), True, None],
         [Inside("talus waterfall cave front"), Inside("talus waterfall cave left"), True, None],
-        [Outside("talus waterfall cave right"), "_redirect_waterfall", False, None],
+        [Outside("talus waterfall cave right"), "redirect waterfall", False, None],
 
         [Outside("talus waterfall cave front"), "restoration wall", False, lambda state: all([
             state.has("_redirect_waterfall"),

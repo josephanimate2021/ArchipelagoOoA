@@ -11,12 +11,13 @@ class OracleOfAgesGoal(Choice):
     The goal to accomplish in order to complete the seed.
     - Beat Veran: beat the usual final boss
     - Beat Ganon: teleport to the Room of Rites after beating Onox or Veran, then beat Ganon (same as linked game)
-    - Retrieve Maku Seed - You will have to retrieve the maku seed from the maku tree in order cut straight into the credits scene (similar to a triforce hunt in ALTTPR)
+    - Collect Maku Seed - Don't Feel like fighting Veran or Ganon to goal? Then don't! (similar to a triforce hunt in ALTTPR)
     """
     display_name = "Goal"
 
     option_beat_veran = 0
     option_beat_ganon = 1
+    option_collect_maku_seed = 2
 
     default = 0
     include_in_patch = True
@@ -38,7 +39,7 @@ class OracleOfAgesVasuRingChecksRequirement(OptionDict):
     """
     When enabled, vasu will congradulate you based off of the number of rupees (for Rupee Ring check), and number of enemies defeated (for Slayer's Ring check). 
 
-    Disable Entirely: Determines whatever or not vasu will give out mutiple checks when the friendship ring check is finished.
+    Disable Entirely: Determines whatever or not vasu will give out multiple checks when the friendship ring check is finished.
     Rupee Requirement for Rupee Ring Check: Determines the amount of rupees that you need to collect in order for vasu to give you a check. (from 1 to 9999)
     Amount of Enemies Defeated for Slayer Ring Check: Determines the amount of enemies that you need to defeat in order for vasu to give you a check. (from 1 to 1000)
     """
