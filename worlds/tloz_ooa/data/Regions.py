@@ -106,6 +106,7 @@ REGIONS = [
     #######
     "symmetry past",
     "place tuni nut",
+    "redirect waterfall"
     "symmetry city secret",
     "symmetry city brother",
     "tokkey's composition",
