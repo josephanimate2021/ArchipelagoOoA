@@ -230,6 +230,7 @@
     push bc
     ld b,a
     ld c,e
+    ld e,$02
     ld hl,customTextJumpTable
     call searchDoubleKey
     pop bc
