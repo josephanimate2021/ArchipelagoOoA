@@ -51,8 +51,7 @@ class sym():
     def get_sections(self) -> List[Dict[str, Any]]:
         array = []
         for stuff in self.browse_sym("sections"):
-            full_address, others = stuff.split(" ")
-            bank_and_address, address, size, label = others.split(" ")
+            full_address, bank_and_address, address, size, label = stuff.split(" ")
             addr = bank_and_address.split(":")[1]
             if str_hex_to_int(addr[:1]) > self.bank_limit:
                 continue

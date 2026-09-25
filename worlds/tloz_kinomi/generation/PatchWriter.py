@@ -28,12 +28,16 @@ def kinomi_create_appp_patch(world: "GiftsOfKinomiWorld") -> KinomiProcedurePatc
             #"required_rings", "excluded_rings", 
             "shop_prices_factor", "death_link"
         ]),
-        "dungeon_entrances": {a.replace(" entrance", ""): b.replace("enter ", "")
-                              for a, b in world.dungeon_entrances.items()},
+        "dungeon_entrances": [],
         
         "locations": {},
         "shop_prices": world.shop_prices
     }
+
+    for e in world.dungeon_entrances:
+        e[0] = e[0].replace(" entrance", "")
+        e[1] = e[1].replace("enter ", "")
+        patch_data["dungeon_entrances"].append(e)
 
     for loc in world.multiworld.get_locations(world.player):
         if loc.address is None:

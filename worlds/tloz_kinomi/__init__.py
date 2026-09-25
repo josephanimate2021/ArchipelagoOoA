@@ -41,7 +41,7 @@ class GiftsOfKinomiWorld(World):
     pre_fill_items: List[Item]
     dungeon_items: List[Item]
     regions: List[Item]
-    dungeon_entrances: Dict[str, str]
+    dungeon_entrances: List[List[str]]
     shop_prices: Dict[str, int]
 
     settings: ClassVar[KinomiSettings]
@@ -52,7 +52,7 @@ class GiftsOfKinomiWorld(World):
         self.pre_fill_items = []
         self.dungeon_items = []
         self.regions = REGIONS
-        self.dungeon_entrances = DUNGEON_ENTRANCES.copy()
+        self.dungeon_entrances = DUNGEON_ENTRANCES
         self.shop_prices = SHOP_PRICES_DIVIDERS.copy()
 
     def fill_slot_data(self) -> dict:
@@ -104,13 +104,12 @@ class GiftsOfKinomiWorld(World):
 
     
     def shuffle_dungeons(self):
-        shuffled_dungeons = list(self.dungeon_entrances.values())
-        while True:
-            self.random.shuffle(shuffled_dungeons)
-            if shuffled_dungeons[4] != "enter d0": # Ensure D4 entrance doesn't lead to d0
-                break
-        
-        self.dungeon_entrances = dict(zip(self.dungeon_entrances, shuffled_dungeons))
+        dungeon_entrance_values = []
+        for e in self.dungeon_entrances:
+            dungeon_entrance_values.append(e[1])
+        self.random.shuffle(dungeon_entrance_values)
+        for i in range(len(dungeon_entrance_values)):
+            self.dungeon_entrances[i][1] = dungeon_entrance_values[i]
 
     def randomize_shop_prices(self):
         prices_pool = get_prices_pool()
@@ -375,5 +374,5 @@ class GiftsOfKinomiWorld(World):
         spoiler_handle.write(f"Apworld version : {VERSION}")
         if self.options.shuffle_dungeons != "vanilla":
             spoiler_handle.write(f"\nDungeon Entrances ({self.multiworld.player_name[self.player]}):\n")
-            for entrance, dungeon in self.dungeon_entrances.items():
-                spoiler_handle.write(f"\t- {entrance} --> {dungeon.replace('enter ', '')}\n")
+            for e in self.dungeon_entrances:
+                spoiler_handle.write(f"\t- {e[0]} --> {e[1].replace('enter ', '')}\n")

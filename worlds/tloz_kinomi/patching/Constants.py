@@ -81,7 +81,7 @@ RUPEE_VALUES = {
     999: 0x14,
 }
 
-# Format is [group, lineNumber] (found in the warpSources.s after you begin with the label and count down the line (line count starts 1 down after the label)).
+# Format is [(group or label), lineNumber] (found in the warpSources.s after you begin with the label and count down the line (line count starts 1 down after the label)).
 # or [] if you don't want anything modified in that index. 
 # This also has to be in dungeon order.
 DUNGEON_WARPS = [
@@ -93,7 +93,7 @@ DUNGEON_WARPS = [
         "entrance": [0, 42],
         "exit": [5, 0]
     },
-    {},
+    #{},
     {
         "entrance": [0, 68],
         "exit": [5, 78]

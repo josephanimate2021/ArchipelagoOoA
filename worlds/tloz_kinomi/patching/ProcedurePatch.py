@@ -15,6 +15,7 @@ from .treasureAddresses import *
 from ..common.patching.RomData import RomData
 from ..common.patching.z80asm.Assembler import Z80Assembler, Z80Block
 from .bps import apply_bps_patch
+from typing import Any
 
 from tkinter.filedialog import askopenfilename
 
@@ -41,7 +42,7 @@ class KinomiPatchExtensions(APPatchExtension):
         #if patch_data["options"]["enforce_potion_in_shop"]:
         #    patch_data["locations"]["Horon Village: Shop #3"] = "Potion"
 
-        bank_caves: list[int | list[int | list[int]]] = []
+        bank_caves: list[Any | list[Any | list[Any]]] = []
         parsed_sym = sym()
 
         # Max finding algorithm for the end of banks (reading the code will help accurate that).
@@ -72,19 +73,25 @@ class KinomiPatchExtensions(APPatchExtension):
             if len(update_array) <= total_banks:
                 loop(find_max)
 
-        loop(True)
-        bankCount = 0
-        for label, _ in maxes.items():
-            print(label)
-            label = label.split("@")[0]
-            addr = parsed_sym.find("label", label).offset
-            size = parsed_sym.find("label", "_sizeof_" + label)
-            print("_sizeof_" + label, size)
-            if size is not None:
-                addr += size
-            bank_caves.append(0x4000 if addr >= 0x4000 else addr)
-            logger.info(f"Ending address for bank {hex(bankCount)} is {hex(0x4000 if addr >= 0x4000 else addr)}")
-            bankCount += 1
+        EOB_PATH = world_path("patching/eob.json")
+        if os.path.exists(EOB_PATH):
+            bank_caves = json.loads(open(EOB_PATH).read())
+        else:
+            logger.info("Getting end of banks. This may take a few minutes.")
+            loop(True)
+            bankCount = 0
+            for label, _ in maxes.items():
+                label = label.split("@")[0]
+                addr = parsed_sym.find("label", label).offset
+                size = parsed_sym.find("label", "_sizeof_" + label)
+                if size is not None:
+                    addr += size
+                num_hex = hex(0x4000 if addr >= 0x4000 else addr)
+                bank_caves.append(num_hex)
+                logger.info(f"Ending address for bank {hex(bankCount)} is {num_hex}")
+                bankCount += 1
+            open(EOB_PATH, "w").write(json.dumps(bank_caves, indent=4))
+            logger.info(f"Saved the end of banks to {EOB_PATH} for later use.")
             
         bank_caves[0x14] = 0x3c99 # bank 14 is the only one getting modified because of the space size nonsense in the sym file describing the size for bank 14 near it's end.
 

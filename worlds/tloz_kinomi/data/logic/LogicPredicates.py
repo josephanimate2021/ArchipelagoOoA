@@ -537,7 +537,7 @@ def kinomi_can_kill_pols_voice(state: CollectionState, player: int, ranged: bool
     return any([
         kinomi_can_open_portal(state, player),
         kinomi_has_bombs(state, player),
-        kinomi_can_use_gale_seeds_offensively(state, player, ranged)
+        kinomi_can_use_gale_seeds_offensively(state, player)
     ])
 
 def kinomi_can_kill_armos(state: CollectionState, player: int, ranged: bool = False):

@@ -17,9 +17,9 @@ def make_logic_array(player: int):
     ]
 
 def create_connections(multiworld: MultiWorld, player: int):
-    dungeon_entrances = []
-    for reg1, reg2 in multiworld.worlds[player].dungeon_entrances.items():
-        dungeon_entrances.append([reg1, reg2, True, None])
+    dungeon_entrances = [["lost labyrinth entrance", "enter lost labyrinth", True, None]]
+    for e in multiworld.worlds[player].dungeon_entrances:
+        dungeon_entrances.append([e[0], e[1], True, None])
 
     all_logic = make_logic_array(player)
     all_logic.append(dungeon_entrances)

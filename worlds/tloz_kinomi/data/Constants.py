@@ -67,16 +67,16 @@ DAMAGE_MODIFIER_VALUES = {
     "insane": 4,
 }
 
-DUNGEON_ENTRANCES = {
-    "summer villa entrance": "enter summer villa",
-    "spirit's grotto entrance": "enter spirit's grotto",
-    "lost labyrinth entrance": "enter lost labyrinth",
-    "four corners cave entrance": "enter four corners cave",
-    "seasons shrine entrance": "enter seasons shrine",
+DUNGEON_ENTRANCES = [
+    ["summer villa entrance", "enter summer villa"],
+    ["spirit's grotto entrance", "enter spirit's grotto"],
+    #"lost labyrinth entrance": "enter lost labyrinth",
+    ["four corners cave entrance", "enter four corners cave"],
+    ["seasons shrine entrance", "enter seasons shrine"]
     #"old crown dungeon entrance": "enter old crown dungeon",
     #"d6 entrance": "enter d6",
     #"d7 entrance": "enter d7"
-}
+]
 
 SHOP_PRICES_DIVIDERS = {
     "kinomiShop1": 1,

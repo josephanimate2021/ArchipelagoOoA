@@ -221,19 +221,46 @@ def write_seed_tree_content(rom: RomData, patch_data):
         newdata = (original_data & 0x0f) | (item_id - 0x20) << 4
         rom.write_bytes(tree_data["codeAdress"], [newdata])
 
+# helper function that adds param2 to i unless stopped by my base case, which is helpful for finding the right rom address for a certain param in a table despite changes in the disasm code.
+def find_address_for_param_helper(lineNumber, param, param2 = 4, i=0,c=0):
+    return i - param if c == lineNumber else find_address_for_param_helper(lineNumber, param, param2, i + param2, c + 1)
+
 def set_dungeon_warps(parsed_sym: sym, rom: RomData, patch_data):
     warp_matchings = patch_data["dungeon_entrances"]
+    entrance_dest_groups = []
+    exit_dest_groups = []
+    warp_array_indexes = {}
 
     # Apply warp matchings expressed in the patch
-    for from_name, to_name in warp_matchings.items():
-        return
+    for i in range(len(warp_matchings)): # STEP 1: Get all of the necessary bytes appended to an array for the update.
+        warp_array_indexes[warp_matchings[i][0]] = i
+        dWarp = DUNGEON_WARPS[i]
+        def loop(t, update_array):
+            index_label, index_lineNumber = dWarp[t]
+            label = f"group{index_label}WarpSources" if isinstance(index_label, int) else index_label
+            base_address = parsed_sym.find("label", label)
+            if base_address is not None:
+                bytes_count = find_address_for_param_helper(index_lineNumber, 2)
+                update_array.append(rom.read_byte(GameboyAddress(base_address.bank, base_address.offset + bytes_count).address_in_rom()))
+        for t in [["entrance", entrance_dest_groups], ["exit", exit_dest_groups]]:
+            loop(t[0], t[1])
+    for e in warp_matchings: # STEP 2: Apply all warps to their randomized position using all gathered bytes
+        def modify_warp(from_index, to_index, t, array):
+            from_index_label, from_index_lineNumber = DUNGEON_WARPS[from_index][t]
+            entrance_label = f"group{from_index_label}WarpSources" if isinstance(from_index_label, int) else from_index_label
+            base_address = parsed_sym.find("label", entrance_label)
+            if base_address is not None:
+                bytes_count = find_address_for_param_helper(from_index_lineNumber, 2)
+                rom.write_byte(GameboyAddress(base_address.bank, base_address.offset + bytes_count).address_in_rom(), array[to_index])
+        for d in [[warp_array_indexes[e[0]], warp_array_indexes[e[1]], "entrance", entrance_dest_groups], [warp_array_indexes[e[1]], warp_array_indexes[e[0]], "exit", exit_dest_groups]]:
+            modify_warp(d[0], d[1], d[2], d[3])
 
-#    # Change Minimap popups to indicate the randomized dungeon's name
-#    for i in range(8):
-#        entrance_name = f"d{i}"
-#        dungeon_index = int(warp_matchings[entrance_name][1:])
-#        map_tile = DUNGEON_ENTRANCES[entrance_name]["map_tile"]
-#        rom.write_byte(0x???? + map_tile, 0x81 | (dungeon_index << 3))
+    #    # Change Minimap popups to indicate the randomized dungeon's name
+    #    for i in range(8):
+    #        entrance_name = f"d{i}"
+    #        dungeon_index = int(warp_matchings[entrance_name][1:])
+    #        map_tile = DUNGEON_ENTRANCES[entrance_name]["map_tile"]
+    #        rom.write_byte(0x???? + map_tile, 0x81 | (dungeon_index << 3))
 
 def set_file_select_text(assembler: Z80Assembler, slot_name: str):
     def char_to_tile(c: str) -> int:
@@ -304,7 +331,7 @@ def set_character_sprite_from_settings(parsed_sym, rom: RomData):
     rom.write_byte(0x15271, 0x08 | palette_byte)
 
 
-    # Link standing still in file select (fileSelectDrawLink:@sprites0)
+    # Link in file select (still and moving)
     fileSelectDrawLink = [parsed_sym.find("label", f"fileSelectDrawLink@sprites{i}").address_in_rom() + 4 for i in range(3)]
     for i in range(2):
         rom.write_byte(fileSelectDrawLink[i], palette_byte)
