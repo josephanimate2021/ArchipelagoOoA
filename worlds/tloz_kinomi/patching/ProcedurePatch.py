@@ -1,6 +1,8 @@
 import hashlib
 import os
 import pkgutil
+import logging
+import json
 
 import yaml
 
@@ -9,7 +11,7 @@ from worlds.Files import APProcedurePatch, APTokenMixin, APPatchExtension
 
 from .Functions import *
 from .Constants import *
-from ..treasureObjectDataCodeToPython import *
+from .treasureAddresses import *
 from ..common.patching.RomData import RomData
 from ..common.patching.z80asm.Assembler import Z80Assembler, Z80Block
 from .bps import apply_bps_patch
@@ -25,6 +27,7 @@ class KinomiPatchExtensions(APPatchExtension):
     @staticmethod
     def apply_patches(caller: APProcedurePatch, rom: bytes, patch_file: str) -> bytes:
         rom = apply_bps_patch(open(world_path('patching/kinomi.bps'), 'rb'), rom)
+        logger = logging.getLogger()
         if __debug__:
             f = open(Utils.home_path("kinomi_debug.gbc"), "wb")
             f.write(rom)
@@ -39,40 +42,70 @@ class KinomiPatchExtensions(APPatchExtension):
         #    patch_data["locations"]["Horon Village: Shop #3"] = "Potion"
 
         bank_caves: list[int | list[int | list[int]]] = []
-        for i in range(0x40): # Made it like this so that I can specify the bank ends very easily without doing all of them at once.
-            bank_caves.extend([
-                0x3dca if i == 0x0a # If we have enough space that would be a luxury.
-                else 0x3c99 if i == 0x14 # Just enough for the file select text
-                else 0x4000 # All other banks.
-            ])
+        parsed_sym = sym()
+
+        # Max finding algorithm for the end of banks (reading the code will help accurate that).
+        maxes = {}
+        mins = {}
+        total_banks = max([val.bank for _, val in parsed_sym.get_labels().items()])
+        def find(find_max):
+            offsets = []
+            labels = []
+            maxLabels = []
+            for label, val in parsed_sym.get_labels(False).items():
+                if val.bank == len(maxes if find_max else mins):
+                    offsets.append(val.offset)
+                    labels.append(label)
+            if len(offsets) > 0:
+                maxOffset = max(offsets) if find_max else min(offsets)
+                for i in range(len(offsets)):
+                    if offsets[i] == maxOffset:
+                        maxLabels.append(labels[i])
+                return maxOffset, maxLabels[len(maxLabels) - 1]
+            return None
+        
+        def loop(find_max):
+            update_array = maxes if find_max else mins
+            max, label = find(find_max)
+            logger.info(f"Found {"last" if find_max else "first"} address to work with at bank " + hex(len(update_array)) + ". Should be " + hex(max))
+            update_array[label] = max
+            if len(update_array) <= total_banks:
+                loop(find_max)
+
+        loop(True)
+        bankCount = 0
+        for label, _ in maxes.items():
+            print(label)
+            label = label.split("@")[0]
+            addr = parsed_sym.find("label", label).offset
+            size = parsed_sym.find("label", "_sizeof_" + label)
+            print("_sizeof_" + label, size)
+            if size is not None:
+                addr += size
+            bank_caves.append(0x4000 if addr >= 0x4000 else addr)
+            logger.info(f"Ending address for bank {hex(bankCount)} is {hex(0x4000 if addr >= 0x4000 else addr)}")
+            bankCount += 1
+            
+        bank_caves[0x14] = 0x3c99 # bank 14 is the only one getting modified because of the space size nonsense in the sym file describing the size for bank 14 near it's end.
+
+        treasure_obj_addresses = treasureAddressMaker().TREASURE_ADDRESSES
         assembler = Z80Assembler(bank_caves, {}, rom)
 
-        for label, val in sym().get_labels().items():
-            assembler.add_global_label(label, val)
-
-        for section in sym().get_sections():
-            bankAndAddress = section['bank_and_address']
-            assembler.add_global_label(section['label'], GameboyAddress(bankAndAddress[0], bankAndAddress[1]))
-
-        treasure_obj_addresses = treasureAddressMaker(assembler.global_labels).TREASURE_ADDRESSES
-        print(treasure_obj_addresses)
+        force_collect_mode_on_nonchest_items(parsed_sym, rom_data, patch_data, treasure_obj_addresses)
 
         for symbolic_name, price in patch_data["shop_prices"].items():
             assembler.define_byte(f"shopPrices.{symbolic_name}", RUPEE_VALUES[price])
-        define_location_constants(assembler, patch_data)
-        set_static_items(assembler, rom_data, patch_data)
-        set_boss_items(assembler, rom_data, patch_data)
-        define_option_constants(assembler, patch_data)
-        define_text_constants(assembler, patch_data)
-        define_dungeon_items_text_constants(assembler, patch_data)
-        modify_required_gifts_and_slates_count(assembler, rom_data, patch_data)
+        #define_option_constants(parsed_sym, patch_data)
+        #define_text_constants(assembler, patch_data)
+        #define_dungeon_items_text_constants(assembler, patch_data)
+        modify_required_gifts_and_slates_count(parsed_sym, rom_data, patch_data)
         if not hasattr(get_settings().tloz_kinomi_options, "beat_tutorial"):
             rom_data.write_byte(GameboyAddress(0x09, 0x5ad1).address_in_rom(), 0x01) # Turn on the hardhat worker guy who's in charge of the FAQ
-        set_newGame_stuff(assembler, rom_data)
+        set_newGame_stuff(parsed_sym, rom_data)
         set_refill_npc(rom_data)
 
         # Define dynamic data blocks
-        define_compass_rooms_table(assembler, patch_data)
+        #define_compass_rooms_table(assembler, patch_data)
         set_file_select_text(assembler, caller.player_name)
 
         # Parse assembler files, compile them and write the result in the ROM
@@ -85,15 +118,14 @@ class KinomiPatchExtensions(APPatchExtension):
         for block in assembler.blocks:
             rom_data.write_bytes(block.addr.address_in_rom(), block.byte_array)
 
-        alter_treasures(assembler, rom_data)
-        write_chest_contents(assembler, rom_data, patch_data)
-        write_rando_npcItem_contents(assembler, rom_data, patch_data)
+        alter_treasures(parsed_sym, rom_data)
+        write_chest_contents(parsed_sym, rom_data, patch_data)
         #write_seed_tree_content(rom_data, patch_data)
-        #set_dungeon_warps(rom_data, patch_data)
+        set_dungeon_warps(parsed_sym, rom_data, patch_data)
         #apply_miscellaneous_options(rom_data, patch_data)
 
         set_heart_beep_interval_from_settings(rom_data)
-        set_character_sprite_from_settings(rom_data)
+        set_character_sprite_from_settings(parsed_sym, rom_data)
         apply_misc_option(rom_data, patch_data)
         inject_slot_name(rom_data, caller.player_name)
 
