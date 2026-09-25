@@ -83,7 +83,7 @@ RUPEE_VALUES = {
 
 # Format is [(group or label), lineNumber] (found in the warpSources.s after you begin with the label and count down the line (line count starts 1 down after the label)).
 # or [] if you don't want anything modified in that index. 
-# This also has to be in dungeon order.
+# This also has to be in dungeon order to prevent the user from getting confused by dungeon name.
 DUNGEON_WARPS = [
     {
         "entrance": [0, 35],
