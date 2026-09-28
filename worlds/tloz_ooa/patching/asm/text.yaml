@@ -136,6 +136,18 @@
 38//TX_5a22: /include text.compassD7
 38//TX_5a23: /include text.compassD8
 38//TX_5a24: /include text.compassD6Past
+
+38//TX_5a25: /include text.blockedByRock
+38//TX_5a26: /include text.blockedByBush
+38//TX_5a27: /include text.blockedByBrickWall
+38//TX_5a28: /include text.blockedByLibraryPresent
+38//TX_5a29: /include text.blockedByLibraryPast
+38//TX_5a2a: /include text.blockedByCrown
+38//TX_5a2b: /include text.blockedByMermaidPresent
+38//TX_5a2c: /include text.blockedByMermaidPast
+38//TX_5a2d: /include text.blockedByTeeth
+38//TX_5a2e: /include text.blockedByTokay
+
 # 38//TX_5a25: /include text.faqIntro
 #38//TX_5a26: /include text.faqReadImportance
 #38//TX_5a27: /include text.faqLoc
@@ -154,8 +166,9 @@
     dw TX_5a18, TX_5a19, TX_5a1a, TX_5a1b
     dw TX_5a1c, TX_5a1d, TX_5a1e, TX_5a1f
     dw TX_5a20, TX_5a21, TX_5a22, TX_5a23
-    dw TX_5a24#, TX_5a25, TX_5a26, TX_5a27
-    #dw TX_5a28, TX_5a29, TX_5a2a, TX_5a2b
+    dw TX_5a24, TX_5a25, TX_5a26, TX_5a27
+    dw TX_5a28, TX_5a29, TX_5a2a, TX_5a2b
+    dw TX_5a2c, TX_5a2d, TX_5a2e
 
 38//setCustomBankForText: |
     ld hl,customTextTable
@@ -217,6 +230,7 @@
     push bc
     ld b,a
     ld c,e
+    ld e,$02
     ld hl,customTextJumpTable
     call searchDoubleKey
     pop bc

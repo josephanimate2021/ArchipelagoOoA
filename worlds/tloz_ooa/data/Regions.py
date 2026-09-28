@@ -5,7 +5,7 @@ REGIONS = [
     #######
     "forest of time",
     "starting item",
-    "nayru's house",
+    "nayru's house harp spot",
     #######
     "lynna city",
     "south lynna tree",
@@ -31,6 +31,7 @@ REGIONS = [
     "rescue nayru",
     "rafton's raft",
     "d0 entrance",
+    "build raft",
     #######
     "maku tree",
     "maku seed",
@@ -43,10 +44,9 @@ REGIONS = [
 
     #######
     "yoll graveyard",
-    "cheval's grave",
     "cheval's test",
     "cheval's invention",
-    "grave under tree",
+    "drop under tree",
     "graveyard door",
     "syrup shop",
     "d1 entrance",
@@ -105,6 +105,8 @@ REGIONS = [
     "symmetry city tree",
     #######
     "symmetry past",
+    "place tuni nut",
+    "redirect waterfall",
     "symmetry city secret",
     "symmetry city brother",
     "tokkey's composition",
@@ -125,7 +127,7 @@ REGIONS = [
     "goron elder",
     #######
     "ridge west present",
-    "ridge west cave",
+    "ridge west cave chest",
     "under moblin keep",
     "defeat great moblin",
     "goron's hiding place",
@@ -135,6 +137,7 @@ REGIONS = [
     "bomb goron head",
     "treasure hunting goron",
     #######
+    "crown ledge",
     "ridge upper present",
     "d5 entrance",
     #######
@@ -164,7 +167,6 @@ REGIONS = [
     "ridge east tree",
     #######
     "ridge mid present",
-    "target carts",
     "target carts 1",
     "target carts 2",
     "troy secret",
@@ -173,20 +175,27 @@ REGIONS = [
     "goron diamond cave",
 
     #######
-    "zora village",
-    "zora village tree",
     "zora village present",
+    "zora village past",
+    "zora village tree",
+    "zora village chest",
     "zora palace chest",
     "zora NW cave",
     "fairies' coast chest",
-    "library present",
-    "library past",
+    "library island past",
+    "library island present",
+    "open library",
+    "library present old man",
+    "library past old man",
     "library secret",
     "zora seas chest",
     "zora king gift",
     "d7 entrance",
     "fisher's island cave",
     "zora's reward",
+    "sea cleaned",
+    "king zora's saved",
+    "king zora's permission",
     "king zora's secret",
 
     #######

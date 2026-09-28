@@ -63,8 +63,20 @@ def create_events(world: OracleOfAgesWorld):
         create_event(world, "veran beaten", "_beaten_game")
     elif world.options.goal == OracleOfAgesGoal.option_beat_ganon:
         create_event(world, "ganon beaten", "_beaten_game")
+    elif world.options.goal == OracleOfAgesGoal.option_collect_maku_seed:
+        create_event(world, "maku seed", "_beaten_game")
 
     create_event(world,"ridge move vine seed", "_access_cart")
+    
+    create_event(world,"build raft", "_raft_built")
+    
+    create_event(world,"redirect waterfall", "_redirect_waterfall")
+    create_event(world,"place tuni nut", "_tuni_nut_placed")
+    
+    create_event(world,"sea cleaned", "_sea_cleaned")
+    create_event(world,"king zora's saved", "_saved_king_zora")
+    create_event(world,"king zora's permission", "_got_permission_from_king_zora")
+    create_event(world,"open library", "_library_open")
 
     create_event(world,"d3 S crystal", "_d3_S_crystal")
     create_event(world,"d3 E crystal", "_d3_E_crystal")
