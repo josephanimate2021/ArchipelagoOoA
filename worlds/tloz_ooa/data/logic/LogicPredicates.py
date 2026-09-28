@@ -153,6 +153,9 @@ def ooa_has_essences(state: CollectionState, player: int, target_count: int):
 
 def ooa_has_essences_for_maku_seed(state: CollectionState, player: int):
     return ooa_has_essences(state, player, state.multiworld.worlds[player].options.required_essences.value)
+
+def ooa_goal_is(state: CollectionState, player: int, goal: OracleOfAgesGoal):
+    return state.multiworld.worlds[player].options.goal == goal
     
 def ooa_has_slates(state: CollectionState, player: int, target_count):
     return state.has("Slate", player, target_count)

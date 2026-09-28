@@ -187,6 +187,11 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
                 ])
             ])
         ])],
+
+        ["maku seed", "beaten game", False, lambda state: ooa_goal_is(state, player, OracleOfAgesGoal.option_collect_maku_seed)],
+        ["veran beaten", "beaten game", False, lambda state: ooa_goal_is(state, player, OracleOfAgesGoal.option_beat_veran)],
+        ["ganon beaten", "beaten game", False, lambda state: ooa_goal_is(state, player, OracleOfAgesGoal.option_beat_ganon)],
+
         # TODO : Check Essence 3, 5, 7
 
         # SHORE PRESENT
@@ -1106,7 +1111,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         ["zora village present", "zora village tree", False, lambda state: ooa_can_harvest_tree(state, player, False)],
         ["zora village present", "zora village chest", False, lambda state: ooa_can_dive(state, player)], # Unnecessary ooa_can_dive just in case we decide that link can go underwater without its dive suit
         ["zora village present", "fairies' coast chest", False, lambda state: ooa_can_dive(state, player)], # Unnecessary ooa_can_dive just in case we decide that link can go underwater without its dive suit
-        [Outside("zora crypt cave"), "fairies' coast chest", False, lambda state: ooa_can_swim(state, player)],
+        [Outside("zora crypt cave"), "fairies' coast chest", False, lambda state: ooa_can_swim(state, player, True)],
 
         ["zora village present", Outside("present underwater zora duplex left"), True, None],
         ["zora village present", Outside("present underwater zora duplex right"), True, None],

@@ -58,13 +58,7 @@ def create_event(world: OracleOfAgesWorld, region_name, event_item_name):
 # -----------------------------------------------------------------------------------
 def create_events(world: OracleOfAgesWorld):
     create_event(world, "maku seed", "Maku Seed")
-
-    if world.options.goal == OracleOfAgesGoal.option_beat_veran:
-        create_event(world, "veran beaten", "_beaten_game")
-    elif world.options.goal == OracleOfAgesGoal.option_beat_ganon:
-        create_event(world, "ganon beaten", "_beaten_game")
-    elif world.options.goal == OracleOfAgesGoal.option_collect_maku_seed:
-        create_event(world, "maku seed", "_beaten_game")
+    create_event(world, "beaten game", "_beaten_game")
 
     create_event(world,"ridge move vine seed", "_access_cart")
     

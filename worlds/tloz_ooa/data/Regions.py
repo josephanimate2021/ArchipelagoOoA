@@ -2,6 +2,7 @@
 
 REGIONS = [
     "Menu",
+    "beaten game",
     #######
     "forest of time",
     "starting item",

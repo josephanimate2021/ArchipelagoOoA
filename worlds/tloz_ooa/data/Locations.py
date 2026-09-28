@@ -1394,7 +1394,7 @@ LOCATIONS_DATA = {
         "symbolic_name": "d2Boss",
     },
     ##########################################
-    "Moonlit Grotto (1F): Bridge Chest": {
+    "Moonlit Grotto (B1F): Bridge Chest": {
     	"region_id": "d3 bridge chest",
     	"vanilla_item": "Rupees (20)",
     	"dungeon" : 3,
