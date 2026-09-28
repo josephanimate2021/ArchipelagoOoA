@@ -1,5 +1,6 @@
 from .. import OracleOfAgesWorld
 
+from Options import OptionError
 from BaseClasses import EntranceType
 from entrance_rando import randomize_entrances, disconnect_entrance_for_randomization
 from rule_builder.rules import Has, True_
@@ -15,6 +16,18 @@ def ooa_create_entrances(world: OracleOfAgesWorld):
     option_no_ER = world.options.entrance_randomizer == OracleOfAgesEntranceRandomizer.option_disabled
     option_dungeon_only = world.options.entrance_randomizer == OracleOfAgesEntranceRandomizer.option_dungeon_only
     option_dungeon_grouping = world.options.entrance_randomizer_dungeon_pairing
+    option_excluded_ER = world.options.entrance_randomizer_excluded_entrances.value
+
+    unknown_entrances = []
+
+
+    for excluded_entrance in option_excluded_ER:
+        if (excluded_entrance not in WARPS_DATA):
+            unknown_entrances.append(excluded_entrance)
+
+    if len(unknown_entrances) > 0:
+        raise OptionError("Unrecognized excluded entrances", unknown_entrances)
+
     world.randomized_entrances = {}
     for warpName, warpData in WARPS_DATA.items():
 
@@ -27,6 +40,8 @@ def ooa_create_entrances(world: OracleOfAgesWorld):
         elif "require_option" in warpData and (hasattr(world.options, warpData["require_option"]) == False or getattr(world.options, warpData["require_option"]) == False):
             dont_randomize = True
         elif option_dungeon_only and "dungeon" not in warpData:
+            dont_randomize = True
+        elif warpName in option_excluded_ER:
             dont_randomize = True
 
         regionOutside = world.get_region(OUTSIDE_TAG + warpName)

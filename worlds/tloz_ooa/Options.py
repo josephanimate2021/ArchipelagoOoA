@@ -279,6 +279,24 @@ class OracleOfAgesEntranceRandomizer_InsideLock(Choice):
 
     default = 1
     include_in_patch = True
+    
+class OracleOfAgesEntranceRandomizer_ExcludedEntrances(OptionSet):
+    """
+    Determine entrances that won't be shuffled when ER is enabled
+    NOTE : 
+    * Also work with dungeon shuffle
+    * Does nothing if ER is fully disabled
+    * All entrances can be found here : {INSERT LINK HERE}
+    * 
+    """
+    display_name = "ER Excluded Entrance"
+
+    default = [
+        # black tower,
+        
+    ]
+
+    include_in_patch = True
 
 class OracleOfAgesGashaLocations(Range):
     """
@@ -343,6 +361,7 @@ class OracleOfAgesOptions(PerGameCommonOptions):
     entrance_randomizer_surface_underwater_pairing: OracleOfAgesEntranceRandomizer_SurfaceUnderwaterPairing
     entrance_randomizer_dungeon_pairing: OracleOfAgesEntranceRandomizer_DungeonPairing
     entrance_randomizer_inside_lock: OracleOfAgesEntranceRandomizer_InsideLock
+    entrance_randomizer_excluded_entrances: OracleOfAgesEntranceRandomizer_ExcludedEntrances
 
     #entrance_randomizer_surface_to_underwater_freedom: OracleOfAgesEntranceRandomizer_SurfaceToUnderwaterFreedom
 
