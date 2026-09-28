@@ -399,6 +399,12 @@ def define_text_constants(assembler: Z80Assembler, patch_data):
     text_bytes.extend([0x00])
     assembler.add_floating_chunk(f"text.blockedByTokay", text_bytes)
 
+                                 ################
+    text_bytes = text_to_binary("Let me refill "
+                                "your supplies.")
+    text_bytes.extend([0x00])
+    assembler.add_floating_chunk(f"text.impaRefill", text_bytes)
+
 
 def write_chest_contents(rom: RomData, patch_data):
     """

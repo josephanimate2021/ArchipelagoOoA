@@ -34,6 +34,9 @@
 1f/4822/: /include text.tokayMarket1Validation # fix 2b market validation
 1f/4894/TX_0a31: /include text.tokayMarket2
 
+# Impa refill
+1e/52e6/TX_0122: /include text.impaRefill
+
 # Replace First Deku meeting by essence & slate requirement
 1e/64c7/: |
     db $04,$92,$05,$a0,$20,$09,$03 ; You need

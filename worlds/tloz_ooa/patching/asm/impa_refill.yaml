@@ -101,5 +101,5 @@
     jp z,$64c1 # val0b
     jp $64b4 # val0a
 
-09/64b5/: dw $9898
+09/64b5/: dw $9898 # val 0a pos
 09/64c2/: dw $2828 # val 0b pos
