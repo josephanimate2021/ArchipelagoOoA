@@ -49,6 +49,22 @@ def apply_text_edits(texts: dict[str, str]) -> None:
     texts["TX_301a"] = "" # One of Vasu snake text
     texts["TX_3026"] = "" # More of Vasu snake text
     texts["TX_5809"] = "  \\opt()Yes \\opt()No" # Patch ceremony Explanation...
+    
+    # impa refill
+    item_text = "Let me refill\nyour supplies."
+    texts["TX_0122"] = item_text
+
+    # Archipelago Item
+    item_text = "You found 🟥an\nitem for another\nworld⬜!"
+    texts["TX_0057"] = item_text
+
+    # Zora Potion
+    item_text = "You got\n🟥King Zora's\nMagic Potion⬜!"
+    texts["TX_0045"] = item_text
+
+    # Ring Appraisal
+    item_text = "You got the\n🟥\\call(fd)⬜!"
+    texts["TX_301c"] = item_text
     return
 
 def get_modded_ages_text_data(rom_data: RomData) -> tuple[dict[str, str], dict[str, str]]:

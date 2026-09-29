@@ -158,18 +158,6 @@ def make_text_data(assembler: Z80Assembler, text: dict[str, str], patch_data: di
     mahe_shop_text(text, patch_data)
     make_hint_texts(text, patch_data)
 
-    # impa refill
-    item_text = "Let me refill\nyour supplies."
-    text["TX_0122"] = item_text
-
-    # Archipelago Item
-    item_text = "You found 🟥an\nitem for another\nworld⬜!"
-    text["TX_0057"] = item_text
-
-    # Zora Potion
-    item_text = "You got\n🟥King Zora's\nMagic Potion⬜!"
-    text["TX_0045"] = item_text
-
     # Maku road Sign Replacement
     options = patch_data["options"]
     requiredEssences = options["required_essences"]
