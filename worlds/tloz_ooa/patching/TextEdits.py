@@ -223,7 +223,6 @@ def make_dungeon_item_texts(texts: dict[str, str], patch_data) -> None:
             small_key_text += dungeon_precision
         small_key_text += "⬜!" 
         texts[dungeon_obj_tx_indices[f"smallKey{dungeon_tag}"]] = small_key_text
-        print(f"smallKey{dungeon_tag} => {small_key_text}")
 
         # Maku Path & Hero Cave only has Small Keys, so skip other texts
         if i == 0 or i == 10:
@@ -236,7 +235,6 @@ def make_dungeon_item_texts(texts: dict[str, str], patch_data) -> None:
             if patch_data["options"]["keysanity_boss_keys"]:
                 boss_key_text += dungeon_precisionForBossKey
             texts[dungeon_obj_tx_indices[f"bossKeyD{trueI}"]] = boss_key_text
-            print(f"bossKeyD{trueI} => {boss_key_text}")
 
         # ###### Dungeon maps ##############################################
         # "You found the\n\color(RED)"
@@ -245,7 +243,6 @@ def make_dungeon_item_texts(texts: dict[str, str], patch_data) -> None:
             dungeon_map_text += dungeon_precision
         dungeon_map_text += "⬜!" 
         texts[dungeon_obj_tx_indices[f"dungeonMap{dungeon_tag}"]] = dungeon_map_text
-        print(f"dungeonMap{dungeon_tag} => {dungeon_map_text}")
 
         # ###### Compasses ##############################################
         # "You found the\n\color(RED)Compass"
@@ -254,7 +251,6 @@ def make_dungeon_item_texts(texts: dict[str, str], patch_data) -> None:
             compasses_text += dungeon_precision
         compasses_text += "⬜!" 
         texts[dungeon_obj_tx_indices[f"compass{dungeon_tag}"]] = compasses_text
-        print(f"compass{dungeon_tag} => {compasses_text}")
     return
  
 # ====================================================================================================
@@ -274,6 +270,6 @@ def make_text_data(assembler: Z80Assembler, text: dict[str, str], patch_data: di
 
     item_text = f"You need 🟩{requiredEssences}⬜\nessences to get\nthe Maku Seed\\stop\n"
     item_text += f"You need 🟩{requiredSlates}⬜\nslates to open\nD8 basement"
-    text["TX_0564"] = item_text
+    text["TX_2e0d"] = item_text
 
     

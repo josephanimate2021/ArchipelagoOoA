@@ -48,6 +48,8 @@ def apply_text_edits(texts: dict[str, str]) -> None:
     texts["TX_2d11"] = "" # Symmetry Sister Ramble about the black tower
     texts["TX_301a"] = "" # One of Vasu snake text
     texts["TX_3026"] = "" # More of Vasu snake text
+    texts["TX_0564"] = "" # Maku tree presentation
+    texts["TX_281a"] = "" # Twinrova Monologue (Dialogue ?) about Onox Death
     texts["TX_5809"] = "  \\opt()Yes \\opt()No" # Patch ceremony Explanation...
     
     # impa refill

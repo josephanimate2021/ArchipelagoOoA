@@ -79,42 +79,4 @@
     ret
 09/4c64/: call checkCustomTreasureTextId
 
-# Insert a redirection table inside showText
-38//customTextJumpTable: |
-    dwbe $2e0d, $0564 ; maku path sign into maku tree introduction
-    db $ff
-
-38//showCustomText_body: |
-    ld a,b
-    ld e,c
-    push bc
-    ld b,a
-    ld c,e
-    ld e,$02
-    ld hl,customTextJumpTable
-    call searchDoubleKey
-    pop bc
-    jr c,@customText
-    ret
-    @customText:
-    ldi a,(hl)
-    ld b,a
-    ld c,(hl)
-    ret
-
-00//showCustomText: |
-    push af
-    push de
-    push hl
-    ld e,$38
-    ld hl,showCustomText_body
-    call interBankCall
-    pop hl
-    pop de
-    pop af
-    ld a,($cbae)
-    ret
-
-00/1876/: call showCustomText
-
 0c/7f81/: db $bd,$bd,$bd,$bd,$bd,$bd,$bd,$bd,$bd,$bd,$bd,$bd ; always skip the second know-it-all bird text
