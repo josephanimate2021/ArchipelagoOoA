@@ -57,7 +57,6 @@ class OoAPatchExtensions(APPatchExtension):
         define_static_items_table(assembler, patch_data)
         define_option_constants(assembler, patch_data)
         # set_faq_text(assembler)
-        define_text_constants(assembler, patch_data)
         define_dungeon_items_text_constants(assembler, patch_data)
 
         # Define dynamic data blocks

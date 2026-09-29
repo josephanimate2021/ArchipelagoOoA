@@ -50,6 +50,22 @@ DUNGEON_NAMES = [
     "Linked Hero's Cave"
 ]
 
+DUNGEON_NAMES_FOR_TXT = [
+    "Maku Path",
+    "Spirit's Grave",
+    "Wing Dungeon",
+    "Moonlit Grotto",
+    "Skull Dungeon",
+    "Crown Dungeon",
+    "Mermaid's Cave",
+    "Jabu-Jabu's Belly",
+    "Ancient Tomb",
+    "Mermaid's Cave",
+    "",
+    "Linked Hero's Cave"
+]
+
+
 REGIONS_CONVERSION_TABLE = {
     # TODO OTHERS
     "LYNNA_VILLAGE": "Lynna village",

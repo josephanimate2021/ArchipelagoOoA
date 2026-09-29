@@ -65,6 +65,40 @@ def apply_text_edits(texts: dict[str, str]) -> None:
     # Ring Appraisal
     item_text = "You got the\n🟥\\call(fd)⬜!"
     texts["TX_301c"] = item_text
+
+    # ER Blocked entrances -------------------------
+    
+    item_text = "Fallen rubble\nblocks the way.\nExplosives might\nclear the exit."
+    texts["TX_5a25"] = item_text
+
+    item_text = "A thorny bush\nblocks the way.\nA big fire might\ntake care of it."
+    texts["TX_5a26"] = item_text
+    
+    item_text = "The exit is shut\nby a sturdy wall\nIt might belong\nto a fortress."
+    texts["TX_5a27"] = item_text
+    
+    item_text = "A closed door\nblocks the exit.\nIt has a rusty\nunusable padlock"
+    texts["TX_5a28"] = item_text
+    
+    item_text = "A closed door\nblocks the exit.\nIt has a book-\nlike padlock."
+    texts["TX_5a29"] = item_text
+    
+    item_text = "A closed door\nblocks the exit.\nThe lock looks\nlike a crown."
+    texts["TX_5a2a"] = item_text
+    
+    item_text = "A closed door\nblocks the exit.\nIt has a rusty\nfish engraving."
+    texts["TX_5a2b"] = item_text
+    
+    item_text = "A closed door\nblocks the exit.\nIt has a clean\nfish engraving."
+    texts["TX_5a2c"] = item_text
+    
+    item_text = "Huh... A bunch\nof teeth are\nblocking the\nway out... "
+    texts["TX_5a2d"] = item_text
+    
+    item_text = "A closed door\nblocks the exit.\nIt has a tokay\nmissing an eye."
+    texts["TX_5a2e"] = item_text
+
+
     return
 
 def get_modded_ages_text_data(rom_data: RomData) -> tuple[dict[str, str], dict[str, str]]:

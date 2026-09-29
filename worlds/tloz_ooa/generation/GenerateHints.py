@@ -20,7 +20,6 @@ def compute_location_per_region() -> dict[str, list[str]]:
         result[region] = locations_in_region(region)
     return result
 
-
 def create_region_hints(world: OracleOfAgesWorld) -> list[tuple[str, str | int]]:
     hinted_regions: list[str] = world.random.sample(HINT_REGIONS, k=len(KNOW_IT_ALL_BIRDS_TX))
     hint_data: list[tuple[str, str | int]] = []

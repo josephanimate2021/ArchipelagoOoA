@@ -1,9 +1,10 @@
 from typing import Any, cast
 
+from settings import get_settings
 from ..common.patching.text import normalize_text
 from ..common.patching.Util import simple_hex
 from ..common.patching.z80asm.Assembler import Z80Assembler
-from ..data.Constants import SEED_ITEMS
+from ..data.Constants import DUNGEON_NAMES_FOR_TXT
 from ..data.Locations import LOCATIONS_DATA
 from ..data.Hints import *
 import random
@@ -147,6 +148,113 @@ def make_hint_texts(texts: dict[str, str], patch_data) -> None:
 
 # ====================================================================================================
 def make_dungeon_item_texts(texts: dict[str, str], patch_data) -> None:
+    
+    dungeon_obj_tx_indices = {
+        "smallKeyD0":"TX_5a00",
+        "smallKeyD1":"TX_5a01",
+        "smallKeyD2":"TX_5a02",
+        "smallKeyD3":"TX_5a03",
+        "smallKeyD4":"TX_5a04",
+        "smallKeyD5":"TX_5a05",
+        "smallKeyD6Present":"TX_5a06",
+        "smallKeyD7":"TX_5a07",
+        "smallKeyD8":"TX_5a08",
+        "smallKeyD11":"TX_5a09",
+        "smallKeyD6Past":"TX_5a0a",
+        "bossKeyD1":"TX_5a0b",
+        "bossKeyD2":"TX_5a0c",
+        "bossKeyD3":"TX_5a0d",
+        "bossKeyD4":"TX_5a0e",
+        "bossKeyD5":"TX_5a0f",
+        "bossKeyD6":"TX_5a10",
+        "bossKeyD7":"TX_5a11",
+        "bossKeyD8":"TX_5a12",
+        "dungeonMapD1":"TX_5a13",
+        "dungeonMapD2":"TX_5a14",
+        "dungeonMapD3":"TX_5a15",
+        "dungeonMapD4":"TX_5a16",
+        "dungeonMapD5":"TX_5a17",
+        "dungeonMapD6Present":"TX_5a18",
+        "dungeonMapD7":"TX_5a19",
+        "dungeonMapD8":"TX_5a1a",
+        "dungeonMapD6Past":"TX_5a1b",
+        "compassD1":"TX_5a1c",
+        "compassD2":"TX_5a1d",
+        "compassD3":"TX_5a1e",
+        "compassD4":"TX_5a1f",
+        "compassD5":"TX_5a20",
+        "compassD6Present":"TX_5a21",
+        "compassD7":"TX_5a22",
+        "compassD8":"TX_5a23",
+        "compassD6Past":"TX_5a24",
+    }
+
+    for i in range(0, 11): # Maku Path and Hero's Cave has no map, no compass, no boss key, and the unique small key use the default text. 
+        # " for\nDungeon X"
+        trueI = i if i != 9 else 6
+        if trueI == 10:
+            trueI = 11
+        dungeon_precision = " for\n"
+        dungeon_tag = f"D{trueI}"
+        dungeon_precision += (f"{DUNGEON_NAMES_FOR_TXT[trueI]}\n({dungeon_tag})" if get_settings().tloz_ooa_options["simplify_dungeon_precision_text"] else (
+            f"Dungeon {dungeon_tag[1:]}"
+        ))
+        dungeon_precisionForBossKey = f"{dungeon_precision}"
+
+        if i == 6:
+            #\n(present)
+            dungeon_precision += " (present)"
+            dungeon_tag += "Present"
+        if i == 9:
+            #\n(past)
+            dungeon_precision += " (past)"
+            dungeon_tag += "Past"
+
+        # ###### Small keys ##############################################
+        # "You found a\n\color(RED)"
+        small_key_text = "You found a\n🟥"
+        if patch_data["options"]["master_keys"]:
+            # "Master Key"
+            small_key_text += "Master Key"
+        else:
+            # "Small Key"
+            small_key_text += "Small Key"
+        if patch_data["options"]["keysanity_small_keys"]:
+            small_key_text += dungeon_precision
+        small_key_text += "⬜!" 
+        texts[dungeon_obj_tx_indices[f"smallKey{dungeon_tag}"]] = small_key_text
+        print(f"smallKey{dungeon_tag} => {small_key_text}")
+
+        # Maku Path & Hero Cave only has Small Keys, so skip other texts
+        if i == 0 or i == 10:
+            continue
+
+        # ###### Boss keys ##############################################
+        # "You found the\n\color(RED)Boss Key"
+        if i < 9:
+            boss_key_text = "You found the\n🟥Boss Key"
+            if patch_data["options"]["keysanity_boss_keys"]:
+                boss_key_text += dungeon_precisionForBossKey
+            texts[dungeon_obj_tx_indices[f"bossKeyD{trueI}"]] = boss_key_text
+            print(f"bossKeyD{trueI} => {boss_key_text}")
+
+        # ###### Dungeon maps ##############################################
+        # "You found the\n\color(RED)"
+        dungeon_map_text = "You found the\n🟥Dungeon Map"
+        if patch_data["options"]["keysanity_maps_compasses"]:
+            dungeon_map_text += dungeon_precision
+        dungeon_map_text += "⬜!" 
+        texts[dungeon_obj_tx_indices[f"dungeonMap{dungeon_tag}"]] = dungeon_map_text
+        print(f"dungeonMap{dungeon_tag} => {dungeon_map_text}")
+
+        # ###### Compasses ##############################################
+        # "You found the\n\color(RED)Compass"
+        compasses_text = "You found the\n🟥Compass"
+        if patch_data["options"]["keysanity_maps_compasses"]:
+            compasses_text += dungeon_precision
+        compasses_text += "⬜!" 
+        texts[dungeon_obj_tx_indices[f"compass{dungeon_tag}"]] = compasses_text
+        print(f"compass{dungeon_tag} => {compasses_text}")
     return
  
 # ====================================================================================================
@@ -157,6 +265,7 @@ def make_entrance_blocker_texts(texts: dict[str, str], patch_data) -> None:
 def make_text_data(assembler: Z80Assembler, text: dict[str, str], patch_data: dict[str, Any]) -> None:
     mahe_shop_text(text, patch_data)
     make_hint_texts(text, patch_data)
+    make_dungeon_item_texts(text, patch_data)
 
     # Maku road Sign Replacement
     options = patch_data["options"]
