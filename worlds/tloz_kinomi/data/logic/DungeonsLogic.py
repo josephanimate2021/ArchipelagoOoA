@@ -3,20 +3,20 @@ from .LogicPredicates import *
 
 def make_summerVilla_logic(player: int):
     return [
-        ["enter summer villa", "d0 map chest", False, None],
-        ["enter summer villa", "d0 compass chest", False, None],
-        ["enter summer villa", "d0 small key chest 1f", False, None],
-        ["enter summer villa", "d0 heartpiece inside water", False, None],
-        ["enter summer villa", "soldier trade", False, lambda state: state.has("Wood Clock", player)],
-        ["enter summer villa", "d0 small key chest b1f", False, lambda state: kinomi_can_kill_armos(state, player)],
-        ["enter summer villa", "d0 small key chest 2f", False, None],
-        ["enter summer villa", "d0 heartpiece drop", False, lambda state: kinomi_can_kill_spiked_beetle(state, player)],
-        ["enter summer villa", "d0 boss key chest", False, lambda state: all([
+        ["inside summer villa", "d0 map chest", False, None],
+        ["d0 map chest", "d0 compass chest", False, None],
+        ["d0 map chest", "d0 small key chest 1f", False, None],
+        ["d0 map chest", "d0 heartpiece inside water", False, None],
+        ["d0 map chest", "soldier trade", False, lambda state: state.has("Wood Clock", player)],
+        ["d0 map chest", "d0 small key chest b1f", False, lambda state: kinomi_can_kill_armos(state, player)],
+        ["d0 map chest", "d0 small key chest 2f", False, None],
+        ["d0 map chest", "d0 heartpiece drop", False, lambda state: kinomi_can_kill_spiked_beetle(state, player)],
+        ["d0 map chest", "d0 boss key chest", False, lambda state: all([
             kinomi_can_kill_spiked_beetle(state, player),
             kinomi_has_small_keys(state, player, 0, 1)
         ])],
-        ["enter summer villa", "d0 shield chest", False, lambda state: kinomi_has_small_keys(state, player, 0, 1)],
-        ["enter summer villa", "d0 boss", False, lambda state: all([
+        ["d0 map chest", "d0 shield chest", False, lambda state: kinomi_has_small_keys(state, player, 0, 1)],
+        ["d0 map chest", "d0 boss", False, lambda state: all([
             kinomi_has_shield(state, player),
             kinomi_has_boss_key(state, player, 0)
         ])],
@@ -25,8 +25,10 @@ def make_summerVilla_logic(player: int):
 
 def make_spiritGrotto_logic(player: int):
     return [
+        ["inside spirit's grotto", "d1", False, None],
+
         # LEFT SIDE OF SPIRIT'S GROTTO
-        ["enter spirit's grotto", "d1 left side", False, lambda state: kinomi_can_kill_normal_enemy(state, player)],
+        ["d1", "d1 left side", False, lambda state: kinomi_can_kill_normal_enemy(state, player)],
         ["d1 left side", "d1 pots chest", False, lambda state: kinomi_can_break_pot(state, player)],
         ["d1 left side", "d1 platform chest", False, None],
         ["d1 left side", "d1 small key drop", False, None],
@@ -49,11 +51,11 @@ def make_spiritGrotto_logic(player: int):
         ["d1 miniboss arena", "d1 bracelet", False, lambda state: kinomi_can_press_nonhold_presure_plate_without_blocks(state, player, True)],
 
         # RIGHT SIDE OF SPIRIT'S GROTTO
-        ["enter spirit's grotto", "d1 hit color block", False, lambda state: all([
+        ["d1", "d1 hit color block", False, lambda state: all([
             kinomi_can_break_pot(state, player),
             kinomi_has_sword(state, player)
         ])],
-        ["enter spirit's grotto", "d1 pully puzzle", False, lambda state: all([
+        ["d1", "d1 pully puzzle", False, lambda state: all([
             kinomi_has_small_keys(state, player, 1, 1),
             kinomi_has_glove(state, player)
         ])],
@@ -73,9 +75,11 @@ def make_spiritGrotto_logic(player: int):
 
 def make_fourCornersCave_logic(player: int):
     return [
+        ["inside four corners cave", "d3", False, lambda state: kinomi_can_jump_pit(state, player)],
+
         # DESCENDING DOWN
-        ["enter four corners cave", "d3 compass chest", False, lambda state: kinomi_can_jump_pit(state, player)],
-        ["enter four corners cave", "d3 first floor", False, lambda state: kinomi_has_bombs(state, player)],
+        ["d3", "d3 compass chest", False, lambda state: kinomi_can_jump_pit(state, player)],
+        ["d3", "d3 first floor", False, lambda state: kinomi_has_bombs(state, player)],
         ["d3 first floor", "d3 compass chest", False, None],
         ["d3 first floor", "d3 small key chest in dark", False, lambda state: all([
             kinomi_has_small_keys(state, player, 3, 1),
@@ -138,10 +142,11 @@ def make_fourCornersCave_logic(player: int):
 
 def make_seasonsShrine_logic(player: int):
     return [
+        ["inside seasons shrine", "d4", False, None],
 
         # UNLOCK AUTUMN
-        ["enter seasons shrine", "d4 summer small key drop", False, lambda state: kinomi_can_kill_normal_enemy(state, player)],
-        ["enter seasons shrine", "d4 summer big rupee chest", False, lambda state: kinomi_can_trigger_far_switch(state, player, False, False)],
+        ["d4", "d4 summer small key drop", False, lambda state: kinomi_can_kill_normal_enemy(state, player)],
+        ["d4", "d4 summer big rupee chest", False, lambda state: kinomi_can_trigger_far_switch(state, player, False, False)],
         ["d4 summer big rupee chest", "d4 autumn fall", False, lambda state: kinomi_has_small_keys(state, player, 4, 1)],
         ["d4 autumn fall", "d4 autumn compass chest", False, lambda state: any([
             kinomi_can_swim(state, player),
@@ -232,7 +237,7 @@ def make_seasonsShrine_logic(player: int):
 def make_lostLabrinth_logic(player: int):
     return [
         # LOST LABYRINTH PRESENT MAIN ENTRANCE ROUTE
-        ["enter lost labyrinth", "d2 present dungeon map chest", False, lambda state: kinomi_can_kill_normal_enemy(state, player, True)],
+        ["inside lost labyrinth", "d2 present dungeon map chest", False, lambda state: kinomi_can_kill_normal_enemy(state, player, True)],
         ["d2 present dungeon map chest", "d2 present cross with cane", False, lambda state: any([
             kinomi_can_jump_4_wide_pit(state, player),
             kinomi_has_cane(state, player)

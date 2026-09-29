@@ -19,7 +19,7 @@ def make_logic_array(player: int):
 def create_connections(multiworld: MultiWorld, player: int):
     entrances = []
     for p, v in multiworld.worlds[player].entrances.items():
-        entrances.extend([[e[0] + " entrance", "enter " + e[1], True, None] for e in v])
+        entrances.extend([["outside " + e[0], "inside " + e[1], True, None] for e in v])
 
     all_logic = make_logic_array(player)
     all_logic.append(entrances)

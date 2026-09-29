@@ -10,7 +10,7 @@ def make_overworld_logic(player: int):
             kinomi_can_kill_normal_enemy(state, player, True),
             state.has("Ghastly Doll", player)
         ])],
-        ["kinomi town", "summer villa entrance", False, None],
+        ["kinomi town", "outside summer villa", False, None],
         ["kinomi town", "ghost's house", False, lambda state: kinomi_can_use_ember_seeds(state, player, True)],
         ["kinomi town", "kinomi shop", False, None],
         ["kinomi town", "hidden shop", False, lambda state: kinomi_can_use_ember_seeds(state, player, False)], # You can just use ember seeds to burn bushes and a tree.
@@ -26,7 +26,7 @@ def make_overworld_logic(player: int):
         ["kinomi town", "forever falls old man", False, lambda state: kinomi_can_break_bush(state, player)],
         ["kinomi town", "forever falls enemy kill", False, lambda state: kinomi_can_kill_normal_enemy(state, player)],
         ["kinomi town", "forever falls cave", False, lambda state: kinomi_can_kill_normal_enemy(state, player)],
-        ["kinomi town", "spirit's grotto entrance", False, lambda state: state.has("Falls Key", player)],
+        ["kinomi town", "outside spirit's grotto", False, lambda state: state.has("Falls Key", player)],
         ["kinomi town", "lost labyrinth forever falls entrance", False, lambda state: all([
             kinomi_can_use_ember_seeds(state, player, False),
             kinomi_has_gifts_for_zelda_kidnapped_cutscene(state, player)
@@ -55,7 +55,7 @@ def make_overworld_logic(player: int):
         ["daichi plain underwater heartpiece", "fall stone reward", False, None],
         ["daichi plain summer old man", "daichi plain summer old man's rupee", False, None],
         ["daichi plain", "daichi plain chest", False, lambda state: kinomi_has_glove(state, player)],
-        ["kinomi town", "four corners cave entrance", False, lambda state: kinomi_has_bombs(state, player)],
+        ["kinomi town", "outside four corners cave", False, lambda state: kinomi_has_bombs(state, player)],
 
         # LAKE OF MEMORIES
         #######################################
@@ -97,7 +97,7 @@ def make_overworld_logic(player: int):
             kinomi_has_shield(state, player),
             kinomi_option_medium_logic(state, player)
         ])],
-        ["hedge maze", "seasons shrine entrance", False, lambda state: all([ 
+        ["hedge maze", "outside seasons shrine", False, lambda state: all([ 
             # For some reason the game expects you to have all the stones to get to the seasons shrine. Tried getting there once on three stones and failed despite guessing correctly.
             state.has("Summer Stone", player),
             state.has("Winter Stone", player),
@@ -146,7 +146,7 @@ def make_overworld_logic(player: int):
             kinomi_option_medium_logic(state, player), # hopefully you know that as long as you get a percise landing in the right place then you'll get the heartpiece. Tried it once and it worked.
             kinomi_can_jump_pit(state, player),
         ])],
-        ["jiku clifs", "lost labyrinth entrance", False, lambda state: state.has("Old Labyrinth Key", player)],
+        ["jiku clifs", "outside lost labyrinth", False, lambda state: state.has("Old Labyrinth Key", player)],
         ["d2 past bomb chest", "jiku clifs past fill hole close to main entrance", False, lambda state: kinomi_has_cane(state, player)],
         ["d2 past small key drop 2", "jiku clifs past springwater region", False, lambda state: all([
             kinomi_has_small_keys(state, player, 2, 1),
