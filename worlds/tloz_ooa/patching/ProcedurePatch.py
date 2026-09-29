@@ -2,6 +2,7 @@ import hashlib
 import os
 import pkgutil
 import logging
+import json
 
 import yaml
 
@@ -13,6 +14,9 @@ from .Constants import *
 from ..common.patching.RomData import RomData
 from ..common.patching.z80asm.Assembler import Z80Assembler, Z80Block
 from ..common.patching.music import *
+from ..common.patching.text.encoding import write_text_data
+from .Text import get_modded_ages_text_data
+from .TextEdits import make_text_data
 
 from tkinter.filedialog import askopenfilename
 
@@ -31,7 +35,7 @@ class OoAPatchExtensions(APPatchExtension):
             rom = shuffle_sfx(bytearray(rom), Game.Ages)
 
         rom_data = RomData(rom)
-        patch_data = yaml.safe_load(caller.get_file(patch_file).decode("utf-8"))
+        patch_data = json.loads(caller.get_file(patch_file).decode("utf-8"))
 
         from .. import OracleOfAgesWorld
         version = patch_data["version"].split(".")
@@ -44,6 +48,7 @@ class OoAPatchExtensions(APPatchExtension):
         #    patch_data["locations"]["Horon Village: Shop #3"] = "Potion"
 
         assembler = Z80Assembler(EOB_ADDR, DEFINES, rom)
+        dictionary, texts = get_modded_ages_text_data(rom_data)
 
         # Define static values & data blocks
         for symbolic_name, price in patch_data["shop_prices"].items():
@@ -56,6 +61,7 @@ class OoAPatchExtensions(APPatchExtension):
         define_dungeon_items_text_constants(assembler, patch_data)
 
         # Define dynamic data blocks
+        make_text_data(assembler, texts, patch_data)
         define_tile_replacements_table(assembler, patch_data)
         define_compass_rooms_table(assembler, patch_data)
         define_collect_properties_table(assembler, patch_data)
@@ -65,6 +71,7 @@ class OoAPatchExtensions(APPatchExtension):
 
         # Parse assembler files, compile them and write the result in the ROM
         logging.info(f"Compiling ASM files...")
+        write_text_data(rom_data, dictionary, texts, False)
         for file_path in get_asm_files(patch_data):
             data_loaded = yaml.safe_load(pkgutil.get_data(__name__, file_path))
             for metalabel, contents in data_loaded.items():
@@ -95,7 +102,7 @@ class OoAProcedurePatch(APProcedurePatch, APTokenMixin):
 
     game = "The Legend of Zelda - Oracle of Ages"
     procedure = [
-        ("apply_patches", ["patch.dat"])
+        ("apply_patches", ["patch.json"])
     ]
 
     @classmethod

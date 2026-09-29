@@ -16,40 +16,6 @@
 # the wrong one in random given seed type
 #1d/5730/: db $00
 
-1e/4da5/TX_0101: /include text.lynnaShop1 # (Cutscene save impa pt1)
-1e/4e45/TX_0102: /include text.lynnaShop2 # (Cutscene save impa pt2)
-1e/4e85/TX_0103: /include text.lynnaShop3 # (Cutscene save impa pt2 - LINKED)
-1e/4fec/TX_0113: /include text.advanceShop1 # (Cutscene Unpossessed Impa pt2)
-1e/51fa/TX_0118: /include text.advanceShop2 # (Cutscene Unpossessed Impa pt3)
-1f/60b1/TX_0e24: /include text.advanceShop3 # (Original)
-1e/5067/TX_0114: /include text.syrupShop1 # (Cutscene Unpossessed Impa pt4)
-1e/519e/TX_0117: /include text.syrupShop2 # (Cutscene After Sword Given)
-1e/535b/TX_0125: /include text.syrupShop3 # (Cutscene at the entrance of the black tower pt2)
-1f/5df5/TX_0e09: /include text.hiddenShop1 # (Original)
-1e/5569/TX_012a: /include text.hiddenShop2 # (Cutscene Zelda saved)
-1e/56c3/TX_0131: /include text.hiddenShop3 # (Cutscene with zelda)
-
-1f/482b/TX_0a2c: /include text.tokayMarket1
-1f/481e/: db $2c # move where 2b point too
-1f/4822/: /include text.tokayMarket1Validation # fix 2b market validation
-1f/4894/TX_0a31: /include text.tokayMarket2
-
-# Impa refill
-1e/52e6/TX_0122: /include text.impaRefill
-
-# Replace First Deku meeting by essence & slate requirement
-1e/64c7/: |
-    db $04,$92,$05,$a0,$20,$09,$03 ; You need
-    db $30 + option.requiredEssences ; X
-    db $09,$00,$01,$65,$73,$73,$65,$6e,$63,$65,$73,$04,$47 ; essences to
-    db $05,$57,$04,$46,$01 ; get the
-    db $4d,$61,$6b,$75,$20,$53,$65,$65,$64,$04,$58 ; Maku Seed
-
-    db $04,$92,$05,$a0,$20,$09,$03 ; You need
-    db $30 + option.required_slates ; X
-    db $09,$00,$01,$73,$6c,$61,$74,$65,$73,$04,$57,$05,$50,$01 ; slates to open
-    db $44,$38,$20,$62,$61,$73,$65,$6d,$65,$6e,$74,$2e,$00 ; D8 basement
-
 
 # replace text in script command 9a (showtextnonexitable) using
 # scriptTextReplacements: four-byte entries, first two bytes are old text
@@ -90,17 +56,6 @@
 # Some required redirections
 0c/4822/: db $2c
 0c/483c/: db $1c
-
-1e/4957/getArchipelagoItemText: |
-    db $02,$7c,$20,$61,$6e,$01                          ; You found an
-    db $69,$74,$65,$6d,$05,$55,$20,$61,$6e,$03,$b9,$01  ; item for another
-    db $03,$c9,$21,$00                                  ; world!
-
-1e/47d5/KingZoraPotionText: |
-    db $02,$7c,$01                                     ; You got
-    db $4b,$69,$6e,$67,$20,$5a,$6f,$72,$61,$27,$73,$01 ; King Zora's 
-    db $09,$01,$03,$0a,$09,$00,$21,$00                 ; Magic Potion! 
-
 
 38//TX_5a00: /include text.smallKeyD0
 38//TX_5a01: /include text.smallKeyD1
@@ -259,3 +214,5 @@
     ret
 
 00/1876/: call showCustomText
+
+0c/7f81/: db $bd,$bd,$bd,$bd,$bd,$bd,$bd,$bd,$bd,$bd,$bd,$bd ; always skip the second know-it-all bird text

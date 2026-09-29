@@ -330,6 +330,7 @@ class OracleOfAgesGashaNutKillRequirement(NamedRange):
     special_range_names = {"vanilla": 40}
     include_in_patch = True
 
+
 @dataclass
 class OracleOfAgesOptions(PerGameCommonOptions):
     start_inventory_from_pool: StartInventoryPool
@@ -383,3 +384,4 @@ class OracleOfAgesOptions(PerGameCommonOptions):
     shop_prices_factor: OracleOfAgesPricesFactor
     combat_difficulty: OraclesCombatDifficulty
     enforce_potion_in_shop: OracleOfAgesEnforcePotionInShop
+    bird_hint: OraclesBirdHint

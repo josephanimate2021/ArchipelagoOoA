@@ -296,38 +296,6 @@ def text_to_binary(text: str) -> List[int]:
     return result
 
 def define_text_constants(assembler: Z80Assembler, patch_data):
-    overworld_shops = [
-        "Lynna City: Shop",
-        "Lynna City: Hidden Shop",
-        "Yoll Graveyard: Syrup Shop",
-        "Lynna Village: Advance Shop",
-    ]
-
-    for shop_name in overworld_shops:
-        for i in range(1, 4):
-            location_name = f"{shop_name} Item #{i}"
-            symbolic_name = LOCATIONS_DATA[location_name]["symbolic_name"]
-            text_bytes = []
-            if location_name in patch_data["locations"]:
-                item_name_bytes = text_to_binary(patch_data["locations"][location_name])
-                text_bytes = [0x09, 0x01] + item_name_bytes + [0x09, 0x00, 0x0c, 0x18, 0x01]  # Item name
-                if shop_name != "Crescent Island (Past): Market":
-                    text_bytes.extend([0x20, 0x0c, 0x08, 0x20, 0x03, 0x7b, 0x01])  # Price
-                    text_bytes.extend([0x02, 0x00, 0x00])  # OK / No thanks
-            assembler.add_floating_chunk(f"text.{symbolic_name}", text_bytes)
-
-    #Tokay Market
-    shop_name = "Crescent Island (Past): Market"
-    for i in range(1, 3):
-        location_name = f"{shop_name} Item #{i}"
-        symbolic_name = LOCATIONS_DATA[location_name]["symbolic_name"]
-        text_bytes = []
-        if location_name in patch_data["locations"]:
-            item_name_bytes = text_to_binary(patch_data["locations"][location_name])
-            text_bytes = [0x09, 0x01] + item_name_bytes + [0x09, 0x00, 0x0c, 0x18, 0x00]  # Item name
-            assembler.add_floating_chunk(f"text.{symbolic_name}", text_bytes)
-    text_bytes = [0x31, 0x30, 0x20, 0x02, 0x12, 0x01, 0x02, 0x00, 0x00]
-    assembler.add_floating_chunk(f"text.tokayMarket1Validation", text_bytes)
                                  ################
     text_bytes = text_to_binary("Fallen rubble  "
                                 "blocks the way. "
@@ -398,12 +366,6 @@ def define_text_constants(assembler: Z80Assembler, patch_data):
                                 "missing an eye.")
     text_bytes.extend([0x00])
     assembler.add_floating_chunk(f"text.blockedByTokay", text_bytes)
-
-                                 ################
-    text_bytes = text_to_binary("Let me refill "
-                                "your supplies.")
-    text_bytes.extend([0x00])
-    assembler.add_floating_chunk(f"text.impaRefill", text_bytes)
 
 
 def write_chest_contents(rom: RomData, patch_data):

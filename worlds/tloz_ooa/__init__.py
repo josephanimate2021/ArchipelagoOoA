@@ -2,7 +2,7 @@ import logging
 import os
 import yaml
 
-from typing import ClassVar, Any, Optional, Type, TextIO
+from typing import ClassVar, Any, Optional, Type, TextIO, cast
 from Options import Option
 from BaseClasses import Item, Location, LocationProgressType, MultiWorld
 from Options import Accessibility, OptionError
@@ -44,6 +44,9 @@ class OracleOfAgesWorld(World):
     dungeon_items: List[Item]
     randomized_entrances: Dict[str, str] = {}
     shop_prices: Dict[str, int]
+    
+    region_hints: list[tuple[str, str | int]] = []
+    item_hints: list[Item | None] = []
 
     entrance_group_lookup: Dict[int, List[int]] = {0:[0]}
 
@@ -208,6 +211,18 @@ class OracleOfAgesWorld(World):
     # ===================================================================================
     #
     # ===================================================================================
+    def pre_output(self) -> None:
+        from .generation.GenerateHints import create_item_hints, create_region_hints
+
+        if self.options.bird_hint.know_it_all():
+            self.region_hints = create_region_hints(self)
+
+        if self.options.bird_hint.owl():
+            self.item_hints = create_item_hints(self)
+    
+    # ===================================================================================
+    #
+    # ===================================================================================
     def generate_output(self, output_directory: str):
         patch = ooa_create_appp_patch(self)
         rom_path = os.path.join(output_directory, f"{self.multiworld.get_out_file_name_base(self.player)}"
@@ -239,6 +254,17 @@ class OracleOfAgesWorld(World):
             "randomized_entrances": self.randomized_entrances,
             "shop_costs": self.shop_prices,
         }
+
+        # The structure is made to make it easy to call CreateHints
+        slot_data_item_hints = []
+        for item_hint in self.item_hints:
+            if item_hint is None:
+                # Joke hint
+                slot_data_item_hints.append(None)
+                continue
+            location = cast(Location, item_hint.location)
+            slot_data_item_hints.append((location.address, location.player))
+        slot_data["item_hints"] = slot_data_item_hints
 
         return slot_data
     
