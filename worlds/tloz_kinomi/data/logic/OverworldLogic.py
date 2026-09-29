@@ -108,19 +108,7 @@ def make_overworld_logic(player: int):
         ["deeper woods route 1", "deeper woods heartpiece under tree", False, lambda state: kinomi_can_use_ember_seeds(state, player, False)],
         ["deeper woods old man 2", "deeper woods old man 2's rupee", False, lambda state: kinomi_can_break_pot(state, player)],
         ["deeper woods old man 2", "deeper woods underground heartpiece", False, lambda state: kinomi_can_swim(state, player)],
-        ["deeper woods underground heartpiece", "familar swamp gift", False, lambda state: all([
-            kinomi_can_jump_pit(state, player),
-            kinomi_has_glove(state, player),
-            kinomi_can_break_bush(state, player),
-            kinomi_can_kill_normal_enemy(state, player)
-        ])],
-        ["familar swamp gift", "subrosia dance", False, lambda state: all([
-            kinomi_has_bombs(state, player),
-            any([
-                kinomi_has_cane(state, player),
-                kinomi_can_jump_4_wide_pit(state, player)
-            ])
-        ])],
+        ["deeper woods underground heartpiece", "outside deeper woods library portal", False, lambda state: kinomi_can_jump_pit(state, player)],
         ["deeper woods route 2", "deeper woods swordsman trade", False, lambda state: state.has("Broken Sword", player)],
         ["hedge maze", "deeper woods chest", False, None],
 
@@ -202,4 +190,23 @@ def make_overworld_logic(player: int):
         ["tokay desert", "tokay desert fourth chest", False, None],
         ["tokay desert", "chest inside first tokay house", False, None],
         ["d5 chest near slate slots", "chest in bottom screen of graveyard", False, None],
+    ]
+
+def make_logic_with_portal_conections(player: int):
+    return [
+        ["inside deeper woods library portal", "familar swamp gift", False, lambda state: all([
+            kinomi_has_glove(state, player),
+            kinomi_can_break_bush(state, player),
+            kinomi_can_kill_normal_enemy(state, player)
+        ])],
+        ["familar swamp gift", "outside seasons swamp portal", False, None],
+        ["inside seasons swamp portal", "subrosia dance", False, lambda state: all([
+            kinomi_has_bombs(state, player),
+            any([
+                kinomi_has_cane(state, player),
+                kinomi_can_jump_4_wide_pit(state, player)
+            ])
+        ])],
+        ["inside seasons shrine portal", "impa's seasons house chest", False, None],
+        ["inside lost labyrinth portal", "nayru's house", False, None],
     ]

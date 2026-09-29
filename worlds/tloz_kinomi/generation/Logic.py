@@ -1,11 +1,13 @@
 from BaseClasses import MultiWorld
 from .. import LOCATIONS_DATA
 from ..data.logic.DungeonsLogic import *
-from ..data.logic.OverworldLogic import make_overworld_logic
+from ..data.logic.OverworldLogic import *
+from ..data.Warps import ALL_WARPS
 
 def make_logic_array(player: int):
     return [
         make_overworld_logic(player),
+        make_logic_with_portal_conections(player),
         make_summerVilla_logic(player),
         make_spiritGrotto_logic(player),
         make_fourCornersCave_logic(player),
@@ -18,8 +20,8 @@ def make_logic_array(player: int):
 
 def create_connections(multiworld: MultiWorld, player: int):
     entrances = []
-    for p, v in multiworld.worlds[player].entrances.items():
-        entrances.extend([["outside " + e[0], "inside " + e[1], True, None] for e in v])
+    for _, v in multiworld.worlds[player].entrances.items():
+        entrances.extend([["outside " + e[0], "inside " + e[1], True, None] for e in v if e[0] != "dummy"])
 
     all_logic = make_logic_array(player)
     all_logic.append(entrances)

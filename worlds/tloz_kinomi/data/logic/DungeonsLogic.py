@@ -174,7 +174,7 @@ def make_seasonsShrine_logic(player: int):
             kinomi_generic_boss_and_miniboss_kill(state, player)
         ])],
         ["d4 boss", "din's gift", False, None],
-        ["d4 boss", "impa's seasons house chest", False, None],
+        ["d4 boss", "outside seasons shrine portal", False, None],
         ["d4 spring fall", "d4 winter north stump region with barrier", False, lambda state: all([
             kinomi_can_break_flower(state, player),
             kinomi_has_small_keys(state, player, 4, 1)
@@ -242,7 +242,7 @@ def make_lostLabrinth_logic(player: int):
             kinomi_can_jump_4_wide_pit(state, player),
             kinomi_has_cane(state, player)
         ])],
-        ["d2 present dungeon map chest", "nayru's house", False, None],
+        ["d2 present dungeon map chest", "outside lost labyrinth portal", False, None],
         ["lost labyrinth past entrance 4", "d2 present fix holes", False, lambda state: any([
             kinomi_has_cane(state, player),
             kinomi_has_glove(state, player)

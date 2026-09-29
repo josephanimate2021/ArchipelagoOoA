@@ -1,5 +1,6 @@
 def make_regions():
     from ..generation.Logic import make_logic_array
+    from ..data.Warps import ALL_WARPS
     regions = []
     for logic_array in make_logic_array(0):
         for region_desc in logic_array:

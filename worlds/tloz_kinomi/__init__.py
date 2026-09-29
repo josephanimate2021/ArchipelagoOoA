@@ -54,7 +54,12 @@ class GiftsOfKinomiWorld(World):
         for p, v in ALL_WARPS.items():
             self.entrances[p] = []
             for j in v:
-                self.entrances[p].append([j["name"],j["name"]])
+                array = []
+                if "name" in j:
+                    array.extend([j["name"],j["name"]])
+                else:
+                    array.extend(["dummy", "dummy"])
+                self.entrances[p].append(array)
         self.shop_prices = SHOP_PRICES_DIVIDERS.copy()
 
     def fill_slot_data(self) -> dict:
@@ -104,9 +109,14 @@ class GiftsOfKinomiWorld(World):
         entrance_values = []
         for e in self.entrances[entrance_type]:
             entrance_values.append(e[1])
-        self.random.shuffle(entrance_values)
-        for i in range(len(entrance_values)):
-            self.entrances[entrance_type][i][1] = entrance_values[i]
+        def shuffle():
+            self.random.shuffle(entrance_values)
+            for i in range(len(entrance_values)):
+                self.entrances[entrance_type][i][1] = entrance_values[i]
+                if "dummy" in entrance_values:
+                    while self.entrances[entrance_type][i][0] == "dummy" and self.entrances[entrance_type][i][1] != "dummy":
+                        shuffle()
+        shuffle()
 
     def randomize_shop_prices(self):
         prices_pool = get_prices_pool()

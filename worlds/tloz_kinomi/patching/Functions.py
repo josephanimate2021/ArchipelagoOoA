@@ -226,8 +226,7 @@ def write_seed_tree_content(rom: RomData, patch_data):
 def find_address_for_param_helper(lineNumber, param, param2 = 4, i=0,c=0):
     return i - param if c == lineNumber else find_address_for_param_helper(lineNumber, param, param2, i + param2, c + 1)
 
-def set_warps(parsed_sym: sym, rom: RomData, patch_data, entrance_type):
-    warp_matchings = patch_data["entrances"][entrance_type]
+def set_warps(parsed_sym: sym, rom: RomData, warp_matchings, entrance_type):
     entrance_dest_groups = []
     exit_dest_groups = []
     warp_array_indexes = {}
@@ -262,8 +261,42 @@ def set_warps(parsed_sym: sym, rom: RomData, patch_data, entrance_type):
             modify_warp(d[0], d[1], d[2], d[3])
 
 def set_entrance_warps(parsed_sym: sym, rom: RomData, patch_data):
-    for p, _ in patch_data["entrances"].items():
-        set_warps(parsed_sym, rom, patch_data, p)
+    for p, v in patch_data["entrances"].items():
+        dummy_vals = []
+        i = 0
+        for e in v: # If theres no logic for some warps, then change them every patch instead of rando gen to make up for rando gen logic issues afterward. NOTE: This means that those warps don't rely on logic, maing you have to patch your game every single time to get good RNG.
+            if "dummy" in e[0]:
+                dummy_vals.append(e[0] + str(i))
+                i += 1
+        if len(dummy_vals) > 0:
+            og_dummy_vals = dummy_vals.copy()
+            random.shuffle(dummy_vals)
+            for e in v:
+                if "dummy" in e[0]:
+                    e[0] = og_dummy_vals[0]
+                    e[1] = dummy_vals[0]
+                    og_dummy_vals.remove(e[0])
+                    dummy_vals.remove(e[1])
+        edit_room(parsed_sym, rom, 0x0308, 0x1c, 0xa0)
+        print(v)
+        set_warps(parsed_sym, rom, v, p)
+
+# Format for editing rooms:
+# room is the exact room number you want to edit.
+# the pos parameter is the XY position in hex you want the tile to be placed in.       
+def edit_room(parsed_sym: sym, rom: RomData, room, pos, new_value):
+    nLen = len(hex_str(room)[1:])
+    zeros = ""
+    for _ in range(nLen - (nLen - 1)):
+        zeros += "0"
+    addr_start = parsed_sym.find("label", f"room{zeros}{hex_str(room)}")
+    if addr_start is None:
+        raise ValueError(f"Room {hex_str(room)} does not exist")
+    bank, addr = addr_start.__str__().split(":")
+    addr_end = parsed_sym.find_addr_end(bank, addr).address_in_rom()
+    if pos >= addr_end:
+        raise ValueError(f"Position of tile in room {hex_str(room)} is not valid.")
+    rom.write_byte(addr_start.address_in_rom() + (pos + 1), new_value)
 
 def set_file_select_text(assembler: Z80Assembler, slot_name: str):
     def char_to_tile(c: str) -> int:
