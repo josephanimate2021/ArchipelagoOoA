@@ -91,7 +91,7 @@ DUNGEON_WARPS = [
     },
     {
         "entrance": [0, 42],
-        "exit": [5, 0]
+        "exit": [4, 1]
     },
     #{},
     {

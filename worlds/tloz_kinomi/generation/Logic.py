@@ -24,13 +24,8 @@ def create_connections(multiworld: MultiWorld, player: int):
     all_logic = make_logic_array(player)
     all_logic.append(dungeon_entrances)
 
-    # Check unreachable regions
-    unused_region = multiworld.worlds[player].regions
-    unused_region.remove("Menu")
-    for logic_array in all_logic:
-        for entrance_desc in logic_array:
-            if entrance_desc[1] in unused_region:
-                unused_region.remove(entrance_desc[1])
+    # Remove menu because we don't need that placeholder.
+    multiworld.worlds[player].regions.remove("Menu")
 
     # Create connections
     for logic_array in all_logic:

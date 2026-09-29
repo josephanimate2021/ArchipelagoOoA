@@ -241,7 +241,7 @@ def set_dungeon_warps(parsed_sym: sym, rom: RomData, patch_data):
             base_address = parsed_sym.find("label", label)
             if base_address is not None:
                 bytes_count = find_address_for_param_helper(index_lineNumber, 2)
-                update_array.append(rom.read_byte(GameboyAddress(base_address.bank, base_address.offset + bytes_count).address_in_rom()))
+                update_array.append(rom.read_bytes(GameboyAddress(base_address.bank, base_address.offset + bytes_count).address_in_rom(), 2))
         for t in [["entrance", entrance_dest_groups], ["exit", exit_dest_groups]]:
             loop(t[0], t[1])
     for e in warp_matchings: # STEP 2: Apply all warps to their randomized position using all gathered bytes
@@ -251,7 +251,7 @@ def set_dungeon_warps(parsed_sym: sym, rom: RomData, patch_data):
             base_address = parsed_sym.find("label", entrance_label)
             if base_address is not None:
                 bytes_count = find_address_for_param_helper(from_index_lineNumber, 2)
-                rom.write_byte(GameboyAddress(base_address.bank, base_address.offset + bytes_count).address_in_rom(), array[to_index])
+                rom.write_bytes(GameboyAddress(base_address.bank, base_address.offset + bytes_count).address_in_rom(), array[to_index])
         for d in [[warp_array_indexes[e[0]], warp_array_indexes[e[1]], "entrance", entrance_dest_groups], [warp_array_indexes[e[1]], warp_array_indexes[e[0]], "exit", exit_dest_groups]]:
             modify_warp(d[0], d[1], d[2], d[3])
 
