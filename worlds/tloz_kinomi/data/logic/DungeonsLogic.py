@@ -75,7 +75,7 @@ def make_spiritGrotto_logic(player: int):
 
 def make_fourCornersCave_logic(player: int):
     return [
-        ["inside four corners cave", "d3", False, lambda state: kinomi_can_jump_pit(state, player)],
+        ["inside four corners cave", "d3", False, None],
 
         # DESCENDING DOWN
         ["d3", "d3 compass chest", False, lambda state: kinomi_can_jump_pit(state, player)],
