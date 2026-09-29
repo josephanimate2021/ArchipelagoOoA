@@ -1,6 +1,6 @@
 from dataclasses import dataclass
-
-from Options import Choice, DeathLink, DefaultOnToggle, PerGameCommonOptions, Range, Toggle, StartInventoryPool, ItemSet
+from .data.Warps import ALL_WARPS
+from Options import Choice, DeathLink, DefaultOnToggle, PerGameCommonOptions, Range, Toggle, StartInventoryPool, OptionDict, OptionError, Option
 
 
 class GiftsOfKinomiLogicDifficulty(Choice):
@@ -18,6 +18,8 @@ class GiftsOfKinomiLogicDifficulty(Choice):
 
     default = 0
 
+    include_in_slot_data = True
+
 
 class GiftsOfKinomiGameplayMode(Choice):
     """
@@ -27,6 +29,8 @@ class GiftsOfKinomiGameplayMode(Choice):
     option_vanila = 0
     option_randomizer = 1
     default = 1
+
+    include_in_patch_data = True
 
 
 class GiftsOfKinomiRequiredGifts(Range):
@@ -38,6 +42,8 @@ class GiftsOfKinomiRequiredGifts(Range):
     range_end = 2
     default = 2
 
+    include_in_slot_data = True
+
 class GiftsOfKinomiRequiredSlates(Range):
     """
     The amount of slates that need to be obtained in order to get to the boss for the Temple of The Tokay.
@@ -47,6 +53,7 @@ class GiftsOfKinomiRequiredSlates(Range):
     range_end = 8
     default = 8
 
+    include_in_slot_data = True
 
 class GiftsOfKinomiRemoveExtraStairsFromLostLabyrinth(Toggle):
     """
@@ -56,18 +63,18 @@ class GiftsOfKinomiRemoveExtraStairsFromLostLabyrinth(Toggle):
 
     default = False
 
+    include_in_slot_data = True
 
-class GiftsOfKinomiDungeonShuffle(Choice):
+
+class GiftsOfKinomiEntranceShuffle(OptionDict):
     """
-    - Vanilla: each dungeon entrance leads to its intended dungeon
-    - Shuffle: each dungeon entrance leads to a random dungeon picked at generation time
+    When enabled, each outside entrance leads to a random inside entrance picked at generation time
     """
-    display_name = "Shuffle Dungeons"
+    display_name = "Shuffle Entrances"
 
-    option_vanilla = 0
-    option_shuffle = 1
+    default = {s: False for s in ALL_WARPS}
 
-    default = 0
+    include_in_patch_data = True
 
 
 class GiftsOfKinomiMasterKeys(Choice):
@@ -87,11 +94,15 @@ class GiftsOfKinomiMasterKeys(Choice):
 
     default = 0
 
+    include_in_slot_data = True
+
 class GiftsOfKinomiSmallKeyShuffle(Toggle):
     """
     If enabled, dungeon Small Keys can be found anywhere instead of being confined in their dungeon of origin.
     """
     display_name = "Keysanity (Small Keys)"
+
+    include_in_patch_data = True
 
 
 class GiftsOfKinomiBossKeyShuffle(Toggle):
@@ -100,12 +111,16 @@ class GiftsOfKinomiBossKeyShuffle(Toggle):
     """
     display_name = "Keysanity (Boss Keys)"
 
+    include_in_patch_data = True
+
 
 class GiftsOfKinomiMapCompassShuffle(Toggle):
     """
     If enabled, Dungeon Maps and Compasses can be found anywhere instead of being confined in their dungeon of origin.
     """
     display_name = "Maps & Compasses Outside Dungeon"
+
+    include_in_patch_data = True
 
 
 class GiftsOfKinomiSlateShuffle(Toggle):
@@ -114,11 +129,15 @@ class GiftsOfKinomiSlateShuffle(Toggle):
     """
     display_name = "Slates Outside Temple Of The Tokay"
 
+    include_in_patch_data = True
+
 class GiftsOfKinomiRevealSomeAgesLocations(Toggle):
     """
     If enabled, A staircase will open up next to Kimoni Town where if you go inside, will take you to a room with two stairs going down to the old dungeons with their exits remaining untouched, allowing exploration of the remains of ages in kinomi.
     """
     display_name = "Open Staircase To Ancient Ages Locations"
+
+    include_in_slot_data = True
 
 
 class GiftsOfKinomiPricesFactor(Range):
@@ -133,6 +152,8 @@ class GiftsOfKinomiPricesFactor(Range):
     range_end = 500
     default = 100
 
+    include_in_patch_data = True
+
 
 @dataclass
 class GiftsOfKinomiOptions(PerGameCommonOptions):
@@ -143,7 +164,7 @@ class GiftsOfKinomiOptions(PerGameCommonOptions):
     required_slates: GiftsOfKinomiRequiredSlates
     remove_extra_stairs_from_lost_labyrinth_past: GiftsOfKinomiRemoveExtraStairsFromLostLabyrinth
     open_staircase_to_ancient_ages_locations: GiftsOfKinomiRevealSomeAgesLocations
-    shuffle_dungeons: GiftsOfKinomiDungeonShuffle
+    shuffle_entrances: GiftsOfKinomiEntranceShuffle
     master_keys: GiftsOfKinomiMasterKeys
     keysanity_small_keys: GiftsOfKinomiSmallKeyShuffle
     keysanity_boss_keys: GiftsOfKinomiBossKeyShuffle

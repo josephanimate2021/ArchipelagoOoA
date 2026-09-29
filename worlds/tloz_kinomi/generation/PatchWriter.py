@@ -2,7 +2,8 @@ import os
 
 import yaml
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast, Any
+from ..Options import GiftsOfKinomiOptions, Option
 from BaseClasses import ItemClassification
 from ..patching.ProcedurePatch import KinomiProcedurePatch
 from ..data.Constants import *
@@ -17,27 +18,23 @@ def kinomi_create_appp_patch(world: "GiftsOfKinomiWorld") -> KinomiProcedurePatc
 
     patch.player = world.player
     patch.player_name = world.multiworld.get_player_name(world.player)
-
+    options = cast(dict[str, type[Option[Any]]], cast(object, GiftsOfKinomiOptions.type_hints))
     patch_data = {
         "version": VERSION,
 
-        "options": world.options.as_dict(*[
-            "remove_extra_stairs_from_lost_labyrinth_past", "logic_difficulty", "required_gifts",
-            "required_slates", "shuffle_dungeons", "master_keys", "open_staircase_to_ancient_ages_locations",
-            "keysanity_small_keys", "keysanity_boss_keys", "keysanity_maps_compasses", "keysanity_slates",
-            #"required_rings", "excluded_rings", 
-            "shop_prices_factor", "death_link"
-        ]),
-        "dungeon_entrances": [],
+        "options": world.options.as_dict(
+            *[
+                option_name
+                for option_name in options
+                if hasattr(options[option_name], "include_in_slot_data")
+                or hasattr(options[option_name], "include_in_patch_data")
+            ]
+        ),
+        "entrances": world.entrances,
         
         "locations": {},
         "shop_prices": world.shop_prices
     }
-
-    for e in world.dungeon_entrances:
-        e[0] = e[0].replace(" entrance", "")
-        e[1] = e[1].replace("enter ", "")
-        patch_data["dungeon_entrances"].append(e)
 
     for loc in world.multiworld.get_locations(world.player):
         if loc.address is None:

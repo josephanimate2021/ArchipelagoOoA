@@ -5,10 +5,9 @@ import settings
 
 from BaseClasses import Region, Location, LocationProgressType
 from Fill import fill_restrictive, FillError
-from Options import Accessibility, OptionError
 from worlds.AutoWorld import World
 import Utils
-from typing import Any, Set, List, Dict, Optional, Tuple, ClassVar, TextIO, Union
+from typing import Any, Set, List, Dict, Optional, Tuple, ClassVar, TextIO, Union, cast
 from .generation.Data import *
 from .data.Items import *
 from .generation.Logic import create_connections, apply_self_locking_rules
@@ -33,7 +32,7 @@ class GiftsOfKinomiWorld(World):
     required_client_version = (0, 5, 1)
     web = GiftsOfKinomiWeb()
     topology_present = True
-
+    logger = logging.getLogger()
     location_name_to_id = build_location_name_to_id_dict()
     item_name_to_id = build_item_name_to_id_dict()
     item_name_groups = ITEM_GROUPS
@@ -41,7 +40,7 @@ class GiftsOfKinomiWorld(World):
     pre_fill_items: List[Item]
     dungeon_items: List[Item]
     regions: List[Item]
-    dungeon_entrances: List[List[str]]
+    entrances = {}
     shop_prices: Dict[str, int]
 
     settings: ClassVar[KinomiSettings]
@@ -52,28 +51,25 @@ class GiftsOfKinomiWorld(World):
         self.pre_fill_items = []
         self.dungeon_items = []
         self.regions = REGIONS
-        self.dungeon_entrances = DUNGEON_ENTRANCES
+        for p, v in ALL_WARPS.items():
+            self.entrances[p] = []
+            for j in v:
+                self.entrances[p].append([j["name"],j["name"]])
         self.shop_prices = SHOP_PRICES_DIVIDERS.copy()
 
     def fill_slot_data(self) -> dict:
-        # Put options that are useful to the tracker inside slot data
-        # TODO MOAR DATA ?
-        options = ["death_link",
-                   # Logic-impacting options
-                   "logic_difficulty",
-                   "shuffle_dungeons",
-                   "open_staircase_to_ancient_ages_locations",
-                   "remove_extra_stairs_from_lost_labyrinth_past",
-                   # Requirements
-                   "required_gifts", 
-                   "required_slates",
-                   # keysanity
-                   "keysanity_small_keys", "keysanity_boss_keys", "keysanity_slates"
-                   ]
+        options = cast(dict[str, type[Option[Any]]], cast(object, GiftsOfKinomiOptions.type_hints))
 
-        slot_data = self.options.as_dict(*options)
-
-        slot_data["dungeon_entrances"] = self.dungeon_entrances
+        slot_data = {
+            "options": self.options.as_dict(
+                *[
+                    option_name
+                    for option_name in options
+                    if hasattr(options[option_name], "include_in_slot_data")
+                ]
+            ),
+            "entrances": self.entrances
+        }
 
         return slot_data
 
@@ -81,8 +77,9 @@ class GiftsOfKinomiWorld(World):
         if self.options.gameplay_mode != "vanila":
             self.restrict_non_local_items()
             
-            if self.options.shuffle_dungeons == "shuffle":
-                self.shuffle_dungeons()
+            for p, v in self.options.shuffle_entrances.items():
+                if v:
+                    self.shuffle_entrances(p)
             
             self.randomize_shop_prices()
         else:
@@ -103,13 +100,13 @@ class GiftsOfKinomiWorld(World):
             self.options.non_local_items.value -= set(["Slate"])
 
     
-    def shuffle_dungeons(self):
-        dungeon_entrance_values = []
-        for e in self.dungeon_entrances:
-            dungeon_entrance_values.append(e[1])
-        self.random.shuffle(dungeon_entrance_values)
-        for i in range(len(dungeon_entrance_values)):
-            self.dungeon_entrances[i][1] = dungeon_entrance_values[i]
+    def shuffle_entrances(self, entrance_type):
+        entrance_values = []
+        for e in self.entrances[entrance_type]:
+            entrance_values.append(e[1])
+        self.random.shuffle(entrance_values)
+        for i in range(len(entrance_values)):
+            self.entrances[entrance_type][i][1] = entrance_values[i]
 
     def randomize_shop_prices(self):
         prices_pool = get_prices_pool()
@@ -345,13 +342,13 @@ class GiftsOfKinomiWorld(World):
                     except FillError as exc:
                         if attempts_remaining == 0:
                             raise exc
-                        logging.debug(f"Failed to shuffle dungeon items for player {self.player}. Retrying...")
+                        self.logger.debug(f"Failed to shuffle dungeon items for player {self.player}. Retrying...")
 
         if __debug__:
             filename = "my_world.puml"
-            logging.debug("Visualizing Regions...")
+            self.logger.debug("Visualizing Regions...")
             Utils.visualize_regions(self.multiworld.get_region("Menu", self.player), filename)
-            logging.debug("Regions visualization saved at " + Utils.home_path(filename))
+            self.logger.debug("Regions visualization saved at " + Utils.home_path(filename))
             
 
     def get_filler_item_name(self) -> str:
@@ -372,7 +369,7 @@ class GiftsOfKinomiWorld(World):
 
     def write_spoiler(self, spoiler_handle):
         spoiler_handle.write(f"Apworld version : {VERSION}")
-        if self.options.shuffle_dungeons != "vanilla":
-            spoiler_handle.write(f"\nDungeon Entrances ({self.multiworld.player_name[self.player]}):\n")
-            for e in self.dungeon_entrances:
-                spoiler_handle.write(f"\t- {e[0]} --> {e[1].replace('enter ', '')}\n")
+        for p, v in self.entrances.items():
+            spoiler_handle.write(f"\nentrances for {p} ({self.multiworld.player_name[self.player]}):\n")
+            for e in v:
+                spoiler_handle.write(f"\t- outside {e[0]} --> inside {e[1]}\n")

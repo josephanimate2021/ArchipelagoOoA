@@ -17,12 +17,12 @@ def make_logic_array(player: int):
     ]
 
 def create_connections(multiworld: MultiWorld, player: int):
-    dungeon_entrances = [["lost labyrinth entrance", "enter lost labyrinth", True, None]]
-    for e in multiworld.worlds[player].dungeon_entrances:
-        dungeon_entrances.append([e[0], e[1], True, None])
+    entrances = []
+    for p, v in multiworld.worlds[player].entrances.items():
+        entrances.extend([[e[0] + " entrance", "enter " + e[1], True, None] for e in v])
 
     all_logic = make_logic_array(player)
-    all_logic.append(dungeon_entrances)
+    all_logic.append(entrances)
 
     # Remove menu because we don't need that placeholder.
     multiworld.worlds[player].regions.remove("Menu")

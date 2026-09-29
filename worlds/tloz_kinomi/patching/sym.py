@@ -9,7 +9,7 @@ def str_hex_to_int(h) -> int:
 class sym():
     bank_limit = 0x0b
     def __init__(self):
-        with open(world_path("disasm/ages.sym"), "rt") as f:
+        with open(world_path("patching/kinomi.sym"), "rt") as f:
             self.array = []
             code = f.readline()
             while code != "":
@@ -70,12 +70,26 @@ class sym():
                 if section["label"] == label:
                     return section
         elif type.startswith("label"):
-            labels = self.get_labels(type != "label_noChangeToGbAddressOffset")
+            labels = self.get_labels("_noChangeToGbAddressOffset" not in type)
             defs = self.get_defs()
-            if label in labels:
+            if "_findFromBankAndAddr" in type:
+                for lbl, l in labels.items():
+                    if l.__str__() == label:
+                        return lbl
+            elif label in labels:
                 return labels[label]
             elif label in defs:
                 return defs[label]
             else:
                 return None
+        return None
+
+    def find_addr_end(self, bank, offset):
+        beginFindAddrEnd = False
+        for _, addr in self.get_labels().items():
+            b, a = addr.__str__().split(":")
+            if beginFindAddrEnd:
+                return GameboyAddress(addr.bank, addr.offset)
+            if a == offset and b == bank:
+                beginFindAddrEnd = True
         return None

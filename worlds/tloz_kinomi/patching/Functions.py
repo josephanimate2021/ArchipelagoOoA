@@ -12,6 +12,7 @@ from ..common.patching.z80asm.Assembler import GameboyAddress
 from ..data.Constants import *
 from .Constants import *
 from pathlib import Path
+from ..data.Warps import ALL_WARPS
 
 from .. import LOCATIONS_DATA, GiftsOfKinomiMasterKeys
 
@@ -225,8 +226,8 @@ def write_seed_tree_content(rom: RomData, patch_data):
 def find_address_for_param_helper(lineNumber, param, param2 = 4, i=0,c=0):
     return i - param if c == lineNumber else find_address_for_param_helper(lineNumber, param, param2, i + param2, c + 1)
 
-def set_dungeon_warps(parsed_sym: sym, rom: RomData, patch_data):
-    warp_matchings = patch_data["dungeon_entrances"]
+def set_warps(parsed_sym: sym, rom: RomData, patch_data, entrance_type):
+    warp_matchings = patch_data["entrances"][entrance_type]
     entrance_dest_groups = []
     exit_dest_groups = []
     warp_array_indexes = {}
@@ -234,10 +235,9 @@ def set_dungeon_warps(parsed_sym: sym, rom: RomData, patch_data):
     # Apply warp matchings expressed in the patch
     for i in range(len(warp_matchings)): # STEP 1: Get all of the necessary bytes appended to an array for the update.
         warp_array_indexes[warp_matchings[i][0]] = i
-        dWarp = DUNGEON_WARPS[i]
+        dWarp = ALL_WARPS[entrance_type][i]
         def loop(t, update_array):
-            index_label, index_lineNumber = dWarp[t]
-            label = f"group{index_label}WarpSources" if isinstance(index_label, int) else index_label
+            label, index_lineNumber = dWarp[t]
             base_address = parsed_sym.find("label", label)
             if base_address is not None:
                 bytes_count = find_address_for_param_helper(index_lineNumber, 2)
@@ -246,21 +246,24 @@ def set_dungeon_warps(parsed_sym: sym, rom: RomData, patch_data):
             loop(t[0], t[1])
     for e in warp_matchings: # STEP 2: Apply all warps to their randomized position using all gathered bytes
         def modify_warp(from_index, to_index, t, array):
-            from_index_label, from_index_lineNumber = DUNGEON_WARPS[from_index][t]
-            entrance_label = f"group{from_index_label}WarpSources" if isinstance(from_index_label, int) else from_index_label
+            entrance_label, from_index_lineNumber = ALL_WARPS[entrance_type][from_index][t]
             base_address = parsed_sym.find("label", entrance_label)
             if base_address is not None:
-                bytes_count = find_address_for_param_helper(from_index_lineNumber, 2)
-                rom.write_bytes(GameboyAddress(base_address.bank, base_address.offset + bytes_count).address_in_rom(), array[to_index])
+                addr = GameboyAddress(base_address.bank, base_address.offset + (find_address_for_param_helper(from_index_lineNumber, 2))).address_in_rom()
+                rom.write_bytes(addr, array[to_index])
+                # For some reason modifying the map text dosen't work in kinomi.
+                #if t == "entrance" and entrance_type == "dungeons":
+                    #group = ["present", "past"][ALL_WARPS[entrance_type][from_index]["group"]]
+                    #map_tile = int(rom.read_byte(addr - 1))
+                    #address = int("0xa" + parsed_sym.find("label", group + "MapTextIndices").__str__()[4:], 0) + map_tile
+                    #print(to_index, (to_index << 3), hex(0x81 | to_index))
+                    #rom.write_byte(address, 0x81 | to_index)
         for d in [[warp_array_indexes[e[0]], warp_array_indexes[e[1]], "entrance", entrance_dest_groups], [warp_array_indexes[e[1]], warp_array_indexes[e[0]], "exit", exit_dest_groups]]:
             modify_warp(d[0], d[1], d[2], d[3])
 
-    #    # Change Minimap popups to indicate the randomized dungeon's name
-    #    for i in range(8):
-    #        entrance_name = f"d{i}"
-    #        dungeon_index = int(warp_matchings[entrance_name][1:])
-    #        map_tile = DUNGEON_ENTRANCES[entrance_name]["map_tile"]
-    #        rom.write_byte(0x???? + map_tile, 0x81 | (dungeon_index << 3))
+def set_entrance_warps(parsed_sym: sym, rom: RomData, patch_data):
+    for p, _ in patch_data["entrances"].items():
+        set_warps(parsed_sym, rom, patch_data, p)
 
 def set_file_select_text(assembler: Z80Assembler, slot_name: str):
     def char_to_tile(c: str) -> int:

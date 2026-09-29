@@ -68,7 +68,7 @@ class KinomiPatchExtensions(APPatchExtension):
         def loop(find_max):
             update_array = maxes if find_max else mins
             max, label = find(find_max)
-            logger.info(f"Found {"last" if find_max else "first"} address to work with at bank " + hex(len(update_array)) + ". Should be " + hex(max))
+            logger.info(f"Found {"last" if find_max else "first"} address to work with at bank {hex(len(update_array))}. Should be {hex(max)}")
             update_array[label] = max
             if len(update_array) <= total_banks:
                 loop(find_max)
@@ -95,7 +95,7 @@ class KinomiPatchExtensions(APPatchExtension):
             
         bank_caves[0x14] = 0x3c99 # bank 14 is the only one getting modified because of the space size nonsense in the sym file describing the size for bank 14 near it's end.
 
-        treasure_obj_addresses = treasureAddressMaker().TREASURE_ADDRESSES
+        treasure_obj_addresses = treasureAddressMaker(parsed_sym, rom_data).TREASURE_ADDRESSES
         assembler = Z80Assembler(bank_caves, {}, rom)
 
         force_collect_mode_on_nonchest_items(parsed_sym, rom_data, patch_data, treasure_obj_addresses)
@@ -128,7 +128,7 @@ class KinomiPatchExtensions(APPatchExtension):
         alter_treasures(parsed_sym, rom_data)
         write_chest_contents(parsed_sym, rom_data, patch_data)
         #write_seed_tree_content(rom_data, patch_data)
-        set_dungeon_warps(parsed_sym, rom_data, patch_data)
+        set_entrance_warps(parsed_sym, rom_data, patch_data)
         #apply_miscellaneous_options(rom_data, patch_data)
 
         set_heart_beep_interval_from_settings(rom_data)
