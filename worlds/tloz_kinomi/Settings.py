@@ -4,22 +4,6 @@ from typing import Union
 from .patching.ProcedurePatch import ROM_HASH
 from .patching.Constants import REFILL_NPCS
 
-def refillNPCInString(limit=-1) -> str:
-    array = []
-    for npc in REFILL_NPCS.keys():
-        array.append(npc)
-    if limit == -1:
-        limit = len(array)
-    string = ""
-    for i in range(len(array)):
-        if i == limit:
-            break
-        if ((limit - 1) == 0 and i == len(array) - 1) or ((limit - 1) != 0 and i == (limit - 1)):
-            string += "and "
-        string += f"{array[i] + (", " if i != limit - 1 else "")}"
-    return string
-
-print(refillNPCInString())
 class KinomiSettings(settings.Group):
     class KinomiRomFileOOA(settings.UserFilePath):
         """File path of the OOA US rom"""
@@ -52,7 +36,7 @@ class KinomiSettings(settings.Group):
         """
 
     rom_file: KinomiRomFileOOA = KinomiRomFileOOA(KinomiRomFileOOA.copy_to)
-    refill_npc: Union[KinomiRefillNPC, str] = refillNPCInString(1)
+    refill_npc: Union[KinomiRefillNPC, str] = "impa"
     heart_beep_interval: Union[KinomiHeartBeepInterval, str] = "vanilla"
     character_sprite: Union[KinomiCharacterSprite, str] = "link"
     character_palette: Union[KinomiCharacterPalette, str] = "green"

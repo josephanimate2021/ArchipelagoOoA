@@ -76,6 +76,18 @@ class GiftsOfKinomiEntranceShuffle(OptionDict):
 
     include_in_patch_data = True
 
+class GiftsOfKinomiEntrancePlando(OptionDict):
+    """
+    Use the dict below to change which entrances lead to where. You cannot create new entrances nor use duplicates.
+    """
+    display_name = "Entrance Plando"
+
+    default = {}
+    for p, v in ALL_WARPS.items():
+        default[p] = [["outside " + e["name"], "inside " + e["name"]] for e in v if "name" in e]
+
+    include_in_patch_data = True
+
 
 class GiftsOfKinomiMasterKeys(Choice):
     """
@@ -165,6 +177,7 @@ class GiftsOfKinomiOptions(PerGameCommonOptions):
     remove_extra_stairs_from_lost_labyrinth_past: GiftsOfKinomiRemoveExtraStairsFromLostLabyrinth
     open_staircase_to_ancient_ages_locations: GiftsOfKinomiRevealSomeAgesLocations
     shuffle_entrances: GiftsOfKinomiEntranceShuffle
+    entrance_plando: GiftsOfKinomiEntrancePlando
     master_keys: GiftsOfKinomiMasterKeys
     keysanity_small_keys: GiftsOfKinomiSmallKeyShuffle
     keysanity_boss_keys: GiftsOfKinomiBossKeyShuffle

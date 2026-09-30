@@ -85,6 +85,21 @@ class GiftsOfKinomiWorld(World):
             for p, v in self.options.shuffle_entrances.items():
                 if v:
                     self.shuffle_entrances(p)
+                else:
+                    entrance_values = []
+                    plando_count = 0
+                    for i in range(len(self.entrances[p])):
+                        if "dummy" in self.entrances[p][i][0]:
+                            continue
+                        e = self.options.entrance_plando[p][plando_count]
+                        if self.entrances[p][i][0] != e[0][8:]:
+                            raise OptionError(f"You cannot move {e[0]} to another spot inside the plando. Either that or it's removed. Still though.")
+                        if e[1][7:] in entrance_values:
+                            raise OptionError(f"{e[0]} cannot lead to {e[1]} as that will break the warp sequence for that entrance (example is the inside warp taking you to an outside warp that's already planned for this inside entrance). Please change it to something else not already being used.")
+                        entrance_values.append(e[1][7:])
+                        self.entrances[p][i][1] = e[1][7:]
+                        plando_count += 1
+
             
             self.randomize_shop_prices()
         else:
