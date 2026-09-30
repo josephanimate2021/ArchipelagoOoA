@@ -100,7 +100,6 @@ def apply_text_edits(texts: dict[str, str]) -> None:
     item_text = "A closed door\nblocks the exit.\nIt has a tokay\nmissing an eye."
     texts["TX_5a2e"] = item_text
 
-
     return
 
 def get_modded_ages_text_data(rom_data: RomData) -> tuple[dict[str, str], dict[str, str]]:

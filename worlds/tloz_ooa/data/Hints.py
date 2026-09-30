@@ -18,7 +18,7 @@ OWL_STATUE_TX = [
     "TX_3901",  # "Spiked Beetles Owl",
     "TX_3902",  # "Slates Owl",
     "TX_3903",  # "Roc Feather Owl",
-    "TX_3904",  # "Talus Owl",
+    "TX_3905",  # "Talus Owl",
     "TX_3906",  # "Mystery Owl",
     "TX_3907",  # "Twomp Face Owl",
     "TX_3908",  # "Scent Seed Owl",
@@ -32,6 +32,7 @@ OWL_STATUE_TX = [
     "TX_3910",  # "D7 Waterflow Owl",
     "TX_3911",  # "D7 Boss Owl",
     "TX_3912",  # "D7 golden Isle Owl",
+    "TX_3913",  # "D6 Porch",
 ]
 
 HINT_REGIONS = [
