@@ -862,7 +862,20 @@ def make_d8_logic(player: int):
 
         # 2 keys - access SE spinner
         ["d8 ghini chest", "d8 blue peg chest", False, lambda state: ooa_has_small_keys(state, player, 8, 2)],
-        ["d8 blue peg chest", "d8 blade trap", False, None],
+        ["d8 blue peg chest", "d8 blade trap", False, lambda state: any([
+            all([
+                ooa_has_feather(state, player),
+                ooa_can_use_pegasus_seeds(state, player),
+            ]),
+            all([
+                any([
+                    ooa_has_feather(state, player),
+                    ooa_can_use_pegasus_seeds(state, player),
+                ]),
+                ooa_option_medium_logic(state, player), 
+            ]),
+            ooa_option_hard_logic(state, player),
+        ])],
         ["d8 blue peg chest", "d8 sarcophagus chest", False, lambda state: ooa_has_glove(state, player)],
         ["d8 blue peg chest", "d8 stalfos", False, lambda state: ooa_can_kill_stalfos(state, player)],
 
