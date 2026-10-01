@@ -43,6 +43,7 @@ class KinomiPatchExtensions(APPatchExtension):
         #    patch_data["locations"]["Horon Village: Shop #3"] = "Potion"
 
         bank_caves: list[Any | list[Any | list[Any]]] = []
+        asm_content = {}
         parsed_sym = sym()
 
         # Max finding algorithm for the end of banks (reading the code will help accurate that).
@@ -121,6 +122,8 @@ class KinomiPatchExtensions(APPatchExtension):
             data_loaded = yaml.safe_load(pkgutil.get_data(__name__, file_path))
             for metalabel, contents in data_loaded.items():
                 assembler.add_block(Z80Block(metalabel, contents))
+        for metalabel, contents in asm_content.items():
+            assembler.add_block(Z80Block(metalabel, contents))
         assembler.compile_all()
         for block in assembler.blocks:
             rom_data.write_bytes(block.addr.address_in_rom(), block.byte_array)

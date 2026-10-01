@@ -148,6 +148,8 @@ def force_collect_mode_on_nonchest_items(parsed_sym: sym, rom: RomData, patch_da
     """
     itemsCount = {}
     locations = {}
+    collect_mode_applied = {}
+    item_name_replacements = {}
 
     # STEP 1: gather the count of each item in rooms without a chest.
     for location_name, location_data in LOCATIONS_DATA.items():
@@ -158,23 +160,28 @@ def force_collect_mode_on_nonchest_items(parsed_sym: sym, rom: RomData, patch_da
             or location_data["collect"] == TREASURE_SPAWN_CHEST
         ):
             continue
+
         item_name = patch_data["locations"][location_name]
+        
         if item_name.startswith("Rupees"): # Ignore the rupees since they work in chests regardless.
             continue
-        nameInItemGroups = False
-        for _, v in ITEM_GROUPS.items(): # Ignore dungeon items because I need to figure those out.
-            if nameInItemGroups:
-                break
+
+        for _, v in ITEM_GROUPS.items(): # Make dungeon items generic names for now.
             for e in v:
                 if e == item_name:
-                    nameInItemGroups = True
+                    item_name_replacements[item_name] = item_name.split(" (")[0]
                     break
-        if nameInItemGroups:
-            continue
+
+        if item_name in item_name_replacements: # If there are any replacements made for the item name, inject them here.
+            item_name = item_name_replacements[item_name]
+
+        # Add count to the item name.
         if item_name not in itemsCount:
             itemsCount[item_name] = 1
         else:
             itemsCount[item_name] += 1
+
+        
         locations[location_name] = location_data
 
     # STEP 2: force collect mode on counted items. I know this process is slow and inefficent but we have to use the same loop again in order make this new collect mode
@@ -185,7 +192,13 @@ def force_collect_mode_on_nonchest_items(parsed_sym: sym, rom: RomData, patch_da
         item_id, item_subid = get_item_id_and_subid(item_name)
         item_addr = treasure_object_addresss[item_id]
 
-        if ('randomized' in ITEMS_DATA[item_name] and not ITEMS_DATA[item_name]['randomized']) or len(item_addr) == 0:
+        if ('randomized' in location_data and not location_data['randomized']) or len(item_addr) == 0:
+            continue
+
+        if item_name in item_name_replacements:
+            item_name = item_name_replacements[item_name]
+
+        if item_name in collect_mode_applied:
             continue
 
         def set_static_item(s):
@@ -220,8 +233,8 @@ def force_collect_mode_on_nonchest_items(parsed_sym: sym, rom: RomData, patch_da
                     if (s | g | TREASURE_SET_ITEM_ROOM_FLAG) == collect_mode:
                         collectModeModified = True
                         rom.write_byte(addr, location_data["collect"] | g | TREASURE_SET_ITEM_ROOM_FLAG)
-                        checkItemsWrite(subid)
                         break
+            checkItemsWrite(subid) # Write items anyway. Creating new subids will work anyway if needed.
             return collectModeModified
 
         if itemsCount[item_name] == 1:
@@ -229,11 +242,7 @@ def force_collect_mode_on_nonchest_items(parsed_sym: sym, rom: RomData, patch_da
         else:
             def modify_collect_mode(s, add = False):
                 if (not add and s >= 0) or (add and s < len(item_addr)):
-                    if writeNewCollectMode(int(item_addr[s], 0), s):
-                        checkItemsWrite(s)
-                        return True
-                    else:
-                        return modify_collect_mode((s - 1) if not add else (s + 1), add)
+                    return True if writeNewCollectMode(int(item_addr[s], 0), s) else modify_collect_mode((s - 1) if not add else (s + 1), add)
                 else:
                     return False if add else modify_collect_mode(item_subid, True)
             modify_collect_mode(item_subid)  

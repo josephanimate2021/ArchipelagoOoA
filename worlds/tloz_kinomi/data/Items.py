@@ -191,17 +191,17 @@ ITEMS_DATA = {
     "Small Key (Summer Villa)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x00
+        'subid': 0x03
     },
     "Small Key (Spirit's Grotto)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x01
+        'subid': 0x03
     },
     "Small Key (Lost Labyrinth (Past))": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x02
+        'subid': 0x03
     },
     "Small Key (Four Corners Cave)": {
         'classification': ItemClassification.progression,
@@ -211,37 +211,37 @@ ITEMS_DATA = {
     "Small Key (Seasons Shrine)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x04
+        'subid': 0x03
     },
     "Small Key (Crown Dungeon)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x05
+        'subid': 0x03
     },
     "Small Key (Lost Labyrinth (Present))": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x0b
+        'subid': 0x03
     },
     "Small Key (Temple of The Tokay)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x0c
+        'subid': 0x02
     },
     "Master Key (Summer Villa)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x00
+        'subid': 0x03
     },
     "Master Key (Spirit's Grotto)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x01
+        'subid': 0x03
     },
     "Master Key (Lost Labyrinth (Past))": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x02
+        'subid': 0x03
     },
     "Master Key (Four Corners Cave)": {
         'classification': ItemClassification.progression,
@@ -251,37 +251,37 @@ ITEMS_DATA = {
     "Master Key (Seasons Shrine)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x04
+        'subid': 0x03
     },
     "Master Key (Crown Dungeon)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x05
+        'subid': 0x03
     },
     "Master Key (Lost Labyrinth (Present))": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x0b
+        'subid': 0x03
     },
     "Master Key (Temple of The Tokay)": {
         'classification': ItemClassification.progression,
         'id': 0x30,
-        'subid': 0x0c
+        'subid': 0x03
     },
     "Boss Key (Summer Villa)": {
         'classification': ItemClassification.progression,
         'id': 0x31,
-        'subid': 0x00
+        'subid': 0x03
     },
     "Boss Key (Spirit's Grotto)": {
         'classification': ItemClassification.progression,
         'id': 0x31,
-        'subid': 0x01
+        'subid': 0x03
     },
     "Boss Key (Lost Labyrinth (Past))": {
         'classification': ItemClassification.progression,
         'id': 0x31,
-        'subid': 0x02
+        'subid': 0x03
     },
     "Boss Key (Four Corners Cave)": {
         'classification': ItemClassification.progression,
@@ -291,27 +291,27 @@ ITEMS_DATA = {
     "Boss Key (Seasons Shrine)": {
         'classification': ItemClassification.progression,
         'id': 0x31,
-        'subid': 0x04
+        'subid': 0x03
     },
     "Boss Key (Crown Dungeon)": {
         'classification': ItemClassification.progression,
         'id': 0x31,
-        'subid': 0x05
+        'subid': 0x03
     },
     "Boss Key (Temple of The Tokay)": {
         'classification': ItemClassification.progression,
         'id': 0x31,
-        'subid': 0x0c
+        'subid': 0x03
     },
     "Compass (Summer Villa)": {
         'classification': ItemClassification.useful,
         'id': 0x32,
-        'subid': 0x00
+        'subid': 0x02
     },
     "Compass (Spirit's Grotto)": {
         'classification': ItemClassification.useful,
         'id': 0x32,
-        'subid': 0x01
+        'subid': 0x02
     },
     "Compass (Lost Labyrinth (Past))": {
         'classification': ItemClassification.useful,
@@ -321,37 +321,37 @@ ITEMS_DATA = {
     "Compass (Four Corners Cave)": {
         'classification': ItemClassification.useful,
         'id': 0x32,
-        'subid': 0x03
+        'subid': 0x02
     },
     "Compass (Seasons Shrine)": {
         'classification': ItemClassification.useful,
         'id': 0x32,
-        'subid': 0x04
+        'subid': 0x02
     },
     "Compass (Crown Dungeon)": {
         'classification': ItemClassification.useful,
         'id': 0x32,
-        'subid': 0x05
+        'subid': 0x02
     },
     "Compass (Lost Labyrinth (Present))": {
         'classification': ItemClassification.useful,
         'id': 0x32,
-        'subid': 0x0b
+        'subid': 0x02
         },
     "Compass (Temple of The Tokay)": {
         'classification': ItemClassification.useful,
         'id': 0x32,
-        'subid': 0x0c
+        'subid': 0x02
     },
     "Dungeon Map (Summer Villa)": {
         'classification': ItemClassification.useful,
         'id': 0x33,
-        'subid': 0x00
+        'subid': 0x02
     },
     "Dungeon Map (Spirit's Grotto)": {
         'classification': ItemClassification.useful,
         'id': 0x33,
-        'subid': 0x01
+        'subid': 0x02
     },
     "Dungeon Map (Lost Labyrinth (Past))": {
         'classification': ItemClassification.useful,
@@ -361,27 +361,27 @@ ITEMS_DATA = {
     "Dungeon Map (Four Corners Cave)": {
         'classification': ItemClassification.useful,
         'id': 0x33,
-        'subid': 0x03
+        'subid': 0x02
     },
     "Dungeon Map (Seasons Shrine)": {
         'classification': ItemClassification.useful,
         'id': 0x33,
-        'subid': 0x04
+        'subid': 0x02
     },
     "Dungeon Map (Crown Dungeon)": {
         'classification': ItemClassification.useful,
         'id': 0x30,
-        'subid': 0x05
+        'subid': 0x02
     },
     "Dungeon Map (Lost Labyrinth (Present))": {
         'classification': ItemClassification.useful,
         'id': 0x33,
-        'subid': 0x0b
+        'subid': 0x02
     },
     "Dungeon Map (Temple of The Tokay)": {
         'classification': ItemClassification.useful,
         'id': 0x33,
-        'subid': 0x0c
+        'subid': 0x02
     },
 
     "Gasha Seed": {
