@@ -24,37 +24,6 @@ def get_treasure_addr(parsed_sym: sym, rom: RomData, item_name: str):
         addr = parsed_sym.find("section", "Bank_15")["full_address"] + rom.read_word(addr + 1)
     return addr + (item_subid * 4)
 
-def set_static_items(parsed_sym: sym, rom: RomData, patch_data):
-    for location_name, location_data in LOCATIONS_DATA.items():
-        if location_name in patch_data["locations"]:
-            item_name = patch_data["locations"][location_name]
-        else:
-            item_name = location_data["vanilla_item"]
-
-        itemsTableAddr = parsed_sym.find("label", "itemsTable").address_in_rom()
-        for i in range(len(STATIC_ITEM_ROOM_ORDER)):
-            if location_data["room"] == STATIC_ITEM_ROOM_ORDER[i]:
-                item_id, item_subid = get_item_id_and_subid(item_name)
-                rom.write_bytes(itemsTableAddr + i, [item_id, item_subid])
-
-def set_boss_items(parsed_sym: sym, rom: RomData, patch_data, i=0):
-    no_boss_dungeons = [2, 6]
-    for location_name, location_data in LOCATIONS_DATA.items():
-        if i == 7: # base case for the recursive function
-            break
-        elif i in no_boss_dungeons: # continue on if there are no bosses for that dungeon.
-            set_boss_items(parsed_sym, rom, patch_data,i+1)
-            break
-        elif "dungeon" in location_data and location_data["dungeon"] == i: # write down the boss checks if there is a dungeon with a boss in it.
-            if location_name.endswith(" Boss") and location_name in patch_data["locations"]:
-                item_id, item_subid = get_item_id_and_subid(patch_data["locations"][location_name])
-                rom.write_bytes(parsed_sym.find("label", "bossItemTable").address_in_rom() + (
-                    0x0c if i == 5
-                    else i
-                ), [item_id, item_subid])
-                set_boss_items(parsed_sym, rom, patch_data, i+1)
-                break
-
 def set_refill_npc(rom: RomData):
     if get_settings().tloz_kinomi_options.refill_npc in REFILL_NPCS:
         refill_npc_addr = REFILL_NPCS[get_settings().tloz_kinomi_options.refill_npc]
@@ -144,7 +113,7 @@ def write_chest_contents(parsed_sym: sym, rom: RomData, patch_data):
         if (
             'collect' not in location_data 
             or 'room' not in location_data 
-            or location_data['collect'] != COLLECT_CHEST
+            or location_data['collect'] != TREASURE_SPAWN_CHEST
             or location_name not in patch_data["locations"]
         ):
             continue
@@ -164,7 +133,7 @@ def write_rando_npcItem_contents(parsed_sym: sym, rom: RomData, patch_data):
             'room' not in location_data
             or location_name not in patch_data["locations"]
             or "collect" not in location_data
-            or location_data["collect"] != COLLECT_TOUCH
+            or location_data["collect"] != TREASURE_GRAB_INSTANT
         ):
             continue
 
@@ -177,31 +146,97 @@ def force_collect_mode_on_nonchest_items(parsed_sym: sym, rom: RomData, patch_da
     """
     Takes an item object code and changes it's collect mode to accomidate for the modifications
     """
-    def get_info():
-        info = {
-            'items_count': {},
-            'item_subids_to_avoid': {}
-        }
-        for location_name, location_data in LOCATIONS_DATA.items():
-            if (
-                'room' not in location_data
-                or location_name not in patch_data["locations"]
-                or "collect" not in location_data
-            ):
-                continue
-            item_name = patch_data["locations"][location_name]
-            if item_name not in info['items_count']:
-                info["items_count"][item_name] = 1
-            else:
-                info["items_count"][item_name] += 1
-            item_id, item_subid = get_item_id_and_subid(item_name)
-            if location_data["collect"] == COLLECT_CHEST:
-                if item_id not in info["item_subids_to_avoid"]:
-                    info["item_subids_to_avoid"][item_id] = [item_subid]
+    itemsCount = {}
+    locations = {}
+
+    # STEP 1: gather the count of each item in rooms without a chest.
+    for location_name, location_data in LOCATIONS_DATA.items():
+        if (
+            'room' not in location_data
+            or location_name not in patch_data["locations"]
+            or "collect" not in location_data
+            or location_data["collect"] == TREASURE_SPAWN_CHEST
+        ):
+            continue
+        item_name = patch_data["locations"][location_name]
+        if item_name.startswith("Rupees"): # Ignore the rupees since they work in chests regardless.
+            continue
+        nameInItemGroups = False
+        for _, v in ITEM_GROUPS.items(): # Ignore dungeon items because I need to figure those out.
+            if nameInItemGroups:
+                break
+            for e in v:
+                if e == item_name:
+                    nameInItemGroups = True
+                    break
+        if nameInItemGroups:
+            continue
+        if item_name not in itemsCount:
+            itemsCount[item_name] = 1
+        else:
+            itemsCount[item_name] += 1
+        locations[location_name] = location_data
+
+    # STEP 2: force collect mode on counted items. I know this process is slow and inefficent but we have to use the same loop again in order make this new collect mode
+    # mechanism work.
+    for location_name, location_data in locations.items():
+
+        item_name = patch_data["locations"][location_name]
+        item_id, item_subid = get_item_id_and_subid(item_name)
+        item_addr = treasure_object_addresss[item_id]
+
+        if ('randomized' in ITEMS_DATA[item_name] and not ITEMS_DATA[item_name]['randomized']) or len(item_addr) == 0:
+            continue
+
+        def set_static_item(s):
+            itemsTableAddr = parsed_sym.find("label", "itemsTable").address_in_rom()
+            for i in range(len(STATIC_ITEM_ROOM_ORDER)):
+                if location_data["room"] == STATIC_ITEM_ROOM_ORDER[i]:
+                    rom.write_bytes(itemsTableAddr + i, [item_id, s])
+        def set_boss_items(s, i=0):
+            no_boss_dungeons = [2, 6]
+            if i != 7:
+                if i in no_boss_dungeons: # continue on if there are no bosses for that dungeon.
+                    set_boss_items(s, i+1)
+                elif location_data["dungeon"] == i: # write down the boss checks if there is a dungeon with a boss in it.
+                    if location_name.endswith(" Boss"):
+                        rom.write_bytes(parsed_sym.find("label", "bossItemTable").address_in_rom() + (
+                            0x0c if i == 5
+                            else i
+                        ), [item_id, s])
+                        set_boss_items(s, i+1)
+        def checkItemsWrite(subid):
+            if location_data["room"] in STATIC_ITEM_ROOM_ORDER:
+                set_static_item(subid)
+            elif "dungeon" in location_data:
+                set_boss_items(subid)
+        def writeNewCollectMode(addr, subid):
+            collect_mode = int(rom.read_byte(addr))
+            collectModeModified = False
+            for s in range(0x00, 0x70, 0x10):
+                if collectModeModified:
+                    break
+                for g in range(0x04):
+                    if (s | g | TREASURE_SET_ITEM_ROOM_FLAG) == collect_mode:
+                        collectModeModified = True
+                        rom.write_byte(addr, location_data["collect"] | g | TREASURE_SET_ITEM_ROOM_FLAG)
+                        checkItemsWrite(subid)
+                        break
+            return collectModeModified
+
+        if itemsCount[item_name] == 1:
+            writeNewCollectMode(int(item_addr, 0) if not isinstance(item_addr, list) else int(item_addr[item_subid], 0), item_subid)
+        else:
+            def modify_collect_mode(s, add = False):
+                if (not add and s >= 0) or (add and s < len(item_addr)):
+                    if writeNewCollectMode(int(item_addr[s], 0), s):
+                        checkItemsWrite(s)
+                        return True
+                    else:
+                        return modify_collect_mode((s - 1) if not add else (s + 1), add)
                 else:
-                    info["item_subids_to_avoid"][item_id].append(item_subid)
-        return info
-    print(get_info())
+                    return False if add else modify_collect_mode(item_subid, True)
+            modify_collect_mode(item_subid)  
 
     
 def inject_slot_name(rom: RomData, slot_name: str):

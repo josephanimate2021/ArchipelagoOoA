@@ -49,7 +49,7 @@ class KinomiPatchExtensions(APPatchExtension):
         maxes = {}
         mins = {}
         total_banks = max([val.bank for _, val in parsed_sym.get_labels().items()])
-        def find(find_max):
+        def find(find_max) -> Any:
             offsets = []
             labels = []
             maxLabels = []

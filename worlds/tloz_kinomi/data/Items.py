@@ -14,7 +14,8 @@ ITEMS_DATA = {
     },
     "Bombs (10)": {
         'classification': ItemClassification.progression,
-        'id': 0x03
+        'id': 0x03,
+        'subid': 0x03
     },
     "Sword": {
         'classification': ItemClassification.progression,

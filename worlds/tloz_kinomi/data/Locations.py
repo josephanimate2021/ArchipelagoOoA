@@ -7,7 +7,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc6d2,
         "room": 0x0300,
         "bit_mask": 0x80,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
         "randomized": False,
         "symbolic_name": "mapleTrade",
     },
@@ -16,14 +16,14 @@ LOCATIONS_DATA = {
         "vanilla_item": "Falls Key",
         "flag_byte": 0xc70e,
         "room": 0x020e,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     "Kinomi Town: Librarian": {
         "region_id": "old man's library",
         "vanilla_item": "Old Labyrinth Key",
         "flag_byte": 0xc718,
         "room": 0x0218,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
         "randomized": False,
     },
     "Kinomi Town: Library Employee": {
@@ -31,14 +31,14 @@ LOCATIONS_DATA = {
         "vanilla_item": "Potion",
         "flag_byte": 0xc72e,
         "room": 0x022e,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     "Kinomi Town: Heart Piece at Link's House": {
         "region_id": "link's house heartpiece",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc808,
         "room": 0x0308,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     # -----
     "Kinomi Town: Shop #1": {
@@ -50,7 +50,7 @@ LOCATIONS_DATA = {
         "bit_mask": 0x20,
         "scouting_byte": 0xc75e,
         "scouting_mask": 0x10,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
         "symbolic_name": "kinomiShop1",
     },
     "Kinomi Town: Shop #2": {
@@ -62,7 +62,7 @@ LOCATIONS_DATA = {
         "bit_mask": 0x40,
         "scouting_byte": 0xc75e,
         "scouting_mask": 0x10,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
         "symbolic_name": "kinomiShop2",
     },
     "Kinomi Town: Shop #3": {
@@ -74,7 +74,7 @@ LOCATIONS_DATA = {
         "bit_mask": 0x80,
         "scouting_byte": 0xc75e,
         "scouting_mask": 0x10,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
         "symbolic_name": "kinomiShop3",
     },
     # -----
@@ -86,7 +86,7 @@ LOCATIONS_DATA = {
         "bit_mask": 0x01,
         "scouting_byte": 0xc77e,
         "scouting_mask": 0x10,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
         "symbolic_name": "hiddenShop1",
     },
     "Kinomi Town: Hidden Shop #3": {
@@ -97,7 +97,7 @@ LOCATIONS_DATA = {
         "bit_mask": 0x04,
         "scouting_byte": 0xc77e,
         "scouting_mask": 0x10,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
         "symbolic_name": "hiddenShop3",
     },
     ##########################################
@@ -106,7 +106,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc711,
         "room": 0x0011,
-        "collect": COLLECT_DROP,
+        "collect": TREASURE_SPAWN_DROP,
         "static_item": True
     },
     "Forever Falls: Kill Enemies inside Cave": {
@@ -114,14 +114,14 @@ LOCATIONS_DATA = {
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc739,
         "room": 0x0239,
-        "collect": COLLECT_DROP
+        "collect": TREASURE_SPAWN_DROP
     },
     "Forever Falls: Old Man": {
         "region_id": "forever falls old man",
         "vanilla_item": "Seed Satchel",
         "flag_byte": 0xc74e,
         "room": 0x024e,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     ##########################################
     "Daichi Plain: Bomb Storehouse": {
@@ -129,14 +129,14 @@ LOCATIONS_DATA = {
         "vanilla_item": "Bombs (10)",
         "flag_byte": 0xc818,
         "room": 0x0318,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     "Daichi Plain: Gravesite Basement": {
         "region_id": "daichi plain gravesite basement",
         "vanilla_item": "Shovel",
         "flag_byte": 0xc80d,
         "room": 0x030d,
-        "collect": COLLECT_CHEST
+        "collect": TREASURE_SPAWN_CHEST
     },
     "Daichi Plain: Old Man": {
         "region_id": "daichi plain old man",
@@ -144,14 +144,14 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca06,
         "room": 0x0506,
         "bit_mask": 0x40,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     "Daichi Plain: Old Man's Rupee": {
         "region_id": "daichi plain old man's rupee",
         "vanilla_item": "Rupees (40)",
         "flag_byte": 0xca06,
         "room": 0x0506,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     "Daichi Plain: Old Man (Summer)": {
         "region_id": "daichi plain summer old man",
@@ -159,70 +159,70 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca09,
         "room": 0x0509,
         "bit_mask": 0x40,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     "Daichi Plain: Old Man (Summer)'s Rupee": {
         "region_id": "daichi plain summer old man's rupee",
         "vanilla_item": "Rupees (500)",
         "flag_byte": 0xca09,
         "room": 0x0509,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     "Daichi Plain: Gravesite Heart Piece": {
         "region_id": "daichi plain gravesite heartpiece",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc705,
         "room": 0x0005,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     "Daichi Plain: Gift Under Mushroom": {
         "region_id": "daichi plain gift under mushroom",
         "vanilla_item": "Rupees (200)",
         "flag_byte": 0xc707,
         "room": 0x0007,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     "Daichi Plain: Chest": {
         "region_id": "daichi plain chest",
         "vanilla_item": "Rupees (20)",
         "flag_byte": 0xc727,
         "room": 0x0027,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     "Daichi Plain: Fall Stone Reward": {
         "region_id": "fall stone reward",
         "vanilla_item": "Autumn Stone",
         "flag_byte": 0xca0c,
         "room": 0x070c,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     "Daichi Plain: Winter Cave Crystal Chest": {
         "region_id": "winter cave crystal chest",
         "vanilla_item": "Rupees (20)",
         "flag_byte": 0xc82b,
         "room": 0x032b,
-        "collect": COLLECT_CHEST
+        "collect": TREASURE_SPAWN_CHEST
     },
     "Daichi Plain: Winter Cave Heart Piece Drop": {
         "region_id": "winter cave heartpiece drop",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc82a,
         "room": 0x032a,
-        "collect": COLLECT_DROP
+        "collect": TREASURE_SPAWN_DROP
     },
     "Daichi Plain: Winter Cave Stone Chest": {
         "region_id": "winter stone reward",
         "vanilla_item": "Winter Stone",
         "flag_byte": 0xc83b,
         "room": 0x033b,
-        "collect": COLLECT_CHEST
+        "collect": TREASURE_SPAWN_CHEST
     },
     "Daichi Plain: Underwater Gift": {
         "region_id": "daichi plain underwater heartpiece",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xca0d,
         "room": 0x070d,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     ##########################################
     "Lake of Memories: Old Man": {
@@ -231,42 +231,42 @@ LOCATIONS_DATA = {
         "flag_byte": 0xcafe,
         "room": 0x05fe,
         "bit_mask": 0x40,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     "Lake of Memories: Old Man's Chest": {
         "region_id": "lake of memories old man's chest",
         "vanilla_item": "Rupees (20)",
         "flag_byte": 0xcafe,
         "room": 0x05fe,
-        "collect": COLLECT_CHEST
+        "collect": TREASURE_SPAWN_CHEST
     },
     "Lake of Memories: Shooting Gallery": {
         "region_id": "lake of memories shooting gallery",
         "vanilla_item": "Gasha Seed",
         "flag_byte": 0xc7e9,
         "room": 0x02e9,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
     },
     "Lake of Memories: Scrapped Chest": {
         "region_id": "lake of memories scrapped chest",
         "vanilla_item": "Rupees (5)",
         "flag_byte": 0xc848,
         "room": 0x0348,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Lake of Memories: Blocked Cave": {
         "region_id": "summer stone check",
         "vanilla_item": "Summer Stone",
         "flag_byte": 0xcafd,
         "room": 0x05fd,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Lake of Memories: Heart Piece": {
         "region_id": "lake of memories heartpiece",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc744,
         "room": 0x0044,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     ##########################################
     "Hedge Maze: Old Man 2": {
@@ -275,14 +275,14 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca0a,
         "room": 0x050a,
         "bit_mask": 0x40,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     "Hedge Maze: Old Man 2's Rupee Under Pot": {
         "region_id": "hedge maze old man 2's rupee",
         "vanilla_item": "Rupees (20)",
         "flag_byte": 0xca0a,
         "room": 0x050a,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     "Hedge Maze: Old Man 1": {
         "region_id": "hedge maze old man 1",
@@ -290,21 +290,21 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca08,
         "room": 0x0508,
         "bit_mask": 0x40,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     "Hedge Maze: Old Man 1's Chest": {
         "region_id": "hedge maze old man 1's chest",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xca08,
         "room": 0x0508,
-        "collect": COLLECT_CHEST
+        "collect": TREASURE_SPAWN_CHEST
     },
     "Hedge Maze: Defeat Enemies for Stone": {
         "region_id": "hedge maze stone",
         "vanilla_item": "Spring Stone",
         "flag_byte": 0xcaf7,
         "room": 0x05f7,
-        "collect": COLLECT_DROP
+        "collect": TREASURE_SPAWN_DROP
     },
     ##########################################
     "Deeper Woods: Old Man 1": {
@@ -313,14 +313,14 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca07,
         "room": 0x0507,
         "bit_mask": 0x40,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     "Deeper Woods: Old Man 1's Heart Piece Under Pot": {
         "region_id": "deeper woods old man 1's heartpiece",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xca07,
         "room": 0x0507,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     "Deeper Woods: Old Man 2": {
         "region_id": "deeper woods old man 2",
@@ -328,49 +328,49 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca0b,
         "room": 0x050b,
         "bit_mask": 0x40,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     "Deeper Woods: Old Man 2's Rupee Under Pot": {
         "region_id": "deeper woods old man 2's rupee",
         "vanilla_item": "Rupees (50)",
         "flag_byte": 0xca0b,
         "room": 0x050b,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     "Deeper Woods: Underground Heart Piece": {
         "region_id": "deeper woods underground heartpiece",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xca05,
         "room": 0x0705,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     "Deeper Woods: Heart Piece Under Tree": {
         "region_id": "deeper woods heartpiece under tree",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc757,
         "room": 0x0057,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     "Deeper Woods: Cave Heart Piece": {
         "region_id": "deeper woods chest",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xcafc,
         "room": 0x07fc,
-        "collect": COLLECT_CHEST
+        "collect": TREASURE_SPAWN_CHEST
     },
     "Spool Swamp Remains: Kill Blue Lynel": {
         "region_id": "familar swamp gift",
         "vanilla_item": "Zora's Flippers",
         "flag_byte": 0xc708,
         "room": 0x0008,
-        "collect": COLLECT_CHEST
+        "collect": TREASURE_SPAWN_CHEST
     },
     "Deeper Woods: Subrosia Dance": {
         "region_id": "subrosia dance",
         "vanilla_item": "Red Pearl",
         "flag_byte": 0xc88a,
         "room": 0x038a,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     "Deeper Woods: Happy Mask Salesman Trade": {
         "region_id": "deeper woods swordsman trade",
@@ -378,7 +378,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc80a,
         "room": 0x030a,
         "randomized": False,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     ##########################################
     "Jiku Clifs (Present): Heart Piece Under Rock": {
@@ -386,14 +386,14 @@ LOCATIONS_DATA = {
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc732,
         "room": 0x0032,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
     },
     "Jiku Clifs (Present): Fill Hole for Heart Piece": {
         "region_id": "jiku clifs heartpiece hidding in hole",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc773,
         "room": 0x0073,
-        "collect": COLLECT_POOF,
+        "collect": TREASURE_SPAWN_POOF,
     },
     "Jiku Clifs (Present): Life Potion Trade": {
         "region_id": "old lady trade",
@@ -401,21 +401,21 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc728,
         "room": 0x0228,
         "randomized": False,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
     },
     "Jiku Clifs (Present): Rupee Chest Outside Lost Labyrinth": {
         "region_id": "chest inside cave outside lost labyrinth present entrance",
         "vanilla_item": "Rupees (200)",
         "flag_byte": 0xc8be,
         "room": 0x02be,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Jiku Clifs (Present): Heart Piece Outside Lost Labyrinth": {
         "region_id": "heartpiece inside cave outside lost labyrinth present entrance",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xca04,
         "room": 0x0704,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
     },
     # -----
     "Jiku Clifs (Present): Shop #1": {
@@ -426,7 +426,7 @@ LOCATIONS_DATA = {
         "bit_mask": 0x10,
         "scouting_byte": 0xc8fe,
         "scouting_mask": 0x10,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
         "symbolic_name": "seaShop1",
     },
     "Jiku Clifs (Present): Shop #2": {
@@ -437,7 +437,7 @@ LOCATIONS_DATA = {
         "bit_mask": 0x20,
         "scouting_byte": 0xc8fe,
         "scouting_mask": 0x10,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
         "symbolic_name": "seaShop2",
     },
     "Jiku Clifs (Present): Shop #3": {
@@ -448,7 +448,7 @@ LOCATIONS_DATA = {
         "bit_mask": 0x40,
         "scouting_byte": 0xc8fe,
         "scouting_mask": 0x10,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
         "symbolic_name": "seaShop3",
     },
     "Jiku Clifs (Present): Shop #4": {
@@ -459,7 +459,7 @@ LOCATIONS_DATA = {
         "bit_mask": 0x60,
         "scouting_byte": 0xc8fe,
         "scouting_mask": 0x10,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
         "symbolic_name": "seaShop4",
     },
     ##########################################
@@ -468,63 +468,63 @@ LOCATIONS_DATA = {
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc853,
         "room": 0x0153,
-        "collect": COLLECT_POOF,
+        "collect": TREASURE_SPAWN_POOF,
     },
     "Jiku Clifs (Past): Fill Hole Next To Entrance": {
         "region_id": "jiku clifs past fill hole next to entrance",
         "vanilla_item": "Rupees (200)",
         "flag_byte": 0xc833,
         "room": 0x0133,
-        "collect": COLLECT_POOF,
+        "collect": TREASURE_SPAWN_POOF,
     },
     "Jiku Clifs (Past): Fill Hole Close To Main Entrance": {
         "region_id": "jiku clifs past fill hole close to main entrance",
         "vanilla_item": "Rupees (200)",
         "flag_byte": 0xc872,
         "room": 0x0172,
-        "collect": COLLECT_POOF,
+        "collect": TREASURE_SPAWN_POOF,
     },
     "Jiku Clifs (Past): Bomb Fairy": {
         "region_id": "bomb fairy",
         "vanilla_item": "Bombs (10)",
         "flag_byte": 0xc811,
         "room": 0x0111,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
     },
     "Jiku Clifs (Past): Goron Dance": {
         "region_id": "goron dance",
         "vanilla_item": "Blue Pearl",
         "flag_byte": 0xc72d,
         "room": 0x022d,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
     },
     "Jiku Clifs (Past): Underwater Heart Piece": {
         "region_id": "jiku clifs past underwater heartpiece",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc860,
         "room": 0x0160,
-        "collect": COLLECT_DIVE,
+        "collect": TREASURE_SPAWN_DIVE,
     },
     "Jiku Clifs (Past): Heart Piece Drop": {
         "region_id": "jiku clifs past heartpiece drop",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc822,
         "room": 0x0122,
-        "collect": COLLECT_DROP,
+        "collect": TREASURE_SPAWN_DROP,
     },
     "Jiku Clifs (Past): Statue Heart Piece Inside Cave": {
         "region_id": "jiku clifs past heartpiece",
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xc72a,
         "room": 0x022a,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Jiku Clifs (Past): Zora's Island": {
         "region_id": "zora's island",
         "vanilla_item": "Zora Scale",
         "flag_byte": 0xc87b,
         "room": 0x017b,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
     },
     ##########################################
     "Tokay Desert: First Chest": {
@@ -533,7 +533,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc761,
         "room": 0x0061,
         "dungeon": 5,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Tokay Desert: Second Chest": {
         "region_id": "tokay desert second chest",
@@ -541,7 +541,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc760,
         "room": 0x0060,
         "dungeon": 5,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Tokay Desert: Third Chest": {
         "region_id": "tokay desert third chest",
@@ -549,7 +549,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc770,
         "room": 0x0070,
         "dungeon": 5,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Tokay Desert: Fourth Chest": {
         "region_id": "tokay desert fourth chest",
@@ -557,7 +557,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc751,
         "room": 0x0051,
         "dungeon": 5,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Tokay Desert: Chest Inside Tokay House": {
         "region_id": "chest inside first tokay house",
@@ -565,7 +565,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc729,
         "room": 0x0229,
         "dungeon": 5,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Tokay Desert: Chest Below Graveyard": {
         "region_id": "chest in bottom screen of graveyard",
@@ -573,7 +573,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc740,
         "room": 0x0040,
         "dungeon": 5,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     ##########################################
     "Summer Villa (1F): Four Pillars Chest": {
@@ -581,7 +581,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Dungeon Map (Summer Villa)",
         "flag_byte": 0xcad4,
         "room": 0x05d4,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
         "dungeon": 0
     },
     "Summer Villa (2F): Three Pillars Chest": {
@@ -589,7 +589,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Compass (Summer Villa)",
         "flag_byte": 0xcabc,
         "room": 0x05bc,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
         "dungeon": 0
     },
     "Summer Villa (2F): Heart Piece Drop": {
@@ -597,7 +597,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xcab2,
         "room": 0x05b2,
-        "collect": COLLECT_DROP,
+        "collect": TREASURE_SPAWN_DROP,
         "dungeon": 0
     },
     "Summer Villa (1F): Trade with soldier": {
@@ -606,7 +606,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xcab0,
         "room": 0x05b0,
         "bit_mask": 0x40,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
         "randomized": False,
     },
     "Summer Villa (1F): Small Key Chest": {
@@ -614,7 +614,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Small Key (Summer Villa)",
         "flag_byte": 0xcab0,
         "room": 0x05b0,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
         "dungeon": 0
     },
     "Summer Villa (1F): Boss Key Chest": {
@@ -622,7 +622,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Boss Key (Summer Villa)",
         "flag_byte": 0xcab9,
         "room": 0x05b9,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
         "dungeon": 0
     },
     "Summer Villa (1F): Heart Piece Inside Water": {
@@ -630,7 +630,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Piece of Heart",
         "flag_byte": 0xcab8,
         "room": 0x05b8,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
         "dungeon": 0,
         "static_item": True
     },
@@ -639,7 +639,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Heart Container",
         "flag_byte": 0xcab6,
         "room": 0x05b6,
-        "collect": COLLECT_POOF,
+        "collect": TREASURE_SPAWN_POOF,
         "dungeon": 0,
         "symbolic_name": "d0Boss"
     },
@@ -648,7 +648,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Sword",
         "flag_byte": 0xcab7,
         "room": 0x05b7,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
         "dungeon": 0
     },
     "Summer Villa (B1F): Shield Chest": {
@@ -656,7 +656,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Shield",
         "flag_byte": 0xcab5,
         "room": 0x05b5,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
         "dungeon": 0
     },
     "Summer Villa (B1F): Small Key Chest": {
@@ -664,7 +664,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Small Key (Summer Villa)",
         "flag_byte": 0xcabd,
         "room": 0x05bd,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
         "dungeon": 0
     },
     "Summer Villa (2F): Small Key Chest": {
@@ -672,7 +672,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Small Key (Summer Villa)",
         "flag_byte": 0xcabe,
         "room": 0x05be,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
         "dungeon": 0
     },
     ##########################################
@@ -681,7 +681,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Dungeon Map (Spirit's Grotto)",
         "flag_byte": 0xc920,
         "room": 0x0420,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
         "dungeon": 1
     },
     "Spirit's Grotto: Chest on Platform": {
@@ -689,7 +689,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Small Key (Spirit's Grotto)",
         "flag_byte": 0xc923,
         "room": 0x0423,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
         "dungeon": 1
     },
     "Spirit's Grotto: Small Key Drop": {
@@ -697,7 +697,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Small Key (Spirit's Grotto)",
         "flag_byte": 0xc91f,
         "room": 0x041f,
-        "collect": COLLECT_KEYDROP,
+        "collect": TREASURE_SPAWN_DROP,
         "dungeon": 1
     },
     "Spirit's Grotto: Heart Piece": {
@@ -706,7 +706,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc91b,
         "room": 0x041b,
         "dungeon": 1,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Spirit's Grotto: Heart Piece Under Pot": {
         "region_id": "d1 heartpiece under pot",
@@ -714,7 +714,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca27,
         "room": 0x0627,
         "dungeon": 1,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
     },
     "Spirit's Grotto: Compass Chest": {
         "region_id": "d1 compass chest",
@@ -722,7 +722,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc915,
         "room": 0x0415,
         "dungeon": 1,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Spirit's Grotto: Hit Blocks with Sword": {
         "region_id": "d1 hit blocks",
@@ -730,7 +730,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc916,
         "room": 0x0416,
         "dungeon": 1,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Spirit's Grotto: Heart Piece at Colored Tiles": {
         "region_id": "d1 colored tiles heartpiece",
@@ -738,7 +738,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc92a,
         "room": 0x042a,
         "dungeon": 1,
-        "collect": COLLECT_DROP,
+        "collect": TREASURE_SPAWN_DROP,
     },
     "Spirit's Grotto: Miniboss": {
         "region_id": "d1 miniboss arena",
@@ -746,7 +746,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc918,
         "room": 0x0418,
         "dungeon": 1,
-        "collect": COLLECT_KEYDROP,
+        "collect": TREASURE_SPAWN_DROP,
     },
     "Spirit's Grotto: Bracelet": {
         "region_id": "d1 bracelet",
@@ -754,7 +754,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca10,
         "room": 0x0610,
         "dungeon": 1,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
     },
     "Spirit's Grotto: Hit Color Block": {
         "region_id": "d1 hit color block",
@@ -762,7 +762,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc926,
         "room": 0x0426,
         "dungeon": 1,
-        "collect": COLLECT_KEYDROP,
+        "collect": TREASURE_SPAWN_DROP,
     },
     "Spirit's Grotto: RNG puzzle": {
         "region_id": "d1 pully puzzle",
@@ -770,7 +770,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc922,
         "room": 0x0422,
         "dungeon": 1,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Spirit's Grotto: Rupee Under Pot": {
         "region_id": "d1 rupee under pot",
@@ -778,7 +778,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc91e,
         "room": 0x041e,
         "dungeon": 1,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
     },
     "Spirit's Grotto: Boss Key Chest": {
         "region_id": "d1 boss key chest",
@@ -786,7 +786,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc91d,
         "room": 0x041d,
         "dungeon": 1,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Spirit's Grotto: Rupee Under Crystal": {
         "region_id": "d1 rupee under crystal",
@@ -794,7 +794,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc929,
         "room": 0x0429,
         "dungeon": 1,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
     },
     "Spirit's Grotto: Boss": {
         "region_id": "d1 boss",
@@ -802,7 +802,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc913,
         "room": 0x0413,
         "dungeon": 1,
-        "collect": COLLECT_POOF,
+        "collect": TREASURE_SPAWN_POOF,
         "symbolic_name": "d1Boss"
     },
     "Spirit's Grotto: Final Gift": {
@@ -811,7 +811,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc911,
         "room": 0x0411,
         "dungeon": 1,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     ##########################################
     "Lost Labyrinth (Past): Compass Chest": {
@@ -819,7 +819,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Compass (Lost Labyrinth (Past))",
         "flag_byte": 0xc956,
         "room": 0x0456,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
         "dungeon": 2
     },
     "Lost Labyrinth (Past): Heart Piece": {
@@ -828,7 +828,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc953,
         "room": 0x0453,
         "dungeon": 2,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
     },
     "Lost Labyrinth (Past): Patch Up Holes at Entrance": {
         "region_id": "d2 past fix holes at entrance",
@@ -836,7 +836,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc951,
         "room": 0x0451,
         "dungeon": 2,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
     },
     "Lost Labyrinth (Past): Small Key Drop": {
         "region_id": "d2 past small key drop",
@@ -844,7 +844,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc952,
         "room": 0x0452,
         "dungeon": 2,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
     },
     "Lost Labyrinth (Past): Second Keydrop": {
         "region_id": "d2 past small key drop 2",
@@ -852,7 +852,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc94e,
         "room": 0x044e,
         "dungeon": 2,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
     },
     "Lost Labyrinth (Past): Color Tiles": {
         "region_id": "d2 past color tile puzzle",
@@ -860,14 +860,14 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc94f,
         "room": 0x044f,
         "dungeon": 2,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Lost Labyrinth (Past): Kill Moldorms": {
         "region_id": "d2 past kill moldorm",
         "vanilla_item": "Small Key (Lost Labyrinth (Past))",
         "flag_byte": 0xc958,
         "room": 0x0458,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
         "dungeon": 2
     },
     "Lost Labyrinth (Past): Color Tiles Puzzle 2": {
@@ -876,7 +876,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc95c,
         "room": 0x045c,
         "dungeon": 2,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
     },
     "Lost Labyrinth (Past): Witch's Chest": {
         "region_id": "d2 past witch's chest",
@@ -884,7 +884,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc94b,
         "room": 0x044b,
         "randomized": False,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
     },
     "Lost Labyrinth (Past): Kill Enemies": {
         "region_id": "d2 past kill enemies chest",
@@ -892,7 +892,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc967,
         "room": 0x0467,
         "dungeon": 2,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Lost Labyrinth (Past): Miniboss": {
         "region_id": "d2 past miniboss arena",
@@ -900,7 +900,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc969,
         "room": 0x0469,
         "dungeon": 2,
-        "collect": COLLECT_KEYDROP,
+        "collect": TREASURE_SPAWN_DROP,
     },
     "Lost Labyrinth (Past): Fix Holes Past Arena": {
         "region_id": "d2 past fix holes past arena",
@@ -908,7 +908,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc96a,
         "room": 0x046a,
         "dungeon": 2,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Lost Labyrinth (Past): Color Block Puzzle": {
         "region_id": "d2 past color tiles puzzle",
@@ -916,7 +916,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc963,
         "room": 0x0463,
         "dungeon": 2,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     ##########################################
     "Four Corners Cave: Compass Chest": {
@@ -925,7 +925,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca52, 
         "room": 0x0552,
         "dungeon": 3,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Four Corners Cave: Small Key Chest in The Dark": {
         "region_id": "d3 small key chest in dark",
@@ -933,7 +933,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca51, 
         "room": 0x0552,
         "dungeon": 3,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Four Corners Cave: Bridge Puzzle": {
         "region_id": "d3 heartpiece chest",
@@ -941,7 +941,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca67, 
         "room": 0x0567,
         "dungeon": 3,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Four Corners Cave: Armos Key Chest": {
         "region_id": "d3 armos small key chest",
@@ -949,7 +949,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca56, 
         "room": 0x0556,
         "dungeon": 3,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Four Corners Cave: Dungeon Map Chest": {
         "region_id": "d3 dungeon map chest",
@@ -957,7 +957,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca69, 
         "room": 0x0569,
         "dungeon": 3,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Four Corners Cave: Armos Red Rupee Chest": {
         "region_id": "d3 armos red rupee chest",
@@ -965,7 +965,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca61, 
         "room": 0x0561,
         "dungeon": 3,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Four Corners Cave: Spiked Beedle Small Key Drop": {
         "region_id": "d3 small key chest spiked beedle",
@@ -973,7 +973,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca5d, 
         "room": 0x055d,
         "dungeon": 3,
-        "collect": COLLECT_KEYDROP,
+        "collect": TREASURE_SPAWN_DROP,
     },
     "Four Corners Cave: Boss Key Chest": {
         "region_id": "d3 boss key chest",
@@ -981,7 +981,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca57, 
         "room": 0x0557,
         "dungeon": 3,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Four Corners Cave: Small Key Drop in Middle of Spikes": {
         "region_id": "d3 spikes drop",
@@ -989,7 +989,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca6e, 
         "room": 0x056e,
         "dungeon": 3,
-        "collect": COLLECT_KEYDROP,
+        "collect": TREASURE_SPAWN_DROP,
     },
     "Four Corners Cave: Giant Blade Chest": {
         "region_id": "d3 giant blade trap chest",
@@ -997,7 +997,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca6c, 
         "room": 0x056c,
         "dungeon": 3,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Four Corners Cave: Miniboss": {
         "region_id": "d3 miniboss arena",
@@ -1005,7 +1005,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca59, 
         "room": 0x0559,
         "dungeon": 3,
-        "collect": COLLECT_KEYDROP,
+        "collect": TREASURE_SPAWN_DROP,
     },    
     "Four Corners Cave: Rupee Chest": {
         "region_id": "d3 25 rupee chest",
@@ -1013,7 +1013,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca66, 
         "room": 0x0566,
         "dungeon": 3,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Four Corners Cave: Bemos and Armos Chest": {
         "region_id": "d3 bemos and armos chest",
@@ -1021,7 +1021,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca63, 
         "room": 0x0563,
         "dungeon": 3,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Four Corners Cave: Boomerang Chest": {
         "region_id": "d3 bommerang chest",
@@ -1029,7 +1029,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca60, 
         "room": 0x0560,
         "dungeon": 3,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Four Corners Cave: Boss": {
         "region_id": "d3 boss",
@@ -1037,7 +1037,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca64, 
         "room": 0x0564,
         "dungeon": 3,
-        "collect": COLLECT_POOF,
+        "collect": TREASURE_SPAWN_POOF,
         "symbolic_name": "d3Boss"
     },
     "Four Corners Cave: Final Gift": {
@@ -1046,7 +1046,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc858, 
         "room": 0x0358,
         "dungeon": 3,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
     },
     ##########################################
     "Seasons Shrine (Summer): Small Key Drop": {
@@ -1055,7 +1055,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca27, 
         "room": 0x0527,
         "dungeon": 4,
-        "collect": COLLECT_KEYDROP,
+        "collect": TREASURE_SPAWN_DROP,
     },
     "Seasons Shrine (Summer): Big Rupee Chest": {
         "region_id": "d4 summer big rupee chest",
@@ -1063,7 +1063,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca24, 
         "room": 0x0524,
         "dungeon": 4,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Seasons Shrine (Autumn): Compass Chest": {
         "region_id": "d4 autumn compass chest",
@@ -1071,7 +1071,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca33, 
         "room": 0x0533,
         "dungeon": 4,
-        "collect": COLLECT_CHEST
+        "collect": TREASURE_SPAWN_CHEST
     },
     "Seasons Shrine (Autumn): Small Key Chest": {
         "region_id": "d4 autumn small key chest",
@@ -1079,7 +1079,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca2b, 
         "room": 0x052b,
         "dungeon": 4,
-        "collect": COLLECT_CHEST
+        "collect": TREASURE_SPAWN_CHEST
     },
     "Seasons Shrine (Autumn): Heart Piece": {
         "region_id": "d4 autumn heartpiece",
@@ -1087,7 +1087,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca34, 
         "room": 0x0534,
         "dungeon": 4,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
     },
     "Seasons Shrine (Autumn): Statue Block Puzzle": {
         "region_id": "d4 autumn to summer statue block puzzle",
@@ -1095,7 +1095,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca29, 
         "room": 0x0529,
         "dungeon": 4,
-        "collect": COLLECT_KEYDROP,
+        "collect": TREASURE_SPAWN_DROP,
     },
     "Seasons Shrine (Winter): Small Key Drop": {
         "region_id": "d4 winter small key drop",
@@ -1103,7 +1103,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca3b, 
         "room": 0x053b,
         "dungeon": 4,
-        "collect": COLLECT_KEYDROP,
+        "collect": TREASURE_SPAWN_DROP,
     },    
     "Seasons Shrine (Spring): Small Key Chest": {
         "region_id": "d4 spring small key chest",
@@ -1111,7 +1111,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca3e, 
         "room": 0x053e,
         "dungeon": 4,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Seasons Shrine (Summer): Miniboss": {
         "region_id": "d4 miniboss arena",
@@ -1119,7 +1119,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca1e, 
         "room": 0x051e,
         "dungeon": 4,
-        "collect": COLLECT_KEYDROP,
+        "collect": TREASURE_SPAWN_DROP,
     },
     "Seasons Shrine (Summer): Armos Small Key Drop": {
         "region_id": "d4 summer armos small key drop",
@@ -1127,7 +1127,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca1d, 
         "room": 0x051d,
         "dungeon": 4,
-        "collect": COLLECT_KEYDROP,
+        "collect": TREASURE_SPAWN_DROP,
     },
     "Seasons Shrine (Autumn): Miniboss Chest": {
         "region_id": "d4 autumn miniboss arena chest",
@@ -1135,7 +1135,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca2f, 
         "room": 0x052f,
         "dungeon": 4,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Seasons Shrine (Autumn): Roc's Cape Chest": {
         "region_id": "d4 autumn roc's cape chest",
@@ -1143,7 +1143,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca2c, 
         "room": 0x052c,
         "dungeon": 4,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Seasons Shrine (Spring): Heart Piece": {
         "region_id": "d4 spring north stump heartpiece",
@@ -1151,7 +1151,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca12, 
         "room": 0x0512,
         "dungeon": 4,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Seasons Shrine (Spring): Miniboss Statue Puzzle": {
         "region_id": "d4 spring miniboss arena statue puzzle",
@@ -1159,7 +1159,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca13, 
         "room": 0x0513,
         "dungeon": 4,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Seasons Shrine (Winter): Boss Key Chest": {
         "region_id": "d4 boss key chest",
@@ -1167,7 +1167,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca37, 
         "room": 0x0537,
         "dungeon": 4,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Seasons Shrine (Winter): Boss": {
         "region_id": "d4 boss",
@@ -1175,7 +1175,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xca3a, 
         "room": 0x053a,
         "dungeon": 4,
-        "collect": COLLECT_POOF,
+        "collect": TREASURE_SPAWN_POOF,
         "symbolic_name": "d4Boss"
     },
     "Seasons Shrine: Din's Gift": {
@@ -1184,7 +1184,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc778, 
         "room": 0x0078,
         "randomized": False,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
     },
     "North Horon Remains: Impa's House": {
         "region_id": "impa's seasons house chest",
@@ -1192,7 +1192,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc81a, 
         "room": 0x031a,
         "dungeon": 4,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     ##########################################
     "Temple of The Tokay (2F): Chest Near First Hint Code Tiles": {
@@ -1201,7 +1201,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc976, 
         "room": 0x0476,
         "dungeon": 5,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Temple of The Tokay (2F): Chest Near Second Hint Code Tiles": {
         "region_id": "d5 chest near second codepiece",
@@ -1209,7 +1209,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc97b, 
         "room": 0x047b,
         "dungeon": 5,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Temple of The Tokay (2F): Chest Near Third Hint Code Tiles": {
         "region_id": "d5 chest near third codepiece",
@@ -1217,7 +1217,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc975, 
         "room": 0x0475,
         "dungeon": 5,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Temple of The Tokay (1F): Chest Near Fourth Hint Code Tiles": {
         "region_id": "d5 chest near fourth codepiece",
@@ -1225,7 +1225,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc96c, 
         "room": 0x046c,
         "dungeon": 5,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Temple of The Tokay (1F): Glove Near Fifth Hint Code Tiles": {
         "region_id": "d5 chest near fifth codepiece",
@@ -1233,7 +1233,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc96e, 
         "room": 0x046e,
         "dungeon": 5,
-        "collect": COLLECT_DROP,
+        "collect": TREASURE_SPAWN_DROP,
     },
     "Temple of The Tokay (2F): Hit Color Blocks": {
         "region_id": "d5 color block puzzle",
@@ -1241,7 +1241,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc96d, 
         "room": 0x046d,
         "dungeon": 5,
-        "collect": COLLECT_KEYDROP,
+        "collect": TREASURE_SPAWN_DROP,
     },
     "Temple of The Tokay (2F): Chest Near Slate Slots": {
         "region_id": "d5 chest near slate slots",
@@ -1249,7 +1249,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc97a, 
         "room": 0x047a,
         "dungeon": 5,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Temple of The Tokay (2F): Statue Block Puzzle": {
         "region_id": "d5 statue block puzzle",
@@ -1257,7 +1257,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc971, 
         "room": 0x0471,
         "dungeon": 5,
-        "collect": COLLECT_KEYDROP,
+        "collect": TREASURE_SPAWN_DROP,
     },
     "Temple of the Tokay (2F): Push Blocks to Center": {
         "region_id": "d5 fill holes",
@@ -1265,7 +1265,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc96f, 
         "room": 0x046f,
         "dungeon": 5,
-        "collect": COLLECT_KEYDROP,
+        "collect": TREASURE_SPAWN_DROP,
     },
     "Temple of the Tokay (2F): Miniboss": {
         "region_id": "d5 miniboss arena",
@@ -1273,7 +1273,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc96b, 
         "room": 0x046b,
         "dungeon": 5,
-        "collect": COLLECT_KEYDROP,
+        "collect": TREASURE_SPAWN_DROP,
     },
     "Temple of the Tokay (2F): Statue Block Puzzle 2": {
         "region_id": "d5 statue block puzzle 2",
@@ -1281,7 +1281,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc973, 
         "room": 0x0473,
         "dungeon": 5,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Temple of the Tokay (1F): Boss": {
         "region_id": "d5 boss",
@@ -1289,7 +1289,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc9bf, 
         "room": 0x04bf,
         "dungeon": 5,
-        "collect": COLLECT_POOF,
+        "collect": TREASURE_SPAWN_POOF,
         "symbolic_name": "d5Boss"
     },
     "Temple of the Tokay (1F): Nayru's Gift": {
@@ -1298,7 +1298,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc97f, 
         "room": 0x047f,
         "randomized": False,
-        "collect": COLLECT_TOUCH
+        "collect": TREASURE_SPAWN_INSTANT
     },
     ##########################################
     "Lost Labyrinth (Present): Dungeon Map Chest": {
@@ -1307,7 +1307,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc940, 
         "room": 0x0440,
         "dungeon": 6,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Lost Labyrinth (Present): Cross Holes with Cane": {
         "region_id": "d2 present cross with cane",
@@ -1315,7 +1315,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc93d, 
         "room": 0x043d,
         "dungeon": 6,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Lost Labyrinth (Present): Fix Holes": {
         "region_id": "d2 present fix holes",
@@ -1323,7 +1323,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc93c, 
         "room": 0x043c,
         "dungeon": 6,
-        "collect": COLLECT_KEYDROP,
+        "collect": TREASURE_SPAWN_DROP,
     },
     "Lost Labyrinth (Present): Hit Color Block": {
         "region_id": "d2 present color tiles",
@@ -1331,7 +1331,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc93e, 
         "room": 0x043e,
         "dungeon": 6,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Lost Labyrinth (Present): Small Key Chest": {
         "region_id": "d2 present small key chest",
@@ -1339,7 +1339,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc941, 
         "room": 0x0441,
         "dungeon": 6,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Lost Labyrinth (Present): Color Tiles Puzzle": {
         "region_id": "d2 present color tiles 2",
@@ -1347,7 +1347,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc945, 
         "room": 0x0445,
         "dungeon": 6,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Lost Labyrinth (Present): Cane Chest": {
         "region_id": "d2 present cane chest",
@@ -1355,7 +1355,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc930, 
         "room": 0x0430,
         "dungeon": 6,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Lost Labyrinth (Present): Small Key Drop": {
         "region_id": "d2 present small key drop",
@@ -1363,7 +1363,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc936, 
         "room": 0x0436,
         "dungeon": 6,
-        "collect": COLLECT_KEYDROP,
+        "collect": TREASURE_SPAWN_DROP,
     },
     "Lost Labyrinth (Present): Chest in Corner of Stairs Maze": {
         "region_id": "d2 present stairs maze chest",
@@ -1371,7 +1371,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc937, 
         "room": 0x0437,
         "dungeon": 6,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Lost Labyrinth (Present): Miniboss": {
         "region_id": "d2 present miniboss arena",
@@ -1379,7 +1379,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc948, 
         "room": 0x0448,
         "dungeon": 6,
-        "collect": COLLECT_KEYDROP,
+        "collect": TREASURE_SPAWN_DROP,
     },
     "Lost Labyrinth (Present): Statue & Color Tile Puzzles": {
         "region_id": "d2 present color block puzzle",
@@ -1387,7 +1387,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc935, 
         "room": 0x0448,
         "dungeon": 6,
-        "collect": COLLECT_KEYDROP,
+        "collect": TREASURE_SPAWN_DROP,
     },
     "Lost Labyrinth (Present): Rupees Chest": {
         "region_id": "d2 present rupees chest",
@@ -1395,7 +1395,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc934, 
         "room": 0x0434,
         "dungeon": 6,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Lost Labyrinth (Present): Heart Piece": {
         "region_id": "lost labyrinth present heartpiece",
@@ -1403,7 +1403,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc97e, 
         "room": 0x047e,
         "dungeon": 6,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
     },
     "Forest of Time (Present) Remains: Nayru's House": {
         "region_id": "nayru's house",
@@ -1411,7 +1411,7 @@ LOCATIONS_DATA = {
         "flag_byte": 0xc8ae, 
         "room": 0x03ae,
         "map_tile": 0x3a,
-        "collect": COLLECT_TOUCH,
+        "collect": TREASURE_SPAWN_INSTANT,
         "dungeon": 6,
         "symbolic_name": "nayruHouse",
     },
@@ -1422,7 +1422,7 @@ LOCATIONS_DATA = {
     	"dungeon" : 7,
         "flag_byte": 0xc9ad,
         "room": 0x04ad,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Crown Dungeon (1F): Miniboss": {
     	"region_id": "crown dungeon miniboss",
@@ -1430,7 +1430,7 @@ LOCATIONS_DATA = {
     	"dungeon" : 7,
         "flag_byte": 0xc9b4,
         "room": 0x04b4,
-        "collect": COLLECT_KEYDROP,
+        "collect": TREASURE_SPAWN_DROP,
         "conditional": True,
         "symbolic_name": "d5Miniboss"
     },
@@ -1440,7 +1440,7 @@ LOCATIONS_DATA = {
     	"dungeon" : 7,
         "flag_byte": 0xc9ba,
         "room": 0x04ba,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Crown Dungeon (1F): Three-Statue Puzzle": {
     	"region_id": "crown dungeon three-statue puzzle",
@@ -1448,7 +1448,7 @@ LOCATIONS_DATA = {
     	"dungeon" : 7,
         "flag_byte": 0xc9bc,
         "room": 0x04bc,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Crown Dungeon (1F): Blue Peg Chest": {
     	"region_id": "crown dungeon blue peg chest",
@@ -1456,7 +1456,7 @@ LOCATIONS_DATA = {
     	"dungeon" : 7,
         "flag_byte": 0xc9be,
         "room": 0x04be,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Crown Dungeon (B1F): Like-Like Chest": {
     	"region_id": "crown dungeon like-like chest",
@@ -1464,7 +1464,7 @@ LOCATIONS_DATA = {
     	"dungeon" : 7,
         "flag_byte": 0xc99f,
         "room": 0x049f,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Crown Dungeon (B1F): Red Peg Chest": {
     	"region_id": "crown dungeon red peg chest",
@@ -1472,7 +1472,7 @@ LOCATIONS_DATA = {
     	"dungeon" : 7,
         "flag_byte": 0xc999,
         "room": 0x0499,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Crown Dungeon (B1F): Owl Puzzle": {
     	"region_id": "crown dungeon owl puzzle",
@@ -1480,7 +1480,7 @@ LOCATIONS_DATA = {
     	"dungeon" : 7,
         "flag_byte": 0xc99b,
         "room": 0x049b,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Crown Dungeon (B1F): Two-Statue Puzzle": {
     	"region_id": "crown dungeon two-statue puzzle",
@@ -1488,7 +1488,7 @@ LOCATIONS_DATA = {
     	"dungeon" : 7,
         "flag_byte": 0xc99e,
         "room": 0x049e,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Crown Dungeon (B1F): Dark Room": {
     	"region_id": "crown dungeon dark room",
@@ -1496,7 +1496,7 @@ LOCATIONS_DATA = {
     	"dungeon" : 7,
         "flag_byte": 0xc9a3,
         "room": 0x04a3,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     },
     "Crown Dungeon (B1F): Six-Statue Puzzle": {
     	"region_id": "crown dungeon six-statue puzzle",
@@ -1504,6 +1504,6 @@ LOCATIONS_DATA = {
     	"dungeon" : 7,
         "flag_byte": 0xc9a5,
         "room": 0x04a5,
-        "collect": COLLECT_CHEST,
+        "collect": TREASURE_SPAWN_CHEST,
     }
 }

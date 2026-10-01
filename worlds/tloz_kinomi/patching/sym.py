@@ -67,8 +67,9 @@ class sym():
     def find(self, type: str, label: str) -> None | Dict[str, Any] | Any:
         if type == "section":
             for section in self.get_sections():
-                if section["label"] == label:
-                    return section
+                for p, _ in section.items():
+                    if section[p] == label:
+                        return section
         elif type.startswith("label"):
             labels = self.get_labels("_noChangeToGbAddressOffset" not in type)
             defs = self.get_defs()
@@ -86,10 +87,16 @@ class sym():
 
     def find_addr_end(self, bank, offset):
         beginFindAddrEnd = False
-        for _, addr in self.get_labels().items():
+        label = ""
+        offsete = 0x00
+        banke = 0x00
+        for l, addr in self.get_labels().items():
             b, a = addr.__str__().split(":")
             if beginFindAddrEnd:
                 return GameboyAddress(addr.bank, addr.offset)
             if a == offset and b == bank:
+                label = l
+                banke = addr.bank
+                offsete = addr.offset
                 beginFindAddrEnd = True
-        return None
+        return GameboyAddress(banke, offsete + self.find("label", f"_sizeof_{label}")) if beginFindAddrEnd else None
