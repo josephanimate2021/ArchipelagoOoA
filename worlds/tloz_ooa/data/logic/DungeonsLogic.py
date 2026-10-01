@@ -868,6 +868,7 @@ def make_d8_logic(player: int):
 
         # 4 keys - reach miniboss
         ["d8 blue peg chest", "d8 miniboss", False, lambda state: all([
+            ooa_has_feather(state, player),
             ooa_has_sword(state, player),
             ooa_has_small_keys(state, player, 8, 4)
         ])],
