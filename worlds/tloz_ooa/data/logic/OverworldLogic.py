@@ -881,7 +881,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
 
         # ROLLING UPPER
         #######################################
-        [Outside("crown ledge to upper ridge cave front"), "ridge upper present", True, None],
+        [Outside("crown ledge to upper ridge cave back"), "ridge upper present", True, None],
         ["ridge upper past", "ridge upper present", False, lambda state: ooa_can_go_back_to_present(state, player)],
 
         ["ridge upper present", Outside("empty cave by echo portal under rock"), True, None],
