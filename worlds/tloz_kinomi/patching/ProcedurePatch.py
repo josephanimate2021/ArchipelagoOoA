@@ -99,7 +99,7 @@ class KinomiPatchExtensions(APPatchExtension):
         treasure_obj_addresses = treasureAddressMaker(parsed_sym, rom_data).TREASURE_ADDRESSES
         assembler = Z80Assembler(bank_caves, {}, rom)
 
-        force_collect_mode_on_nonchest_items(parsed_sym, rom_data, patch_data, treasure_obj_addresses)
+        force_collect_mode_on_nonchest_items(parsed_sym, rom_data, patch_data, treasure_obj_addresses, asm_content)
 
         for symbolic_name, price in patch_data["shop_prices"].items():
             assembler.define_byte(f"shopPrices.{symbolic_name}", RUPEE_VALUES[price])
@@ -118,6 +118,7 @@ class KinomiPatchExtensions(APPatchExtension):
 
         # Parse assembler files, compile them and write the result in the ROM
         print(f"Compiling ASM files...")
+        print(asm_content)
         for file_path in get_asm_files(patch_data):
             data_loaded = yaml.safe_load(pkgutil.get_data(__name__, file_path))
             for metalabel, contents in data_loaded.items():
