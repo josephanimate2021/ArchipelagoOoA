@@ -57,7 +57,8 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         ["lynna city", Outside("right bippin blossom door"), True, None],
         [Inside("left bippin blossom door"), Inside("right bippin blossom door"), True, None],
 
-        ["lynna city", "princess zelda rescue", False, lambda state: ooa_has_feather(state, player) and options.secret_locations],
+        ["lynna city", Outside("black tower ruins"), True, lambda state: options.secret_locations],
+        [Inside("black tower ruins"), "princess zelda rescue", False, lambda state: ooa_has_feather(state, player) and options.secret_locations],
 
         # LYNNA VILLAGE
         #######################################
