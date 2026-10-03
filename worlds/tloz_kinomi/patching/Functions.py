@@ -163,9 +163,6 @@ def force_collect_mode_on_nonchest_items(parsed_sym: sym, rom: RomData, patch_da
 
         item_name = patch_data["locations"][location_name]
 
-        if item_name.startswith("Rupees"): # Ignore the rupees since they work in chests regardless.
-            continue
-
         for _, v in ITEM_GROUPS.items(): # Make dungeon items generic names for now.
             for e in v:
                 if e == item_name:
@@ -197,7 +194,6 @@ def force_collect_mode_on_nonchest_items(parsed_sym: sym, rom: RomData, patch_da
 
         if item_name in item_name_replacements:
             item_name = item_name_replacements[item_name]
-
 
         def set_static_item(s):
             staticItemsTable_addr_start = parsed_sym.find("label", "staticItemsReplacementsLookup@staticItemsReplacementsTable")
@@ -233,6 +229,18 @@ def force_collect_mode_on_nonchest_items(parsed_sym: sym, rom: RomData, patch_da
         def findCollectModeInAddr(subid, add = False):
             item_addr_len = len(item_addr) if isinstance(item_addr, list) else 1
             if subid >= 0 and subid < item_addr_len:
+                if item_name.startswith("Rupees"):
+                    collect_mode = [
+                        TREASURE_SPAWN_INSTANT,
+                        TREASURE_SPAWN_DROP
+                    ] # Collect mode is mixed up with the rupees for some reason, so make an array ourselves.
+                    if location_data["collect"] not in collect_mode:
+                        subid = -1 if not add else item_addr_len
+                        return
+                    else:
+                        for i in range(len(collect_mode)):
+                            if collect_mode[i] == location_data["collect"]:
+                                subid += 0x16 * (i + 1)
                 addr = int(item_addr, 0) if not isinstance(item_addr, list) else int(item_addr[subid], 0)
                 collect_mode = int(rom.read_byte(addr))
                 collectModeAlreadyExists = False
