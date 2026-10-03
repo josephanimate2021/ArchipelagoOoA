@@ -801,14 +801,9 @@ def apply_misc_option(rom: RomData, patch_data):
     if patch_data["options"]["master_keys"] != OraclesMasterKeys.option_disabled:
         # Remove small key consumption on keydoor opened
         rom.write_byte(0x18366, 0x00)
-        # Change obtention text
-        rom.write_bytes(0x78247, [0x4d, 0x61, 0x73, 0x74, 0x65, 0x72, 0x20, 0x4b, 0x65, 0x79, 0x09, 0x01, 0x21, 0x00]) # I really wish that the dictionnay of ages would be more useful...
     if patch_data["options"]["master_keys"] == OraclesMasterKeys.option_all_dungeon_keys:
         # Remove boss key consumption on boss keydoor opened (boss door behave like normal locked door)
         rom.write_word(0x1835e, 0x0000)
-    
-    # "Come back when you beat that minigame, kid!"   
-    rom.write_bytes(0x7A871, [0x43, 0x02, 0x40, 0x01, 0x02, 0xa7, 0x20, 0x62, 0x65, 0x61, 0x74, 0x01, 0x03, 0x4c, 0x6d, 0x69, 0x6e, 0x69, 0x05, 0xb1, 0x2c, 0x01, 0x05, 0x8a, 0x00]) 
     
     rom.write_byte(GameboyAddress(0x0B, 0x4445).address_in_rom(), patch_data["options"]["gasha_nut_kill_requirement"])
     rom.write_byte(GameboyAddress(0x02, 0x7d03).address_in_rom(), patch_data["options"]["gasha_nut_kill_requirement"] // 2)

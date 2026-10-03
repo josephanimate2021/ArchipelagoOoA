@@ -252,10 +252,6 @@ def make_dungeon_item_texts(texts: dict[str, str], patch_data) -> None:
         compasses_text += "⬜!" 
         texts[dungeon_obj_tx_indices[f"compass{dungeon_tag}"]] = compasses_text
     return
- 
-# ====================================================================================================
-def make_entrance_blocker_texts(texts: dict[str, str], patch_data) -> None:
-    return
 
 # ====================================================================================================
 def make_text_data(assembler: Z80Assembler, text: dict[str, str], patch_data: dict[str, Any]) -> None:
@@ -271,5 +267,7 @@ def make_text_data(assembler: Z80Assembler, text: dict[str, str], patch_data: di
     item_text = f"You need 🟩{requiredEssences}⬜\nessences to get\nthe Maku Seed\\stop\n"
     item_text += f"You need 🟩{requiredSlates}⬜\nslates to open\nD8 basement"
     text["TX_2e0d"] = item_text
+
+    text["TX_05b1"] = "Come back when\nyou beat that\nminigame, kid!"
 
     
