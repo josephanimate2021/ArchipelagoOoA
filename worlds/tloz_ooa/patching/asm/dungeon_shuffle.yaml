@@ -12,6 +12,17 @@
     
     db $ff
 
+17//weirdBehaviorWarpTable: |
+    dw $2203, resetPatchOnEnteringHouse
+    db $ff
+
+17//resetPatchOnEnteringHouse: |
+  ld hl,$cfd2
+  xor a
+  ldi (hl),a # patchDownstairs
+  ld (hl),a # wonMinigame
+  ret
+
 # Attempting to enter underwater warp without mermaid suit will cancel the warp and instead
 # cause Link to drown. (Could happen with dungeon entrance randomization.)
 # Credit to Stewmat
@@ -145,13 +156,34 @@
   @loop3Start:
   ldi a,(hl)
   cp $ff 
-  ret z ; Not a warp that we are interested in, go back and call initiateWarp
+  jr z, @loop4Init ; Not a warp that we are interested in, check 4st part
   cp b ; Only checking the group number here
   ldi a,(hl)
   jr nz,@loop3Start
   cp c ; Actually checking the "warp dest index" not the room index
   jr nz,@loop3Start
   jp drownLinkOnUnderwaterWarp
+  
+  # ---- Check weird behavior table table ----
+  @loop4Init:
+  ld hl, weirdBehaviorWarpTable
+  @loop4Start:
+  ldi a,(hl)
+  cp $ff 
+  ret z ; Not a warp that we are interested in, go back and call initiateWarp
+  cp b ; Only checking the group number here
+  ldi a,(hl)
+  jr nz,@loop4Next
+  cp c ; Actually checking the "warp dest index" not the room index
+  jr nz,@loop4Next
+  ldi a,(hl)
+  ld h,(hl)
+  ld l,a
+  jp (hl)
+  @loop4Next:
+  ld a,$2
+  rst 10
+  jr @loop4Start
 
 01//checkDungeonWarp_neck: |
   ld e,$17
