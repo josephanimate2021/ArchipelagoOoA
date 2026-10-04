@@ -3,12 +3,15 @@ from typing import List
 import os
 import random
 import Utils
+import json
+
 from settings import get_settings
 from ..common.patching.RomData import RomData
 from .Util import *
 from .treasureAddresses import sym
 from ..common.patching.z80asm.Assembler import Z80Assembler
 from ..common.patching.z80asm.Assembler import GameboyAddress
+from ..common.patching.Util import simple_hex
 from ..data.Constants import *
 from .Constants import *
 from pathlib import Path
@@ -143,13 +146,19 @@ def write_rando_npcItem_contents(parsed_sym: sym, rom: RomData, patch_data):
         if "addr" in location_data:
             rom.write_bytes(location_data["addr"], [item_id, item_subid])
 
-def force_collect_mode_on_nonchest_items(parsed_sym: sym, rom: RomData, patch_data, treasure_object_addresss, asm_content):
+def force_collect_mode_on_nonchest_items(parsed_sym: sym, rom: RomData, patch_data, treasure_object_addresss, asm_content, bank_caves):
     """
     Takes an item object code and changes it's collect mode to accomidate for the modifications
     """
     itemsCount = {}
     locations = {}
     item_name_replacements = {}
+    new_item_collect_modes = {}
+    existing_item_collect_subids = {}
+    banks: dict[str, GameboyAddress] = {}
+    for label, address in parsed_sym.get_labels().items():
+        if label.startswith("treasureObjectData"):
+            banks[label] = address
 
     # STEP 1: gather the count of each item in rooms without a chest.
     for location_name, location_data in LOCATIONS_DATA.items():
@@ -162,6 +171,9 @@ def force_collect_mode_on_nonchest_items(parsed_sym: sym, rom: RomData, patch_da
             continue
 
         item_name = patch_data["locations"][location_name]
+
+        if item_name.startswith("Rupees"):
+            item_name_replacements[item_name] = "Rupees"
 
         for _, v in ITEM_GROUPS.items(): # Make dungeon items generic names for now.
             for e in v:
@@ -209,6 +221,17 @@ def force_collect_mode_on_nonchest_items(parsed_sym: sym, rom: RomData, patch_da
                     foundCheckFromRoom = True
                     break
             return foundCheckFromRoom
+        def set_npc_item(s):
+            oldManItemsTableAddr = parsed_sym.find("label", "oldManLocationsTable").address_in_rom()
+            foundCheckFromRoom = False
+            count = 0
+            for i in range(len(NPC_ITEM_ROOM_ORDER)):
+                if location_data["room"] == NPC_ITEM_ROOM_ORDER[i]:
+                    rom.write_bytes(oldManItemsTableAddr + count, [item_id, s])
+                    foundCheckFromRoom = True
+                    break
+                count += 2
+            return foundCheckFromRoom
         def set_boss_items(s, i=0, c=0):
             no_boss_dungeons = [2, 6]
             if i != 7:
@@ -225,11 +248,15 @@ def force_collect_mode_on_nonchest_items(parsed_sym: sym, rom: RomData, patch_da
             if not set_static_item(subid):
                 if "dungeon" in location_data:
                     set_boss_items(subid)
+                else:
+                    set_npc_item(subid)
 
         def findCollectModeInAddr(subid, add = False):
+            if item_name not in existing_item_collect_subids:
+                existing_item_collect_subids[item_name] = []
             item_addr_len = len(item_addr) if isinstance(item_addr, list) else 1
             if subid >= 0 and subid < item_addr_len:
-                if item_name.startswith("Rupees"):
+                if item_name == "Rupees":
                     collect_mode = [
                         TREASURE_SPAWN_INSTANT,
                         TREASURE_SPAWN_DROP
@@ -254,15 +281,43 @@ def force_collect_mode_on_nonchest_items(parsed_sym: sym, rom: RomData, patch_da
                 if not collectModeAlreadyExists:
                     findCollectModeInAddr((subid - 1) if not add else (subid + 1), add)
                 else:
+                    existing_item_collect_subids[item_name].append(subid)
                     checkItemsWrite(subid)
             else:
                 if add:
-                    print()
+                    itemId = f"{0x11 if item_name == "Harp" else item_id}"
+                    if itemId in treasure_object_addresss["pointers"]:
+                        if item_name not in new_item_collect_modes:
+                            new_item_collect_modes[item_name] = {}
+                        addr_start = int(item_addr[0], 0)
+                        offset = GameboyAddress.from_address(addr_start).offset
+                        bank1, addr1 = treasure_object_addresss["pointers"][itemId].split(":")
+                        for label, address in banks.items():
+                            bank, addr = address.__str__().split(":")
+                            if address.offset == offset:
+                                addr_end = parsed_sym.find_addr_end(bank, addr).address_in_rom()
+                                asmFunc = f"{bank}//{label}"
+                                #if f"{bank1}/{addr1}/" not in asm_content:
+                                    #asm_content[f"{bank1}/{addr1}/"] = f"dw {label}"
+                                
+                    else: # Using my old method of modifying the collect mode I once tried on mutiple subids (wasn't the best idea but should be fine since we have no pointers here).
+                        collectModeModified = False
+                        addr = int(item_addr, 0)
+                        collect_mode = rom.read_byte(addr)
+                        for s in range(0x00, 0x70, 0x10):
+                            if collectModeModified:
+                                break
+                            for g in range(0x04):
+                                if (s | g | TREASURE_SET_ITEM_ROOM_FLAG) == collect_mode:
+                                    collectModeModified = True
+                                    rom.write_byte(addr, location_data["collect"] | g | TREASURE_SET_ITEM_ROOM_FLAG)
+                                    break
                 else:
                     findCollectModeInAddr(item_subid + 1, True)
 
         findCollectModeInAddr(item_subid)
-
+        print(new_item_collect_modes, asm_content)
+    print(new_item_collect_modes)
 
     
 def inject_slot_name(rom: RomData, slot_name: str):

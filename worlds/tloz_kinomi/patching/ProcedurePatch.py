@@ -97,9 +97,8 @@ class KinomiPatchExtensions(APPatchExtension):
         bank_caves[0x14] = 0x3c99 # bank 14 is the only one getting modified because of the space size nonsense in the sym file describing the size for bank 14 near it's end.
 
         treasure_obj_addresses = treasureAddressMaker(parsed_sym, rom_data).TREASURE_ADDRESSES
+        force_collect_mode_on_nonchest_items(parsed_sym, rom_data, patch_data, treasure_obj_addresses, asm_content, bank_caves)
         assembler = Z80Assembler(bank_caves, {}, rom)
-
-        force_collect_mode_on_nonchest_items(parsed_sym, rom_data, patch_data, treasure_obj_addresses, asm_content)
 
         for symbolic_name, price in patch_data["shop_prices"].items():
             assembler.define_byte(f"shopPrices.{symbolic_name}", RUPEE_VALUES[price])
@@ -111,6 +110,7 @@ class KinomiPatchExtensions(APPatchExtension):
             rom_data.write_byte(GameboyAddress(0x09, 0x5ad1).address_in_rom(), 0x01) # Turn on the hardhat worker guy who's in charge of the FAQ
         set_newGame_stuff(parsed_sym, rom_data)
         set_refill_npc(rom_data)
+        #modify_shop_items(parsed_sym, rom_data)
 
         # Define dynamic data blocks
         #define_compass_rooms_table(assembler, patch_data)

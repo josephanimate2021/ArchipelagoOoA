@@ -27,22 +27,23 @@ class treasureAddressMaker():
         
         self.newFile = open(newFilePath, "wt")
         base_addr_start = parsed_sym.find("label", "treasureObjectData")
-        bank, offset = base_addr_start.__str__().split(":")
-        self.base_addr_end = parsed_sym.find_addr_end(bank, offset).address_in_rom()
+        self.bank, self.offset = base_addr_start.__str__().split(":")
+        self.base_addr_end = parsed_sym.find_addr_end(self.bank, self.offset).address_in_rom()
         looger = logging.getLogger()
         looger.info("Creating new treasureAddresses file since it dosen't exist.")
         self.count = 0
 
-        def appendAddressLoop(f, update_array):
+        def appendAddressLoop(addr_start_rom, update_array, i=0):
+            f = addr_start_rom + i
             if f < self.base_addr_end:
                 bytes = [int(j) for j in rom.read_bytes(f, 3)]
                 if bytes[0] == 0x80: # Address is a treasure pointer.
-                    self.TREASURE_ADDRESSES["pointers"][self.count] = hex(f)
-                    update_array.append(parsed_sym.find("label_findFromBankAndAddr", f"{bank}:{simple_hex(bytes[2]) +  simple_hex(bytes[1])}"))
+                    self.TREASURE_ADDRESSES["pointers"][self.count] = f"{self.bank}:{hex(int("0x" + self.offset, 0) + i)[2:]}"
+                    update_array.append(parsed_sym.find("label_findFromBankAndAddr", f"{self.bank}:{simple_hex(bytes[2]) +  simple_hex(bytes[1])}"))
                 else:
                     update_array.append(f)
                 self.count += 1
-                appendAddressLoop(f + 4, update_array)
+                appendAddressLoop(addr_start_rom, update_array, i + 4)
         appendAddressLoop(base_addr_start.address_in_rom(), self.addresses)
     
         for i in range(len(self.addresses)):
@@ -53,12 +54,12 @@ class treasureAddressMaker():
                 addresses: list[int] = []
                 if addr is not None:
                     base_addr_start = parsed_sym.find("label", addr)
-                    bank, offset = base_addr_start.__str__().split(":")
-                    self.base_addr_end = parsed_sym.find_addr_end(bank, offset).address_in_rom()
+                    self.bank, self.offset = base_addr_start.__str__().split(":")
+                    self.base_addr_end = parsed_sym.find_addr_end(self.bank, self.offset).address_in_rom()
                     appendAddressLoop(base_addr_start.address_in_rom(), addresses)
                 self.TREASURE_ADDRESSES["objects"].append([hex(a) for a in addresses])
 
-        self.newFile.write(json.dumps(self.TREASURE_ADDRESSES, indent=4))
+        self.newFile.write(json.dumps(self.TREASURE_ADDRESSES, indent=4, ))
         self.newFile.close()
         looger.info(f"Saved treasure addresses array to {newFilePath} for later viewing.")
 
