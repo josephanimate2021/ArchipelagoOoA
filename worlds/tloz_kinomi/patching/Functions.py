@@ -83,29 +83,6 @@ def alter_treasures(parsed_sym: sym, rom: RomData):
     # not drops (see asm/seasons/bomb_bag_behavior)
     set_treasure_data(parsed_sym, rom, "Bombs (10)", None, None, 0x90)
 
-def process_item_name_for_shop_text(item_name: str) -> List[int]:
-    words = item_name.split(" ")
-    current_line = 0
-    lines = [""]
-    while len(words) > 0:
-        line_with_word = lines[current_line]
-        if len(line_with_word) > 0:
-            line_with_word += " "
-        line_with_word += words[0]
-        if len(line_with_word) <= 16:
-            lines[current_line] = line_with_word
-        else:
-            current_line += 1
-            lines.append(words[0])
-        words = words[1:]
-
-    result = []
-    for line in lines:
-        if len(result) > 0:
-            result.append(0x01)  # Newline
-        result.extend(line.encode())
-    return result
-
 
 def write_chest_contents(parsed_sym: sym, rom: RomData, patch_data):
     """
@@ -124,27 +101,7 @@ def write_chest_contents(parsed_sym: sym, rom: RomData, patch_data):
             table_addr = parsed_sym.find("label", "chestDataGroupTable")
             chest_addr = rom.get_chest_addr(location_data['room'], table_addr.bank, table_addr.offset)
         item_name = patch_data["locations"][location_name]
-        item_id, item_subid = get_item_id_and_subid(item_name)
-        rom.write_byte(chest_addr, item_id)
-        rom.write_byte(chest_addr + 1, item_subid)
-
-def write_rando_npcItem_contents(parsed_sym: sym, rom: RomData, patch_data):
-    """
-    Items given by NPCs work differently than freestanding items, which is why they are much easier to work with
-    """
-    for location_name, location_data in LOCATIONS_DATA.items():
-        if (
-            'room' not in location_data
-            or location_name not in patch_data["locations"]
-            or "collect" not in location_data
-            or location_data["collect"] != TREASURE_GRAB_INSTANT
-        ):
-            continue
-
-        item_name = patch_data["locations"][location_name]
-        item_id, item_subid = get_item_id_and_subid(item_name)
-        if "addr" in location_data:
-            rom.write_bytes(location_data["addr"], [item_id, item_subid])
+        rom.write_bytes(chest_addr, get_item_id_and_subid(item_name))
 
 def force_collect_mode_on_nonchest_items(parsed_sym: sym, rom: RomData, patch_data, treasure_object_addresss, asm_content, bank_caves):
     """
@@ -221,6 +178,22 @@ def force_collect_mode_on_nonchest_items(parsed_sym: sym, rom: RomData, patch_da
                     foundCheckFromRoom = True
                     break
             return foundCheckFromRoom
+        def set_shop_item(s):
+            count = 0
+            itemPricesAddr = parsed_sym.find("label", "shopItemPrices").address_in_rom()
+            giveTreasureAddr = parsed_sym.find("label", "shopItemTreasureToGive").address_in_rom()
+            textTableAddr = parsed_sym.find("label", "shopItemTextTable").address_in_rom()
+            addr = (
+                int(item_addr, 0) if not isinstance(item_addr, list) else int(item_addr[s], 0)
+            ) + 2
+            for i in range(len(SHOP_NAMES_IN_ORDER)):
+                if location_name == SHOP_NAMES_IN_ORDER[i]:
+                    print(location_name, simple_hex(i))
+                    rom.write_byte(itemPricesAddr + i, RUPEE_VALUES[patch_data["shop_prices"][location_data["symbolic_name"]]])
+                    rom.write_bytes(giveTreasureAddr + count, [item_id, s])
+                    rom.write_byte(textTableAddr + i, int(rom.read_byte(addr)))
+                    break
+                count += 2
         def set_npc_item(s):
             oldManItemsTableAddr = parsed_sym.find("label", "oldManLocationsTable").address_in_rom()
             foundCheckFromRoom = False
@@ -248,8 +221,10 @@ def force_collect_mode_on_nonchest_items(parsed_sym: sym, rom: RomData, patch_da
             if not set_static_item(subid):
                 if "dungeon" in location_data:
                     set_boss_items(subid)
-                else:
+                elif location_name not in SHOP_NAMES_IN_ORDER:
                     set_npc_item(subid)
+                else:
+                    set_shop_item(subid)
 
         def findCollectModeInAddr(subid, add = False):
             if item_name not in existing_item_collect_subids:
@@ -316,8 +291,6 @@ def force_collect_mode_on_nonchest_items(parsed_sym: sym, rom: RomData, patch_da
                     findCollectModeInAddr(item_subid + 1, True)
 
         findCollectModeInAddr(item_subid)
-        print(new_item_collect_modes, asm_content)
-    print(new_item_collect_modes)
 
     
 def inject_slot_name(rom: RomData, slot_name: str):

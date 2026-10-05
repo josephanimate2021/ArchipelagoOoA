@@ -1,19 +1,6 @@
 VERSION = "0.4.3"
 RETRO_COMPAT_VERSION = ["0.4.3", "0.4.2", "0.4.1", "0.4.0"]
 
-COMPANIONS = [
-    "Ricky",
-    "Dimitri",
-    "Moosh"
-]
-
-DIRECTIONS = [
-    "up",
-    "right",
-    "down",
-    "left"
-]
-
 SEED_ITEMS = [
     "Ember Seeds",
     "Scent Seeds",
@@ -45,18 +32,9 @@ DUNGEON_NAMES = [
     "Crown Dungeon"
 ]
 
-REGIONS_CONVERSION_TABLE = {
-    # TODO OTHERS
-    "LYNNA_VILLAGE": "Lynna village",
-}
-
 GIFTS = [
     "Eternal Song",
     "Wings of Passion"
-]
-
-VALID_RUPEE_VALUES = [
-    0, 1, 2, 5, 10, 20, 25, 30, 40, 50, 60, 70, 80, 100, 200, 300, 400, 500, 900, 999
 ]
 
 DAMAGE_MODIFIER_VALUES = {

@@ -43,7 +43,7 @@ LOCATIONS_DATA = {
     # -----
     "Kinomi Town: Shop #1": {
         "region_id": "kinomi shop",
-        "vanilla_item": "Shield",
+        "vanilla_item": "Bombs (10)",
         "flag_byte": 0xc643,
         "room": 0x025e,
         "map_tile": 0x13,
@@ -55,7 +55,7 @@ LOCATIONS_DATA = {
     },
     "Kinomi Town: Shop #2": {
         "region_id": "kinomi shop",
-        "vanilla_item": "Bombs (10)",
+        "vanilla_item": "Shield",
         "flag_byte": 0xc643,
         "room": 0x025e,
         "map_tile": 0x13,
@@ -91,7 +91,7 @@ LOCATIONS_DATA = {
     },
     "Kinomi Town: Hidden Shop #3": {
         "region_id": "hidden shop",
-        "vanilla_item": "Gasha Seed", # That's not the Ring box you're looking for.
+        "vanilla_item": "Piece of Heart", # That's not the Ring box you're looking for.
         "flag_byte": 0xc642,
         "room": 0x027e,
         "bit_mask": 0x04,

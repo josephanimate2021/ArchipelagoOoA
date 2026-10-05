@@ -100,8 +100,6 @@ class KinomiPatchExtensions(APPatchExtension):
         force_collect_mode_on_nonchest_items(parsed_sym, rom_data, patch_data, treasure_obj_addresses, asm_content, bank_caves)
         assembler = Z80Assembler(bank_caves, {}, rom)
 
-        for symbolic_name, price in patch_data["shop_prices"].items():
-            assembler.define_byte(f"shopPrices.{symbolic_name}", RUPEE_VALUES[price])
         #define_option_constants(parsed_sym, patch_data)
         #define_text_constants(assembler, patch_data)
         #define_dungeon_items_text_constants(assembler, patch_data)
@@ -110,7 +108,6 @@ class KinomiPatchExtensions(APPatchExtension):
             rom_data.write_byte(GameboyAddress(0x09, 0x5ad1).address_in_rom(), 0x01) # Turn on the hardhat worker guy who's in charge of the FAQ
         set_newGame_stuff(parsed_sym, rom_data)
         set_refill_npc(rom_data)
-        #modify_shop_items(parsed_sym, rom_data)
 
         # Define dynamic data blocks
         #define_compass_rooms_table(assembler, patch_data)
