@@ -226,6 +226,69 @@ def force_collect_mode_on_nonchest_items(parsed_sym: sym, rom: RomData, patch_da
                 else:
                     set_shop_item(subid)
 
+        def set_item_gfx():
+            wroteBytes = False
+            for room, array in APPLY_GFX_CHANGES_TO_INTERACTIONS.items():
+                if wroteBytes:
+                    break
+                if room == location_data["room"] or room == location_name:
+                    label, line = array
+                    addr = parsed_sym.find("label", label)
+                    byte_count = find_address_for_param_helper(line, 0, 3)
+                    increamenter = 0
+                    rom_addr = GameboyAddress(addr.bank, addr.offset + byte_count).address_in_rom()
+                    for i in range(len(INTERACTION_LABEL_INDEXES)):
+                        if label in INTERACTION_LABEL_INDEXES[i]:
+                            increamenter += i
+                            break
+                    for id, data in GFX_ITEM_GROUPS.items():
+                        if wroteBytes:
+                            break
+                        count = 0
+                        for i, p in data.items():
+                            size = p if "@" not in p else p.split("@")[1]
+                            def writeBytes(color):
+                                palette = ITEM_SPR_COLORS[color] | ITEM_SIZES[size] | (0x02 if "half" in p else 0x09 if "showThreeSprites" in p else 0x00)
+                                bytess = [id, count, palette + increamenter]
+                                rom.write_bytes(rom_addr, bytess)
+                                return True
+                            if i == item_name:
+                                wroteBytes = writeBytes(p.split("@")[0])
+                                break
+                            elif "Rupees" in item_name: # Made specificly for Rupees. You may change this code if you need to.
+                                rupee_small_subids = [i for i in range(0x04)]
+                                rupee_small_subids.append(0x14)
+                                rupee_medium_subids = [i for i in range(0x04, 0x0b)]
+                                rupee_medium_subids.append(0x12)
+                                rupee_large_subids = [i for i in range(0x0b, 0x12)]
+                                rupee_large_subids.append(0x13)
+                                rupee_colors = {
+                                    "dark blue": [2, 5, 40, 30, 300],
+                                    "all red": [10, 60, 70, 50, 400, 500, 900, 80, 999]
+                                }
+                                def itemAlignsWithGroup():
+                                    return (
+                                        item_subid in rupee_small_subids and i == "rupee_small"
+                                    ) or (
+                                        item_subid in rupee_medium_subids and i == "rupee_medium"
+                                    ) or (
+                                        item_subid in rupee_large_subids and i == "rupee_large"
+                                    )
+                                for color, array in rupee_colors.items():
+                                    for j in array:
+                                        if item_name == f"Rupees ({j})" and itemAlignsWithGroup():
+                                            wroteBytes = writeBytes(color)
+                                if not wroteBytes and itemAlignsWithGroup():
+                                    wroteBytes = writeBytes("green") # Rupees will look weird because theres no green alternative for them.
+                                if wroteBytes:
+                                    break
+                            elif i in item_name: # For any special case items.
+                                if i == "Pearl":
+                                    wroteBytes = writeBytes(item_name.split(" ")[0].lower())
+                                    break
+                            count += 4 if size == "big" else 2
+                    break
+
         def findCollectModeInAddr(subid, add = False):
             if item_name not in existing_item_collect_subids:
                 existing_item_collect_subids[item_name] = []
@@ -291,6 +354,7 @@ def force_collect_mode_on_nonchest_items(parsed_sym: sym, rom: RomData, patch_da
                     findCollectModeInAddr(item_subid + 1, True)
 
         findCollectModeInAddr(item_subid)
+        set_item_gfx()
 
     
 def inject_slot_name(rom: RomData, slot_name: str):
