@@ -22,16 +22,12 @@ NPC_ITEM_ROOM_ORDER.extend([
     0x056e
 ])
 
-SHOP_NAMES_IN_ORDER = [ # This array needs to be put together by subid order of INTERAC_SHOP_ITEM. Any name works as long as they match with the location.
-    "",
-    "Kinomi Town: Shop #3",
-    "",
-]
-SHOP_NAMES_IN_ORDER.extend([f"Kinomi Town: Shop #{i}" for i in range(2, 0, -1)])
-SHOP_NAMES_IN_ORDER.extend(["" for _ in range(0x0f - len(SHOP_NAMES_IN_ORDER))])
-SHOP_NAMES_IN_ORDER.extend([f"Jiku Clifs (Present): Shop #{i}" for i in range(3, 5)])
-SHOP_NAMES_IN_ORDER.extend([f"Jiku Clifs (Present): Shop #{i}" for i in range(2, 0, -1)])
-SHOP_NAMES_IN_ORDER.extend([f"Kinomi Town: Hidden Shop #{i}" for i in range(1, 4, 2)])
+# This array needs to be put together by subid order of INTERAC_SHOP_ITEM. Any name works as long as they match with the location.
+SHOP_NAMES_IN_ORDER = ["" for _ in range(0x0d)]
+SHOP_NAMES_IN_ORDER.append("Kinomi Town: Shop #3")
+SHOP_NAMES_IN_ORDER.extend(["" for _ in range(0x13 - len(SHOP_NAMES_IN_ORDER))])
+SHOP_NAMES_IN_ORDER.append("Kinomi Town: Shop #2")
+SHOP_NAMES_IN_ORDER.extend(["", "Kinomi Town: Hidden Shop #3"])
 
 REFILL_NPCS = {
     "impa": GameboyAddress(0x09, 0x53ac).address_in_rom(),
@@ -204,11 +200,13 @@ GFX_ITEM_GROUPS: dict[int, dict[Any, Any]] = {
 }
 
 # If you are trying to modify any interactions, list them here in this dict. The order dosen't matter.
+# Format is (room or location name), [interaction label, line number]
 APPLY_GFX_CHANGES_TO_INTERACTIONS = {
     0x0358: ["interaction94SubidData", 2],
-    "Kinomi Town: Shop #3": ["interaction47SubidData", 1],
-    "Kinomi Town: Shop #2": ["interaction47SubidData", 3],
+    "Kinomi Town: Shop #3": ["interaction47SubidData", 0x0d],
+    "Kinomi Town: Shop #2": ["interaction47SubidData", 0x13],
     "Kinomi Town: Shop #1": ["interaction47SubidData", 4],
+    "Kinomi Town: Hidden Shop #3": ["interaction47SubidData", 0x15],
 }
 
 # This array is meant as an incrementer for an interaction that's being modifed to properly display the item sprite.
