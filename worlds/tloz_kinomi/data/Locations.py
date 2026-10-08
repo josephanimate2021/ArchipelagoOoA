@@ -315,6 +315,13 @@ LOCATIONS_DATA = {
         "bit_mask": 0x40,
         "collect": TREASURE_SPAWN_INSTANT
     },
+    "Deeper Woods: Heart Piece Chest": {
+        "region_id": "deeper woods heartpiece chest",
+        "vanilla_item": "Rupees (200)",
+        "flag_byte": 0xcafc,
+        "room": 0x05fc,
+        "collect": TREASURE_SPAWN_CHEST
+    },
     "Deeper Woods: Old Man 1's Heart Piece Under Pot": {
         "region_id": "deeper woods old man 1's heartpiece",
         "vanilla_item": "Piece of Heart",
@@ -357,6 +364,13 @@ LOCATIONS_DATA = {
         "flag_byte": 0xcafc,
         "room": 0x07fc,
         "collect": TREASURE_SPAWN_CHEST
+    },
+    "Spool Swamp Remains: Heart Piece Under Gasha Spot": {
+        "region_id": "familar swamp heartpiece",
+        "vanilla_item": "Piece of Heart",
+        "flag_byte": 0xc738,
+        "room": 0x0038,
+        "collect": TREASURE_SPAWN_INSTANT
     },
     "Spool Swamp Remains: Kill Blue Lynel": {
         "region_id": "familar swamp gift",
@@ -667,6 +681,14 @@ LOCATIONS_DATA = {
         "collect": TREASURE_SPAWN_CHEST,
         "dungeon": 0
     },
+    "Summer Villa (2F): Heart Piece Behind Cracked Rock": {
+        "region_id": "d0 heartpiece behind cracked rock",
+        "vanilla_item": "Gasha Seed",
+        "flag_byte": 0xcac0,
+        "room": 0x07c0,
+        "collect": TREASURE_SPAWN_INSTANT,
+        "dungeon": 0
+    },
     "Summer Villa (2F): Small Key Chest": {
         "region_id": "d0 small key chest 2f",
         "vanilla_item": "Small Key (Summer Villa)",
@@ -975,6 +997,14 @@ LOCATIONS_DATA = {
         "dungeon": 3,
         "collect": TREASURE_SPAWN_DROP,
     },
+    "Four Corners Cave: Heart Piece Across Mini Thromps": {
+        "region_id": "d3 heartpiece across thromps",
+        "vanilla_item": "Gasha Seed",
+        "flag_byte": 0xca72, 
+        "room": 0x0772,
+        "dungeon": 3,
+        "collect": TREASURE_SPAWN_INSTANT,
+    },
     "Four Corners Cave: Boss Key Chest": {
         "region_id": "d3 boss key chest",
         "vanilla_item": "Boss Key (Four Corners Cave)",
@@ -1161,6 +1191,14 @@ LOCATIONS_DATA = {
         "dungeon": 4,
         "collect": TREASURE_SPAWN_CHEST,
     },
+    "Seasons Shrine (Spring): Heart Piece Across Spikes": {
+        "region_id": "d4 heartpiece accross spikes",
+        "vanilla_item": "Gasha Seed",
+        "flag_byte": 0xca48, 
+        "room": 0x0748,
+        "randomized": False,
+        "collect": TREASURE_SPAWN_INSTANT,
+    },
     "Seasons Shrine (Winter): Boss Key Chest": {
         "region_id": "d4 boss key chest",
         "vanilla_item": "Boss Key (Seasons Shrine)",
@@ -1168,6 +1206,14 @@ LOCATIONS_DATA = {
         "room": 0x0537,
         "dungeon": 4,
         "collect": TREASURE_SPAWN_CHEST,
+    },
+    "Seasons Shrine (Winter): Heartpiece Under Crystal": {
+        "region_id": "d4 heartpiece under crystal",
+        "vanilla_item": "Gasha Seed",
+        "flag_byte": 0xca4c, 
+        "room": 0x054c,
+        "dungeon": 4,
+        "collect": TREASURE_SPAWN_INSTANT,
     },
     "Seasons Shrine (Winter): Boss": {
         "region_id": "d4 boss",

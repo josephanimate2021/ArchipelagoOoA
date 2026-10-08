@@ -1,3 +1,5 @@
+from ..patching.Constants import RUPEE_VALUES
+
 VERSION = "0.4.3"
 RETRO_COMPAT_VERSION = ["0.4.3", "0.4.2", "0.4.1", "0.4.0"]
 
@@ -19,6 +21,8 @@ TREES_TABLE = [
     "Rolling Ridge East: Seed Tree",
     "Zora Village: Seed Tree",
 ]
+
+VALID_RUPEE_VALUES = [i for i in RUPEE_VALUES.keys()]
 
 
 DUNGEON_NAMES = [

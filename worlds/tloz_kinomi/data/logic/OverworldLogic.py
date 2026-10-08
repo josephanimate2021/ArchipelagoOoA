@@ -82,6 +82,7 @@ def make_overworld_logic(player: int):
 
         # DEEPER WOODS
         #######################################
+        ["hedge maze", "deeper woods heartpiece chest", False, None],
         ["hedge maze", "deeper woods old man 1", False, lambda state: kinomi_can_use_ember_seeds(state, player, False)],
         ["deeper woods old man 1", "deeper woods old man 1's heartpiece", False, lambda state: kinomi_can_break_pot(state, player)],
         ["hedge maze", "deeper woods route 2", False, lambda state: any([
@@ -194,8 +195,8 @@ def make_overworld_logic(player: int):
 
 def make_logic_with_portal_conections(player: int):
     return [
-        ["inside deeper woods library portal", "familar swamp gift", False, lambda state: all([
-            kinomi_has_glove(state, player),
+        ["inside deeper woods library portal", "familar swamp heartpiece", False, lambda state: kinomi_has_glove(state, player)],
+        ["familar swamp heartpiece", "familar swamp gift", False, lambda state: all([
             kinomi_can_break_bush(state, player),
             kinomi_can_kill_normal_enemy(state, player)
         ])],

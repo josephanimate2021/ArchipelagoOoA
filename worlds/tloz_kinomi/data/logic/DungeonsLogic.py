@@ -9,6 +9,10 @@ def make_summerVilla_logic(player: int):
         ["d0 map chest", "d0 heartpiece inside water", False, None],
         ["d0 map chest", "soldier trade", False, lambda state: state.has("Wood Clock", player)],
         ["d0 map chest", "d0 small key chest b1f", False, lambda state: kinomi_can_kill_armos(state, player)],
+        ["d0 map chest", "d0 heartpiece behind cracked rock", False, lambda state: all([
+            kinomi_has_bombs(state, player),
+            kinomi_has_glove(state, player)
+        ])],
         ["d0 map chest", "d0 small key chest 2f", False, None],
         ["d0 map chest", "d0 heartpiece drop", False, lambda state: kinomi_can_kill_spiked_beetle(state, player)],
         ["d0 map chest", "d0 boss key chest", False, lambda state: all([
@@ -121,10 +125,12 @@ def make_fourCornersCave_logic(player: int):
         ])],
         ["d3 25 rupee chest", "d3 bemos region", False, None],
         ["d3 bemos region", "d3 bemos and armos chest", False, None],
-        ["d3 bemos region", "d3 bommerang chest", False, lambda state: all([
+        ["d3 bemos region", "d3 room 772", False, lambda state: all([
             kinomi_has_small_keys(state, player, 3, 1),
             kinomi_can_trigger_far_switch(state, player, True, True)
         ])],
+        ["d3 room 772", "d3 heartpiece across thromps", False, lambda state: kinomi_can_jump_pit(state, player)],
+        ["d3 room 772", "d3 bommerang chest", False, None],
 
         # BOTTOM SIDE OF CROSSPATH
         ["d3 first floor cross left side", "d3 small key chest spiked beedle", False, lambda state: kinomi_can_kill_spiked_beetle(state, player)],
@@ -201,20 +207,19 @@ def make_seasonsShrine_logic(player: int):
             kinomi_generic_boss_and_miniboss_kill(state, player)
         ])],
         ["d4 miniboss arena", "d4 summer armos small key drop", False, lambda state: kinomi_can_kill_armos(state, player)],
+        ["d4 miniboss arena", "d4 heartpiece under crystal", False, lambda state: kinomi_has_glove(state, player)],
         ["d4 miniboss arena", "d4 autumn miniboss arena chest", False, lambda state: kinomi_can_jump_pit(state, player)],
         ["d4 autumn miniboss arena chest", "d4 autumn north stump", False, lambda state: all([
             kinomi_can_break_mushroom(state, player),
             kinomi_can_break_pot(state, player),
             kinomi_can_trigger_switch(state, player),
         ])],
-        ["d4 autumn north stump", "d4 autumn roc's cape chest", False, lambda state: all([
-            any([
-                kinomi_has_bombs(state, player),
-                kinomi_can_jump_pit(state, player) # Incase the randomizer chooses this.
-            ]),
+        ["d4 autumn north stump", "d4 room 51c", False, lambda state: all([
             kinomi_can_break_mushroom(state, player),
             kinomi_has_small_keys(state, player, 4, 1) # Put this here to prevent softlocks even though it's possible to bypass the keyblock with the cape.
         ])],
+        ["d4 room 51c", "d4 heartpiece accross spikes", False, None],
+        ["d4 room 51c", "d4 autumn roc's cape chest", False, lambda state: kinomi_has_bombs(state, player)],
         ["d4 autumn miniboss arena chest", "d4 spring north stump heartpiece", False, None],
         ["d4 winter north stump switch", "d4 spring miniboss arena statue puzzle", False, None],
         ["d4 winter north stump switch", "d4 fourth crystal", False, lambda state: all([

@@ -39309,7 +39309,7 @@ wlasymbol true
 00000011 _sizeof__func_5694
 00000013 _sizeof__func_56a5
 00000014 _sizeof__func_56b8
-000000db _sizeof_staticItemsReplacementsLookup
+000000eb _sizeof_staticItemsReplacementsLookup
 00000016 _sizeof_checkReloadShopItemTiles
 0000001b _sizeof_interactionCode46
 00000041 _sizeof_shopkeeperState0
@@ -57497,7 +57497,7 @@ wlasymbol true
 000595ed 16:15ed 55ed 000001c3 chestData
 00043b6f 10:3b6f 7b6f 000001a9 Interaction_Code_Group8
 00057e67 15:3e67 7e67 00000155 Bank_15
-00027c4a 09:3c4a 7c4a 000000db randoStaticItems
+00027c4a 09:3c4a 7c4a 000000eb randoStaticItems
 0002b91e 0a:391e 791e 000000c4 Interaction_Code_Group4
 00003f0a 00:3f0a 7f0a 000000af Room_Code
 00059003 16:1003 5003 00000092 staticObjects
