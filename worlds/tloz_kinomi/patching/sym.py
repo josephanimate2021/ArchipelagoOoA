@@ -1,6 +1,8 @@
 from .Util import world_path
 from ..common.patching.z80asm.Assembler import *
 import json
+import Utils
+import os
 from typing import Any
 
 def str_hex_to_int(h) -> int:
@@ -11,10 +13,25 @@ class sym():
     def __init__(self):
         with open(world_path("patching/kinomi.sym"), "rt") as f:
             self.array = []
+            array = []
             code = f.readline()
             while code != "":
+                array.append(code)
                 self.array.append(code.splitlines()[0])
                 code = f.readline()
+            tempSym = Utils.cache_path("oos_ooa/kinomi.sym")
+            if not os.path.exists(tempSym):
+                s = open(tempSym, "w")
+                for c in array:
+                    s.write(c)
+                s.close()
+            if array != open(tempSym).readlines():
+                from .treasureAddresses import treasureAddressMaker
+                if os.path.exists(treasureAddressMaker.newFilePath):
+                    os.remove(treasureAddressMaker.newFilePath)
+                EOB_PATH = world_path("patching/eob.json")
+                if os.path.exists(EOB_PATH):
+                    os.remove(EOB_PATH)
 
     def browse_sym(self, property) -> List[str]:
         found_property = False

@@ -6,11 +6,11 @@ from .Util import world_path
 from .sym import sym
 from ..common.patching.Util import simple_hex
 from ..common.patching.RomData import RomData
-        
 
-newFilePath = world_path("patching/treasureAddresses.json")
 
 class treasureAddressMaker():
+    newFilePath = world_path("patching/treasureAddresses.json")
+
     # Variables for the loop
     addresses: list[str | list[str]] = []
     TREASURE_ADDRESSES = {
@@ -21,11 +21,11 @@ class treasureAddressMaker():
     base_addr_end: int
 
     def __init__(self, parsed_sym: sym, rom: RomData):
-        if os.path.isfile(newFilePath):
-            self.TREASURE_ADDRESSES = json.loads(open(newFilePath, "rt").read())
+        if os.path.isfile(self.newFilePath):
+            self.TREASURE_ADDRESSES = json.loads(open(self.newFilePath, "rt").read())
             return
         
-        self.newFile = open(newFilePath, "wt")
+        self.newFile = open(self.newFilePath, "wt")
         base_addr_start = parsed_sym.find("label", "treasureObjectData")
         self.bank, self.offset = base_addr_start.__str__().split(":")
         self.base_addr_end = parsed_sym.find_addr_end(self.bank, self.offset).address_in_rom()
@@ -61,6 +61,7 @@ class treasureAddressMaker():
 
         self.newFile.write(json.dumps(self.TREASURE_ADDRESSES, indent=4, ))
         self.newFile.close()
-        looger.info(f"Saved treasure addresses array to {newFilePath} for later viewing.")
+        looger.info(f"Saved treasure addresses array to {self.newFilePath} for later viewing.")
+        self.__init__(parsed_sym, rom)
 
 

@@ -1196,7 +1196,6 @@ LOCATIONS_DATA = {
         "vanilla_item": "Gasha Seed",
         "flag_byte": 0xca48, 
         "room": 0x0748,
-        "randomized": False,
         "collect": TREASURE_SPAWN_INSTANT,
     },
     "Seasons Shrine (Winter): Boss Key Chest": {
