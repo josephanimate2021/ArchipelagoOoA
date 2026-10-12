@@ -1,0 +1,14 @@
+{
+  "game": "The Legend of Zelda - Gifts of Kinomi",
+  "authors": [
+    "josephanimate2021",
+    "zerotokoops"
+  ],
+  "minimum_ap_version": "0.5.1",
+  "world_version": "0.4.3",
+  "license": "MIT",
+  "repo_url": "https://github.com/josephanimate2021/ArchipelagoOoA/tree/gifts-of-kinomi",
+  "flags": [
+    "supports_deathlink"
+  ]
+}

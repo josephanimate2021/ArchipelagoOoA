@@ -10,8 +10,9 @@ def str_hex_to_int(h) -> int:
 
 class sym():
     bank_limit = 0x0b
-    def __init__(self):
-        with open(world_path("patching/kinomi.sym"), "rt") as f:
+    def __init__(self, symName):
+        with open(world_path(f"patching/{symName}"), "rt") as f:
+            from ..world import GiftsOfKinomiWorld
             self.array = []
             array = []
             code = f.readline()
@@ -19,13 +20,13 @@ class sym():
                 array.append(code)
                 self.array.append(code.splitlines()[0])
                 code = f.readline()
-            tempSym = Utils.cache_path("oos_ooa/kinomi.sym")
+            tempSym = Utils.cache_path("oos_ooa", symName)
             if not os.path.exists(tempSym):
                 s = open(tempSym, "w")
                 for c in array:
                     s.write(c)
                 s.close()
-            if array != open(tempSym).readlines():
+            if GiftsOfKinomiWorld.game_nickname == symName.split(".")[0] and array != open(tempSym).readlines():
                 from .treasureAddresses import treasureAddressMaker
                 if os.path.exists(treasureAddressMaker.newFilePath):
                     os.remove(treasureAddressMaker.newFilePath)
@@ -81,7 +82,7 @@ class sym():
             })
         return array
 
-    def find(self, type: str, label: str) -> None | Dict[str, Any] | Any:
+    def find(self, type: str, label: str) -> None | Dict[str, Any] | GameboyAddress | str | int:
         if type == "section":
             for section in self.get_sections():
                 for p, _ in section.items():
@@ -102,7 +103,7 @@ class sym():
                 return None
         return None
 
-    def find_addr_end(self, bank, offset):
+    def find_addr_end(self, bank, offset) -> GameboyAddress | None:
         beginFindAddrEnd = False
         label = ""
         offsete = 0x00

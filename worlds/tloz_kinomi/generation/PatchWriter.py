@@ -20,7 +20,7 @@ def kinomi_create_appp_patch(world: "GiftsOfKinomiWorld") -> KinomiProcedurePatc
     patch.player_name = world.multiworld.get_player_name(world.player)
     options = cast(dict[str, type[Option[Any]]], cast(object, GiftsOfKinomiOptions.type_hints))
     patch_data = {
-        "version": VERSION,
+        "version": world.version(),
 
         "options": world.options.as_dict(
             *[

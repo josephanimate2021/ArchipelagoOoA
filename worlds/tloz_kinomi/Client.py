@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING, Set, Dict
 from NetUtils import ClientStatus
 import worlds._bizhawk as bizhawk
 from worlds._bizhawk.client import BizHawkClient
-from . import LOCATIONS_DATA, ITEMS_DATA
+from .data.Locations import LOCATIONS_DATA
 from .generation.Data import build_item_id_to_name_dict, build_location_name_to_id_dict
 from settings import get_settings
 

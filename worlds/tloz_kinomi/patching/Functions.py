@@ -17,7 +17,7 @@ from .Constants import *
 from pathlib import Path
 from ..data.Warps import ALL_WARPS
 
-from .. import LOCATIONS_DATA, GiftsOfKinomiMasterKeys
+from ..world import LOCATIONS_DATA, GiftsOfKinomiMasterKeys
 
 
 def get_treasure_addr(parsed_sym: sym, rom: RomData, item_name: str):
@@ -452,6 +452,7 @@ def edit_room(parsed_sym: sym, rom: RomData, room, pos, new_value):
     rom.write_byte(addr_start.address_in_rom() + (pos + 1), new_value)
 
 def set_file_select_text(assembler: Z80Assembler, slot_name: str):
+    from ..world import GiftsOfKinomiWorld
     def char_to_tile(c: str) -> int:
         if '0' <= c <= '9':
             return ord(c) - 0x20
@@ -466,7 +467,7 @@ def set_file_select_text(assembler: Z80Assembler, slot_name: str):
         else:
             return 0xfc  # All other chars are blank spaces
 
-    row_1 = [char_to_tile(c) for c in f"ARCHIP. {VERSION}".center(16, " ")]
+    row_1 = [char_to_tile(c) for c in f"AP {GiftsOfKinomiWorld.version()}".center(16, " ")]
     row_2 = [char_to_tile(c) for c in slot_name.replace("-", " ").upper().center(16, " ")]
 
     text_tiles = [0x74, 0x31]

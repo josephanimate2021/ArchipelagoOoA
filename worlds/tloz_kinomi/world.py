@@ -1,0 +1,404 @@
+import logging
+import os
+import yaml
+import settings
+
+from BaseClasses import Region, Location, LocationProgressType
+from Fill import fill_restrictive, FillError
+from worlds.AutoWorld import World
+import Utils
+from typing import Any, Set, List, Dict, Optional, Tuple, ClassVar, TextIO, Union, cast
+from .generation.Data import *
+from .data.Items import *
+from .generation.Logic import create_connections, apply_self_locking_rules
+from .Options import *
+from .generation.PatchWriter import kinomi_create_appp_patch
+from .data import LOCATIONS_DATA, ITEMS_DATA
+from .data.Constants import *
+from .data.Regions import REGIONS
+from .Settings import KinomiSettings
+from .WebWorld import GiftsOfKinomiWeb
+
+class GiftsOfKinomiWorld(World):
+    """
+    The Legend of Zelda: Gifts of Kinomi is a romhack made by ZerotoKoops that combines the two Oracle games into one, with a new story/locations.
+    The game is themed around a birthday for the Oracles and everyone wants to throw a party for them. However, they can't throw the party because
+    Link forgot it was their birthday and didn't get them a gift. The Oracles are sad and Link must go on a quest to find the gifts for them so they can have their party.
+    """
+    game = "The Legend of Zelda - Gifts of Kinomi"
+    game_nickname = "kinomi"
+    options_dataclass = GiftsOfKinomiOptions
+    options: GiftsOfKinomiOptions
+    required_client_version = (0, 5, 1)
+    web = GiftsOfKinomiWeb()
+    topology_present = True
+    logger = logging.getLogger()
+    location_name_to_id = build_location_name_to_id_dict()
+    item_name_to_id = build_item_name_to_id_dict()
+    item_name_groups = ITEM_GROUPS
+
+    pre_fill_items: List[Item]
+    dungeon_items: List[Item]
+    regions: List[Item]
+    entrances = {}
+    shop_prices: Dict[str, int]
+
+    settings: ClassVar[KinomiSettings]
+    settings_key = "tloz_kinomi_options"
+
+    def __init__(self, multiworld, player):
+        super().__init__(multiworld, player)
+        self.pre_fill_items = []
+        self.dungeon_items = []
+        self.regions = REGIONS
+        for p, v in ALL_WARPS.items():
+            self.entrances[p] = []
+            for j in v:
+                array = []
+                if "name" in j:
+                    array.extend([j["name"],j["name"]])
+                else:
+                    array.extend(["dummy", "dummy"])
+                self.entrances[p].append(array)
+        self.shop_prices = SHOP_PRICES_DIVIDERS.copy()
+
+    @classmethod
+    def version(cls) -> str:
+        return cls.world_version.as_simple_string()
+
+    def fill_slot_data(self) -> dict:
+        options = cast(dict[str, type[Option[Any]]], cast(object, GiftsOfKinomiOptions.type_hints))
+
+        slot_data = {
+            "options": self.options.as_dict(
+                *[
+                    option_name
+                    for option_name in options
+                    if hasattr(options[option_name], "include_in_slot_data")
+                ]
+            ),
+            "entrances": self.entrances
+        }
+
+        return slot_data
+
+    def generate_early(self):
+        if self.options.gameplay_mode != "vanila":
+            self.restrict_non_local_items()
+            
+            for p, v in self.options.shuffle_entrances.items():
+                if v:
+                    self.shuffle_entrances(p)
+                else:
+                    entrance_values = []
+                    plando_count = 0
+                    for i in range(len(self.entrances[p])):
+                        if "dummy" in self.entrances[p][i][0]:
+                            continue
+                        e = self.options.entrance_plando[p][plando_count]
+                        if self.entrances[p][i][0] != e[0][8:]:
+                            raise OptionError(f"You cannot move {e[0]} to another spot inside the plando. Either that or it's removed. Still though.")
+                        if e[1][7:] in entrance_values:
+                            raise OptionError(f"{e[0]} cannot lead to {e[1]} as that will break the warp sequence for that entrance (example is the inside warp taking you to an outside warp that's already planned for this inside entrance). Please change it to something else not already being used.")
+                        entrance_values.append(e[1][7:])
+                        self.entrances[p][i][1] = e[1][7:]
+                        plando_count += 1
+
+            
+            self.randomize_shop_prices()
+        else:
+            for location_data in LOCATIONS_DATA.values():
+                location_data["randomized"] = False
+
+    def restrict_non_local_items(self):
+        # Restrict non_local_items option in cases where it's incompatible with other options that enforce items
+        # to be placed locally (e.g. dungeon items with keysanity off)
+        if not self.options.keysanity_small_keys:
+            self.options.non_local_items.value -= self.item_name_groups["Small Keys"]
+        if not self.options.keysanity_boss_keys:
+            self.options.non_local_items.value -= self.item_name_groups["Boss Keys"]
+        if not self.options.keysanity_maps_compasses:
+            self.options.non_local_items.value -= self.item_name_groups["Dungeon Maps"]
+            self.options.non_local_items.value -= self.item_name_groups["Compasses"]
+        if not self.options.keysanity_slates:
+            self.options.non_local_items.value -= set(["Slate"])
+
+    
+    def shuffle_entrances(self, entrance_type):
+        entrance_values = []
+        for e in self.entrances[entrance_type]:
+            entrance_values.append(e[1])
+        def shuffle():
+            self.random.shuffle(entrance_values)
+            for i in range(len(entrance_values)):
+                self.entrances[entrance_type][i][1] = entrance_values[i]
+                if "dummy" in entrance_values:
+                    while self.entrances[entrance_type][i][0] == "dummy" and self.entrances[entrance_type][i][1] != "dummy":
+                        shuffle()
+        shuffle()
+
+    def randomize_shop_prices(self):
+        prices_pool = get_prices_pool()
+        self.random.shuffle(prices_pool)
+        global_prices_factor = self.options.shop_prices_factor.value / 100.0
+        for key, divider in self.shop_prices.items():
+            floating_price = prices_pool.pop() * global_prices_factor / divider
+            for i, value in enumerate(VALID_RUPEE_VALUES):
+                if value > floating_price:
+                    self.shop_prices[key] = VALID_RUPEE_VALUES[i-1]
+                    break
+
+    def location_is_active(self, location_name, location_data):
+        if "dungeon" in location_data and location_data["dungeon"] == 7 and not self.options.open_staircase_to_ancient_ages_locations:
+            return False
+        if "conditional" not in location_data or location_data["conditional"] is False:
+            return True
+
+        region_id = location_data["region_id"]
+
+        # TODO FUNNY LOCATION ?
+
+        return False
+
+    def create_location(self, region_name: str, location_name: str, local: bool):
+        region = self.multiworld.get_region(region_name, self.player)
+        location = Location(self.player, location_name, self.location_name_to_id[location_name], region)
+        region.locations.append(location)
+        if local:
+            location.item_rule = lambda item: item.player == self.player
+
+    def create_regions(self):
+        # Create regions
+        for region_name in REGIONS:
+            region = Region(region_name, self.player, self.multiworld)
+            self.multiworld.regions.append(region)
+
+        # Create locations
+        for location_name, location_data in LOCATIONS_DATA.items():
+            if not self.location_is_active(location_name, location_data):
+                continue
+
+            is_local = "local" in location_data and location_data["local"] is True
+            self.create_location(location_data['region_id'], location_name, is_local)
+
+        self.create_events()
+        self.exclude_problematic_locations()
+
+    def create_event(self, region_name, event_item_name):
+        region = self.multiworld.get_region(region_name, self.player)
+        location = Location(self.player, region_name + ".event", None, region)
+        region.locations.append(location)
+        location.place_locked_item(Item(event_item_name, ItemClassification.progression, None, self.player))
+
+    def create_events(self):
+        self.create_event("ganon beaten", "_beaten_game")
+
+        self.create_event("d4 first crystal", "_hit_first_d4_crystal")
+        self.create_event("d4 second crystal", "_hit_second_d4_crystal")
+        self.create_event("d4 third crystal", "_hit_third_d4_crystal")
+        self.create_event("d4 fourth crystal", "_hit_fourth_d4_crystal")
+
+        self.create_event("syrup's shop", "_has_access_to_syrups_shop")
+
+    def exclude_problematic_locations(self):
+        locations_to_exclude = []
+        # If goal essence requirement is set to a specific value, prevent essence-bound checks which require more
+        # essences than this goal to hold anything of value
+        #if self.options.required_essences < 7:
+        #    locations_to_exclude.append("Horon Village: Item Inside Maku Tree (7+ Essences)")
+        #    if self.options.required_essences < 5:
+        #        locations_to_exclude.append("Horon Village: Item Inside Maku Tree (5+ Essences)")
+        #        if self.options.required_essences < 3:
+        #            locations_to_exclude.append("Horon Village: Item Inside Maku Tree (3+ Essences)")
+
+        # TODO PROBLEMATIC LOCATIONS
+
+        for name in locations_to_exclude:
+            self.multiworld.get_location(name, self.player).progress_type = LocationProgressType.EXCLUDED
+
+    def set_rules(self):
+        create_connections(self.multiworld, self.player)
+        apply_self_locking_rules(self.multiworld, self.player)
+        self.multiworld.completion_condition[self.player] = lambda state: state.has("_beaten_game", self.player)
+
+    def create_item(self, name: str) -> Item:
+        if name.endswith("!PROG"):
+            # If item name has a "!PROG" suffix, force it to be progression. This is typically used to create the right
+            # amount of progression rupees while keeping them a filler item as default
+            name = name.removesuffix("!PROG")
+            classification = ItemClassification.progression_skip_balancing
+        elif name.endswith("!USEFUL"):
+            # Same for above but with useful. This is typically used for Required Rings,
+            # as we don't want those locked in a barren dungeon
+            name = name.removesuffix("!USEFUL")
+            classification = ITEMS_DATA[name]["classification"]
+            if classification == ItemClassification.filler:
+                classification = ItemClassification.useful
+        else:
+            classification = ITEMS_DATA[name]["classification"]
+        ap_code = self.item_name_to_id[name]
+
+        # A few items become progression only in hard logic
+        progression_items_in_medium_logic = ["Expert's Ring", "Fist Ring", "Toss Ring", "Energy Ring"]
+        if self.options.logic_difficulty == "medium" and name in progression_items_in_medium_logic:
+            classification = ItemClassification.progression
+
+        return Item(name, classification, ap_code, self.player)
+
+    def build_item_pool_dict(self):
+        item_pool_dict = {}
+        filler_item_count = 0
+        for loc_name, loc_data in LOCATIONS_DATA.items():
+
+            if "vanilla_item" not in loc_data:
+                #print("Can't create item from location '",loc_name ,"' because it doesn't have one")
+                continue
+
+            item_name = loc_data['vanilla_item']
+            if "randomized" in loc_data and loc_data["randomized"] is False:
+                item = self.create_item(item_name)
+                location = self.multiworld.get_location(loc_name, self.player)
+                location.place_locked_item(item)
+                #print("placing locked item '",loc_data['vanilla_item'] ,"' in '",loc_name ,"'")
+                continue
+            if not self.location_is_active(loc_name, loc_data):
+                #print("Can't create item '",loc_data['vanilla_item'] ,"' because '",loc_name ,"' is not active")
+                continue
+
+
+            if self.options.master_keys != GiftsOfKinomiMasterKeys.option_disabled and "Small Key" in item_name:
+                # Small Keys don't exist if Master Keys are set to replace them
+                filler_item_count += 1
+                continue
+            if self.options.master_keys == GiftsOfKinomiMasterKeys.option_all_dungeon_keys and "Boss Key" in item_name:
+                # Boss keys don't exist if Master Keys are set to replace them
+                filler_item_count += 1
+                continue
+
+            item_name = loc_data['vanilla_item']
+
+            item_pool_dict[item_name] = item_pool_dict.get(item_name, 0) + 1
+
+        # If Master Keys are enabled, put one for every dungeon
+        if self.options.master_keys != GiftsOfKinomiMasterKeys.option_disabled:
+            for small_key_name in self.item_name_groups["Master Keys"]:
+                item_pool_dict[small_key_name] = 1
+                filler_item_count -= 1
+
+        # Add as many filler items as required
+        for _ in range(filler_item_count):
+            random_filler_item = self.get_filler_item_name()
+            item_pool_dict[random_filler_item] = item_pool_dict.get(random_filler_item, 0) + 1
+        
+        # Perform adjustments on the item pool
+        item_pool_adjustements = []
+
+        for i, pair in enumerate(item_pool_adjustements):
+            original_name = pair[0]
+            replacement_name = pair[1]
+            item_pool_dict[original_name] -= 1
+            item_pool_dict[replacement_name] = item_pool_dict.get(replacement_name, 0) + 1
+
+        return item_pool_dict
+
+    def create_items(self):
+        item_pool_dict = self.build_item_pool_dict()
+        
+        # Create items following the dictionary that was previously constructed
+
+        for item_name, quantity in item_pool_dict.items():
+            for i in range(quantity):
+                if ("Small Key" in item_name or "Master Key" in item_name) and not self.options.keysanity_small_keys:
+                    self.dungeon_items.append(self.create_item(item_name))
+                elif "Boss Key" in item_name and not self.options.keysanity_boss_keys:
+                    self.dungeon_items.append(self.create_item(item_name))
+                elif ("Compass" in item_name or "Dungeon Map" in item_name) and not self.options.keysanity_maps_compasses:
+                    self.dungeon_items.append(self.create_item(item_name))
+                elif "Slate" in item_name and not self.options.keysanity_slates:
+                    self.dungeon_items.append(self.create_item(item_name))
+                else:
+                    self.multiworld.itempool.append(self.create_item(item_name))        
+
+    def get_pre_fill_items(self):
+        return self.pre_fill_items
+
+    def pre_fill(self) -> None:
+        self.pre_fill_dungeon_items()
+
+        #self.debug_pre_fill("Dimitri's Flute", "Impa Gift")
+
+    def debug_pre_fill(self, i, l):
+        collection_state = self.multiworld.get_all_state(False)
+        
+        locations = [loc for loc in self.multiworld.get_locations(self.player)
+                                 if l in loc.name]
+        item = [self.create_item(i)]
+        print(item)
+        print(locations)
+        fill_restrictive(self.multiworld, collection_state, locations, item, single_player_placement=True, lock=True, allow_excluded=True)
+
+    def pre_fill_dungeon_items(self):
+        # If keysanity is off, dungeon items can only be put inside local dungeon locations, and there are not so many
+        # of those which makes them pretty crowded.
+        # This usually ends up with generator not having anywhere to place a few small keys, making the seed unbeatable.
+        # To circumvent this, we perform a restricted pre-fill here, placing only those dungeon items
+        # before anything else.
+        collection_state = self.multiworld.get_all_state(False)
+
+        if self.options.gameplay_mode == "randomizer":
+            for i in range(0, 8):
+                # Build a list of locations in this dungeon
+                dungeon_location_names = [name for name, loc in LOCATIONS_DATA.items()
+                                        if "dungeon" in loc and loc["dungeon"] == i]
+                dungeon_locations = [loc for loc in self.multiworld.get_locations(self.player)
+                                    if loc.name in dungeon_location_names]
+
+                # Build a list of dungeon items that are "confined" (i.e. must be placed inside this dungeon)
+                # See `create_items` to see how `self.dungeon_items` is populated depending on current options.
+                confined_dungeon_items = [item for item in self.dungeon_items if item.name.endswith(f"({DUNGEON_NAMES[i]})") or (i == 5 and "Slate" in item.name)]
+                if len(confined_dungeon_items) == 0:
+                    continue  # This list might be empty with some keysanity options
+                for item in confined_dungeon_items:
+                    collection_state.remove(item)
+
+                # Perform a prefill to place confined items inside locations of this dungeon
+                for attempts_remaining in range(2, -1, -1):
+                    self.random.shuffle(dungeon_locations)
+                    try:
+                        fill_restrictive(self.multiworld, collection_state, dungeon_locations, confined_dungeon_items,
+                                        single_player_placement=True, lock=True, allow_excluded=True)
+                        break
+                    except FillError as exc:
+                        if attempts_remaining == 0:
+                            raise exc
+                        self.logger.debug(f"Failed to shuffle dungeon items for player {self.player}. Retrying...")
+
+        if __debug__:
+            filename = "my_world.puml"
+            self.logger.info("Visualizing Regions...")
+            Utils.visualize_regions(self.multiworld.get_region("Menu", self.player), filename)
+            self.logger.info("Regions visualization saved at " + Utils.home_path(filename))
+            
+
+    def get_filler_item_name(self) -> str:
+        FILLER_ITEM_NAMES = []
+        for item, details in ITEMS_DATA.items():
+            if details["classification"] == ItemClassification.filler:
+                FILLER_ITEM_NAMES.append(item)
+
+        item_name = self.random.choice(FILLER_ITEM_NAMES)
+        return item_name
+    
+    def generate_output(self, output_directory: str):
+        patch = kinomi_create_appp_patch(self)
+        rom_path = os.path.join(output_directory, f"{self.multiworld.get_out_file_name_base(self.player)}"
+                                                  f"{patch.patch_file_ending}")
+        patch.write(rom_path)
+        return
+
+    def write_spoiler(self, spoiler_handle):
+        spoiler_handle.write(f"Apworld version : {VERSION}")
+        for p, v in self.entrances.items():
+            spoiler_handle.write(f"\nentrances for {p} ({self.multiworld.player_name[self.player]}):\n")
+            for e in v:
+                spoiler_handle.write(f"\t- outside {e[0]} --> inside {e[1]}\n")

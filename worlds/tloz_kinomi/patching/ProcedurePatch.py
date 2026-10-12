@@ -16,6 +16,7 @@ from ..common.patching.RomData import RomData
 from ..common.patching.z80asm.Assembler import Z80Assembler, Z80Block
 from .bps import apply_bps_patch
 from typing import Any
+from .data_manager.text_modded import get_modded_text_data
 
 from tkinter.filedialog import askopenfilename
 
@@ -35,16 +36,20 @@ class KinomiPatchExtensions(APPatchExtension):
         rom_data = RomData(rom)
         patch_data = yaml.safe_load(caller.get_file(patch_file).decode("utf-8"))
 
-        if not (patch_data["version"] in RETRO_COMPAT_VERSION):
-            raise Exception(f"Invalid version: this seed was generated on v{patch_data['version']}, "
-                            f"and is not compatible with current : v{VERSION}")
+        from ..world import GiftsOfKinomiWorld
+        version = patch_data["version"].split(".")
+        world_version = GiftsOfKinomiWorld.world_version
+        if int(version[0]) != world_version.major or int(version[1]) > world_version.minor:
+            raise Exception(f"Invalid version: this patch was generated on v{patch_data['version']}, "
+                            f"you are currently using v{world_version.as_simple_string()}")
 
         #if patch_data["options"]["enforce_potion_in_shop"]:
         #    patch_data["locations"]["Horon Village: Shop #3"] = "Potion"
 
         bank_caves: list[Any | list[Any | list[Any]]] = []
         asm_content = {}
-        parsed_sym = sym()
+        parsed_sym = sym("patching/kinomi.sym")
+        dictionary, texts = get_modded_text_data(rom_data, parsed_sym)
 
         # Max finding algorithm for the end of banks (reading the code will help accurate that).
         maxes = {}

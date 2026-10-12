@@ -1,8 +1,7 @@
 from BaseClasses import MultiWorld
-from .. import LOCATIONS_DATA
+from ..data.Locations import LOCATIONS_DATA
 from ..data.logic.DungeonsLogic import *
 from ..data.logic.OverworldLogic import *
-from ..data.Warps import ALL_WARPS
 
 def make_logic_array(player: int):
     return [
