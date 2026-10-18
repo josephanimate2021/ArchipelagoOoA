@@ -265,13 +265,18 @@ def make_d3_logic(player: int):
         ["d3 between two bridge room", "d3 crossing bridge room 2", True, lambda state: any([
             ooa_has_seedshooter(state, player),
             ooa_can_jump_4_wide_pit(state, player, False),
+            #jump north to the miniboss door and slash the switch and either fall in the pit or jump back down
             all([
                 ooa_can_jump_3_wide_pit(state, player, False),
                 ooa_has_sword(state, player),
+                ooa_option_medium_logic(state, player),
                 ]),
+
+            #absurd logic stuff
             all([
                 ooa_option_hard_logic(state, player),
                 ooa_has_feather(state, player),
+                #how to hit the lever
                 any([
                     ooa_has_sword(state, player),
                     all([
@@ -285,6 +290,8 @@ def make_d3_logic(player: int):
                         ]),
                     ]),
                 ]),
+
+                #how to cross the second bridge
                 any([
                     ooa_can_jump_3_wide_pit(state, player, False),
                     ooa_has_switch_hook(state, player),
@@ -678,7 +685,14 @@ def make_d6present_logic(player: int):
                 ]),
                 ooa_can_jump_3_wide_pit(state, player, False)
             ]),
-            ooa_can_use_scent_seeds_for_smell(state, player)
+
+            any([
+                ooa_can_use_scent_seeds_for_smell(state, player),
+                all([
+                    ooa_has_bombchus(state, player),
+                    ooa_option_hard_logic(state, player),
+                ])
+            ])
         ])],
         ["d6 present orb room", "d6 present handmaster room", False, lambda state: any([
             ooa_has_seedshooter(state, player),

@@ -345,7 +345,36 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ooa_can_switch_past_and_present(state, player),
         ])],
 
-        ["deku forest", Outside("mystery seed cave back right stairs"), False, lambda state: ooa_can_warp_using_gale_seeds(state, player)],
+        ["fairies' woods", Outside("mystery seed cave back left stairs"), True, lambda state: any([
+            ooa_can_switch_past_and_present(state, player),
+        ])],
+        ["fairies' woods", Outside("mystery seed cave back right stairs"), True, lambda state: any([
+            ooa_can_switch_past_and_present(state, player),
+        ])],
+        ["fairies' woods", Outside("mystery seed cave front stairs"), True, lambda state: any([
+            ooa_can_switch_past_and_present(state, player),
+        ])],
+        ["fairies' woods", Outside("deku forest push block cave stairs"), True, lambda state: any([
+            ooa_can_switch_past_and_present(state, player),
+        ])],
+        [Outside("mystery seed cave back left stairs", "fairies' woods"), False, lambda state: any([
+            ooa_can_go_back_to_present(state, player),
+        ])],
+        [Outside("mystery seed cave back right stairs", "fairies' woods"), False, lambda state: any([
+            ooa_can_go_back_to_present(state, player),
+        ])],
+        [Outside("mystery seed cave front stairs", "fairies' woods"), False, lambda state: any([
+            ooa_can_go_back_to_present(state, player),
+        ])],
+        [Outside("deku forest push block cave stairs", "fairies' woods"), False, lambda state: any([
+            ooa_can_go_back_to_present(state, player),
+        ])],
+
+        ["deku forest", Outside("mystery seed cave back right stairs"), False, lambda state: all([
+            ooa_can_warp_using_gale_seeds(state, player),
+            ooa_option_medium_logic(state, player)
+            ])],
+
         [Outside("mystery seed cave back right stairs"), "deku forest tree", False, lambda state: ooa_can_harvest_tree(state, player, False)],
 
         [Inside("mystery seed cave front stairs"), Inside("mystery seed cave back left stairs"), True, None],
@@ -715,11 +744,16 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         ])],
         [Outside("talus waterfall cave front"), "bomb fairy", False, lambda state: all([
             ooa_has_bombs(state, player),
-            ooa_can_go_back_to_present(state, player)
+            ooa_can_go_back_to_present(state, player),
+            state.has("_redirect_waterfall", player),
         ])],
 
         [Inside("talus waterfall cave front"), Inside("talus waterfall cave right"), True, None],
         [Inside("talus waterfall cave front"), Inside("talus waterfall cave left"), True, None],
+        [Outside("talus waterfall cave right"), Outside("talus waterfall cave left"), True, lambda state: all([
+            ooa_can_switch_past_and_present(state, player),
+            ooa_option_medium_logic(state, player),
+        ])],
         [Outside("talus waterfall cave right"), "redirect waterfall", False, None],
 
         [Outside("talus waterfall cave front"), "restoration wall", False, lambda state: all([
@@ -734,13 +768,11 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         ["restoration wall", "bomb fairy", False, lambda state: all([
             state.has("_redirect_waterfall", player),
             ooa_has_bombs(state, player),
-        all([
             ooa_can_open_portal(state, player),
             any([
                 ooa_can_swim(state, player, False),
                 ooa_can_jump_3_wide_liquid(state, player),
                 ])
-            ])
         ])],
         ["restoration wall", "talus peaks chest", False, lambda state: ooa_can_go_back_to_present(state, player)],
         ["fairies' woods", "restoration wall", True, lambda state: ooa_can_switch_past_and_present(state, player)],
