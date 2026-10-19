@@ -160,8 +160,6 @@ def ooa_connect_entrance_according_to_slot_data(world: OracleOfAgesWorld):
         outside_entrance.connect(inside_entrance)
         inside_entrance.connect(outside_entrance)
 
-        print(f"{warp_name} -> {warp_destination}")
-
         
 
 

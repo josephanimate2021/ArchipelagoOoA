@@ -35,7 +35,6 @@ def create_region_hints(world: OracleOfAgesWorld) -> list[tuple[str, str | int]]
                     num_progression += 1
             except KeyError:
                 pass
-        print(region)
         ratio = num_progression / num_locations
         if ratio == 0:
             region_type = "Foolish"

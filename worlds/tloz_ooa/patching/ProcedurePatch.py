@@ -91,7 +91,6 @@ class OoAPatchExtensions(APPatchExtension):
         inject_slot_name(rom_data, caller.player_name)
 
         rom_data.update_checksum(0x14e)
-        #assembler.print_bank_remaining_bank_cave()
         return rom_data.output()
 
 class OoAProcedurePatch(APProcedurePatch, APTokenMixin):
