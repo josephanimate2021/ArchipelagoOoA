@@ -196,7 +196,7 @@ def make_dungeon_item_texts(texts: dict[str, str], patch_data) -> None:
             trueI = 11
         dungeon_precision = " for\n"
         dungeon_tag = f"D{trueI}"
-        dungeon_precision += (f"{DUNGEON_NAMES_FOR_TXT[trueI]}\n({dungeon_tag})" if get_settings().tloz_ooa_options["simplify_dungeon_precision_text"] else (
+        dungeon_precision += (f"{DUNGEON_NAMES_FOR_TXT[trueI]}({dungeon_tag})" if get_settings().tloz_ooa_options["simplify_dungeon_precision_text"] else (
             f"Dungeon {dungeon_tag[1:]}"
         ))
         dungeon_precisionForBossKey = f"{dungeon_precision}"
@@ -205,10 +205,11 @@ def make_dungeon_item_texts(texts: dict[str, str], patch_data) -> None:
             #\n(present)
             dungeon_precision += " (present)"
             dungeon_tag += "Present"
-        if i == 9:
+        elif i == 9:
             #\n(past)
             dungeon_precision += " (past)"
             dungeon_tag += "Past"
+
 
         # ###### Small keys ##############################################
         # "You found a\n\color(RED)"

@@ -51,18 +51,18 @@ DUNGEON_NAMES = [
 ]
 
 DUNGEON_NAMES_FOR_TXT = [
-    "Maku Path",
-    "Spirit's Grave",
-    "Wing Dungeon",
-    "Moonlit Grotto",
-    "Skull Dungeon",
-    "Crown Dungeon",
-    "Mermaid's Cave",
-    "Jabu-Jabu's Belly",
-    "Ancient Tomb",
-    "Mermaid's Cave",
+    "Maku Path ",
+    "Spirit's Grave\n",
+    "Wing Dungeon\n",
+    "Moonlit Grotto\n",
+    "Skull Dungeon\n",
+    "Crown Dungeon\n",
+    "Mermaid's Cave\n",
+    "Jabu-Jabu's\nBelly ",
+    "Ancient Tomb\n",
+    "Mermaid's Cave\n",
     "",
-    "Linked Hero's Cave"
+    "Linked Hero's\nCave "
 ]
 
 
