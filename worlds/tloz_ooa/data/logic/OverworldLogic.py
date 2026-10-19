@@ -311,7 +311,6 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ooa_can_jump_1_wide_pit(state, player, False),
             ooa_can_switch_past_and_present(state, player),
         ])],
-        [Outside("deku forest push block cave stairs"), "fairies' woods", False, lambda state: ooa_can_go_back_to_present(state, player)],
         [Inside("deku forest push block cave stairs"), "deku forest cave east", False, None],
 
         ["deku forest", Outside("deku forest heart cave stairs"), True, None],
@@ -345,35 +344,35 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ooa_can_switch_past_and_present(state, player),
         ])],
 
-        ["fairies' woods", Outside("mystery seed cave back left stairs"), True, lambda state: any([
+        ["fairies' woods", Outside("mystery seed cave back left stairs"), False, lambda state: any([
             ooa_can_switch_past_and_present(state, player),
         ])],
-        ["fairies' woods", Outside("mystery seed cave back right stairs"), True, lambda state: any([
+        ["fairies' woods", Outside("mystery seed cave back right stairs"), False, lambda state: any([
             ooa_can_switch_past_and_present(state, player),
         ])],
-        ["fairies' woods", Outside("mystery seed cave front stairs"), True, lambda state: any([
+        ["fairies' woods", Outside("mystery seed cave front stairs"), False, lambda state: any([
             ooa_can_switch_past_and_present(state, player),
         ])],
-        ["fairies' woods", Outside("deku forest push block cave stairs"), True, lambda state: any([
+        ["fairies' woods", Outside("deku forest push block cave stairs"), False, lambda state: any([
             ooa_can_switch_past_and_present(state, player),
         ])],
-        [Outside("mystery seed cave back left stairs", "fairies' woods"), False, lambda state: any([
+        [Outside("mystery seed cave back left stairs"), "fairies' woods", False, lambda state: any([
             ooa_can_go_back_to_present(state, player),
         ])],
-        [Outside("mystery seed cave back right stairs", "fairies' woods"), False, lambda state: any([
+        [Outside("mystery seed cave back right stairs"), "fairies' woods", False, lambda state: any([
             ooa_can_go_back_to_present(state, player),
         ])],
-        [Outside("mystery seed cave front stairs", "fairies' woods"), False, lambda state: any([
+        [Outside("mystery seed cave front stairs"), "fairies' woods", False, lambda state: any([
             ooa_can_go_back_to_present(state, player),
         ])],
-        [Outside("deku forest push block cave stairs", "fairies' woods"), False, lambda state: any([
+        [Outside("deku forest push block cave stairs"), "fairies' woods", False, lambda state: any([
             ooa_can_go_back_to_present(state, player),
         ])],
 
         ["deku forest", Outside("mystery seed cave back right stairs"), False, lambda state: all([
             ooa_can_warp_using_gale_seeds(state, player),
             ooa_option_medium_logic(state, player)
-            ])],
+        ])],
 
         [Outside("mystery seed cave back right stairs"), "deku forest tree", False, lambda state: ooa_can_harvest_tree(state, player, False)],
 
@@ -1393,9 +1392,9 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ["lynna city", Outside("d11"), True, None]
         ])
 
-    if not options.vasu_ring_checks_requirement["disable_entirely"]:
+    if options.vasu_additional_rings:
         labrynna_logic.extend([
-            [Inside("vasu's shop"), "vasu's rupee ring gift", False, lambda state: ooa_has_rupees(state, player, options.vasu_ring_checks_requirement["rupee_requirement_for_rupee_ring_check"])],
+            [Inside("vasu's shop"), "vasu's rupee ring gift", False, lambda state: ooa_has_rupees(state, player, options.vasu_rupee_ring_requirement)],
             [Inside("vasu's shop"), "vasu's slayers ring gift", False, lambda state: all([
                 ooa_can_kill_normal_enemy(state, player, True),
             ])

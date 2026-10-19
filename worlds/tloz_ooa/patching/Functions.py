@@ -210,15 +210,14 @@ def define_option_constants(assembler: Z80Assembler, patch_data):
     assembler.define_byte("option.startingXPos", 0x58)
     assembler.define_byte("option.startingYPos", 0x58)
 
-    if options["vasu_ring_checks_requirement"]["disable_entirely"] == False:
-        assembler.define_word("option.vasuSlayerRingCheckRequirement", options["vasu_ring_checks_requirement"]["amount_of_enemies_defeated_for_slayer_ring_check"])
+    if options["vasu_additional_rings"]:
+        assembler.define_word("option.vasuSlayerRingCheckRequirement", options["vasu_slayer_ring_requirement"])
         ## Game use hexadecimal as decimal for rupee count, so we translate from decimal to hexadecimal to have the correct value
         ## + we remove one to the count because with current implementation it only work once you go beyond the rupee count given in the option.
-        assembler.define_word("option.vasuRupeeRingCheckRequirement", int(str(options["vasu_ring_checks_requirement"]["rupee_requirement_for_rupee_ring_check"]-1),16))
+        assembler.define_word("option.vasuRupeeRingCheckRequirement", int(str(options["vasu_rupee_ring_requirement"]-1),16))
     else:
         assembler.define_word("option.vasuSlayerRingCheckRequirement", 1000)
         assembler.define_word("option.vasuRupeeRingCheckRequirement", int(str(9999),16))
-
 
     assembler.define_byte("option.warpingGroup", patch_data["warp_to_start_variables"]["group"] if "group" in patch_data["warp_to_start_variables"] else 0x00)
     assembler.define_byte("option.warpingRoom", patch_data["warp_to_start_variables"]["room"] if "room" in patch_data["warp_to_start_variables"] else 0x59)

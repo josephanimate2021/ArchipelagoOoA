@@ -34,22 +34,40 @@ class OracleOfAgesRequiredSlates(Range):
 
     include_in_slot_data = True
     include_in_patch = True
-
-class OracleOfAgesVasuRingChecksRequirement(OptionDict):
+    
+class OracleOfAgesVasuRings_Enabled(Toggle):
     """
     When enabled, vasu will congradulate you based off of the number of rupees (for Rupee Ring check), and number of enemies defeated (for Slayer's Ring check). 
-
-    Disable Entirely: Determines whatever or not vasu will give out multiple checks when the friendship ring check is finished.
-    Rupee Requirement for Rupee Ring Check: Determines the amount of rupees that you need to collect in order for vasu to give you a check. (from 1 to 9999)
-    Amount of Enemies Defeated for Slayer Ring Check: Determines the amount of enemies that you need to defeat in order for vasu to give you a check. (from 1 to 1000)
     """
-    display_name = "Vasu Ring Checks Requirement"
+    display_name = "Vasu Additionnal Rings enabled"
 
-    default = {
-        "disable_entirely": True,
-        "amount_of_enemies_defeated_for_slayer_ring_check": 50,
-        "rupee_requirement_for_rupee_ring_check": 1000,
-    }
+    default = False
+    
+    include_in_patch = True
+    include_in_slot_data = True
+    
+class OracleOfAgesVasuRings_RupeeCount(Range):
+    """
+    if Vasu Additionnal Rings enabled, this set the number of rupees you need to collect in order for vasu to give you a check. (from 1 to 9999)
+    """
+    display_name = "Vasu Rupee Ring Requirement"
+    
+    range_start = 1
+    range_end = 9999
+    default = 1000
+    
+    include_in_patch = True
+    include_in_slot_data = True
+    
+class OracleOfAgesVasuRings_KillCount(Range):
+    """
+    if Vasu Additionnal Rings enabled, this set the amount of enemies that you need to defeat in order for vasu to give you a check. (from 1 to 1000)
+    """
+    display_name = "Vasu Slayer Ring Requirement"
+    
+    range_start = 1
+    range_end = 1000
+    default = 50
     
     include_in_patch = True
     include_in_slot_data = True
@@ -344,6 +362,7 @@ class OracleOfAgesOptions(PerGameCommonOptions):
     secret_locations: OraclesIncludeSecretLocations
     linked_heros_cave: OracleOfAgesLinkedHerosCave
     miniboss_locations: OracleOfAgesMinibossLocations
+    vasu_additional_rings: OracleOfAgesVasuRings_Enabled
 
     # Essences
     required_essences: OraclesRequiredEssences
@@ -375,8 +394,9 @@ class OracleOfAgesOptions(PerGameCommonOptions):
     keysanity_slates: OracleOfAgesSlateShuffle
 
     # Numeric requirements for some checks / access to regions
-    vasu_ring_checks_requirement: OracleOfAgesVasuRingChecksRequirement
     gasha_nut_kill_requirement: OracleOfAgesGashaNutKillRequirement
+    vasu_rupee_ring_requirement: OracleOfAgesVasuRings_RupeeCount
+    vasu_slayer_ring_requirement: OracleOfAgesVasuRings_KillCount
     
     # Miscellaneous options
     required_rings: OraclesRequiredRings

@@ -28,8 +28,8 @@ def location_is_active(world: OracleOfAgesWorld, location_name, location_data):
     if "secret_location" in location_data and not False:
         return world.options.secret_locations
     
-    if "vasu" in region_id:
-        return not world.options.vasu_ring_checks_requirement["disable_entirely"]
+    if "slayers ring gift" in region_id or "rupee ring gift" in region_id:
+        return world.options.vasu_additional_rings
 
     if location_name == "Lynna City: Shop Item #3":
         return world.options.enforce_potion_in_shop != OracleOfAgesEnforcePotionInShop.option_lynna_shop
