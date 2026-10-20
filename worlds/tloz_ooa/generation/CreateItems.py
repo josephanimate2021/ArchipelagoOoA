@@ -209,8 +209,6 @@ def ooa_create_seeds_items(world: OracleOfAgesWorld):
         for i in range(0, len(seeds_to_place)):
             while seeds_to_place[i] == "Gale Seeds" and trees_to_process[len(trees_to_process) - 1 - i] == "Deku Forest: Seed Tree":
                 world.random.shuffle(trees_to_process) # Deku forest
-                print("shuffling")
-                print(trees_to_process)
     
     # Place remaining seeds on remaining trees
     for seed in seeds_to_place:

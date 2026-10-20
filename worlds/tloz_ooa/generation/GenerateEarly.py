@@ -36,6 +36,7 @@ def randomize_shop_prices(world: OracleOfAgesWorld):
         for i, value in enumerate(VALID_RUPEE_VALUES):
             if value > floating_price:
                 world.shop_prices[key] = VALID_RUPEE_VALUES[i-1]
+                world.total_shop_prices += VALID_RUPEE_VALUES[i-1]
                 break
             
 # -----------------------------------------------------------------------------------

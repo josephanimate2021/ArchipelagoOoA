@@ -49,6 +49,7 @@ class OracleOfAgesVasuRings_Enabled(Toggle):
 class OracleOfAgesVasuRings_RupeeCount(Range):
     """
     if Vasu Additionnal Rings enabled, this set the number of rupees you need to collect in order for vasu to give you a check. (from 1 to 9999)
+    /!\\ Above 1000, the logic assume that you will need to farm in some capacity as there will certainly not be enough rupees in the pool, so be aware of it before you go beyond that number.
     """
     display_name = "Vasu Rupee Ring Requirement"
     

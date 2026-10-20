@@ -26,11 +26,11 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         ["lynna village", "lynna city chest", False, lambda state: ooa_can_go_back_to_present(state, player)],
 
         ["lynna city", Outside("lynna city shop"), True, None],
-        [Inside("lynna city shop"), "lynna shop", False, lambda state: ooa_has_rupees(state, player, 400)],
+        [Inside("lynna city shop"), "lynna shop", False, lambda state: ooa_can_buy_from_shop(state, player)],
 
         ["lynna village", Outside("hidden entrance shop"), False, lambda state: ooa_can_go_back_to_present(state, player)],
         #[Outside("hidden entrance shop"), "lynna village", False, lambda state: ooa_can_open_portal(state, player)], # Might not be necessary, because you can always reach lynna village if you can open portals
-        [Inside("hidden entrance shop"), "hidden shop", False, lambda state: ooa_has_rupees(state, player, 400)],
+        [Inside("hidden entrance shop"), "hidden shop", False, lambda state: ooa_can_buy_from_shop(state, player)],
 
         ["lynna city", Outside("mayor's house"), True, None],
         [Inside("mayor's house"), "mayor plen's house", False, lambda state: ooa_has_long_hook(state, player)],
@@ -70,7 +70,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
 
         ["lynna village", Outside("advance shop"), True, lambda state: options.advance_shop],
         [Inside("advance shop"), "advance shop", False, lambda state: all([
-            ooa_has_rupees(state, player, 400),
+            ooa_can_buy_from_shop(state, player),
             options.advance_shop
         ])],
 
@@ -270,7 +270,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ooa_can_swim(state, player, True),
             ooa_has_long_hook(state, player)
         ])],
-        [Inside("syrup hut"), "syrup shop", False, lambda state: ooa_has_rupees(state, player, 400)],
+        [Inside("syrup hut"), "syrup shop", False, lambda state: ooa_can_buy_from_shop(state, player)],
 
         ["graveyard door", "graveyard poe trade", True, lambda state: ooa_has_bracelet(state, player)],
         ["graveyard poe trade", Outside("poe grave"), True, None],
@@ -1393,8 +1393,9 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         ])
 
     if options.vasu_additional_rings:
+        rupee_requirement = min(options.vasu_rupee_ring_requirement, 1000)
         labrynna_logic.extend([
-            [Inside("vasu's shop"), "vasu's rupee ring gift", False, lambda state: ooa_has_rupees(state, player, options.vasu_rupee_ring_requirement)],
+            [Inside("vasu's shop"), "vasu's rupee ring gift", False, lambda state: ooa_has_rupees(state, player, rupee_requirement)],
             [Inside("vasu's shop"), "vasu's slayers ring gift", False, lambda state: all([
                 ooa_can_kill_normal_enemy(state, player, True),
             ])

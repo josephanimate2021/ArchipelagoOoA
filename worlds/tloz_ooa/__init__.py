@@ -44,6 +44,7 @@ class OracleOfAgesWorld(World):
     dungeon_items: List[Item]
     randomized_entrances: Dict[str, str] = {}
     shop_prices: Dict[str, int]
+    total_shop_prices: int = 0
     
     region_hints: list[tuple[str, str | int]] = []
     item_hints: list[Item | None] = []
@@ -239,6 +240,12 @@ class OracleOfAgesWorld(World):
             spoiler_handle.write(f"Shuffled Entrances ({self.multiworld.player_name[self.player]}):\n")
             for entrance, target in self.randomized_entrances.items():
                 spoiler_handle.write(f"\t- outside {entrance} --> inside {target}\n")
+
+        #spoiler_handle.write(f"Shop prices ({self.multiworld.player_name[self.player]}):\n")
+        #for shop, price in self.shop_prices.items():
+        #    spoiler_handle.write(f"{shop} => {price}\n")
+        #spoiler_handle.write(f"Total: {self.total_shop_prices}\n")
+        
 
 
     # ===================================================================================
