@@ -181,7 +181,7 @@ def ooa_ER_inside_lock_fully_open(state: CollectionState, player: int):
 # Various item predicates ###########################################
 
 def ooa_can_buy_from_shop(state: CollectionState, player: int):
-    rupee_requirement = min(1000, state.multiworld.worlds[player].total_shop_prices * 0.5)
+    rupee_requirement = min(state.multiworld.worlds[player].total_shop_prices * 0.5, 1000)
     return ooa_has_rupees(state, player, rupee_requirement)
 
 def ooa_has_rupees(state: CollectionState, player: int, amount: int):

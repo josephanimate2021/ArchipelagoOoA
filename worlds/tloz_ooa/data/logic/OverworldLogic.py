@@ -1396,10 +1396,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         rupee_requirement = min(options.vasu_rupee_ring_requirement, 1000)
         labrynna_logic.extend([
             [Inside("vasu's shop"), "vasu's rupee ring gift", False, lambda state: ooa_has_rupees(state, player, rupee_requirement)],
-            [Inside("vasu's shop"), "vasu's slayers ring gift", False, lambda state: all([
-                ooa_can_kill_normal_enemy(state, player, True),
-            ])
-             ]
+            [Inside("vasu's shop"), "vasu's slayers ring gift", False, lambda state: ooa_can_kill_normal_enemy(state, player, True)]
         ])
 
     return labrynna_logic

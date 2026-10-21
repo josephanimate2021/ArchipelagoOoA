@@ -826,7 +826,7 @@ LOCATIONS_DATA = {
     ##########################################
     "Rolling Ridge Base (Present): Terrace Chest": {
         "region_id": "ridge base chest",
-        "vanilla_item": "Rupees (50)",
+        "vanilla_item": "Rupees (200)",
         "flag_byte": 0xcab9,
         "room": 0x05b9,
         "map_tile": 0x28,
@@ -897,7 +897,7 @@ LOCATIONS_DATA = {
     },
     "Rolling Ridge Base (Past): Chest Behind Cracked Rocks": {
         "region_id": "ridge base bomb past",
-        "vanilla_item": "Rupees (50)",
+        "vanilla_item": "Rupees (100)",
         "flag_byte": 0xcae0,
         "room": 0x05e0,
         "map_tile": 0x12b,
@@ -1881,7 +1881,7 @@ LOCATIONS_DATA = {
     },
     "Mermaid's Cave (Present): Beamos Chest": {
     	"region_id": "d6 present beamos chest",
-    	"vanilla_item": "Rupees (10)",
+    	"vanilla_item": "Rupees (10)", # Adding more rupees to the pool
     	"dungeon" : 6,
         "flag_byte": 0xca1f,
         "room": 0x051f,
