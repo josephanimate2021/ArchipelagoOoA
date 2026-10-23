@@ -138,8 +138,11 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         ["lynna village", Outside("d0"), True, lambda state: ooa_can_remove_dirt(state, player, False)],
 
         ["lynna village", Outside("advisor house"), True, None],
-        ["lynna village", Outside("cheval house"), True, lambda state: ooa_can_jump_1_wide_liquid(state, player, False)],
-
+        ["lynna village", Outside("cheval house"), True, lambda state:
+        all([
+            ooa_can_jump_1_wide_liquid(state, player, False),
+            ooa_can_swim(state, player, False)
+         ])],
         # MAKU TREE
         #######################################
         ["d0 exit", "maku tree", True, lambda state: ooa_can_kill_normal_enemy(state, player)],
@@ -1140,15 +1143,18 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         [Outside("present fairy queen cave"), "zora village present", False, lambda state: ooa_can_dive(state, player)],
         ["zora village past", "zora village present", False, lambda state: ooa_can_go_back_to_present(state, player)],
 
-        ["zora village present", "zora village tree", False, lambda state: ooa_can_harvest_tree(state, player, False)],
+        ["zora village present", "zora village tree", False, lambda state: all([
+            ooa_can_harvest_tree(state, player, False),
+            ooa_can_swim_deepwater(state, player, True)
+                ])],
         ["zora village present", "zora village chest", False, lambda state: ooa_can_dive(state, player)], # Unnecessary ooa_can_dive just in case we decide that link can go underwater without its dive suit
         ["zora village present", "fairies' coast chest", False, lambda state: ooa_can_dive(state, player)], # Unnecessary ooa_can_dive just in case we decide that link can go underwater without its dive suit
         [Outside("zora crypt cave"), "fairies' coast chest", False, lambda state: ooa_can_swim(state, player, True)],
 
-        ["zora village present", Outside("present underwater zora duplex left"), True, None],
-        ["zora village present", Outside("present underwater zora duplex right"), True, None],
-        ["zora village present", Outside("present underwater zora house"), True, None],
-        ["zora village present", Outside("present zora palace"), True, None],
+        ["zora village present", Outside("present underwater zora duplex left"), True, lambda  state: ooa_can_travel_underwater(state, player)],
+        ["zora village present", Outside("present underwater zora duplex right"), True, lambda  state: ooa_can_travel_underwater(state, player)],
+        ["zora village present", Outside("present underwater zora house"), True, lambda  state: ooa_can_travel_underwater(state, player)],
+        ["zora village present", Outside("present zora palace"), True, lambda  state: ooa_can_travel_underwater(state, player)],
         ["zora village present", Outside("zora crypt cave"), False, lambda state: all([
             ooa_has_explosives(state, player),
             ooa_can_dive(state, player)
