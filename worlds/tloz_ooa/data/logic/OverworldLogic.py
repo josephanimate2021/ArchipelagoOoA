@@ -523,7 +523,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ooa_can_swim(state, player, False),
         ])],
         [Outside("flipper tokay cave stairs"), "tokay stolen satchel", True, None],
-        ["tokay stolen satchel", Inside("flipper tokay bomb cave"), False, None],
+        [Outside("flipper tokay cave stairs"), "crescent past east", False, None],
 
         ["crescent present east", "tokay stolen satchel", False, lambda state: ooa_can_switch_past_and_present(state, player)],
 
