@@ -242,9 +242,10 @@ WARPS_DATA = {
         "outside_warp": 0x76a4,   #room 0 09
         "inside_warp": 0x7d28,    #room 5 DA
         "present": True,
-        "lock_flag": 0xc709,
-        "lock_mask": 0x01,
-        "lock_text": 0x5a27
+        # Moblin keep have a special behavior, and is always blocked if not triggered, whatever it the option
+        #"lock_flag": 0xc709,
+        #"lock_mask": 0x01,
+        #"lock_text": 0x5a27
     },
     #the side of the moblin keep connector that takes you to crown dungeon ledge
     "cave behind moblin keep back": {
