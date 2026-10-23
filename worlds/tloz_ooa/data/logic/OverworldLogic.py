@@ -7,7 +7,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         #######################################
         ["Menu", "forest of time", False, None],
         ["black tower worker", "maple trade", False, lambda state: all([
-            ooa_can_kill_normal_enemy(state, player, True),
+            ooa_can_kill_normal_enemy(state, player, ooa_option_medium_logic(state, player)),
             state.has("Touching Book", player)
         ])],
         ["forest of time", "starting item", False, None],
