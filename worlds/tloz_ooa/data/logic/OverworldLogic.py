@@ -914,7 +914,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         [Inside("treasure hunting goron cave"), "treasure hunting goron", False, lambda state: all([
             ooa_has_bombs(state, player, 2),
             ooa_has_satchel(state, player),
-            ooa_can_use_ember_seeds(state, player),
+            ooa_can_use_ember_seeds(state, player, False),
         ])],
 
         # ROLLING UPPER
