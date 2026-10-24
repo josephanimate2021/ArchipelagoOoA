@@ -75,10 +75,7 @@ def ooa_has_long_hook(state: CollectionState, player: int):
 def ooa_has_ember_seeds(state: CollectionState, player: int):
     return any([
         state.has("Ember Seeds", player),
-        all([
         state.multiworld.worlds[player].options.default_seed == "ember",
-        ooa_can_use_ember_seeds(state, player, False)
-        ]),
         (state.has("_wild_ember_seeds", player) and ooa_option_medium_logic(state, player))
     ])
 
@@ -94,10 +91,7 @@ def ooa_has_pegasus_seeds(state: CollectionState, player: int):
 def ooa_has_mystery_seeds(state: CollectionState, player: int):
     return any([
         state.has("Mystery Seeds", player),
-        all([
         state.multiworld.worlds[player].options.default_seed == "mystery",
-        ooa_can_use_mystery_seeds(state, player)
-        ]),
         (state.has("_wild_mystery_seeds", player) and ooa_option_medium_logic(state, player))
     ])
 

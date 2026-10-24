@@ -467,8 +467,11 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         [Inside("long hook pot cave"), "tokay pot cave", False, lambda state: ooa_has_long_hook(state, player)],
 
         ["crescent past east", Outside("tokay shop"), True, None],
-        [Inside("tokay shop"), "tokay market 1", False, lambda state: ooa_has_mystery_seeds(state, player)],
-        [Inside("tokay shop"), "tokay market 2", False, lambda state: ooa_has_scent_seeds(state, player)],
+        [Inside("tokay shop"), "tokay market 1", False, lambda state: ooa_can_use_mystery_seeds(state, player)],
+        [Inside("tokay shop"), "tokay market 2", False, lambda state: all([
+            ooa_can_use_scent_seeds_for_smell(state, player),
+            ooa_can_use_scent_seeds_offensively(state, player),
+        ])],
 
         ["crescent past east", "crescent past middle", False, lambda state: any([
             ooa_has_bracelet(state, player),
@@ -795,7 +798,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             all([
                 ooa_option_hard_logic(state, player),
                 any([
-                    ooa_has_scent_seeds(state, player),
+                    ooa_can_use_scent_seeds_for_smell(state, player),
                     ooa_has_shovel(state, player),
                 ])
             ])
@@ -911,7 +914,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
         [Inside("treasure hunting goron cave"), "treasure hunting goron", False, lambda state: all([
             ooa_has_bombs(state, player, 2),
             ooa_has_satchel(state, player),
-            ooa_has_ember_seeds(state, player),
+            ooa_can_use_ember_seeds(state, player),
         ])],
 
         # ROLLING UPPER
