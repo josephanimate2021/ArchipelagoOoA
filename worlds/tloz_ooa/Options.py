@@ -305,14 +305,14 @@ class OracleOfAgesEntranceRandomizer_ExcludedEntrances(OptionSet):
     NOTE : 
     * Also work with dungeon shuffle
     * Does nothing if ER is fully disabled
-    * All entrances can be found here : {INSERT LINK HERE}
+    * All entrances' names can be found here : https://github.com/josephanimate2021/ArchipelagoOoA/blob/ooa/worlds/tloz_ooa/data/Entrances.py
     * 
     """
     display_name = "ER Excluded Entrance"
 
     default = [
         # black tower,
-        
+        # maku road
     ]
 
     include_in_patch = True
