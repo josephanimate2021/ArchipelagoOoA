@@ -419,7 +419,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ooa_ER_inside_lock_fully_blocked(state, player) == False,
             any([
                 ooa_ER_inside_lock_fully_open(state, player),
-                ooa_has_explosives(state, player, False)
+                ooa_has_explosives(state, player, 1)
             ])
         ])],
 
@@ -456,7 +456,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ooa_ER_inside_lock_fully_blocked(state, player) == False,
             any([
                 ooa_ER_inside_lock_fully_open(state, player),
-                ooa_has_explosives(state, player, False)
+                ooa_has_explosives(state, player, 1)
             ])
         ])],
         [Inside("wild tokay game"), "wild tokay game", False, lambda state: ooa_has_bracelet(state, player)],
@@ -513,7 +513,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ooa_ER_inside_lock_fully_blocked(state, player) == False,
             any([
                 ooa_ER_inside_lock_fully_open(state, player),
-                ooa_has_explosives(state, player, False)
+                ooa_has_explosives(state, player, 1)
             ])
         ])],
         [Inside("flipper tokay bomb cave"), "tokay stolen flippers", False, lambda state: any([
