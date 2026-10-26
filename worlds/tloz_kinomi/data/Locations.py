@@ -1075,7 +1075,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Rod of Seasons",
         "flag_byte": 0xc858, 
         "room": 0x0358,
-        "dungeon": 3,
+        #"dungeon": 3,
         "collect": TREASURE_SPAWN_INSTANT,
     },
     ##########################################
@@ -1236,7 +1236,7 @@ LOCATIONS_DATA = {
         "vanilla_item": "Bombs (10)",
         "flag_byte": 0xc81a, 
         "room": 0x031a,
-        "dungeon": 4,
+        #"dungeon": 4,
         "collect": TREASURE_SPAWN_CHEST,
     },
     ##########################################
@@ -1457,7 +1457,7 @@ LOCATIONS_DATA = {
         "room": 0x03ae,
         "map_tile": 0x3a,
         "collect": TREASURE_SPAWN_INSTANT,
-        "dungeon": 6,
+        #"dungeon": 6,
         "symbolic_name": "nayruHouse",
     },
     ##########################################

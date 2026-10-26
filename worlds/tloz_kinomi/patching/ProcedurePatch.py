@@ -17,6 +17,9 @@ from ..common.patching.z80asm.Assembler import Z80Assembler, Z80Block
 from .bps import apply_bps_patch
 from typing import Any
 from .data_manager.text_modded import get_modded_text_data
+from .text.encoding import write_text_data
+from .rooms.edit import apply_room_edits
+from .rooms.encoding import write_room_data
 
 from tkinter.filedialog import askopenfilename
 
@@ -48,8 +51,9 @@ class KinomiPatchExtensions(APPatchExtension):
 
         bank_caves: list[Any | list[Any | list[Any]]] = []
         asm_content = {}
-        parsed_sym = sym("patching/kinomi.sym")
+        parsed_sym = sym(f"{GiftsOfKinomiWorld.game_nickname}.sym")
         dictionary, texts = get_modded_text_data(rom_data, parsed_sym)
+        room_data = apply_room_edits(rom_data, patch_data, parsed_sym)
 
         # Max finding algorithm for the end of banks (reading the code will help accurate that).
         maxes = {}
@@ -120,6 +124,8 @@ class KinomiPatchExtensions(APPatchExtension):
 
         # Parse assembler files, compile them and write the result in the ROM
         print(f"Compiling ASM files...")
+        #write_text_data(rom_data, dictionary, texts, parsed_sym)
+        write_room_data(rom_data, room_data, parsed_sym)
         print(asm_content)
         for file_path in get_asm_files(patch_data):
             data_loaded = yaml.safe_load(pkgutil.get_data(__name__, file_path))
@@ -164,7 +170,14 @@ class KinomiProcedurePatch(APProcedurePatch, APTokenMixin):
             if not os.path.exists(file_name):
                 file_name = Utils.user_path(file_name)
             if not os.path.exists(file_name):
-                file_name = askopenfilename() 
+                file_name = askopenfilename(
+                    title="Select Oracle Of Ages (US) ROM",
+                    filetypes=(("Game Boy Color ROM", "*.gbc"), ("All files", "*.*"))
+                ) 
+            if not file_name or not os.path.exists(file_name):
+                raise FileNotFoundError(
+                    "Oracle of Ages (US) ROM was not found or selected."
+                )
             base_rom_bytes = bytes(open(file_name, "rb").read())
 
             basemd5 = hashlib.md5()

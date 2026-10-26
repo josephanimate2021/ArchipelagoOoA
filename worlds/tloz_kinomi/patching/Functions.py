@@ -52,10 +52,6 @@ def modify_required_gifts_and_slates_count(parsed_sym: sym, rom: RomData, patch_
     rom.write_byte(GameboyAddress(0x0b, 0x4eb2).address_in_rom(), patch_data["options"]["required_gifts"]) # For getting a din interaction responsible for the zelda getting kidnapped cutscene, which we'll use for the indication that a user got the exact gifts neexed.
 
 def get_asm_files(patch_data):
-    if patch_data["options"]["remove_extra_stairs_from_lost_labyrinth_past"]:
-        ASM_FILES.append("asm/conditional/no_extra_stairs_for_lost_labyrinth.yaml")
-    if patch_data["options"]["open_staircase_to_ancient_ages_locations"]:
-        ASM_FILES.append("asm/conditional/add_some_ages_old_locations.yaml")
     return ASM_FILES
 
 def set_treasure_data(parsed_sym: sym, rom: RomData,
@@ -423,33 +419,16 @@ def set_entrance_warps(parsed_sym: sym, rom: RomData, patch_data):
                 i += 1
         if len(dummy_vals) > 0:
             og_dummy_vals = dummy_vals.copy()
-            random.shuffle(dummy_vals)
+            if patch_data["options"]["shuffle_entrances"][p]:
+                random.shuffle(dummy_vals)
             for e in v:
                 if "dummy" in e[0]:
                     e[0] = og_dummy_vals[0]
                     e[1] = dummy_vals[0]
                     og_dummy_vals.remove(e[0])
                     dummy_vals.remove(e[1])
-        edit_room(parsed_sym, rom, 0x0308, 0x1c, 0xa0)
         print(v)
         set_warps(parsed_sym, rom, v, p)
-
-# Format for editing rooms:
-# room is the exact room number you want to edit.
-# the pos parameter is the XY position in hex you want the tile to be placed in.       
-def edit_room(parsed_sym: sym, rom: RomData, room, pos, new_value):
-    nLen = len(hex_str(room)[1:])
-    zeros = ""
-    for _ in range(nLen - (nLen - 1)):
-        zeros += "0"
-    addr_start = parsed_sym.find("label", f"room{zeros}{hex_str(room)}")
-    if addr_start is None:
-        raise ValueError(f"Room {hex_str(room)} does not exist")
-    bank, addr = addr_start.__str__().split(":")
-    addr_end = parsed_sym.find_addr_end(bank, addr).address_in_rom()
-    if pos >= addr_end:
-        raise ValueError(f"Position of tile in room {hex_str(room)} is not valid.")
-    rom.write_byte(addr_start.address_in_rom() + (pos + 1), new_value)
 
 def set_file_select_text(assembler: Z80Assembler, slot_name: str):
     from ..world import GiftsOfKinomiWorld

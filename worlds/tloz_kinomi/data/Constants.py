@@ -1,8 +1,5 @@
 from ..patching.Constants import RUPEE_VALUES
 
-VERSION = "0.4.3"
-RETRO_COMPAT_VERSION = ["0.4.3", "0.4.2", "0.4.1", "0.4.0"]
-
 SEED_ITEMS = [
     "Ember Seeds",
     "Scent Seeds",
