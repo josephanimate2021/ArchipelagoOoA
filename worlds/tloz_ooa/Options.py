@@ -233,6 +233,7 @@ class OracleOfAgesEntranceRandomizer(Choice):
 
     default = 0
     include_in_patch = True
+    include_in_slot_data = True
 
 class OracleOfAgesEntranceRandomizer_PastPresentPairing(Toggle):
     """
