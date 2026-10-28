@@ -279,7 +279,7 @@ class OracleOfAgesClient(BizHawkClient):
         for flagname, data in EVENT_FLAGS.items():
             if flagname == "Rolling Ridge Vine Moved":
                 addr = data[1] - RAM_ADDRS["location_flags"][0]
-                pos = data[2]
+                pos = flag_bytes[addr]
                 self.flags_values[flagname] = pos == 0x17
             elif (data[0]): # is global flag
                 addr = data[1] >> 3
