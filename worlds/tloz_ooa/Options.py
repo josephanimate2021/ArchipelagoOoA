@@ -349,13 +349,29 @@ class OracleOfAgesGashaNutKillRequirement(NamedRange):
     special_range_names = {"vanilla": 40}
     include_in_patch = True
 
+class OraclesGrindyCombatLogic(Toggle):
+    """
+    This option affects two things:
+    By default (false),
+    1: Any consumable based check logically requires at least one quantity upgrade in order for the
+    location to be accessible. i.e 50 seeds for combat, 20 bombs/bombchus. This is to prevent needing to farm
+    resources. Setting this to true would make it only require the item to be collected.
+    2: killing monsters with the switch hook or cane of somaria can be annoying so its disabled in logic.
+    setting this to true would put them in combat logic
+    """
+    display_name = "Grindy Combat Logic"
+
+    default = False
+
 
 @dataclass
 class OracleOfAgesOptions(PerGameCommonOptions):
     start_inventory_from_pool: StartInventoryPool
     goal: OracleOfAgesGoal
     logic_difficulty: OraclesLogicDifficulty
+    grindy_logic: OraclesGrindyCombatLogic
     death_link: OraclesDeathLink
+
 
     # Optional locations
     advance_shop: OraclesAdvanceShop
