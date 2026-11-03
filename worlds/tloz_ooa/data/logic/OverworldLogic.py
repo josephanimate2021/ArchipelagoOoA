@@ -544,11 +544,16 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ])
         ])],
         [Inside("flipper tokay cave stairs"), "tokay stolen flippers", False, lambda state: any([
-            ooa_can_swim(state, player, False),
             all([
                 ooa_has_bombs(state, player),  # Not sure this work with bombchus...
                 ooa_can_jump_1_wide_liquid(state, player, False)
             ]),
+#can cause a softlock without bracelet / bombs so medium
+            all([
+                ooa_can_swim(state, player, False),
+                ooa_option_medium_logic(state, player),
+            ]),
+#can cause a softlock without feather & bombs or flippers so medium
             all([
                 ooa_has_bracelet(state, player),
                 ooa_option_medium_logic(state, player),
