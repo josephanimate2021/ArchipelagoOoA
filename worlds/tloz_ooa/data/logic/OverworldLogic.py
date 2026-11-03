@@ -524,10 +524,37 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ])
         ])],
 
-        [Inside("flipper tokay bomb cave"), Inside("flipper tokay cave stairs"), False, lambda state: any([
-            ooa_can_jump_1_wide_liquid(state, player, False),
+        [Inside("flipper tokay bomb cave"), Inside("flipper tokay cave stairs"), False, lambda state: all([
+        ooa_has_bracelet(state, player),
+        # to cross the water
+        any([
             ooa_can_swim(state, player, False),
+            all([
+                ooa_has_bombs(state, player),  # Not sure this work with bombchus...
+                ooa_can_jump_1_wide_liquid(state, player, False)
+                ])
+            ])
         ])],
+
+        [Inside("flipper tokay cave stairs"), Inside("flipper tokay bomb cave"), False, lambda state: any([
+            ooa_can_swim(state, player, False),
+            all([
+                ooa_has_bombs(state, player),  # Not sure this work with bombchus...
+                ooa_can_jump_1_wide_liquid(state, player, False)
+            ])
+        ])],
+        [Inside("flipper tokay cave stairs"), "tokay stolen flippers", False, lambda state: any([
+            ooa_can_swim(state, player, False),
+            all([
+                ooa_has_bombs(state, player),  # Not sure this work with bombchus...
+                ooa_can_jump_1_wide_liquid(state, player, False)
+            ]),
+            all([
+                ooa_has_bracelet(state, player),
+                ooa_option_medium_logic(state, player),
+            ])
+        ])],
+
         [Outside("flipper tokay cave stairs"), "tokay stolen satchel", True, None],
         [Outside("flipper tokay cave stairs"), "crescent past east", False, None],
 
@@ -1239,7 +1266,7 @@ def make_overworld_logic(player: int, options: OracleOfAgesOptions):
             ooa_can_travel_underwater(state, player)
         ])],
 
-        ["rafton's raft", "library island past", True, lambda state: state.has("_sea_cleaned", player)],
+        ["rafton's raft", "library island past", False, lambda state: state.has("_sea_cleaned", player)],
         ["library island past", Outside("past fairy queen cave"), False, lambda state: ooa_has_switch_hook(state, player)],
 
         [Inside("past fairy queen cave"), "sea cleaned", False, lambda state: state.has("Fairy Powder", player)],
